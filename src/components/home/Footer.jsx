@@ -1,23 +1,29 @@
 import React from "react";
-import { Brain } from "lucide-react";
+import { Link } from "react-router-dom";
+import { createPageUrl } from "@/utils";
 
 export default function Footer() {
   return (
-    <footer className="bg-[#0C3547] text-white py-12">
+    <footer className="bg-[#0C3547] text-white py-10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col md:flex-row justify-between items-center gap-6">
+          {/* Logo */}
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 bg-[#F5921B] rounded-xl flex items-center justify-center">
-              <Brain className="w-6 h-6 text-white" />
-            </div>
-            <div>
-              <span className="font-bold text-lg">IQ Test</span>
-              <p className="text-sm text-gray-400">Discover your true potential</p>
+            <div className="border-2 border-white rounded p-1.5 flex flex-col items-center leading-none">
+              <span className="text-xs font-black tracking-widest">WW</span>
+              <span className="text-[9px] font-semibold tracking-wider">World Wide</span>
+              <span className="text-[10px] font-black tracking-widest">IQ TEST</span>
             </div>
           </div>
-          
-          <p className="text-sm text-gray-400">
-            © {new Date().getFullYear()} IQ Test. All rights reserved.
+
+          {/* Links */}
+          <div className="flex items-center gap-6 text-sm text-gray-300">
+            <Link to={createPageUrl("Home")} className="hover:text-white transition-colors">Home</Link>
+            <a href="#pricing" className="hover:text-white transition-colors">Pricing</a>
+          </div>
+
+          <p className="text-xs text-gray-400">
+            © {new Date().getFullYear()} World Wide IQ Test. All rights reserved.
           </p>
         </div>
       </div>

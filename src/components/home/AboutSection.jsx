@@ -1,89 +1,111 @@
 import React from "react";
-import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { createPageUrl } from "@/utils";
-import { CheckCircle } from "lucide-react";
 
 export default function AboutSection() {
   return (
-    <section className="py-20 bg-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid md:grid-cols-2 gap-16 items-center">
-          <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-          >
-            <h2 className="text-3xl md:text-4xl font-bold text-[#0C3547] mb-6">
-              Why Take This IQ Test?
-            </h2>
-            <p className="text-gray-500 leading-relaxed mb-8">
-              Our IQ test measures several dimensions of general fluid intelligence, including visuospatial pattern reasoning, visuospatial insight, and numerical pattern reasoning skills. Designed by cognitive science experts, it provides accurate and precise information about your intellectual abilities.
+    <section className="py-16 bg-white">
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 className="text-3xl md:text-4xl font-extrabold text-center text-[#0C3547] mb-8">
+          World Wide IQ Test
+        </h2>
+
+        <div className="grid md:grid-cols-2 gap-12 items-center">
+          <div>
+            <p className="text-gray-600 leading-relaxed mb-6">
+              The World Wide IQ Test is part of an ambitious effort to deliver fun, stimulating and
+              engaging online measures of human cognitive abilities, as well as social and emotional
+              learning skills for the global community.
             </p>
+            <p className="text-gray-600 leading-relaxed mb-6">
+              We aim to provide you with accurate and precise information about important aspects of
+              your intellectual abilities and personality characteristics, and where they may benefit
+              the most from further development, regardless of your academic, professional, or
+              cultural background.
+            </p>
+            <p className="text-gray-600 leading-relaxed">
+              The current version measures several dimensions of general fluid intelligence, including
+              visuospatial pattern reasoning, visuospatial insight, and numerical pattern reasoning
+              skills.
+            </p>
+          </div>
 
-            <div className="space-y-4 mb-8">
-              {[
-                "Scientifically designed questions",
-                "Instant, detailed score report",
-                "Compare with global averages",
-                "Pattern, numerical & spatial reasoning",
-                "Completely free to take",
-              ].map((item) => (
-                <div key={item} className="flex items-center gap-3">
-                  <CheckCircle className="w-5 h-5 text-[#F5921B] flex-shrink-0" />
-                  <span className="text-gray-700">{item}</span>
+          {/* Steps */}
+          <div className="space-y-8">
+            {[
+              {
+                num: "01.",
+                title: "Take the IQ Test",
+                desc: "Designed by experts and test developers",
+              },
+              {
+                num: "02.",
+                title: "Find out your scores",
+                desc: "Get your customized score report and learn how you compare to thousands of adults from all over the world",
+              },
+              {
+                num: "03.",
+                title: "Start your brain power journey",
+                desc: "Unleash your full potential with brain training designed to improve your memory, focus and problem-solving skills",
+              },
+            ].map((step) => (
+              <div key={step.num} className="flex gap-4">
+                <span className="text-2xl font-black text-[#0C3547] leading-tight flex-shrink-0">
+                  {step.num}
+                </span>
+                <div>
+                  <h4 className="font-bold text-[#0C3547] text-sm uppercase tracking-wide mb-1">
+                    {step.title}
+                  </h4>
+                  <p className="text-gray-500 text-sm">{step.desc}</p>
                 </div>
-              ))}
-            </div>
-
-            <Link to={createPageUrl("IQTest")}>
-              <motion.button
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-                className="bg-[#F5921B] hover:bg-[#e0830f] text-white font-bold px-8 py-3.5 rounded-xl shadow-lg shadow-orange-500/20 transition-colors"
-              >
-                Start IQ Test
-              </motion.button>
-            </Link>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, x: 20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            className="relative"
-          >
-            <div className="bg-gradient-to-br from-[#0C3547] to-[#11465e] rounded-3xl p-8 text-white">
-              <h3 className="text-2xl font-bold mb-6">IQ Score Distribution</h3>
-              <div className="space-y-4">
-                {[
-                  { range: "130+", label: "Very Superior", pct: 2 },
-                  { range: "120-129", label: "Superior", pct: 7 },
-                  { range: "110-119", label: "High Average", pct: 16 },
-                  { range: "90-109", label: "Average", pct: 50 },
-                  { range: "80-89", label: "Low Average", pct: 16 },
-                  { range: "70-79", label: "Borderline", pct: 7 },
-                  { range: "Below 70", label: "Extremely Low", pct: 2 },
-                ].map((item) => (
-                  <div key={item.range}>
-                    <div className="flex justify-between text-sm mb-1">
-                      <span className="font-medium">{item.range}</span>
-                      <span className="text-gray-300">{item.label} ({item.pct}%)</span>
-                    </div>
-                    <div className="w-full bg-white/10 rounded-full h-2">
-                      <motion.div
-                        initial={{ width: 0 }}
-                        whileInView={{ width: `${Math.min(item.pct * 2, 100)}%` }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 1, delay: 0.3 }}
-                        className="bg-[#F5921B] h-2 rounded-full"
-                      />
-                    </div>
-                  </div>
-                ))}
               </div>
-            </div>
-          </motion.div>
+            ))}
+          </div>
+        </div>
+
+        {/* Why section */}
+        <div className="mt-16 grid md:grid-cols-2 gap-10 items-center">
+          <div className="bg-gray-50 rounded-xl p-8 border border-gray-200">
+            <h3 className="text-2xl font-extrabold text-[#0C3547] mb-4">Why this IQ test?</h3>
+            <p className="text-gray-600 leading-relaxed mb-6">
+              The World Wide IQ Test presents you with a short series of fun, challenging problems
+              designed to measure your fluid intelligence abilities and provide you with both accurate
+              and precise scores.
+            </p>
+            <p className="text-gray-600 leading-relaxed mb-6">
+              You can take the test online anytime from any mobile device or desktop computer and
+              immediately receive a detailed score report that tells you how your performance compares
+              to thousands of adults from all over the world.
+            </p>
+            <Link to={createPageUrl("IQTest")}>
+              <button className="bg-[#F5921B] hover:bg-[#e07a0c] text-white font-bold px-7 py-3 rounded-md transition-colors">
+                Start IQ Test
+              </button>
+            </Link>
+          </div>
+
+          <div className="space-y-4">
+            {[
+              { label: "Pattern Recognition", pct: 85 },
+              { label: "Numerical Reasoning", pct: 78 },
+              { label: "Spatial Intelligence", pct: 72 },
+              { label: "Fluid Intelligence", pct: 90 },
+            ].map((item) => (
+              <div key={item.label}>
+                <div className="flex justify-between text-sm font-medium text-[#0C3547] mb-1">
+                  <span>{item.label}</span>
+                  <span className="text-gray-400">{item.pct}%</span>
+                </div>
+                <div className="w-full bg-gray-200 rounded-full h-2.5">
+                  <div
+                    className="bg-[#F5921B] h-2.5 rounded-full transition-all"
+                    style={{ width: `${item.pct}%` }}
+                  />
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </section>
