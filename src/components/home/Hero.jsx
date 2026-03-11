@@ -70,7 +70,7 @@ export default function Hero() {
             className="hidden md:block"
           >
             <img
-              src="/__generating__/img_3f048a04c354.png"
+              src="https://media.base44.com/images/public/69b1aedc5a0abb358cd40ec0/99322480b_generated_d799e002.png"
               alt="IQ Test on multiple devices"
               className="w-full rounded-2xl shadow-2xl"
             />
