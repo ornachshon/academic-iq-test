@@ -17,7 +17,7 @@ export default function IQTest() {
   const [answers, setAnswers] = useState({});
   const [startTime] = useState(Date.now());
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [showIntro, setShowIntro] = useState(true);
+  const [showIntro, setShowIntro] = useState(false);
 
   const handleSelect = (optionIdx) => {
     setAnswers((prev) => ({ ...prev, [currentQ]: optionIdx }));
