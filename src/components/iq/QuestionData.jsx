@@ -5,9 +5,9 @@ const questions = [
     type: "pattern",
     category: "Pattern Recognition",
     question: "Which shape is missing?",
-    image: "https://media.base44.com/images/public/69b1aedc5a0abb358cd40ec0/f36d09bb6_image.png",
+    image: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69b1aedc5a0abb358cd40ec0/18834d34d_image.png",
     options: [
-      { text: "A", image: "https://media.base44.com/images/public/69b1aedc5a0abb358cd40ec0/2558b4876_image.png" },
+      { text: "A", image: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69b1aedc5a0abb358cd40ec0/453eace32_image.png" },
       { text: "B", image: "https://media.base44.com/images/public/69b1aedc5a0abb358cd40ec0/ede6a0d9e_image.png" },
       { text: "C", image: "https://media.base44.com/images/public/69b1aedc5a0abb358cd40ec0/5e9ee2080_image.png" },
       { text: "D", image: "https://media.base44.com/images/public/69b1aedc5a0abb358cd40ec0/27d9c10ee_image.png" },
