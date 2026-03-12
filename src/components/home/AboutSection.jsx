@@ -33,23 +33,23 @@ export default function AboutSection() {
           {/* Steps */}
           <div className="space-y-8">
             {[
-              {
-                num: "01.",
-                title: "Take the IQ Test",
-                desc: "Designed by experts and test developers",
-              },
-              {
-                num: "02.",
-                title: "Find out your scores",
-                desc: "Get your customized score report and learn how you compare to thousands of adults from all over the world",
-              },
-              {
-                num: "03.",
-                title: "Start your brain power journey",
-                desc: "Unleash your full potential with brain training designed to improve your memory, focus and problem-solving skills",
-              },
-            ].map((step) => (
-              <div key={step.num} className="flex gap-4">
+            {
+              num: "01.",
+              title: "Take the IQ Test",
+              desc: "Designed by experts and test developers"
+            },
+            {
+              num: "02.",
+              title: "Find out your scores",
+              desc: "Get your customized score report and learn how you compare to thousands of adults from all over the world"
+            },
+            {
+              num: "03.",
+              title: "Start your brain power journey",
+              desc: "Unleash your full potential with brain training designed to improve your memory, focus and problem-solving skills"
+            }].
+            map((step) =>
+            <div key={step.num} className="flex gap-4">
                 <span className="text-2xl font-black text-[#0C3547] leading-tight flex-shrink-0">
                   {step.num}
                 </span>
@@ -60,7 +60,7 @@ export default function AboutSection() {
                   <p className="text-gray-500 text-sm">{step.desc}</p>
                 </div>
               </div>
-            ))}
+            )}
           </div>
         </div>
 
@@ -85,29 +85,29 @@ export default function AboutSection() {
             </Link>
           </div>
 
-          <div className="space-y-4">
-            {[
-              { label: "Pattern Recognition", pct: 85 },
-              { label: "Numerical Reasoning", pct: 78 },
-              { label: "Spatial Intelligence", pct: 72 },
-              { label: "Fluid Intelligence", pct: 90 },
-            ].map((item) => (
-              <div key={item.label}>
-                <div className="flex justify-between text-sm font-medium text-[#0C3547] mb-1">
-                  <span>{item.label}</span>
-                  <span className="text-gray-400">{item.pct}%</span>
-                </div>
-                <div className="w-full bg-gray-200 rounded-full h-2.5">
-                  <div
-                    className="bg-[#F5921B] h-2.5 rounded-full transition-all"
-                    style={{ width: `${item.pct}%` }}
-                  />
-                </div>
-              </div>
-            ))}
-          </div>
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         </div>
       </div>
-    </section>
-  );
+    </section>);
+
 }
