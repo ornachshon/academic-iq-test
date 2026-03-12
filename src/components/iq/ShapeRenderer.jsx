@@ -1,0 +1,321 @@
+import React from "react";
+
+const S = 48; // SVG viewBox size
+const sw = 2.5; // strokeWidth
+const color = "#0C3547";
+
+const Svg = ({ children }) => (
+  <svg width="100%" height="100%" viewBox={`0 0 ${S} ${S}`} fill="none"
+    stroke={color} strokeWidth={sw} strokeLinecap="round" strokeLinejoin="round">
+    {children}
+  </svg>
+);
+
+const shapes = {
+  // ── Arrows ──────────────────────────────────────────────
+  arrow_up_right_small: () => (
+    <Svg>
+      <line x1="14" y1="34" x2="34" y2="14" />
+      <polyline points="20,14 34,14 34,28" />
+    </Svg>
+  ),
+  arrow_up_right_large: () => (
+    <Svg>
+      <line x1="10" y1="38" x2="38" y2="10" />
+      <polyline points="16,10 38,10 38,32" />
+    </Svg>
+  ),
+  arrow_down_left_small: () => (
+    <Svg>
+      <line x1="34" y1="14" x2="14" y2="34" />
+      <polyline points="28,34 14,34 14,20" />
+    </Svg>
+  ),
+  arrow_down_right: () => (
+    <Svg>
+      <line x1="14" y1="14" x2="34" y2="34" />
+      <polyline points="34,20 34,34 20,34" />
+    </Svg>
+  ),
+  arrow_diagonal_both: () => (
+    <Svg>
+      {/* two diagonal arrows crossing */}
+      <line x1="10" y1="38" x2="38" y2="10" />
+      <polyline points="16,10 38,10 38,32" />
+      <line x1="10" y1="10" x2="38" y2="38" />
+      <polyline points="38,16 38,38 16,38" />
+    </Svg>
+  ),
+  arrow_up_left: () => (
+    <Svg>
+      <line x1="38" y1="38" x2="10" y2="10" />
+      <polyline points="32,10 10,10 10,32" />
+    </Svg>
+  ),
+
+  // ── Squares with diagonals ───────────────────────────────
+  square_left_diagonals: () => (
+    <Svg>
+      <rect x="8" y="8" width="32" height="32" />
+      {/* left triangle: top-left to top-mid and top-left to bot-left (X from left) */}
+      <line x1="8" y1="8" x2="24" y2="24" />
+      <line x1="8" y1="40" x2="24" y2="24" />
+    </Svg>
+  ),
+  square_full_diagonals: () => (
+    <Svg>
+      <rect x="8" y="8" width="32" height="32" />
+      <line x1="8" y1="8" x2="40" y2="40" />
+      <line x1="40" y1="8" x2="8" y2="40" />
+    </Svg>
+  ),
+  square_right_diagonals: () => (
+    <Svg>
+      <rect x="8" y="8" width="32" height="32" />
+      <line x1="40" y1="8" x2="24" y2="24" />
+      <line x1="40" y1="40" x2="24" y2="24" />
+    </Svg>
+  ),
+
+  // ── Shapes for Q5 ────────────────────────────────────────
+  circle: () => (
+    <Svg><circle cx="24" cy="24" r="16" /></Svg>
+  ),
+  circle_in_diamond: () => (
+    <Svg>
+      <polygon points="24,6 42,24 24,42 6,24" />
+      <circle cx="24" cy="24" r="10" />
+    </Svg>
+  ),
+  diamond: () => (
+    <Svg><polygon points="24,6 42,24 24,42 6,24" /></Svg>
+  ),
+  square_in_circle: () => (
+    <Svg>
+      <circle cx="24" cy="24" r="16" />
+      <rect x="14" y="14" width="20" height="20" />
+    </Svg>
+  ),
+  nested_square_with_dot: () => (
+    <Svg>
+      <rect x="8" y="8" width="32" height="32" />
+      <rect x="16" y="16" width="16" height="16" />
+      <circle cx="24" cy="24" r="2" fill={color} stroke="none" />
+    </Svg>
+  ),
+  diamond_with_dot: () => (
+    <Svg>
+      <polygon points="24,6 42,24 24,42 6,24" />
+      <circle cx="24" cy="24" r="2.5" fill={color} stroke="none" />
+    </Svg>
+  ),
+  square: () => (
+    <Svg><rect x="10" y="10" width="28" height="28" /></Svg>
+  ),
+  square_with_dot: () => (
+    <Svg>
+      <rect x="10" y="10" width="28" height="28" />
+      <circle cx="24" cy="24" r="2.5" fill={color} stroke="none" />
+    </Svg>
+  ),
+  dot_only: () => (
+    <Svg><circle cx="24" cy="24" r="3.5" fill={color} stroke="none" /></Svg>
+  ),
+
+  // ── Shapes for Q7 ────────────────────────────────────────
+  diamond_with_filled_triangle: () => (
+    <Svg>
+      <polygon points="24,6 42,24 24,42 6,24" />
+      <polygon points="24,14 34,34 14,34" fill={color} />
+    </Svg>
+  ),
+  filled_triangle: () => (
+    <Svg><polygon points="24,8 42,40 6,40" fill={color} stroke="none" /></Svg>
+  ),
+  circle_in_diamond: () => (
+    <Svg>
+      <polygon points="24,6 42,24 24,42 6,24" />
+      <circle cx="24" cy="24" r="10" />
+    </Svg>
+  ),
+  nested_circle_with_triangle: () => (
+    <Svg>
+      <polygon points="24,6 42,24 24,42 6,24" />
+      <circle cx="24" cy="24" r="10" />
+      <polygon points="24,16 32,32 16,32" fill={color} />
+    </Svg>
+  ),
+  square_with_triangle: () => (
+    <Svg>
+      <rect x="8" y="8" width="32" height="32" />
+      <polygon points="24,14 38,38 10,38" fill={color} />
+    </Svg>
+  ),
+  circle_with_square: () => (
+    <Svg>
+      <circle cx="24" cy="24" r="16" />
+      <rect x="15" y="15" width="18" height="18" />
+    </Svg>
+  ),
+
+  // ── Mini orange-cell grid shapes for Q10/Q18 (rendered as mini grid) ──
+  orange_top_left: () => <MiniGrid highlight={[0]} />,
+  orange_top_center: () => <MiniGrid highlight={[1]} />,
+  orange_top_right: () => <MiniGrid highlight={[2]} />,
+  orange_mid_left: () => <MiniGrid highlight={[3]} />,
+  orange_center: () => <MiniGrid highlight={[4]} />,
+  orange_mid_right: () => <MiniGrid highlight={[5]} />,
+  orange_bottom_left: () => <MiniGrid highlight={[6]} />,
+  orange_bottom_center: () => <MiniGrid highlight={[7]} />,
+
+  // Q18 cell counts
+  "4_orange_cells_left": () => <MiniGrid highlight={[0,1,3,4]} />,
+  "3_orange_cells_left": () => <MiniGrid highlight={[0,3,6]} />,
+  "2_orange_cells_top": () => <MiniGrid highlight={[0,1]} />,
+  "6_orange_cells": () => <MiniGrid highlight={[0,1,2,3,4,5]} />,
+  "5_orange_cells": () => <MiniGrid highlight={[0,1,2,3,4]} />,
+  "4_orange_cells_right": () => <MiniGrid highlight={[1,2,4,5]} />,
+  "4_orange_cells_left_col": () => <MiniGrid highlight={[0,3,6,7]} />,
+  "5_orange_cells_mid": () => <MiniGrid highlight={[0,1,3,4,6]} />,
+
+  // ── Wedge circles for Q6 (simplified) ───────────────────
+  "2_wedges_top_left": () => <WedgeCircle count={2} startAngle={180} />,
+  "3_wedges_top_right": () => <WedgeCircle count={3} startAngle={270} />,
+  "4_wedges_right": () => <WedgeCircle count={4} startAngle={315} />,
+  "1_wedge_bottom_left": () => <WedgeCircle count={1} startAngle={135} />,
+  "2_wedges_bottom": () => <WedgeCircle count={2} startAngle={90} />,
+  "3_wedges_bottom_right": () => <WedgeCircle count={3} startAngle={45} />,
+  "1_wedge_left": () => <WedgeCircle count={1} startAngle={180} />,
+  "2_wedges_bottom_left": () => <WedgeCircle count={2} startAngle={135} />,
+
+  // ── Partially-filled circles for Q17 ────────────────────
+  circle_25pct: () => <FilledCircle pct={0.25} startAngle={-90} />,
+  circle_50pct: () => <FilledCircle pct={0.50} startAngle={-90} />,
+  circle_75pct: () => <FilledCircle pct={0.75} startAngle={-90} />,
+  circle_25pct_rotated: () => <FilledCircle pct={0.25} startAngle={0} />,
+  circle_25pct_more_rotated: () => <FilledCircle pct={0.25} startAngle={90} />,
+  circle_25pct_further: () => <FilledCircle pct={0.25} startAngle={180} />,
+  circle_25pct_bottom: () => <FilledCircle pct={0.25} startAngle={-180} />,
+  circle_50pct_bottom: () => <FilledCircle pct={0.50} startAngle={0} />,
+
+  // ── Hexagon wedge fills for Q14 (simplified) ────────────
+  navy_dominant_left_orange: () => <HexWedge orangeFraction={0.15} rotOffset={0} />,
+  navy_dominant_right_orange: () => <HexWedge orangeFraction={0.15} rotOffset={60} />,
+  orange_dominant_left_navy: () => <HexWedge orangeFraction={0.7} rotOffset={120} />,
+  navy_large_bottom_orange: () => <HexWedge orangeFraction={0.2} rotOffset={180} />,
+  navy_center_triangle: () => <HexWedge orangeFraction={0.1} rotOffset={240} />,
+  navy_right_small_orange: () => <HexWedge orangeFraction={0.15} rotOffset={300} />,
+  navy_bottom_triangle: () => <HexWedge orangeFraction={0.1} rotOffset={30} />,
+  orange_dominant_navy_triangle: () => <HexWedge orangeFraction={0.65} rotOffset={90} />,
+};
+
+// ── Helper: Mini 3×3 grid with highlighted (orange) cells ─────────────────
+function MiniGrid({ highlight }) {
+  const cells = Array.from({ length: 9 }, (_, i) => i);
+  return (
+    <svg width="100%" height="100%" viewBox="0 0 48 48">
+      {cells.map((i) => {
+        const col = i % 3;
+        const row = Math.floor(i / 3);
+        const x = 6 + col * 13;
+        const y = 6 + row * 13;
+        return (
+          <rect key={i} x={x} y={y} width="11" height="11" rx="1"
+            fill={highlight.includes(i) ? "#F5921B" : "none"}
+            stroke={color} strokeWidth="1.5" />
+        );
+      })}
+    </svg>
+  );
+}
+
+// ── Helper: Pie / filled circle ───────────────────────────────────────────
+function FilledCircle({ pct, startAngle }) {
+  const cx = 24, cy = 24, r = 16;
+  const toRad = (deg) => (deg * Math.PI) / 180;
+  const endAngle = startAngle + pct * 360;
+  const x1 = cx + r * Math.cos(toRad(startAngle));
+  const y1 = cy + r * Math.sin(toRad(startAngle));
+  const x2 = cx + r * Math.cos(toRad(endAngle));
+  const y2 = cy + r * Math.sin(toRad(endAngle));
+  const largeArc = pct > 0.5 ? 1 : 0;
+  return (
+    <svg width="100%" height="100%" viewBox="0 0 48 48">
+      <circle cx={cx} cy={cy} r={r} fill="none" stroke={color} strokeWidth={sw} />
+      <path d={`M${cx},${cy} L${x1},${y1} A${r},${r} 0 ${largeArc},1 ${x2},${y2} Z`}
+        fill={color} stroke="none" />
+    </svg>
+  );
+}
+
+// ── Helper: Circle with N orange wedges (out of 10) ───────────────────────
+function WedgeCircle({ count, startAngle }) {
+  const cx = 24, cy = 24, r = 16;
+  const total = 10;
+  const step = 360 / total;
+  const toRad = (d) => (d * Math.PI) / 180;
+  const wedges = Array.from({ length: count }, (_, i) => {
+    const a1 = startAngle + i * step;
+    const a2 = a1 + step;
+    const x1 = cx + r * Math.cos(toRad(a1));
+    const y1 = cy + r * Math.sin(toRad(a1));
+    const x2 = cx + r * Math.cos(toRad(a2));
+    const y2 = cy + r * Math.sin(toRad(a2));
+    return <path key={i} d={`M${cx},${cy} L${x1},${y1} A${r},${r} 0 0,1 ${x2},${y2} Z`}
+      fill="#F5921B" stroke="none" />;
+  });
+  return (
+    <svg width="100%" height="100%" viewBox="0 0 48 48">
+      <circle cx={cx} cy={cy} r={r} fill="none" stroke={color} strokeWidth={sw} />
+      {wedges}
+      {/* dividing lines */}
+      {Array.from({ length: total }, (_, i) => {
+        const a = toRad(startAngle + i * step);
+        return <line key={i} x1={cx} y1={cy} x2={cx + r * Math.cos(a)} y2={cy + r * Math.sin(a)}
+          stroke={color} strokeWidth="1" />;
+      })}
+    </svg>
+  );
+}
+
+// ── Helper: Hexagon with fraction filled orange ───────────────────────────
+function HexWedge({ orangeFraction, rotOffset }) {
+  const cx = 24, cy = 24, r = 18;
+  const toRad = (d) => (d * Math.PI) / 180;
+  const hex = Array.from({ length: 6 }, (_, i) => {
+    const a = toRad(i * 60 - 30);
+    return [cx + r * Math.cos(a), cy + r * Math.sin(a)];
+  });
+  const pts = hex.map((p) => p.join(",")).join(" ");
+  const orangeSlices = Math.round(orangeFraction * 6);
+  const fillPaths = Array.from({ length: orangeSlices }, (_, i) => {
+    const idx = (i + Math.round(rotOffset / 60)) % 6;
+    const [x1, y1] = hex[idx];
+    const [x2, y2] = hex[(idx + 1) % 6];
+    return <polygon key={i} points={`${cx},${cy} ${x1},${y1} ${x2},${y2}`} fill="#F5921B" stroke="none" />;
+  });
+  return (
+    <svg width="100%" height="100%" viewBox="0 0 48 48">
+      {fillPaths}
+      <polygon points={pts} fill="none" stroke={color} strokeWidth={sw} />
+    </svg>
+  );
+}
+
+export default function ShapeRenderer({ shapeName }) {
+  // Numbers render as text
+  if (typeof shapeName === "number") {
+    return (
+      <span className="text-xl font-bold text-[#0C3547]">{shapeName}</span>
+    );
+  }
+  if (shapeName === "?") {
+    return <span className="text-3xl font-bold text-white">?</span>;
+  }
+
+  const ShapeComponent = shapes[shapeName];
+  if (ShapeComponent) return <ShapeComponent />;
+
+  // Fallback: render as text (shouldn't happen with complete mapping)
+  return <span className="text-xs text-gray-400 text-center leading-tight">{shapeName}</span>;
+}
