@@ -1,41 +1,16 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { createPageUrl } from "@/utils";
-
-const countryData = {
-  US: { flag: "🇺🇸", name: "United States", iq: 98 },
-  GB: { flag: "🇬🇧", name: "United Kingdom", iq: 100 },
-  CA: { flag: "🇨🇦", name: "Canada", iq: 99 },
-  AU: { flag: "🇦🇺", name: "Australia", iq: 99 },
-  DE: { flag: "🇩🇪", name: "Germany", iq: 102 },
-  FR: { flag: "🇫🇷", name: "France", iq: 98 },
-  IN: { flag: "🇮🇳", name: "India", iq: 82 },
-  CN: { flag: "🇨🇳", name: "China", iq: 105 },
-  JP: { flag: "🇯🇵", name: "Japan", iq: 106 },
-  KR: { flag: "🇰🇷", name: "South Korea", iq: 106 },
-  BR: { flag: "🇧🇷", name: "Brazil", iq: 87 },
-  MX: { flag: "🇲🇽", name: "Mexico", iq: 88 },
-  IL: { flag: "🇮🇱", name: "Israel", iq: 95 },
-  NL: { flag: "🇳🇱", name: "Netherlands", iq: 102 },
-  SE: { flag: "🇸🇪", name: "Sweden", iq: 101 },
-  NO: { flag: "🇳🇴", name: "Norway", iq: 100 },
-  FI: { flag: "🇫🇮", name: "Finland", iq: 101 },
-  IT: { flag: "🇮🇹", name: "Italy", iq: 96 },
-  ES: { flag: "🇪🇸", name: "Spain", iq: 97 },
-  PL: { flag: "🇵🇱", name: "Poland", iq: 99 },
-};
+import { getCountryByCode, defaultCountry } from "./countryData";
 
 export default function Hero() {
-  const [country, setCountry] = useState({ flag: "🇺🇸", name: "United States", iq: 98 });
+  const [country, setCountry] = useState(defaultCountry);
 
   useEffect(() => {
     fetch("https://ipapi.co/json/")
       .then((res) => res.json())
       .then((data) => {
-        const code = data.country_code;
-        if (code && countryData[code]) {
-          setCountry(countryData[code]);
-        }
+        setCountry(getCountryByCode(data.country_code));
       })
       .catch(() => {});
   }, []);
