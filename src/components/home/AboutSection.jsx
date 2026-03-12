@@ -6,8 +6,8 @@ export default function AboutSection() {
   return (
     <section className="py-16 bg-white">
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 className="text-3xl md:text-4xl font-extrabold text-center text-[#0C3547] mb-8">
-          World Wide IQ Test
+        <h2 className="text-3xl md:text-4xl font-extrabold text-center text-[#0C3547] mb-8">Academic IQ Test
+
         </h2>
 
         <div className="grid md:grid-cols-2 gap-12 items-center">
@@ -80,10 +80,10 @@ export default function AboutSection() {
 
           <div className="bg-transparent p-8 opacity-100 rounded-none border border-gray-200">
             <h3 className="text-2xl font-extrabold text-[#0C3547] mb-4">Why this IQ test?</h3>
-            <p className="text-gray-600 leading-relaxed mb-6">
-              The World Wide IQ Test presents you with a short series of fun, challenging problems
-              designed to measure your fluid intelligence abilities and provide you with both accurate
-              and precise scores.
+            <p className="text-gray-600 leading-relaxed mb-6">The Academic IQ Test presents you with a short series of fun, challenging problems designed to measure your fluid intelligence abilities and provide you with both accurate and precise scores.
+
+
+
             </p>
             <p className="text-gray-600 leading-relaxed mb-6">
               You can take the test online anytime from any mobile device or desktop computer and
