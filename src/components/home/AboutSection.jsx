@@ -65,20 +65,20 @@ export default function AboutSection() {
         </div>
 
         {/* Why section */}
-        <div className="mt-16 grid md:grid-cols-2 gap-10 items-center">
+        <div className="bg-transparent mt-16 grid md:grid-cols-2 gap-10 items-center">
           <div className="flex items-center justify-center">
             <img
               src="https://media.base44.com/images/public/69b1aedc5a0abb358cd40ec0/ccd006c18_image.png"
               alt="IQ Score Distribution"
-              className="w-full h-full object-contain rounded-xl"
-            />
+              className="w-full h-full object-contain rounded-xl" />
+
 
 
 
 
           </div>
 
-          <div className="bg-gray-50 rounded-xl p-8 border border-gray-200">
+          <div className="bg-transparent p-8 opacity-100 rounded-none border border-gray-200">
             <h3 className="text-2xl font-extrabold text-[#0C3547] mb-4">Why this IQ test?</h3>
             <p className="text-gray-600 leading-relaxed mb-6">
               The World Wide IQ Test presents you with a short series of fun, challenging problems
