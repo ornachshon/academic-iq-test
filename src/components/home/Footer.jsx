@@ -18,8 +18,8 @@ export default function Footer() {
 
           {/* Links */}
           <div className="flex items-center gap-6 text-sm text-gray-300">
-            <Link to={createPageUrl("Home")} className="hover:text-white transition-colors">Home</Link>
-            <a href="#pricing" className="hover:text-white transition-colors">Pricing</a>
+            
+            
           </div>
 
           <p className="text-xs text-gray-400">
@@ -27,6 +27,6 @@ export default function Footer() {
           </p>
         </div>
       </div>
-    </footer>
-  );
+    </footer>);
+
 }
