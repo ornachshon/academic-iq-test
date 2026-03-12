@@ -65,7 +65,7 @@ export default function AboutSection() {
         </div>
 
         {/* Why section */}
-        <div className="bg-transparent mt-16 grid md:grid-cols-2 gap-10 items-center">
+        <div className="bg-slate-50 mt-16 grid md:grid-cols-2 gap-10 items-center">
           <div className="flex items-center justify-center">
             <img
               src="https://media.base44.com/images/public/69b1aedc5a0abb358cd40ec0/ccd006c18_image.png"
@@ -78,7 +78,7 @@ export default function AboutSection() {
 
           </div>
 
-          <div className="bg-transparent p-8 opacity-100 rounded-none border border-gray-200">
+          <div className="bg-transparent p-8 opacity-70 rounded-none border border-gray-200">
             <h3 className="text-2xl font-extrabold text-[#0C3547] mb-4">Why this IQ test?</h3>
             <p className="text-gray-600 leading-relaxed mb-6">The Academic IQ Test presents you with a short series of fun, challenging problems designed to measure your fluid intelligence abilities and provide you with both accurate and precise scores.
 
@@ -91,7 +91,7 @@ export default function AboutSection() {
               to thousands of adults from all over the world.
             </p>
             <Link to={createPageUrl("IQTest")}>
-              <button className="bg-[#F5921B] hover:bg-[#e07a0c] text-white font-bold px-7 py-3 rounded-md transition-colors">
+              <button className="bg-[#F5921B] text-[#0C3547] px-7 py-3 font-bold rounded-md hover:bg-[#e07a0c] transition-colors">
                 Start IQ Test
               </button>
             </Link>
