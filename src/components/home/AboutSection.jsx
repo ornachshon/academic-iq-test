@@ -66,6 +66,8 @@ export default function AboutSection() {
 
         {/* Why section */}
         <div className="mt-16 grid md:grid-cols-2 gap-10 items-center">
+          <div></div>
+
           <div className="bg-gray-50 rounded-xl p-8 border border-gray-200">
             <h3 className="text-2xl font-extrabold text-[#0C3547] mb-4">Why this IQ test?</h3>
             <p className="text-gray-600 leading-relaxed mb-6">
