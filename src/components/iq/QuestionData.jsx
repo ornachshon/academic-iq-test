@@ -4,22 +4,18 @@ const questions = [
     id: 1,
     type: "pattern",
     category: "Pattern Recognition",
-    question: "Which shape is missing? The grid shows arrows and squares with diagonal patterns that follow a visual rule across rows and columns.",
-    grid: [
-      ["arrow_up_right_small", "arrow_up_right_large", "arrow_down_left_small"],
-      ["square_left_diagonals", "square_full_diagonals", "square_right_diagonals"],
-      ["arrow_down_right", "arrow_diagonal_both", "?"]
-    ],
+    question: "Which shape is missing?",
+    image: "https://media.base44.com/images/public/69b1aedc5a0abb358cd40ec0/f36d09bb6_image.png",
     options: [
-      "Triangle shape",
-      "Arrow up-left",
-      "Arrow down-left small",
-      "Arrow up-right large",
-      "Square with right triangle",
-      "Square with full X"
+      { text: "A", image: "https://media.base44.com/images/public/69b1aedc5a0abb358cd40ec0/2558b4876_image.png" },
+      { text: "B", image: "https://media.base44.com/images/public/69b1aedc5a0abb358cd40ec0/ede6a0d9e_image.png" },
+      { text: "C", image: "https://media.base44.com/images/public/69b1aedc5a0abb358cd40ec0/5e9ee2080_image.png" },
+      { text: "D", image: "https://media.base44.com/images/public/69b1aedc5a0abb358cd40ec0/27d9c10ee_image.png" },
+      { text: "E", image: "https://media.base44.com/images/public/69b1aedc5a0abb358cd40ec0/ed6095e75_image.png" },
+      { text: "F", image: "https://media.base44.com/images/public/69b1aedc5a0abb358cd40ec0/c10172c52_image.png" }
     ],
-    correct: 4,
-    explanation: "Each row col 3 shows the right-side half of the box with diagonals. The missing shape is a square with only right-side triangles (like option E)."
+    correct: 2,
+    explanation: "The correct answer is C."
   },
   {
     id: 2,
