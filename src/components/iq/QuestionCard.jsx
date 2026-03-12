@@ -79,7 +79,7 @@ export default function QuestionCard({ question, selectedAnswer, onSelectAnswer 
                 }`}>
                   {labels[idx]}
                 </span>
-                <span className="font-semibold text-[#0C3547] text-lg">{option}</span>
+                <span className="font-semibold text-[#0C3547] text-base leading-tight">{option}</span>
               </motion.button>
             ))}
           </div>
