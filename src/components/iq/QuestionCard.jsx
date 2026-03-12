@@ -35,7 +35,7 @@ export default function QuestionCard({ question, selectedAnswer, onSelectAnswer 
                             : "bg-white text-[#0C3547]"
                         }`}
                       >
-                        {cell}
+                        <ShapeRenderer shapeName={cell} />
                       </div>
                     ))}
                   </div>
