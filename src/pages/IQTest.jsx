@@ -63,7 +63,7 @@ export default function IQTest() {
     const result = await base44.entities.IQResult.create({
       score,
       correct_answers: correct,
-      total_questions: 30,
+      total_questions: 20,
       time_taken_seconds: timeTaken,
       answers: answerDetails,
     });
