@@ -1,5 +1,6 @@
 import React from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import ShapeRenderer from "./ShapeRenderer";
 
 export default function QuestionCard({ question, selectedAnswer, onSelectAnswer }) {
   const labels = ["A", "B", "C", "D", "E", "F"];
