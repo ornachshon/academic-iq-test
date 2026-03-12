@@ -10,8 +10,8 @@ export default function Footer() {
           {/* Logo */}
           <div className="flex items-center gap-3">
             <div className="border-2 border-white rounded p-1.5 flex flex-col items-center leading-none">
-              <span className="text-xs font-black tracking-widest">WW</span>
-              <span className="text-[9px] font-semibold tracking-wider">World Wide</span>
+              
+              <span className="text-[9px] font-semibold tracking-wider">Academic</span>
               <span className="text-[10px] font-black tracking-widest">IQ TEST</span>
             </div>
           </div>
