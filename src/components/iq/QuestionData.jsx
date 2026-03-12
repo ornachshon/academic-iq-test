@@ -1,296 +1,349 @@
 // IQ Test Questions - Pattern Recognition, Numerical, Spatial
-// Each question has a type, prompt, visual description, and 6 answer options
-
 const questions = [
   {
     id: 1,
     type: "pattern",
-    question: "Which shape completes the pattern?",
+    category: "Pattern Recognition",
+    question: "Which shape is missing? The grid shows arrows and squares with diagonal patterns that follow a visual rule across rows and columns.",
     grid: [
-      ["▲", "▲▲", "▲▲▲"],
-      ["●", "●●", "●●●"],
-      ["■", "■■", "?"]
+      ["arrow_up_right_small", "arrow_up_right_large", "arrow_down_left_small"],
+      ["square_left_diagonals", "square_full_diagonals", "square_right_diagonals"],
+      ["arrow_down_right", "arrow_diagonal_both", "?"]
     ],
-    options: ["■■■", "■■", "●●●", "▲▲▲", "■", "●●"],
-    correct: 0
+    options: [
+      "Triangle shape",
+      "Arrow up-left",
+      "Arrow down-left small",
+      "Arrow up-right large",
+      "Square with right triangle",
+      "Square with full X"
+    ],
+    correct: 4,
+    explanation: "Each row col 3 shows the right-side half of the box with diagonals. The missing shape is a square with only right-side triangles (like option E)."
   },
   {
     id: 2,
-    type: "numerical",
-    question: "What number comes next? 2, 6, 18, 54, ?",
-    options: ["108", "162", "148", "216", "72", "96"],
-    correct: 1
+    type: "spatial",
+    category: "Spatial Reasoning",
+    question: "Which shape completes the center of the image? The large image shows an orange rectangle divided into sections with a blue center and converging white lines forming a trapezoid shape.",
+    options: [
+      "Orange top only, blue bottom with wide trapezoid",
+      "Orange sides, blue center with narrow V at top",
+      "Orange sides with blue center, V-shape lines pointing down",
+      "Orange with blue center, wide trapezoid lines",
+      "Orange with blue, trapezoid wider at bottom",
+      "Orange sides, blue bar in middle only"
+    ],
+    correct: 2,
+    explanation: "The center piece must show the middle section of the image: orange on left and right, blue in the center, with white V-lines converging downward — matching option C."
   },
   {
     id: 3,
-    type: "pattern",
-    question: "Which shape completes the sequence?",
+    type: "numerical",
+    category: "Numerical Reasoning",
+    question: "Which number is missing? The grid contains: Row 1: 5, 3, 15 | Row 2: 3, 3, 9 | Row 3: 4, 2, ?",
     grid: [
-      ["◆", "◇", "◆"],
-      ["◇", "◆", "◇"],
-      ["◆", "◇", "?"]
+      [5, 3, 15],
+      [3, 3, 9],
+      [4, 2, "?"]
     ],
-    options: ["◆", "◇", "○", "●", "□", "■"],
-    correct: 0
+    options: ["10", "8", "6", "12", "16", "9"],
+    correct: 1,
+    explanation: "The pattern is col1 × col2 = col3. Row 1: 5×3=15. Row 2: 3×3=9. Row 3: 4×2=8. Answer: 8 (option B)."
   },
   {
     id: 4,
-    type: "numerical",
-    question: "What number is missing? 3, 9, 27, ?, 243",
-    options: ["54", "72", "81", "108", "99", "63"],
-    correct: 2
+    type: "spatial",
+    category: "Spatial Reasoning",
+    question: "How many triangles are in the picture? A large triangle is divided into 4 smaller triangles by connecting the midpoints of each side.",
+    options: ["3", "9", "7", "6", "5", "4"],
+    correct: 4,
+    explanation: "There are 4 small triangles + 1 large outer triangle = 5 total. Answer: 5 (option E)."
   },
   {
     id: 5,
-    type: "spatial",
-    question: "How many rectangles are in a 3×2 grid?",
-    options: ["12", "15", "18", "10", "8", "20"],
-    correct: 2
+    type: "pattern",
+    category: "Pattern Recognition",
+    question: "Which shape is missing? Row 1: circle, circle-in-diamond, diamond. Row 2: square-in-circle, nested-square-dot, diamond-dot. Row 3: square, square-dot, ?",
+    grid: [
+      ["circle", "circle_in_diamond", "diamond"],
+      ["square_in_circle", "nested_square_with_dot", "diamond_with_dot"],
+      ["square", "square_with_dot", "?"]
+    ],
+    options: [
+      "Circle with dot",
+      "Empty circle",
+      "Diamond with dot",
+      "Empty square",
+      "Nested square with diagonals",
+      "Dot only"
+    ],
+    correct: 5,
+    explanation: "Column 3 shows only the innermost element with a dot. In row 3, the shape progression loses its outer container, leaving just the dot. Answer: F (dot only)."
   },
   {
     id: 6,
     type: "pattern",
-    question: "Which completes the pattern?",
+    category: "Pattern Recognition",
+    question: "Which shape is missing? Each circle is divided into 10 wedges. The orange-filled wedges rotate/increase across the grid.",
     grid: [
-      ["↑", "→", "↓"],
-      ["←", "↑", "→"],
-      ["↓", "←", "?"]
+      ["2_wedges_top_left", "3_wedges_top_right", "4_wedges_right"],
+      ["1_wedge_bottom_left", "2_wedges_bottom", "3_wedges_bottom_right"],
+      ["1_wedge_left", "2_wedges_bottom_left", "?"]
     ],
-    options: ["↑", "→", "↓", "←", "↗", "↙"],
-    correct: 0
+    options: [
+      "Many wedges top-right orange",
+      "All wedges filled",
+      "3 wedges bottom-left orange",
+      "4 wedges center-right orange",
+      "2 wedges bottom-right orange",
+      "5 wedges top orange"
+    ],
+    correct: 4,
+    explanation: "Each row the orange slice count increases by 1 per column, and the position shifts clockwise. Row 3 col 3 should have 3 wedges in the lower-right area — matching option E."
   },
   {
     id: 7,
-    type: "numerical",
-    question: "What number comes next? 1, 1, 2, 3, 5, 8, ?",
-    options: ["11", "12", "13", "15", "10", "14"],
-    correct: 2
+    type: "pattern",
+    category: "Pattern Recognition",
+    question: "Which shape is missing? Row 1: diamond, diamond-with-triangle, filled-triangle. Row 2: circle-in-diamond, nested-circle-triangle, square-with-triangle. Row 3: circle, circle-with-square, ?",
+    grid: [
+      ["diamond", "diamond_with_filled_triangle", "filled_triangle"],
+      ["circle_in_diamond", "nested_circle_with_triangle", "square_with_triangle"],
+      ["circle", "circle_with_square", "?"]
+    ],
+    options: [
+      "Circle with triangle in square",
+      "Diamond with triangle",
+      "Empty triangle",
+      "Complex nested shape",
+      "Circle inside square",
+      "Empty square"
+    ],
+    correct: 5,
+    explanation: "Column 3 shows only the innermost shape (no outer container). Row 3's innermost shape is a square. Answer: F (plain square)."
   },
   {
     id: 8,
-    type: "pattern",
-    question: "Which shape completes the sequence?",
-    grid: [
-      ["○●○", "●○●", "○●○"],
-      ["●○●", "○●○", "●○●"],
-      ["○●○", "●○●", "?"]
+    type: "spatial",
+    category: "Spatial Reasoning",
+    question: "Which shape is missing? A large rectangle with horizontal orange and navy stripes and diagonal blue lines crossing through the center, where the center piece is hidden.",
+    options: [
+      "Orange stripes only, blue lines top-left",
+      "Orange and navy stripes, blue lines top-right",
+      "Navy lines with partial orange",
+      "Orange and navy stripes with diagonal blue lines centered",
+      "Orange top only with blue diagonal",
+      "Blue lines only with orange bottom stripe"
     ],
-    options: ["○●○", "●○●", "○○○", "●●●", "○●●", "●○○"],
-    correct: 0
+    correct: 3,
+    explanation: "The center piece must contain the horizontal orange/navy stripes plus the two diagonal blue lines passing through the middle. Answer: D."
   },
   {
     id: 9,
-    type: "numerical",
-    question: "Find the missing number: 4, 16, 64, ?, 1024",
-    options: ["128", "192", "256", "512", "384", "320"],
-    correct: 2
+    type: "spatial",
+    category: "Spatial Reasoning",
+    question: "What box was created from the image? A cross-shaped net (unfolded cube) is shown where the top, bottom, left, and right panels are dark navy, and the center and far-right panel are white/outline only.",
+    options: [
+      "Navy top face, orange edges, white sides",
+      "Orange top, navy front, white right",
+      "Orange outline, navy top and front",
+      "All navy cube",
+      "Navy front and top, orange outline edges",
+      "All orange outline cube"
+    ],
+    correct: 4,
+    explanation: "The net has navy filled squares on top, bottom, left, right of center, and a white square for center/right. When folded, the visible faces show navy top and front with orange outline edges. Answer: E."
   },
   {
     id: 10,
-    type: "spatial",
-    question: "If you fold a square paper in half twice and cut a corner, how many holes when unfolded?",
-    options: ["1", "2", "4", "8", "3", "6"],
-    correct: 2
+    type: "pattern",
+    category: "Pattern Recognition",
+    question: "Which shape is missing? Each item is a 3×3 grid of cells. Orange cells move diagonally. Row 1: top-left, top-center, top-right. Row 2: mid-left, center, mid-right. Row 3: bottom-left, bottom-center, ?",
+    grid: [
+      ["orange_top_left", "orange_top_center", "orange_top_right"],
+      ["orange_mid_left", "orange_center", "orange_mid_right"],
+      ["orange_bottom_left", "orange_bottom_center", "?"]
+    ],
+    options: [
+      "Orange bottom-right cell",
+      "Orange top-right and bottom-left",
+      "Orange left column",
+      "Orange top row",
+      "Orange full grid",
+      "Orange right column"
+    ],
+    correct: 0,
+    explanation: "The orange cell moves one position to the right per column. Row 3 col 3 should have orange in the bottom-right cell. Answer: A."
   },
   {
     id: 11,
-    type: "pattern",
-    question: "Which completes the pattern?",
+    type: "numerical",
+    category: "Numerical Reasoning",
+    question: "Which number is missing? The grid contains: Row 1: 7, 10, 8 | Row 2: 11, 9, 12 | Row 3: 10, 13, ?",
     grid: [
-      ["1", "4", "9"],
-      ["16", "25", "36"],
-      ["49", "64", "?"]
+      [7, 10, 8],
+      [11, 9, 12],
+      [10, 13, "?"]
     ],
-    options: ["72", "80", "81", "100", "91", "76"],
-    correct: 2
+    options: ["9", "10", "11", "12", "14", "15"],
+    correct: 2,
+    explanation: "Diagonal pattern (top-left to bottom-right): 7, 9, ? → each increases by 2, so ? = 11. Answer: C (11)."
   },
   {
     id: 12,
     type: "numerical",
-    question: "What comes next? 100, 95, 85, 70, 50, ?",
-    options: ["20", "25", "30", "35", "15", "40"],
-    correct: 1
+    category: "Numerical Reasoning",
+    question: "Which number is missing? The grid contains: Row 1: 43, 42, 40 | Row 2: 37, 33, 28 | Row 3: 22, 15, ?",
+    grid: [
+      [43, 42, 40],
+      [37, 33, 28],
+      [22, 15, "?"]
+    ],
+    options: ["10", "7", "8", "21", "5", "14"],
+    correct: 1,
+    explanation: "Differences across each row increase: Row 1: -1,-2; Row 2: -4,-5; Row 3: -7,-8. So 15-8=7. Answer: B (7)."
   },
   {
     id: 13,
-    type: "pattern",
-    question: "Which shape completes the grid?",
-    grid: [
-      ["▲", "■", "●"],
-      ["■", "●", "▲"],
-      ["●", "▲", "?"]
-    ],
-    options: ["■", "●", "▲", "◆", "★", "○"],
-    correct: 0
+    type: "spatial",
+    category: "Spatial Reasoning",
+    question: "How many squares are in the picture? The image shows a 3×3 grid of squares (like a tic-tac-toe board).",
+    options: ["9", "10", "11", "12", "13", "14"],
+    correct: 5,
+    explanation: "Count all squares: 9 small (1×1) + 4 medium (2×2) + 1 large (3×3) = 14. Answer: F (14)."
   },
   {
     id: 14,
-    type: "numerical",
-    question: "What number comes next? 2, 3, 5, 7, 11, 13, ?",
-    options: ["15", "17", "19", "21", "14", "16"],
-    correct: 1
+    type: "pattern",
+    category: "Pattern Recognition",
+    question: "Which shape is missing? Each hexagon is divided into triangular sections colored orange and navy. The orange section rotates clockwise across the grid.",
+    grid: [
+      ["navy_dominant_left_orange", "navy_dominant_right_orange", "orange_dominant_left_navy"],
+      ["navy_large_bottom_orange", "navy_center_triangle", "navy_right_small_orange"],
+      ["navy_bottom_triangle", "orange_dominant_navy_triangle", "?"]
+    ],
+    options: [
+      "Navy and orange equal split rotated",
+      "Mostly orange, small navy wedge",
+      "Orange dominant with two navy wedges",
+      "Mostly orange, large navy right",
+      "Navy with small orange triangles",
+      "Mostly navy, orange right wedge"
+    ],
+    correct: 2,
+    explanation: "The pattern shows the orange section rotating clockwise and growing. Row 3 col 3 should show mostly orange with two small navy wedges. Answer: C."
   },
   {
     id: 15,
     type: "spatial",
-    question: "How many triangles can you find in a triangle divided by 3 lines from each vertex to the opposite midpoint?",
-    options: ["6", "8", "10", "12", "13", "16"],
-    correct: 4
+    category: "Spatial Reasoning",
+    question: "Which shape is missing? A large orange rectangle contains diagonal lines: two dark gray/navy parallel diagonal lines going one direction, white curved lines, and one red diagonal line.",
+    options: [
+      "Orange with red line top-right and black diagonal",
+      "Orange with horizontal black lines and red slash",
+      "Orange with diagonal black line only",
+      "Orange with multiple black diagonals and red",
+      "Orange with black lines and red top-left",
+      "Orange with black parallel diagonals and red line bottom-right"
+    ],
+    correct: 5,
+    explanation: "The center piece of the image shows the intersection of the gray parallel lines and the red diagonal line in the lower portion. Answer: F."
   },
   {
     id: 16,
-    type: "pattern",
-    question: "Which completes the sequence? A1, B2, C3, D4, ?",
-    options: ["E5", "F6", "E4", "D5", "F5", "E6"],
-    correct: 0
+    type: "numerical",
+    category: "Numerical Reasoning",
+    question: "Which number is missing? The grid contains: Row 1: 4, 5, 7 | Row 2: 10, 14, 19 | Row 3: 25, 32, ?",
+    grid: [
+      [4, 5, 7],
+      [10, 14, 19],
+      [25, 32, "?"]
+    ],
+    options: ["38", "43", "40", "42", "41", "39"],
+    correct: 2,
+    explanation: "Reading all numbers left-to-right top-to-bottom: 4,5,7,10,14,19,25,32,? The differences are 1,2,3,4,5,6,7,8 — so ?=32+8=40. Answer: C (40)."
   },
   {
     id: 17,
-    type: "numerical",
-    question: "What is missing? 1, 4, 9, 16, 25, ?, 49",
-    options: ["30", "32", "34", "36", "38", "40"],
-    correct: 3
+    type: "pattern",
+    category: "Pattern Recognition",
+    question: "Which shape is missing? Each circle is filled with varying amounts of dark navy. Row 1: ~25%, ~50%, ~75% filled. Row 2: ~25% rotating. Row 3: ~25%, ~50%, ?",
+    grid: [
+      ["circle_25pct", "circle_50pct", "circle_75pct"],
+      ["circle_25pct_rotated", "circle_25pct_more_rotated", "circle_25pct_further"],
+      ["circle_25pct_bottom", "circle_50pct_bottom", "?"]
+    ],
+    options: [
+      "Half filled left",
+      "75% filled with small white wedge",
+      "Quarter filled top-left",
+      "Quarter filled bottom-right",
+      "Quarter filled bottom-left",
+      "Fully filled"
+    ],
+    correct: 1,
+    explanation: "Column 3 consistently shows 75% fill (only a small white wedge visible). Row 3 col 3 should show approximately 75% navy filled. Answer: B."
   },
   {
     id: 18,
     type: "pattern",
-    question: "Which shape completes the pattern?",
+    category: "Pattern Recognition",
+    question: "Which shape is missing? Each item is a 3×3 grid of cells. Orange cell count decreases across each row and changes position. Row 1: 4, 3, 2 cells. Row 2: 6, 5, 4 cells. Row 3: 4, 5, ?",
     grid: [
-      ["★", "☆", "★"],
-      ["☆", "★", "☆"],
-      ["★", "☆", "?"]
+      ["4_orange_cells_left", "3_orange_cells_left", "2_orange_cells_top"],
+      ["6_orange_cells", "5_orange_cells", "4_orange_cells_right"],
+      ["4_orange_cells_left_col", "5_orange_cells_mid", "?"]
     ],
-    options: ["★", "☆", "○", "●", "◆", "◇"],
-    correct: 0
+    options: [
+      "4 orange cells top-left block",
+      "6 orange cells right-heavy",
+      "3 orange cells top-right",
+      "6 orange cells left-heavy",
+      "4 orange cells bottom-left",
+      "2 orange cells right column"
+    ],
+    correct: 3,
+    explanation: "Column 3 values: 2, 4, ? — each increases by 2, so ? = 6. The orange fills the right/bottom side. Answer: D (6 orange cells)."
   },
   {
     id: 19,
     type: "numerical",
-    question: "What comes next? 256, 128, 64, 32, ?",
-    options: ["8", "12", "16", "24", "20", "10"],
-    correct: 2
+    category: "Numerical Reasoning",
+    question: "Which number is missing? The grid contains: Row 1: 4, 8, 24 | Row 2: 3, 6, 18 | Row 3: 5, 10, ?",
+    grid: [
+      [4, 8, 24],
+      [3, 6, 18],
+      [5, 10, "?"]
+    ],
+    options: ["30", "55", "25", "15", "50", "20"],
+    correct: 0,
+    explanation: "Pattern: col1 × 2 = col2, col2 × 3 = col3. Row 3: 5×2=10, 10×3=30. Answer: A (30)."
   },
   {
     id: 20,
     type: "spatial",
-    question: "A cube has 6 faces. How many edges does it have?",
-    options: ["8", "10", "12", "14", "16", "6"],
-    correct: 2
-  },
-  {
-    id: 21,
-    type: "pattern",
-    question: "What comes next in the sequence?",
-    grid: [
-      ["2", "4", "8"],
-      ["3", "9", "27"],
-      ["4", "16", "?"]
-    ],
-    options: ["32", "48", "64", "128", "56", "36"],
-    correct: 2
-  },
-  {
-    id: 22,
-    type: "numerical",
-    question: "What number comes next? 1, 3, 6, 10, 15, ?",
-    options: ["18", "20", "21", "24", "25", "19"],
-    correct: 2
-  },
-  {
-    id: 23,
-    type: "pattern",
-    question: "Which completes the grid?",
-    grid: [
-      ["R", "G", "B"],
-      ["G", "B", "R"],
-      ["B", "R", "?"]
-    ],
-    options: ["G", "R", "B", "Y", "O", "P"],
-    correct: 0
-  },
-  {
-    id: 24,
-    type: "numerical",
-    question: "Find the pattern: 0, 1, 1, 2, 3, 5, 8, 13, ?",
-    options: ["18", "19", "20", "21", "22", "24"],
-    correct: 2  // not strictly fibonacci 21 — let me fix
-  },
-  {
-    id: 25,
-    type: "spatial",
-    question: "If you rotate the letter 'N' 180°, what letter do you get?",
-    options: ["N", "Z", "M", "W", "U", "S"],
-    correct: 0
-  },
-  {
-    id: 26,
-    type: "pattern",
-    question: "Which completes the sequence?",
-    grid: [
-      ["1", "3", "5"],
-      ["7", "9", "11"],
-      ["13", "15", "?"]
-    ],
-    options: ["16", "17", "18", "19", "20", "21"],
-    correct: 1
-  },
-  {
-    id: 27,
-    type: "numerical",
-    question: "What is missing? 5, 10, 20, 40, ?, 160",
-    options: ["60", "70", "80", "90", "100", "120"],
-    correct: 2
-  },
-  {
-    id: 28,
-    type: "spatial",
-    question: "How many squares are on a standard 8×8 chessboard? (including all sizes)",
-    options: ["64", "204", "256", "128", "196", "100"],
-    correct: 1
-  },
-  {
-    id: 29,
-    type: "pattern",
-    question: "Which completes the pattern?",
-    grid: [
-      ["A", "C", "E"],
-      ["G", "I", "K"],
-      ["M", "O", "?"]
-    ],
-    options: ["P", "Q", "R", "S", "T", "U"],
-    correct: 1
-  },
-  {
-    id: 30,
-    type: "numerical",
-    question: "What comes next? 1, 8, 27, 64, 125, ?",
-    options: ["150", "196", "200", "216", "250", "225"],
-    correct: 3
+    category: "Spatial Reasoning",
+    question: "How many triangles are in the picture? A large triangle contains two internal lines drawn from the apex down to the base, creating smaller triangles.",
+    options: ["3", "8", "7", "6", "5", "4"],
+    correct: 3,
+    explanation: "The large triangle has 2 lines from the apex creating 3 small triangles at the base. Counting all: 3 small + 2 medium (left pair, right pair) + 1 large = 6. Answer: D (6)."
   }
 ];
 
-// Fix question 24 (fibonacci): 0,1,1,2,3,5,8,13,21
-questions[23] = {
-  id: 24,
-  type: "numerical",
-  question: "Find the pattern: 0, 1, 1, 2, 3, 5, 8, 13, ?",
-  options: ["18", "19", "20", "21", "24", "26"],
-  correct: 3
-};
-
 export default questions;
 
-// Scoring: maps correct answers to approximate IQ score
+// Scoring: maps correct answers to approximate IQ score (out of 20 questions)
 export function calculateIQ(correctAnswers) {
-  // Bell curve approximation: mean = 15 correct → IQ 100
-  // Each additional correct answer adds ~3.33 IQ points
+  // Bell curve approximation: mean = 10 correct → IQ 100
+  // Each additional correct answer adds ~5 IQ points
   const baseIQ = 55;
-  const pointsPerCorrect = 3.33;
+  const pointsPerCorrect = 5;
   let score = Math.round(baseIQ + (correctAnswers * pointsPerCorrect));
-  
+
   // Add slight randomness for realism (+/- 2)
   score += Math.floor(Math.random() * 5) - 2;
-  
+
   // Clamp between 55 and 155
   return Math.max(55, Math.min(155, score));
 }
