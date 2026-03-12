@@ -67,11 +67,11 @@ export default function AboutSection() {
         {/* Why section */}
         <div className="mt-16 grid md:grid-cols-2 gap-10 items-center">
           <div className="flex items-center justify-center">
-            <img
-              src="https://media.base44.com/images/public/69b1aedc5a0abb358cd40ec0/42c6e80c7_image.png"
-              alt="IQ Score Distribution"
-              className="w-full max-w-sm rounded-xl"
-            />
+            
+
+
+
+
           </div>
 
           <div className="bg-gray-50 rounded-xl p-8 border border-gray-200">
