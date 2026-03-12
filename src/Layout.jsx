@@ -27,13 +27,15 @@ export default function Layout({ children, currentPageName }) {
             </nav>
 
             {/* CTA buttons */}
-            <div className="flex items-center gap-3">
-              <Link to={createPageUrl("IQTest")}>
-                <button className="bg-[#F5921B] hover:bg-[#e0830f] text-white font-bold text-sm px-5 py-2.5 rounded-md transition-colors">
-                  Start IQ Test
-                </button>
-              </Link>
-            </div>
+            {currentPageName !== "IQTest" && (
+              <div className="flex items-center gap-3">
+                <Link to={createPageUrl("IQTest")}>
+                  <button className="bg-[#F5921B] hover:bg-[#e0830f] text-white font-bold text-sm px-5 py-2.5 rounded-md transition-colors">
+                    Start IQ Test
+                  </button>
+                </Link>
+              </div>
+            )}
           </div>
         </div>
       </header>
