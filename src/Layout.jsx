@@ -12,18 +12,18 @@ export default function Layout({ children, currentPageName }) {
             {/* Logo */}
             <Link to={createPageUrl("Home")} className="flex items-center gap-2">
               <div className="border-2 border-[#0C3547] rounded p-1.5 flex flex-col items-center leading-none">
-                <span className="text-xs font-black text-[#0C3547] tracking-widest">WW</span>
-                <span className="text-[9px] font-semibold text-[#0C3547] tracking-wider">World Wide</span>
+                
+                <span className="text-[9px] font-semibold text-[#0C3547] tracking-wider">Academic</span>
                 <span className="text-[10px] font-black text-[#0C3547] tracking-widest">IQ TEST</span>
               </div>
             </Link>
 
             {/* Nav links */}
             <nav className="hidden md:flex items-center gap-7 text-sm font-medium text-[#0C3547]">
-              <Link to={createPageUrl("Home")} className={`hover:text-[#F5921B] transition-colors pb-0.5 ${currentPageName === "Home" ? "border-b-2 border-[#0C3547]" : ""}`}>
-                Home
-              </Link>
-              <a href="#pricing" className="hover:text-[#F5921B] transition-colors">Pricing</a>
+              
+
+
+              
             </nav>
 
             {/* CTA buttons */}
@@ -39,6 +39,6 @@ export default function Layout({ children, currentPageName }) {
       </header>
 
       <main>{children}</main>
-    </div>
-  );
+    </div>);
+
 }
