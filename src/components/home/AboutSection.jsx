@@ -12,10 +12,10 @@ export default function AboutSection() {
 
         <div className="grid md:grid-cols-2 gap-12 items-center">
           <div>
-            <p className="text-gray-600 leading-relaxed mb-6">
-              The World Wide IQ Test is part of an ambitious effort to deliver fun, stimulating and
-              engaging online measures of human cognitive abilities, as well as social and emotional
-              learning skills for the global community.
+            <p className="text-gray-600 leading-relaxed mb-6">The Academic IQ Test is part of an ambitious effort to deliver fun, stimulating and engaging online measures of human cognitive abilities, as well as social and emotional learning skills for the global community.
+
+
+
             </p>
             <p className="text-gray-600 leading-relaxed mb-6">
               We aim to provide you with accurate and precise information about important aspects of
