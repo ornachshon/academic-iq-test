@@ -21,7 +21,13 @@ export default function QuestionCard({ question, selectedAnswer, onSelectAnswer 
             Which shape is missing?
           </h3>
 
-          {question.grid && (
+          {question.image && (
+            <div className="flex justify-center my-4">
+              <img src={question.image} alt="Question" className="max-w-full rounded-xl" />
+            </div>
+          )}
+
+          {!question.image && question.grid && (
             <div className="flex justify-center my-6">
               <div className="inline-grid gap-0.5 bg-gray-200 p-0.5 rounded-xl">
                 {question.grid.map((row, rIdx) => (
@@ -44,7 +50,7 @@ export default function QuestionCard({ question, selectedAnswer, onSelectAnswer 
             </div>
           )}
 
-          {!question.grid && (
+          {!question.image && !question.grid && (
             <div className="flex items-center justify-center min-h-[200px]">
               <p className="text-2xl sm:text-3xl font-bold text-[#0C3547] text-center">
                 {question.question.includes("?") ? "" : question.question}
