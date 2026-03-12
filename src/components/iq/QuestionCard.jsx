@@ -66,28 +66,35 @@ export default function QuestionCard({ question, selectedAnswer, onSelectAnswer 
           </h4>
 
           <div className="grid grid-cols-2 gap-3">
-            {question.options.map((option, idx) => (
-              <motion.button
-                key={idx}
-                whileHover={{ scale: 1.03 }}
-                whileTap={{ scale: 0.97 }}
-                onClick={() => onSelectAnswer(idx)}
-                className={`flex items-center gap-3 p-4 rounded-xl border-2 transition-all text-left ${
-                  selectedAnswer === idx
-                    ? "border-[#F5921B] bg-[#F5921B]/10 shadow-md"
-                    : "border-gray-200 hover:border-[#0C3547]/30 hover:bg-gray-50"
-                }`}
-              >
-                <span className={`w-8 h-8 rounded-lg flex items-center justify-center text-sm font-bold flex-shrink-0 ${
-                  selectedAnswer === idx
-                    ? "bg-[#F5921B] text-white"
-                    : "bg-gray-100 text-gray-500"
-                }`}>
-                  {labels[idx]}
-                </span>
-                <span className="font-semibold text-[#0C3547] text-base leading-tight">{option}</span>
-              </motion.button>
-            ))}
+            {question.options.map((option, idx) => {
+              const isImageOption = typeof option === "object" && option.image;
+              return (
+                <motion.button
+                  key={idx}
+                  whileHover={{ scale: 1.03 }}
+                  whileTap={{ scale: 0.97 }}
+                  onClick={() => onSelectAnswer(idx)}
+                  className={`flex flex-col items-center gap-2 p-3 rounded-xl border-2 transition-all ${
+                    selectedAnswer === idx
+                      ? "border-[#F5921B] bg-[#F5921B]/10 shadow-md"
+                      : "border-gray-200 hover:border-[#0C3547]/30 hover:bg-gray-50"
+                  }`}
+                >
+                  <span className={`w-8 h-8 rounded-lg flex items-center justify-center text-sm font-bold flex-shrink-0 self-start ${
+                    selectedAnswer === idx
+                      ? "bg-[#F5921B] text-white"
+                      : "bg-gray-100 text-gray-500"
+                  }`}>
+                    {labels[idx]}
+                  </span>
+                  {isImageOption ? (
+                    <img src={option.image} alt={option.text} className="w-full rounded-lg object-contain max-h-24" />
+                  ) : (
+                    <span className="font-semibold text-[#0C3547] text-base leading-tight text-left w-full">{option}</span>
+                  )}
+                </motion.button>
+              );
+            })}
           </div>
         </div>
       </motion.div>
