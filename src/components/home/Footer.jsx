@@ -9,11 +9,7 @@ export default function Footer() {
         <div className="flex flex-col md:flex-row justify-between items-center gap-6">
           {/* Logo */}
           <div className="flex items-center gap-3">
-            <div className="border-2 border-white rounded p-1.5 flex flex-col items-center leading-none">
-              
-              <span className="text-[9px] font-semibold tracking-wider">Academic</span>
-              <span className="text-[10px] font-black tracking-widest">IQ TEST</span>
-            </div>
+            <img src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69b1aedc5a0abb358cd40ec0/3f8959333_AIQlogo.png" alt="Academic IQ Test" className="h-12 w-12 object-contain bg-white rounded-full" />
           </div>
 
           {/* Links */}
