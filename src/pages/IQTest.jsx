@@ -73,9 +73,10 @@ export default function IQTest() {
       total_questions: 20,
       time_taken_seconds: timeTaken,
       answers: answerDetails,
+      email,
     });
 
-    navigate(createPageUrl("Results") + `?id=${result.id}`);
+    navigate(createPageUrl("Checkout") + `?id=${result.id}`);
   }, [answers, startTime, isSubmitting, navigate]);
 
   const handleTimeUp = useCallback(() => {
