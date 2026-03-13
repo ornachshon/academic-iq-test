@@ -22,6 +22,7 @@ const questions = [
     id: 2,
     type: "spatial",
     category: "Spatial Reasoning",
+    category_question: "Visuospatial Insight",
     question: "Which shape completes the center of the image? The large image shows an orange rectangle divided into sections with a blue center and converging white lines forming a trapezoid shape.",
     options: [
       "Orange top only, blue bottom with wide trapezoid",
