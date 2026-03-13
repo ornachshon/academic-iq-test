@@ -19,7 +19,7 @@ export default function Footer() {
           </div>
 
           <p className="text-xs text-gray-400">
-            © {new Date().getFullYear()} World Wide IQ Test. All rights reserved.
+            © {new Date().getFullYear()} Academic IQ Test. All rights reserved.
           </p>
         </div>
       </div>
