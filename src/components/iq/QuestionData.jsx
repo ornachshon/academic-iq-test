@@ -54,6 +54,7 @@ const questions = [
     id: 4,
     type: "spatial",
     category: "Spatial Reasoning",
+    category_question: "Visuospatial Insight",
     question: "How many triangles are in the picture? A large triangle is divided into 4 smaller triangles by connecting the midpoints of each side.",
     options: ["3", "9", "7", "6", "5", "4"],
     correct: 4,
