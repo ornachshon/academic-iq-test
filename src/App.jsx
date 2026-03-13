@@ -25,6 +25,7 @@ function App() {
           <Route path="/IQTest" element={<LayoutWrapper currentPageName="IQTest"><IQTest /></LayoutWrapper>} />
           <Route path="/Results" element={<LayoutWrapper currentPageName="Results"><Results /></LayoutWrapper>} />
           <Route path="/Checkout" element={<Checkout />} />
+          <Route path="/Email" element={<Email />} />
           <Route path="*" element={<PageNotFound />} />
         </Routes>
         <Toaster />
