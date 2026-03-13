@@ -12,11 +12,7 @@ export default function Layout({ children, currentPageName }) {
           <div className="flex items-center justify-between h-16">
             {/* Logo */}
             <Link to={createPageUrl("Home")} className="flex items-center gap-2">
-              <div className="border-2 border-[#0C3547] rounded p-1.5 flex flex-col items-center leading-none">
-                
-                <span className="text-[9px] font-semibold text-[#0C3547] tracking-wider">Academic</span>
-                <span className="text-[10px] font-black text-[#0C3547] tracking-widest">IQ TEST</span>
-              </div>
+              <AiqLogo className="w-10 h-10" />
             </Link>
 
             {/* Nav links */}
