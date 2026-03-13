@@ -10,6 +10,7 @@ import questions, { calculateIQ } from "@/components/iq/QuestionData";
 import Timer from "@/components/iq/Timer";
 import QuestionCard from "@/components/iq/QuestionCard";
 import QuestionNavigator from "@/components/iq/QuestionNavigator";
+import EmailCaptureModal from "@/components/iq/EmailCaptureModal";
 
 export default function IQTest() {
   const navigate = useNavigate();
