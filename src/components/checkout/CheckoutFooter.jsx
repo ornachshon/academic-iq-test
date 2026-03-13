@@ -19,7 +19,7 @@ export default function CheckoutFooter() {
           <p className="text-xs mb-1">Available 24/7/365</p>
           <ul className="space-y-1 text-xs">
             <li><a href="#" className="hover:text-white transition-colors">Contact Support</a></li>
-            <li><a href="#" className="hover:text-white transition-colors">Cancel subscription</a></li>
+            <li></li>
           </ul>
         </div>
 
@@ -46,10 +46,10 @@ export default function CheckoutFooter() {
 
         {/* IQ Booster */}
         <div>
-          <h4 className="text-white font-bold mb-2 text-sm">IQ Booster</h4>
+          
           <ul className="space-y-1 text-xs">
-            <li><a href="#" className="hover:text-white transition-colors">Log In</a></li>
-            <li><a href="#" className="hover:text-white transition-colors">About IQ Booster</a></li>
+            <li></li>
+            <li></li>
           </ul>
         </div>
       </div>
@@ -58,6 +58,6 @@ export default function CheckoutFooter() {
         <p>This test is for personal development and entertainment purposes only. It is not a medical or psychological diagnostic tool.</p>
         <p className="mt-1">© 2026 All Rights Reserved by Academic IQ Test</p>
       </div>
-    </footer>
-  );
+    </footer>);
+
 }
