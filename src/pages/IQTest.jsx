@@ -43,45 +43,17 @@ export default function IQTest() {
     }
   };
 
+  const goToEmail = useCallback(() => {
+    navigate("/Email", { state: { answers, startTime } });
+  }, [navigate, answers, startTime]);
+
   const handleFinishClick = () => {
-    setShowEmailModal(true);
+    goToEmail();
   };
 
-  const handleSubmit = useCallback(async (email) => {
-    if (isSubmitting) return;
-    setIsSubmitting(true);
-    setShowEmailModal(false);
-
-    const timeTaken = Math.floor((Date.now() - startTime) / 1000);
-    let correct = 0;
-    const answerDetails = questions.map((q, idx) => {
-      const selected = answers[idx];
-      const isCorrect = selected === q.correct;
-      if (isCorrect) correct++;
-      return {
-        question_id: q.id,
-        selected_answer: selected ?? -1,
-        correct: isCorrect,
-      };
-    });
-
-    const score = calculateIQ(correct);
-
-    const result = await base44.entities.IQResult.create({
-      score,
-      correct_answers: correct,
-      total_questions: 20,
-      time_taken_seconds: timeTaken,
-      answers: answerDetails,
-      email,
-    });
-
-    navigate(createPageUrl("Checkout") + `?id=${result.id}`);
-  }, [answers, startTime, isSubmitting, navigate]);
-
   const handleTimeUp = useCallback(() => {
-    setShowEmailModal(true);
-  }, []);
+    goToEmail();
+  }, [goToEmail]);
 
   const answeredCount = Object.keys(answers).length;
 
