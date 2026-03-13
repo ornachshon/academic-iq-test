@@ -4,6 +4,7 @@ const questions = [
     id: 1,
     type: "image_options",
     category: "Pattern Recognition",
+    category_question: "Visuospatial Pattern Reasoning",
     question: "Which Shape is missing?",
     image: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69b1aedc5a0abb358cd40ec0/bca1b52ed_image.png",
     options: [
