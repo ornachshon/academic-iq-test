@@ -88,7 +88,7 @@ export default function QuestionCard({ question, selectedAnswer, onSelectAnswer 
                     {labels[idx]}
                   </span>
                   {isImageOption ? (
-                    <img src={option.image} alt={option.text} className="w-full rounded-lg object-contain max-h-24" />
+                    <img src={option.image} alt={option.text} className="w-full rounded-lg object-contain h-20" />
                   ) : (
                     <span className="font-semibold text-[#0C3547] text-base leading-tight text-left w-full">{option}</span>
                   )}
