@@ -91,7 +91,7 @@ export default function AboutSection() {
               to thousands of adults from all over the world.
             </p>
             <Link to={createPageUrl("IQTest")}>
-              <button className="bg-[#F5921B] text-[#0C3547] px-7 py-3 font-bold rounded-md hover:bg-[#e07a0c] transition-colors">
+              <button className="bg-[#F5921B] text-[#0C3547] px-7 py-3 font-bold opacity-100 rounded-md hover:bg-[#e07a0c] transition-colors">
                 Start IQ Test
               </button>
             </Link>
