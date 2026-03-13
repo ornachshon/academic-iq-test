@@ -152,10 +152,9 @@ export default function IQTest() {
             {currentQ === questions.length - 1 || answeredCount === questions.length ? (
               <Button
                 onClick={handleFinishClick}
-                disabled={isSubmitting}
                 className="gap-2 bg-[#F5921B] hover:bg-[#e0830f] text-white px-6"
               >
-                {isSubmitting ? "Submitting..." : "Finish Test"}
+                Finish Test
                 <ArrowRight className="w-4 h-4" />
               </Button>
             ) : (
