@@ -29,8 +29,8 @@ export default function CheckoutFooter() {
           <ul className="space-y-1 text-xs">
             <li><a href="#" className="hover:text-white transition-colors">Privacy Policy</a></li>
             <li><a href="#" className="hover:text-white transition-colors">Terms & Conditions</a></li>
-            <li><a href="#" className="hover:text-white transition-colors">Subscription Policy</a></li>
-            <li><a href="#" className="hover:text-white transition-colors">Pricing</a></li>
+            <li></li>
+            <li><a href="#" className="hover:text-white transition-colors"></a></li>
           </ul>
         </div>
 
