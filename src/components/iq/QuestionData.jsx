@@ -39,6 +39,7 @@ const questions = [
     id: 3,
     type: "numerical",
     category: "Numerical Reasoning",
+    category_question: "Numerical Pattern Reasoning",
     question: "Which number is missing? The grid contains: Row 1: 5, 3, 15 | Row 2: 3, 3, 9 | Row 3: 4, 2, ?",
     grid: [
       [5, 3, 15],
