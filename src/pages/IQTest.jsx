@@ -215,6 +215,10 @@ export default function IQTest() {
           {answeredCount} of {questions.length} questions answered
         </p>
       </div>
+
+      {showEmailModal && (
+        <EmailCaptureModal onSubmit={handleSubmit} />
+      )}
     </div>
   );
 }
