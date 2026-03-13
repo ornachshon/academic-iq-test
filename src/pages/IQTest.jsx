@@ -188,9 +188,6 @@ export default function IQTest() {
         </p>
       </div>
 
-      {showEmailModal && (
-        <EmailCaptureModal onSubmit={handleSubmit} />
-      )}
     </div>
   );
 }
