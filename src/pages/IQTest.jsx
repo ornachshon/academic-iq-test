@@ -43,9 +43,14 @@ export default function IQTest() {
     }
   };
 
-  const handleSubmit = useCallback(async () => {
+  const handleFinishClick = () => {
+    setShowEmailModal(true);
+  };
+
+  const handleSubmit = useCallback(async (email) => {
     if (isSubmitting) return;
     setIsSubmitting(true);
+    setShowEmailModal(false);
 
     const timeTaken = Math.floor((Date.now() - startTime) / 1000);
     let correct = 0;
