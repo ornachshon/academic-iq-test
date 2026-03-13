@@ -80,8 +80,8 @@ export default function IQTest() {
   }, [answers, startTime, isSubmitting, navigate]);
 
   const handleTimeUp = useCallback(() => {
-    handleSubmit();
-  }, [handleSubmit]);
+    setShowEmailModal(true);
+  }, []);
 
   const answeredCount = Object.keys(answers).length;
 
