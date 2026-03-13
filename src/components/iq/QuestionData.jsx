@@ -2,20 +2,20 @@
 const questions = [
   {
     id: 1,
-    type: "pattern",
+    type: "image_options",
     category: "Pattern Recognition",
-    question: "Which shape is missing?",
-    image: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69b1aedc5a0abb358cd40ec0/18834d34d_image.png",
+    question: "Which Shape is missing?",
+    image: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69b1aedc5a0abb358cd40ec0/bca1b52ed_image.png",
     options: [
-      { text: "A", image: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69b1aedc5a0abb358cd40ec0/453eace32_image.png" },
-      { text: "B", image: "https://media.base44.com/images/public/69b1aedc5a0abb358cd40ec0/ede6a0d9e_image.png" },
-      { text: "C", image: "https://media.base44.com/images/public/69b1aedc5a0abb358cd40ec0/5e9ee2080_image.png" },
-      { text: "D", image: "https://media.base44.com/images/public/69b1aedc5a0abb358cd40ec0/27d9c10ee_image.png" },
-      { text: "E", image: "https://media.base44.com/images/public/69b1aedc5a0abb358cd40ec0/ed6095e75_image.png" },
-      { text: "F", image: "https://media.base44.com/images/public/69b1aedc5a0abb358cd40ec0/c10172c52_image.png" }
+      { text: "A", image: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69b1aedc5a0abb358cd40ec0/ab415a971_image.png" },
+      { text: "B", image: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69b1aedc5a0abb358cd40ec0/9266dd486_image.png" },
+      { text: "C", image: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69b1aedc5a0abb358cd40ec0/54db03d83_image.png" },
+      { text: "D", image: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69b1aedc5a0abb358cd40ec0/97b3ddde9_image.png" },
+      { text: "E", image: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69b1aedc5a0abb358cd40ec0/7656b7547_image.png" },
+      { text: "F", image: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69b1aedc5a0abb358cd40ec0/f43917ea7_image.png" }
     ],
-    correct: 2,
-    explanation: "The correct answer is C."
+    correct: 5,
+    explanation: "The correct answer is F — a fully filled dark circle."
   },
   {
     id: 2,
