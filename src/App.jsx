@@ -9,6 +9,7 @@ import Home from './pages/Home';
 import IQTest from './pages/IQTest';
 import Results from './pages/Results';
 import Checkout from './pages/Checkout';
+import Email from './pages/Email';
 
 const LayoutWrapper = ({ children, currentPageName }) => (
   <Layout currentPageName={currentPageName}>{children}</Layout>
