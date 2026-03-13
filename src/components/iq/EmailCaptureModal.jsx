@@ -14,14 +14,14 @@ export default function EmailCaptureModal({ onSubmit }) {
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center">
       {/* Overlay */}
-      <div className="absolute inset-0 bg-black/75" />
+      <div className="bg-black/75 opacity-100 absolute inset-0" />
 
       {/* Modal */}
       <motion.div
         initial={{ opacity: 0, scale: 0.95 }}
         animate={{ opacity: 1, scale: 1 }}
-        className="relative bg-white rounded-2xl shadow-2xl w-full max-w-md mx-4 p-8 text-center"
-      >
+        className="relative bg-white rounded-2xl shadow-2xl w-full max-w-md mx-4 p-8 text-center">
+
         <h2 className="text-2xl font-bold text-[#0C3547] mb-1">
           Where to send your IQ score
         </h2>
@@ -38,25 +38,25 @@ export default function EmailCaptureModal({ onSubmit }) {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             className="w-full border border-gray-300 rounded-md px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#F5921B]"
-            placeholder=""
-          />
+            placeholder="" />
+
 
           <button
             type="submit"
-            className="w-full bg-[#F5921B] hover:bg-[#e0830f] text-white font-bold py-3 rounded-md transition-colors text-base"
-          >
+            className="w-full bg-[#F5921B] hover:bg-[#e0830f] text-white font-bold py-3 rounded-md transition-colors text-base">
+
             Get IQ Results
           </button>
         </form>
 
-        <p className="text-xs text-gray-400 mt-4 leading-relaxed">
-          By clicking "Get IQ Results," you will receive your IQ score and report by email, you
-          consent to also receive promotional offers from us (unsubscribe anytime), and
-          you agree to our{" "}
-          <a href="#" className="underline">Privacy Policy</a> and{" "}
-          <a href="#" className="underline">Terms of Use</a>.
+        <p className="text-xs text-gray-400 mt-4 leading-relaxed">We value your privacy. Your email will never be shared with anyone.
+
+
+
+
+
         </p>
       </motion.div>
-    </div>
-  );
+    </div>);
+
 }
