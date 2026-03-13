@@ -132,8 +132,8 @@ export default function Checkout() {
           </div>
 
           {/* CTA Button */}
-          <button
-            className="w-full bg-[#F5921B] hover:bg-[#e0830f] text-white font-extrabold text-base py-3 rounded-md transition-colors">
+          <button className="w-full bg-[#F5921B] hover:bg-[#e0830f] text-white font-extrabold text-base py-3 rounded-md transition-colors">
+
 
             Continue to Payment
           </button>
