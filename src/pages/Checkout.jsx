@@ -116,19 +116,19 @@ export default function Checkout() {
 
           {/* Terms checkbox */}
           <div className="flex items-start gap-2">
-            <input
-              type="checkbox"
-              id="terms"
-              checked={agreed}
-              onChange={(e) => setAgreed(e.target.checked)}
-              className="mt-1 w-4 h-4 flex-shrink-0 cursor-pointer accent-[#F5921B]" />
+            
 
-            <label htmlFor="terms" className="text-xs text-gray-600 cursor-pointer">
-              I understand that after the 7-day trial, my subscription will automatically renew at{' '}
-              <strong>$29.99 every 28 days</strong> unless I cancel, and I agree to the{' '}
-              <a href="#" className="text-blue-600 underline">Terms of Service</a> and{' '}
-              <a href="#" className="text-blue-600 underline">Privacy Policy</a>.
-            </label>
+
+
+
+
+
+            
+
+
+
+
+
           </div>
 
           {/* CTA Button */}
