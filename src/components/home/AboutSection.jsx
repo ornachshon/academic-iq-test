@@ -78,7 +78,7 @@ export default function AboutSection() {
 
           </div>
 
-          <div className="bg-transparent p-8 opacity-70 rounded-none border border-gray-200">
+          <div className="bg-transparent p-8 opacity-100 rounded-none border border-gray-200">
             <h3 className="text-2xl font-extrabold text-[#0C3547] mb-4">Why this IQ test?</h3>
             <p className="text-gray-600 leading-relaxed mb-6">The Academic IQ Test presents you with a short series of fun, challenging problems designed to measure your fluid intelligence abilities and provide you with both accurate and precise scores.
 
