@@ -64,6 +64,7 @@ const questions = [
     id: 5,
     type: "pattern",
     category: "Pattern Recognition",
+    category_question: "Visuospatial Pattern Reasoning",
     question: "Which shape is missing? Row 1: circle, circle-in-diamond, diamond. Row 2: square-in-circle, nested-square-dot, diamond-dot. Row 3: square, square-dot, ?",
     grid: [
       ["circle", "circle_in_diamond", "diamond"],
