@@ -198,6 +198,70 @@ const shapes = {
   circle_25pct_bottom: () => <FilledCircle pct={0.25} startAngle={-180} />,
   circle_50pct_bottom: () => <FilledCircle pct={0.50} startAngle={0} />,
 
+  // ── Isometric cube shapes for Q5 ─────────────────────────
+  // Cube: top face, left face, right face as isometric projection
+  // Points: top-center(24,6), right(40,15), bottom-center(24,24), left(8,15)
+  //         left-bottom(8,39), bottom-center-low(24,48), right-bottom(40,39)
+  cube_right_filled: () => (
+    <svg width="100%" height="100%" viewBox="0 0 48 48" fill="none">
+      {/* top face - white */}
+      <polygon points="24,6 40,15 24,24 8,15" fill="white" stroke="#F5921B" strokeWidth="1.5"/>
+      {/* left face - white */}
+      <polygon points="8,15 24,24 24,42 8,33" fill="white" stroke="#F5921B" strokeWidth="1.5"/>
+      {/* right face - navy */}
+      <polygon points="24,24 40,15 40,33 24,42" fill="#0C3547" stroke="#F5921B" strokeWidth="1.5"/>
+    </svg>
+  ),
+  cube_bottom_filled: () => (
+    <svg width="100%" height="100%" viewBox="0 0 48 48" fill="none">
+      {/* top face - white */}
+      <polygon points="24,6 40,15 24,24 8,15" fill="white" stroke="#F5921B" strokeWidth="1.5"/>
+      {/* left face - white */}
+      <polygon points="8,15 24,24 24,42 8,33" fill="white" stroke="#F5921B" strokeWidth="1.5"/>
+      {/* right face - white */}
+      <polygon points="24,24 40,15 40,33 24,42" fill="white" stroke="#F5921B" strokeWidth="1.5"/>
+      {/* bottom diamond accent */}
+      <polygon points="24,30 36,24 24,18 12,24" fill="#0C3547" stroke="#F5921B" strokeWidth="1"/>
+    </svg>
+  ),
+  cube_top_filled: () => (
+    <svg width="100%" height="100%" viewBox="0 0 48 48" fill="none">
+      {/* top face - navy */}
+      <polygon points="24,6 40,15 24,24 8,15" fill="#0C3547" stroke="#F5921B" strokeWidth="1.5"/>
+      {/* left face - white */}
+      <polygon points="8,15 24,24 24,42 8,33" fill="white" stroke="#F5921B" strokeWidth="1.5"/>
+      {/* right face - white */}
+      <polygon points="24,24 40,15 40,33 24,42" fill="white" stroke="#F5921B" strokeWidth="1.5"/>
+    </svg>
+  ),
+  cube_all_filled: () => (
+    <svg width="100%" height="100%" viewBox="0 0 48 48" fill="none">
+      <polygon points="24,6 40,15 24,24 8,15" fill="#0C3547" stroke="#F5921B" strokeWidth="1.5"/>
+      <polygon points="8,15 24,24 24,42 8,33" fill="#0C3547" stroke="#F5921B" strokeWidth="1.5"/>
+      <polygon points="24,24 40,15 40,33 24,42" fill="#0C3547" stroke="#F5921B" strokeWidth="1.5"/>
+    </svg>
+  ),
+  cube_left_top_filled: () => (
+    <svg width="100%" height="100%" viewBox="0 0 48 48" fill="none">
+      {/* top face - navy */}
+      <polygon points="24,6 40,15 24,24 8,15" fill="#0C3547" stroke="#F5921B" strokeWidth="1.5"/>
+      {/* left face - navy */}
+      <polygon points="8,15 24,24 24,42 8,33" fill="#0C3547" stroke="#F5921B" strokeWidth="1.5"/>
+      {/* right face - white */}
+      <polygon points="24,24 40,15 40,33 24,42" fill="white" stroke="#F5921B" strokeWidth="1.5"/>
+    </svg>
+  ),
+  cube_top_only_filled: () => (
+    <svg width="100%" height="100%" viewBox="0 0 48 48" fill="none">
+      {/* top face - navy */}
+      <polygon points="24,6 40,15 24,24 8,15" fill="#0C3547" stroke="#F5921B" strokeWidth="1.5"/>
+      {/* left face - white */}
+      <polygon points="8,15 24,24 24,42 8,33" fill="white" stroke="#F5921B" strokeWidth="1.5"/>
+      {/* right face - white, smaller */}
+      <polygon points="24,24 40,15 40,33 24,42" fill="white" stroke="#F5921B" strokeWidth="1.5"/>
+    </svg>
+  ),
+
   // ── Answer shapes for Q3 ─────────────────────────────────
   tall_rect: () => (
     <Svg><rect x="16" y="6" width="16" height="36" /></Svg>
