@@ -176,18 +176,18 @@ const questions = [
   },
   {
     id: 13,
-    type: "image_options",
+    type: "svg_options",
     category: "Pattern Recognition",
     category_question: "Visuospatial Pattern Reasoning",
     question: "Which Shape is missing?",
     image: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69b1aedc5a0abb358cd40ec0/01b6c56a9_image.png",
     options: [
-      { text: "A", image: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69b1aedc5a0abb358cd40ec0/0317446ef_image.png#A" },
-      { text: "B", image: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69b1aedc5a0abb358cd40ec0/0317446ef_image.png#B" },
-      { text: "C", image: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69b1aedc5a0abb358cd40ec0/0317446ef_image.png#C" },
-      { text: "D", image: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69b1aedc5a0abb358cd40ec0/0317446ef_image.png#D" },
-      { text: "E", image: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69b1aedc5a0abb358cd40ec0/0317446ef_image.png#E" },
-      { text: "F", image: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69b1aedc5a0abb358cd40ec0/0317446ef_image.png#F" }
+      { text: "A", svg: "q13_optA" },
+      { text: "B", svg: "q13_optB" },
+      { text: "C", svg: "q13_optC" },
+      { text: "D", svg: "q13_optD" },
+      { text: "E", svg: "q13_optE" },
+      { text: "F", svg: "q13_optF" }
     ],
     correct: 5,
     explanation: "The correct answer is F."
