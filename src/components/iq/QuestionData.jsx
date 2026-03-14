@@ -78,24 +78,21 @@ const questions = [
   },
   {
     id: 6,
-    type: "pattern",
-    category: "Pattern Recognition",
-    question: "Which shape is missing? Each circle is divided into 10 wedges. The orange-filled wedges rotate/increase across the grid.",
-    grid: [
-      ["2_wedges_top_left", "3_wedges_top_right", "4_wedges_right"],
-      ["1_wedge_bottom_left", "2_wedges_bottom", "3_wedges_bottom_right"],
-      ["1_wedge_left", "2_wedges_bottom_left", "?"]
-    ],
+    type: "image_options",
+    category: "Spatial Reasoning",
+    category_question: "Visuospatial Insight",
+    question: "Which Shape is missing?",
+    image: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69b1aedc5a0abb358cd40ec0/f9b82aec0_image.png",
     options: [
-      "Many wedges top-right orange",
-      "All wedges filled",
-      "3 wedges bottom-left orange",
-      "4 wedges center-right orange",
-      "2 wedges bottom-right orange",
-      "5 wedges top orange"
+      { text: "A", image: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69b1aedc5a0abb358cd40ec0/149767771_image.png#A" },
+      { text: "B", image: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69b1aedc5a0abb358cd40ec0/149767771_image.png#B" },
+      { text: "C", image: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69b1aedc5a0abb358cd40ec0/149767771_image.png#C" },
+      { text: "D", image: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69b1aedc5a0abb358cd40ec0/149767771_image.png#D" },
+      { text: "E", image: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69b1aedc5a0abb358cd40ec0/149767771_image.png#E" },
+      { text: "F", image: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69b1aedc5a0abb358cd40ec0/149767771_image.png#F" }
     ],
     correct: 4,
-    explanation: "Each row the orange slice count increases by 1 per column, and the position shifts clockwise. Row 3 col 3 should have 3 wedges in the lower-right area — matching option E."
+    explanation: "The center piece shows the navy vertical band with white diagonal lines converging, and the horizontal dividing line. Answer: E."
   },
   {
     id: 7,
