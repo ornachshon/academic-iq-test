@@ -176,12 +176,21 @@ const questions = [
   },
   {
     id: 13,
-    type: "spatial",
-    category: "Spatial Reasoning",
-    question: "How many squares are in the picture? The image shows a 3×3 grid of squares (like a tic-tac-toe board).",
-    options: ["9", "10", "11", "12", "13", "14"],
+    type: "image_options",
+    category: "Pattern Recognition",
+    category_question: "Visuospatial Pattern Reasoning",
+    question: "Which Shape is missing?",
+    image: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69b1aedc5a0abb358cd40ec0/01b6c56a9_image.png",
+    options: [
+      { text: "A", image: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69b1aedc5a0abb358cd40ec0/0317446ef_image.png#A" },
+      { text: "B", image: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69b1aedc5a0abb358cd40ec0/0317446ef_image.png#B" },
+      { text: "C", image: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69b1aedc5a0abb358cd40ec0/0317446ef_image.png#C" },
+      { text: "D", image: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69b1aedc5a0abb358cd40ec0/0317446ef_image.png#D" },
+      { text: "E", image: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69b1aedc5a0abb358cd40ec0/0317446ef_image.png#E" },
+      { text: "F", image: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69b1aedc5a0abb358cd40ec0/0317446ef_image.png#F" }
+    ],
     correct: 5,
-    explanation: "Count all squares: 9 small (1×1) + 4 medium (2×2) + 1 large (3×3) = 14. Answer: F (14)."
+    explanation: "The correct answer is F."
   },
   {
     id: 14,
