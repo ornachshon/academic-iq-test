@@ -280,6 +280,18 @@ const questions = [
     options: ["A", "B", "C", "D", "E", "F"],
     correct: 2,
     explanation: "Count all triangles of all sizes: 1 large outer triangle + 3 small triangles at the base + 2 medium triangles formed by the internal lines + 3 additional smaller triangles from the center divisions = 9 total. Answer: C (9)."
+  },
+  {
+    id: 21,
+    type: "image_options",
+    category: "Pattern Recognition",
+    category_question: "Visuospatial Pattern Reasoning",
+    question: "Which Shape is missing?",
+    image: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69b1aedc5a0abb358cd40ec0/e7cbe70d5_image.png",
+    options_image: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69b1aedc5a0abb358cd40ec0/523d21ae3_image.png",
+    options: ["A", "B", "C", "D", "E", "F"],
+    correct: 5,
+    explanation: "Across rows and columns, containers progressively disappear while the dot remains. Row 3, col 3 has no outer container, only a dot. Answer: F."
   }
 ];
 
