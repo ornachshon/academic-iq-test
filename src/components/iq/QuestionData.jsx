@@ -125,19 +125,14 @@ const questions = [
   },
   {
     id: 9,
-    type: "spatial",
-    category: "Spatial Reasoning",
-    question: "What box was created from the image? A cross-shaped net (unfolded cube) is shown where the top, bottom, left, and right panels are dark navy, and the center and far-right panel are white/outline only.",
-    options: [
-      "Navy top face, orange edges, white sides",
-      "Orange top, navy front, white right",
-      "Orange outline, navy top and front",
-      "All navy cube",
-      "Navy front and top, orange outline edges",
-      "All orange outline cube"
-    ],
-    correct: 4,
-    explanation: "The net has navy filled squares on top, bottom, left, right of center, and a white square for center/right. When folded, the visible faces show navy top and front with orange outline edges. Answer: E."
+    type: "numerical",
+    category: "Numerical Reasoning",
+    category_question: "Numerical Pattern Reasoning",
+    question: "Which number is missing?",
+    image: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69b1aedc5a0abb358cd40ec0/c7118808d_image.png",
+    options: ["10", "8", "6", "12", "16", "9"],
+    correct: 1,
+    explanation: "Pattern: col1 × col2 = col3. Row 1: 5×3=15, Row 2: 3×3=9, Row 3: 4×2=8. Answer: B (8)."
   },
   {
     id: 10,
