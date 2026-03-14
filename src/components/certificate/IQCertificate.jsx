@@ -8,7 +8,7 @@ export default function IQCertificate({ name, score, serialNumber, date }) {
 
   const displayName = name || "XXXX XXXX";
   const displayScore = score || "XXX";
-  const displaySerial = serialNumber || "XXXX XXXX";
+  const displaySerial = serialNumber || "XXXXXXXX";
   const displayDate = date || "XXXX XXXX";
 
   const handleDownload = async () => {
