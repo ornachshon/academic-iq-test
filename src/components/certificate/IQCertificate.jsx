@@ -9,7 +9,7 @@ export default function IQCertificate({ name, score, serialNumber, date }) {
   const displayName = name || "XXXX XXXX";
   const displayScore = score || "XXX";
   const displaySerial = serialNumber || "XXXXXXXX";
-  const displayDate = date || "XXXX XXXX";
+  const displayDate = date || "Month, Day, Year";
 
   const handleDownload = async () => {
     const el = certRef.current;
