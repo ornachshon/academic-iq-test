@@ -59,8 +59,8 @@ export default function IQTest() {
         <motion.div
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
-          className="bg-white rounded-3xl shadow-2xl max-w-lg w-full p-8 md:p-12 text-center"
-        >
+          className="bg-white rounded-3xl shadow-2xl max-w-lg w-full p-8 md:p-12 text-center">
+
           <div className="w-20 h-20 bg-[#0C3547] rounded-2xl flex items-center justify-center mx-auto mb-6">
             <span className="text-3xl font-black text-[#F5921B]">IQ</span>
           </div>
@@ -86,13 +86,13 @@ export default function IQTest() {
             whileHover={{ scale: 1.03 }}
             whileTap={{ scale: 0.97 }}
             onClick={() => setShowIntro(false)}
-            className="w-full bg-[#F5921B] hover:bg-[#e0830f] text-white font-bold py-4 rounded-xl text-lg shadow-lg shadow-orange-500/25 transition-colors"
-          >
+            className="w-full bg-[#F5921B] hover:bg-[#e0830f] text-white font-bold py-4 rounded-xl text-lg shadow-lg shadow-orange-500/25 transition-colors">
+
             Start Test
           </motion.button>
         </motion.div>
-      </div>
-    );
+      </div>);
+
   }
 
   return (
@@ -111,9 +111,9 @@ export default function IQTest() {
           <div className="w-full bg-white/10 rounded-full h-1.5">
             <motion.div
               className="bg-[#F5921B] h-1.5 rounded-full"
-              animate={{ width: `${((currentQ + 1) / questions.length) * 100}%` }}
-              transition={{ duration: 0.3 }}
-            />
+              animate={{ width: `${(currentQ + 1) / questions.length * 100}%` }}
+              transition={{ duration: 0.3 }} />
+
           </div>
         </div>
       </div>
@@ -123,8 +123,8 @@ export default function IQTest() {
         <QuestionCard
           question={questions[currentQ]}
           selectedAnswer={answers[currentQ]}
-          onSelectAnswer={handleSelect}
-        />
+          onSelectAnswer={handleSelect} />
+
 
         {/* Controls */}
         <div className="flex items-center justify-between mt-6">
@@ -132,8 +132,8 @@ export default function IQTest() {
             variant="outline"
             onClick={handleBack}
             disabled={currentQ === 0}
-            className="gap-2"
-          >
+            className="gap-2">
+
             <ChevronLeft className="w-4 h-4" />
             Back
           </Button>
@@ -143,30 +143,30 @@ export default function IQTest() {
               variant="outline"
               onClick={handleSkip}
               disabled={currentQ === questions.length - 1}
-              className="gap-2 border-[#F5921B] text-[#F5921B] hover:bg-[#F5921B]/10"
-            >
+              className="gap-2 border-[#F5921B] text-[#F5921B] hover:bg-[#F5921B]/10">
+
               <SkipForward className="w-4 h-4" />
               Skip
             </Button>
 
-            {currentQ === questions.length - 1 || answeredCount === questions.length ? (
-              <Button
-                onClick={handleFinishClick}
-                className="gap-2 bg-[#F5921B] hover:bg-[#e0830f] text-white px-6"
-              >
+            {currentQ === questions.length - 1 || answeredCount === questions.length ?
+            <Button
+              onClick={handleFinishClick} className="bg-[#F5921B] text-[#000000] px-6 py-2 text-sm font-medium rounded-md inline-flex items-center justify-center whitespace-nowrap transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 shadow h-9 gap-2 hover:bg-[#e0830f]">
+
+
                 Finish Test
                 <ArrowRight className="w-4 h-4" />
-              </Button>
-            ) : (
-              <Button
-                onClick={handleNext}
-                disabled={answers[currentQ] === undefined}
-                className="gap-2 bg-[#0C3547] hover:bg-[#0e3d52] text-white px-6"
-              >
+              </Button> :
+
+            <Button
+              onClick={handleNext}
+              disabled={answers[currentQ] === undefined}
+              className="gap-2 bg-[#0C3547] hover:bg-[#0e3d52] text-white px-6">
+
                 Next
                 <ArrowRight className="w-4 h-4" />
               </Button>
-            )}
+            }
           </div>
         </div>
 
@@ -175,14 +175,14 @@ export default function IQTest() {
           total={questions.length}
           current={currentQ}
           answers={answers}
-          onNavigate={setCurrentQ}
-        />
+          onNavigate={setCurrentQ} />
+
         
         <p className="text-center text-sm text-gray-400 mt-4">
           {answeredCount} of {questions.length} questions answered
         </p>
       </div>
 
-    </div>
-  );
+    </div>);
+
 }
