@@ -271,12 +271,15 @@ const questions = [
   },
   {
     id: 20,
-    type: "spatial",
+    type: "image_options",
     category: "Spatial Reasoning",
-    question: "How many triangles are in the picture? A large triangle contains two internal lines drawn from the apex down to the base, creating smaller triangles.",
-    options: ["3", "8", "7", "6", "5", "4"],
-    correct: 3,
-    explanation: "The large triangle has 2 lines from the apex creating 3 small triangles at the base. Counting all: 3 small + 2 medium (left pair, right pair) + 1 large = 6. Answer: D (6)."
+    category_question: "Visuospatial Insight",
+    question: "How many triangles are in the picture?",
+    image: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69b1aedc5a0abb358cd40ec0/009baad94_image.png",
+    options_image: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69b1aedc5a0abb358cd40ec0/70ab73c58_image.png",
+    options: ["A", "B", "C", "D", "E", "F"],
+    correct: 2,
+    explanation: "Count all triangles of all sizes: 1 large outer triangle + 3 small triangles at the base + 2 medium triangles formed by the internal lines + 3 additional smaller triangles from the center divisions = 9 total. Answer: C (9)."
   }
 ];
 
