@@ -11,7 +11,7 @@ export default function Certificate() {
   const location = useLocation();
   const { name, score } = location.state || {};
 
-  const serialNumber = React.useMemo(() => generateSerial(), []);
+  const serialNumber = useMemo(() => generateSerial(), []);
   const date = format(new Date(), "MMMM dd, yyyy");
 
   return (
