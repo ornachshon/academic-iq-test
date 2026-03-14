@@ -96,24 +96,14 @@ const questions = [
   },
   {
     id: 7,
-    type: "pattern",
-    category: "Pattern Recognition",
-    question: "Which shape is missing? Row 1: diamond, diamond-with-triangle, filled-triangle. Row 2: circle-in-diamond, nested-circle-triangle, square-with-triangle. Row 3: circle, circle-with-square, ?",
-    grid: [
-      ["diamond", "diamond_with_filled_triangle", "filled_triangle"],
-      ["circle_in_diamond", "nested_circle_with_triangle", "square_with_triangle"],
-      ["circle", "circle_with_square", "?"]
-    ],
-    options: [
-      "Circle with triangle in square",
-      "Diamond with triangle",
-      "Empty triangle",
-      "Complex nested shape",
-      "Circle inside square",
-      "Empty square"
-    ],
-    correct: 5,
-    explanation: "Column 3 shows only the innermost shape (no outer container). Row 3's innermost shape is a square. Answer: F (plain square)."
+    type: "spatial",
+    category: "Spatial Reasoning",
+    category_question: "Visuospatial Insight",
+    question: "How many triangles are in the picture?",
+    image: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69b1aedc5a0abb358cd40ec0/270e31938_image.png",
+    options: ["3", "9", "7", "6", "5", "4"],
+    correct: 4,
+    explanation: "There are 4 small upward triangles, 1 small downward triangle, and the large outer triangle = 5 total (but also counting medium compositions). Answer: E (5)."
   },
   {
     id: 8,
