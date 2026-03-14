@@ -23,17 +23,11 @@ const questions = [
     type: "spatial",
     category: "Spatial Reasoning",
     category_question: "Visuospatial Insight",
-    question: "Which shape completes the center of the image? The large image shows an orange rectangle divided into sections with a blue center and converging white lines forming a trapezoid shape.",
-    options: [
-      "Orange top only, blue bottom with wide trapezoid",
-      "Orange sides, blue center with narrow V at top",
-      "Orange sides with blue center, V-shape lines pointing down",
-      "Orange with blue center, wide trapezoid lines",
-      "Orange with blue, trapezoid wider at bottom",
-      "Orange sides, blue bar in middle only"
-    ],
-    correct: 2,
-    explanation: "The center piece must show the middle section of the image: orange on left and right, blue in the center, with white V-lines converging downward — matching option C."
+    question: "How many triangles are in the picture?",
+    image: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69b1aedc5a0abb358cd40ec0/ef3611d3d_image.png",
+    options: ["3", "8", "7", "6", "5", "4"],
+    correct: 3,
+    explanation: "A large triangle with 2 internal lines from the apex creates 3 small triangles at the base, 2 medium triangles, and 1 large outer triangle = 6 total. Answer: D (6)."
   },
   {
     id: 3,
