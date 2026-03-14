@@ -259,17 +259,15 @@ const questions = [
   },
   {
     id: 19,
-    type: "numerical",
-    category: "Numerical Reasoning",
-    question: "Which number is missing? The grid contains: Row 1: 4, 8, 24 | Row 2: 3, 6, 18 | Row 3: 5, 10, ?",
-    grid: [
-      [4, 8, 24],
-      [3, 6, 18],
-      [5, 10, "?"]
-    ],
-    options: ["30", "55", "25", "15", "50", "20"],
-    correct: 0,
-    explanation: "Pattern: col1 × 2 = col2, col2 × 3 = col3. Row 3: 5×2=10, 10×3=30. Answer: A (30)."
+    type: "image_options",
+    category: "Pattern Recognition",
+    category_question: "Visuospatial Pattern Reasoning",
+    question: "Which Shape is missing?",
+    image: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69b1aedc5a0abb358cd40ec0/ec725ca49_image.png",
+    options_image: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69b1aedc5a0abb358cd40ec0/53f01e48b_image.png",
+    options: ["A", "B", "C", "D", "E", "F"],
+    correct: 1,
+    explanation: "The pattern shows circle with downward triangle inside. Row 3, col 3 should have a circle with a plain downward triangle (no dots, no horizontal line). Answer: B."
   },
   {
     id: 20,
