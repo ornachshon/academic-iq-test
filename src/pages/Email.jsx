@@ -84,9 +84,9 @@ export default function Email() {
 
 
           <button
-            type="submit"
-            disabled={!isValidEmail || isSubmitting}
-            className={`w-full font-bold py-3 rounded-md transition-colors text-base ${isValidEmail && !isSubmitting ? "bg-[#F5921B] hover:bg-[#e0830f] text-white cursor-pointer" : "bg-gray-200 text-gray-400 cursor-not-allowed"}`}>
+            type={isValidEmail ? "submit" : "button"}
+            disabled={isSubmitting}
+            className={`w-full font-bold py-3 rounded-md transition-colors text-base ${isValidEmail ? "bg-[#F5921B] hover:bg-[#e0830f] text-white" : "bg-[#f5c07b] text-white cursor-pointer"}`}>
 
             {isSubmitting ? "Processing..." : "Get IQ Results"}
           </button>
