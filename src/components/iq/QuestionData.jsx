@@ -31,18 +31,21 @@ const questions = [
   },
   {
     id: 3,
-    type: "numerical",
-    category: "Numerical Reasoning",
-    category_question: "Numerical Pattern Reasoning",
-    question: "Which number is missing? The grid contains: Row 1: 5, 3, 15 | Row 2: 3, 3, 9 | Row 3: 4, 2, ?",
-    grid: [
-      [5, 3, 15],
-      [3, 3, 9],
-      [4, 2, "?"]
+    type: "image_options",
+    category: "Pattern Recognition",
+    category_question: "Visuospatial Pattern Reasoning",
+    question: "Which Shape is missing?",
+    image: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69b1aedc5a0abb358cd40ec0/024f8a262_image.png",
+    options: [
+      { text: "A", image: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69b1aedc5a0abb358cd40ec0/55ae3f1c6_image.png#A" },
+      { text: "B", image: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69b1aedc5a0abb358cd40ec0/55ae3f1c6_image.png#B" },
+      { text: "C", image: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69b1aedc5a0abb358cd40ec0/55ae3f1c6_image.png#C" },
+      { text: "D", image: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69b1aedc5a0abb358cd40ec0/55ae3f1c6_image.png#D" },
+      { text: "E", image: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69b1aedc5a0abb358cd40ec0/55ae3f1c6_image.png#E" },
+      { text: "F", image: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69b1aedc5a0abb358cd40ec0/55ae3f1c6_image.png#F" }
     ],
-    options: ["10", "8", "6", "12", "16", "9"],
     correct: 1,
-    explanation: "The pattern is col1 × col2 = col3. Row 1: 5×3=15. Row 2: 3×3=9. Row 3: 4×2=8. Answer: 8 (option B)."
+    explanation: "Each row applies a transformation to the shape: the operator in the middle transforms the left shape. Row 3: square + cross = a square (unchanged/compressed). Answer: B (square)."
   },
   {
     id: 4,
