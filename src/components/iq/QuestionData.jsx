@@ -205,19 +205,21 @@ const questions = [
   },
   {
     id: 15,
-    type: "spatial",
-    category: "Spatial Reasoning",
-    question: "Which shape is missing? A large orange rectangle contains diagonal lines: two dark gray/navy parallel diagonal lines going one direction, white curved lines, and one red diagonal line.",
+    type: "svg_options",
+    category: "Pattern Recognition",
+    category_question: "Visuospatial Pattern Reasoning",
+    question: "Which Shape is missing?",
+    image: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69b1aedc5a0abb358cd40ec0/1e6dfadbd_image.png",
     options: [
-      "Orange with red line top-right and black diagonal",
-      "Orange with horizontal black lines and red slash",
-      "Orange with diagonal black line only",
-      "Orange with multiple black diagonals and red",
-      "Orange with black lines and red top-left",
-      "Orange with black parallel diagonals and red line bottom-right"
+      { text: "A", svg: "q15_optA" },
+      { text: "B", svg: "q15_optB" },
+      { text: "C", svg: "q15_optC" },
+      { text: "D", svg: "q15_optD" },
+      { text: "E", svg: "q15_optE" },
+      { text: "F", svg: "q15_optF" }
     ],
     correct: 5,
-    explanation: "The center piece of the image shows the intersection of the gray parallel lines and the red diagonal line in the lower portion. Answer: F."
+    explanation: "The orange wedge rotates clockwise across the grid. The missing piece has 2 wedges filled at the bottom-left position. Answer: F."
   },
   {
     id: 16,
