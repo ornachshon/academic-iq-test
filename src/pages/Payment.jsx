@@ -5,6 +5,7 @@ import { Shield } from "lucide-react";
 export default function Payment() {
   const location = useLocation();
   const score = location.state?.score || "???";
+  const [payMethod, setPayMethod] = useState("oneclick"); // "oneclick" | "card"
 
   return (
     <div className="min-h-screen bg-white relative overflow-hidden">
