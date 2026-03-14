@@ -35,6 +35,7 @@ function App() {
           <Route path="/Thankyou" element={<Thankyou />} />
           <Route path="/Certificate" element={<Certificate />} />
           <Route path="/Results" element={<LayoutWrapper currentPageName="Results"><Results /></LayoutWrapper>} />
+          <Route path="/Privacy_Policy" element={<Privacy_Policy />} />
           <Route path="*" element={<PageNotFound />} />
         </Routes>
         <Toaster />
