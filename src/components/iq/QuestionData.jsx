@@ -78,21 +78,21 @@ const questions = [
   },
   {
     id: 6,
-    type: "image_options",
+    type: "svg_options",
     category: "Spatial Reasoning",
     category_question: "Visuospatial Insight",
     question: "Which Shape is missing?",
     image: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69b1aedc5a0abb358cd40ec0/f9b82aec0_image.png",
     options: [
-      { text: "A", image: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69b1aedc5a0abb358cd40ec0/149767771_image.png#A" },
-      { text: "B", image: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69b1aedc5a0abb358cd40ec0/149767771_image.png#B" },
-      { text: "C", image: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69b1aedc5a0abb358cd40ec0/149767771_image.png#C" },
-      { text: "D", image: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69b1aedc5a0abb358cd40ec0/149767771_image.png#D" },
-      { text: "E", image: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69b1aedc5a0abb358cd40ec0/149767771_image.png#E" },
-      { text: "F", image: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69b1aedc5a0abb358cd40ec0/149767771_image.png#F" }
+      { text: "A", svg: "q6_optA" },
+      { text: "B", svg: "q6_optB" },
+      { text: "C", svg: "q6_optC" },
+      { text: "D", svg: "q6_optD" },
+      { text: "E", svg: "q6_optE" },
+      { text: "F", svg: "q6_optF" }
     ],
     correct: 4,
-    explanation: "The center piece shows the navy vertical band with white diagonal lines converging, and the horizontal dividing line. Answer: E."
+    explanation: "The center piece shows the navy vertical band with white diagonal lines converging inward and a horizontal dividing line. Answer: E."
   },
   {
     id: 7,
