@@ -27,6 +27,7 @@ function App() {
           <Route path="/Results" element={<LayoutWrapper currentPageName="Results"><Results /></LayoutWrapper>} />
           <Route path="/Checkout" element={<Checkout />} />
           <Route path="/Email" element={<Email />} />
+          <Route path="/Payment" element={<Payment />} />
           <Route path="*" element={<PageNotFound />} />
         </Routes>
         <Toaster />

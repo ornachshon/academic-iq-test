@@ -25,6 +25,9 @@ function StarRating({ count, total = 5 }) {
 
 export default function Checkout() {
   const [agreed, setAgreed] = useState(false);
+  const navigate = useNavigate();
+  const location = useLocation();
+  const score = location.state?.score;
 
   return (
     <div className="min-h-screen bg-gray-100 text-sm text-gray-800">
