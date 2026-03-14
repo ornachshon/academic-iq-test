@@ -262,6 +262,56 @@ const shapes = {
     </svg>
   ),
 
+  // ── Answer shapes for Q8 (box with orange shapes in corners) ──
+  // A: orange square top-right, orange circle top-left
+  q8_optA: () => (
+    <svg width="100%" height="100%" viewBox="0 0 60 60" fill="none">
+      <rect x="2" y="2" width="56" height="56" rx="2" fill="#f0f0f0" stroke="#0C3547" strokeWidth="2.5"/>
+      <rect x="38" y="8" width="14" height="14" fill="#F5921B"/>
+      <circle cx="16" cy="44" r="7" fill="#F5921B"/>
+    </svg>
+  ),
+  // B: orange square top-right, orange circle bottom-left (correct)
+  q8_optB: () => (
+    <svg width="100%" height="100%" viewBox="0 0 60 60" fill="none">
+      <rect x="2" y="2" width="56" height="56" rx="2" fill="#f0f0f0" stroke="#0C3547" strokeWidth="2.5"/>
+      <rect x="38" y="8" width="14" height="14" fill="#F5921B"/>
+      <circle cx="16" cy="44" r="7" fill="#F5921B"/>
+    </svg>
+  ),
+  // C: orange circle top-right, orange circle bottom-left
+  q8_optC: () => (
+    <svg width="100%" height="100%" viewBox="0 0 60 60" fill="none">
+      <rect x="2" y="2" width="56" height="56" rx="2" fill="#f0f0f0" stroke="#0C3547" strokeWidth="2.5"/>
+      <circle cx="44" cy="16" r="7" fill="#F5921B"/>
+      <circle cx="16" cy="44" r="7" fill="#F5921B"/>
+    </svg>
+  ),
+  // D: small square outline top-left, orange circle bottom-right
+  q8_optD: () => (
+    <svg width="100%" height="100%" viewBox="0 0 60 60" fill="none">
+      <rect x="2" y="2" width="56" height="56" rx="2" fill="#f0f0f0" stroke="#0C3547" strokeWidth="2.5"/>
+      <rect x="8" y="8" width="12" height="12" fill="none" stroke="#0C3547" strokeWidth="1.5"/>
+      <circle cx="44" cy="44" r="7" fill="#F5921B"/>
+    </svg>
+  ),
+  // E: orange square top-right, circle outline bottom-left
+  q8_optE: () => (
+    <svg width="100%" height="100%" viewBox="0 0 60 60" fill="none">
+      <rect x="2" y="2" width="56" height="56" rx="2" fill="#f0f0f0" stroke="#0C3547" strokeWidth="2.5"/>
+      <rect x="38" y="8" width="14" height="14" fill="#F5921B"/>
+      <circle cx="16" cy="44" r="7" fill="none" stroke="#F5921B" strokeWidth="1.5"/>
+    </svg>
+  ),
+  // F: orange square top-left, orange circle bottom-right
+  q8_optF: () => (
+    <svg width="100%" height="100%" viewBox="0 0 60 60" fill="none">
+      <rect x="2" y="2" width="56" height="56" rx="2" fill="#f0f0f0" stroke="#0C3547" strokeWidth="2.5"/>
+      <rect x="8" y="8" width="14" height="14" fill="#F5921B"/>
+      <circle cx="44" cy="44" r="7" fill="#F5921B"/>
+    </svg>
+  ),
+
   // ── Answer shapes for Q6 (orange rect with navy band + white lines) ──
   // A: navy center band, white diagonal lines diverging upward, horizontal line bottom
   q6_optA: () => (
