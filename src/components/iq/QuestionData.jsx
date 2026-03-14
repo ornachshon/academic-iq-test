@@ -328,6 +328,18 @@ const questions = [
     options: ["A", "B", "C", "D", "E", "F"],
     correct: 2,
     explanation: "The hexagon sections rotate and change color pattern. Row 3, col 3 shows orange on left, navy triangles center/bottom. Answer: C."
+  },
+  {
+    id: 25,
+    type: "image_options",
+    category: "Spatial Reasoning",
+    category_question: "Visuospatial Insight",
+    question: "What box was created from the image?",
+    image: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69b1aedc5a0abb358cd40ec0/0b713acdd_image.png",
+    options_image: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69b1aedc5a0abb358cd40ec0/300450d61_image.png",
+    options: ["A", "B", "C", "D", "E", "F"],
+    correct: 0,
+    explanation: "The net has gray top, magenta left, green right, cyan back, and orange bottom. When folded, the visible faces display magenta, green, and gray. Answer: A."
   }
 ];
 
