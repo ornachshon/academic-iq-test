@@ -122,6 +122,7 @@ export default function Info() {
       <p className="text-xs text-gray-400 mt-6 text-center">
         * All personal information is confidential and will never be shared with third parties
       </p>
+      </div>
     </div>
   );
 }
