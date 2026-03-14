@@ -194,24 +194,14 @@ const questions = [
   },
   {
     id: 14,
-    type: "pattern",
-    category: "Pattern Recognition",
-    question: "Which shape is missing? Each hexagon is divided into triangular sections colored orange and navy. The orange section rotates clockwise across the grid.",
-    grid: [
-      ["navy_dominant_left_orange", "navy_dominant_right_orange", "orange_dominant_left_navy"],
-      ["navy_large_bottom_orange", "navy_center_triangle", "navy_right_small_orange"],
-      ["navy_bottom_triangle", "orange_dominant_navy_triangle", "?"]
-    ],
-    options: [
-      "Navy and orange equal split rotated",
-      "Mostly orange, small navy wedge",
-      "Orange dominant with two navy wedges",
-      "Mostly orange, large navy right",
-      "Navy with small orange triangles",
-      "Mostly navy, orange right wedge"
-    ],
+    type: "spatial",
+    category: "Spatial Reasoning",
+    category_question: "Visuospatial Insight",
+    question: "How many squares are in the picture?",
+    image: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69b1aedc5a0abb358cd40ec0/2e344e9e8_image.png",
+    options: ["4", "9", "7", "8", "6", "5"],
     correct: 2,
-    explanation: "The pattern shows the orange section rotating clockwise and growing. Row 3 col 3 should show mostly orange with two small navy wedges. Answer: C."
+    explanation: "Count all squares of all sizes: 5 individual cells + 1 large (2×2 top-right area) + 1 outer = 7. Answer: C (7)."
   },
   {
     id: 15,
