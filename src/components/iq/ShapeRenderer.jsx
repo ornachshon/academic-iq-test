@@ -262,6 +262,70 @@ const shapes = {
     </svg>
   ),
 
+  // ── Answer shapes for Q6 (orange rect with navy band + white lines) ──
+  // A: navy center band, white diagonal lines diverging upward, horizontal line bottom
+  q6_optA: () => (
+    <svg width="100%" height="100%" viewBox="0 0 60 42" fill="none">
+      <rect width="60" height="42" fill="#F5921B"/>
+      <rect x="18" y="0" width="24" height="42" fill="#0C3547"/>
+      <line x1="24" y1="0" x2="18" y2="32" stroke="white" strokeWidth="1.5"/>
+      <line x1="36" y1="0" x2="42" y2="32" stroke="white" strokeWidth="1.5"/>
+      <line x1="0" y1="32" x2="60" y2="32" stroke="white" strokeWidth="1.5"/>
+    </svg>
+  ),
+  // B: navy dominant right, orange left strip, diagonal lines
+  q6_optB: () => (
+    <svg width="100%" height="100%" viewBox="0 0 60 42" fill="none">
+      <rect width="60" height="42" fill="#0C3547"/>
+      <rect x="0" y="0" width="12" height="42" fill="#F5921B"/>
+      <rect x="48" y="0" width="12" height="42" fill="#F5921B"/>
+      <line x1="12" y1="0" x2="30" y2="42" stroke="white" strokeWidth="1.5"/>
+      <line x1="48" y1="0" x2="30" y2="21" stroke="white" strokeWidth="1.5"/>
+      <line x1="0" y1="21" x2="60" y2="21" stroke="white" strokeWidth="1.5"/>
+    </svg>
+  ),
+  // C: navy dominant, orange right strip, diagonal lines going left
+  q6_optC: () => (
+    <svg width="100%" height="100%" viewBox="0 0 60 42" fill="none">
+      <rect width="60" height="42" fill="#0C3547"/>
+      <rect x="0" y="0" width="10" height="42" fill="#F5921B"/>
+      <rect x="50" y="0" width="10" height="42" fill="#F5921B"/>
+      <line x1="10" y1="14" x2="50" y2="28" stroke="white" strokeWidth="1.5"/>
+      <line x1="10" y1="28" x2="50" y2="14" stroke="white" strokeWidth="1.5"/>
+      <line x1="0" y1="21" x2="60" y2="21" stroke="white" strokeWidth="1.5"/>
+    </svg>
+  ),
+  // D: navy center band, orange strips, straight vertical lines
+  q6_optD: () => (
+    <svg width="100%" height="100%" viewBox="0 0 60 42" fill="none">
+      <rect width="60" height="42" fill="#F5921B"/>
+      <rect x="18" y="0" width="24" height="42" fill="#0C3547"/>
+      <line x1="18" y1="0" x2="18" y2="42" stroke="white" strokeWidth="1.5"/>
+      <line x1="42" y1="0" x2="42" y2="42" stroke="white" strokeWidth="1.5"/>
+      <line x1="0" y1="21" x2="60" y2="21" stroke="white" strokeWidth="1.5"/>
+    </svg>
+  ),
+  // E: navy center band wider at bottom (trapezoid), orange sides, horizontal line, correct answer
+  q6_optE: () => (
+    <svg width="100%" height="100%" viewBox="0 0 60 42" fill="none">
+      <rect width="60" height="42" fill="#F5921B"/>
+      <polygon points="22,0 38,0 46,42 14,42" fill="#0C3547"/>
+      <line x1="22" y1="0" x2="14" y2="42" stroke="white" strokeWidth="1.5"/>
+      <line x1="38" y1="0" x2="46" y2="42" stroke="white" strokeWidth="1.5"/>
+      <line x1="0" y1="21" x2="60" y2="21" stroke="white" strokeWidth="1.5"/>
+    </svg>
+  ),
+  // F: navy center band, orange sides, one diagonal line off-center
+  q6_optF: () => (
+    <svg width="100%" height="100%" viewBox="0 0 60 42" fill="none">
+      <rect width="60" height="42" fill="#F5921B"/>
+      <rect x="18" y="0" width="24" height="42" fill="#0C3547"/>
+      <line x1="30" y1="0" x2="18" y2="42" stroke="white" strokeWidth="1.5"/>
+      <line x1="0" y1="14" x2="60" y2="14" stroke="white" strokeWidth="1.5"/>
+      <line x1="0" y1="28" x2="60" y2="28" stroke="white" strokeWidth="1.5"/>
+    </svg>
+  ),
+
   // ── Answer shapes for Q3 ─────────────────────────────────
   tall_rect: () => (
     <Svg><rect x="16" y="6" width="16" height="36" /></Svg>
