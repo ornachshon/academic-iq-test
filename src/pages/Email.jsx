@@ -88,7 +88,7 @@ export default function Email() {
             disabled={isSubmitting}
             className={`w-full font-bold py-3 rounded-md transition-colors text-base ${isValidEmail ? "bg-[#F5921B] hover:bg-[#e0830f] text-white" : "bg-[#f5c07b] text-white cursor-pointer"}`}>
 
-            {isSubmitting ? "Processing..." : "Get IQ Results"}
+            {isSubmitting ? "Processing..." : "Get my IQ Results"}
           </button>
         </form>
 
