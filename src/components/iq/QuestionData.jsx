@@ -49,13 +49,14 @@ const questions = [
   },
   {
     id: 4,
-    type: "spatial",
-    category: "Spatial Reasoning",
-    category_question: "Visuospatial Insight",
-    question: "How many triangles are in the picture? A large triangle is divided into 4 smaller triangles by connecting the midpoints of each side.",
-    options: ["3", "9", "7", "6", "5", "4"],
-    correct: 4,
-    explanation: "There are 4 small triangles + 1 large outer triangle = 5 total. Answer: 5 (option E)."
+    type: "numerical",
+    category: "Numerical Reasoning",
+    category_question: "Numerical Pattern Reasoning",
+    question: "Which number is missing?",
+    image: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69b1aedc5a0abb358cd40ec0/23df53e6f_image.png",
+    options: ["30", "55", "25", "15", "50", "20"],
+    correct: 0,
+    explanation: "Pattern: col1 × 2 = col2, col2 × 3 = col3. Row 3: 5×2=10, 10×3=30. Answer: A (30)."
   },
   {
     id: 5,
