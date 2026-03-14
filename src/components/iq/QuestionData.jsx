@@ -31,21 +31,21 @@ const questions = [
   },
   {
     id: 3,
-    type: "image_options",
+    type: "svg_options",
     category: "Pattern Recognition",
     category_question: "Visuospatial Pattern Reasoning",
     question: "Which Shape is missing?",
     image: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69b1aedc5a0abb358cd40ec0/024f8a262_image.png",
     options: [
-      { text: "A", image: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69b1aedc5a0abb358cd40ec0/55ae3f1c6_image.png#A" },
-      { text: "B", image: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69b1aedc5a0abb358cd40ec0/55ae3f1c6_image.png#B" },
-      { text: "C", image: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69b1aedc5a0abb358cd40ec0/55ae3f1c6_image.png#C" },
-      { text: "D", image: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69b1aedc5a0abb358cd40ec0/55ae3f1c6_image.png#D" },
-      { text: "E", image: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69b1aedc5a0abb358cd40ec0/55ae3f1c6_image.png#E" },
-      { text: "F", image: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69b1aedc5a0abb358cd40ec0/55ae3f1c6_image.png#F" }
+      { text: "A", svg: "tall_rect" },
+      { text: "B", svg: "square" },
+      { text: "C", svg: "wide_rect" },
+      { text: "D", svg: "triangle" },
+      { text: "E", svg: "vertical_line" },
+      { text: "F", svg: "oval" }
     ],
     correct: 1,
-    explanation: "Each row applies a transformation to the shape: the operator in the middle transforms the left shape. Row 3: square + cross = a square (unchanged/compressed). Answer: B (square)."
+    explanation: "The pattern shows each shape is transformed by the operator: row 3 has square + cross, resulting in a square. Answer: B (square)."
   },
   {
     id: 4,
