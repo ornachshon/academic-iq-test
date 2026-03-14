@@ -29,6 +29,7 @@ function App() {
           <Route path="/Checkout" element={<Checkout />} />
           <Route path="/Email" element={<Email />} />
           <Route path="/Payment" element={<Payment />} />
+          <Route path="/Certificate" element={<Certificate />} />
           <Route path="*" element={<PageNotFound />} />
         </Routes>
         <Toaster />
