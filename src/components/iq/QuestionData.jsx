@@ -223,17 +223,15 @@ const questions = [
   },
   {
     id: 16,
-    type: "numerical",
-    category: "Numerical Reasoning",
-    question: "Which number is missing? The grid contains: Row 1: 4, 5, 7 | Row 2: 10, 14, 19 | Row 3: 25, 32, ?",
-    grid: [
-      [4, 5, 7],
-      [10, 14, 19],
-      [25, 32, "?"]
-    ],
-    options: ["38", "43", "40", "42", "41", "39"],
-    correct: 2,
-    explanation: "Reading all numbers left-to-right top-to-bottom: 4,5,7,10,14,19,25,32,? The differences are 1,2,3,4,5,6,7,8 — so ?=32+8=40. Answer: C (40)."
+    type: "image_options",
+    category: "Spatial Reasoning",
+    category_question: "Visuospatial Insight",
+    question: "Which Shape is missing?",
+    image: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69b1aedc5a0abb358cd40ec0/0646aa558_image.png",
+    options_image: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69b1aedc5a0abb358cd40ec0/74b69a919_image.png",
+    options: ["A", "B", "C", "D", "E", "F"],
+    correct: 0,
+    explanation: "The center section of the large image shows two white vertical lines, one navy diagonal line and one red diagonal line intersecting from the right. Answer: A."
   },
   {
     id: 17,
