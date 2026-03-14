@@ -316,6 +316,18 @@ const questions = [
     options: ["A", "B", "C", "D", "E", "F"],
     correct: 2,
     explanation: "Count all squares: 6 individual cells (1×1) + 3 medium squares (2×2 combinations) + 2 larger regions = 11 total. Answer: C (11)."
+  },
+  {
+    id: 24,
+    type: "image_options",
+    category: "Pattern Recognition",
+    category_question: "Visuospatial Pattern Reasoning",
+    question: "Which Shape is missing?",
+    image: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69b1aedc5a0abb358cd40ec0/9bb7989c9_image.png",
+    options_image: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69b1aedc5a0abb358cd40ec0/5ecdc0229_image.png",
+    options: ["A", "B", "C", "D", "E", "F"],
+    correct: 2,
+    explanation: "The hexagon sections rotate and change color pattern. Row 3, col 3 shows orange on left, navy triangles center/bottom. Answer: C."
   }
 ];
 
