@@ -65,6 +65,28 @@ export default function QuestionCard({ question, selectedAnswer, onSelectAnswer 
             Choose an answer:
           </h4>
 
+          {question.options_image ? (
+            <div>
+              <img src={question.options_image} alt="Answer options" className="w-full rounded-xl mb-4" />
+              <div className="grid grid-cols-3 gap-2">
+                {question.options.map((label, idx) => (
+                  <motion.button
+                    key={idx}
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.97 }}
+                    onClick={() => onSelectAnswer(idx)}
+                    className={`py-2 rounded-xl border-2 font-bold text-sm transition-all ${
+                      selectedAnswer === idx
+                        ? "border-[#F5921B] bg-[#F5921B] text-white shadow-md"
+                        : "border-gray-200 text-gray-600 hover:border-[#0C3547]/30 hover:bg-gray-50"
+                    }`}
+                  >
+                    {label}
+                  </motion.button>
+                ))}
+              </div>
+            </div>
+          ) : (
           <div className="grid grid-cols-2 gap-3">
             {question.options.map((option, idx) => {
               const isImageOption = typeof option === "object" && option.image;
@@ -103,6 +125,7 @@ export default function QuestionCard({ question, selectedAnswer, onSelectAnswer 
               );
             })}
           </div>
+          )}
         </div>
       </motion.div>
     </AnimatePresence>
