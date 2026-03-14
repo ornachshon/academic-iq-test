@@ -340,6 +340,18 @@ const questions = [
     options: ["A", "B", "C", "D", "E", "F"],
     correct: 0,
     explanation: "The net has gray top, magenta left, green right, cyan back, and orange bottom. When folded, the visible faces display magenta, green, and gray. Answer: A."
+  },
+  {
+    id: 26,
+    type: "image_options",
+    category: "Numerical Reasoning",
+    category_question: "Numerical Pattern Reasoning",
+    question: "Which number is missing?",
+    image: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69b1aedc5a0abb358cd40ec0/266fa1924_image.png",
+    options_image: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69b1aedc5a0abb358cd40ec0/809001f23_image.png",
+    options: ["A", "B", "C", "D", "E", "F"],
+    correct: 2,
+    explanation: "Pattern: Row sums increase by 7 (25, 32, 39). Row 1: 7+10+8=25, Row 2: 11+9+12=32, Row 3: 10+13+?=39. So ?=16. Or by columns, alternating +4/-1: Col 3 follows 8→12→11. Answer: C (11)."
   }
 ];
 
