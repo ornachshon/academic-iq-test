@@ -332,6 +332,21 @@ const shapes = {
     </svg>
   ),
 
+  // ── Answer shapes for Q15 (10-wedge circles, orange sections at various positions) ──
+  // Helper inline: 10-wedge circle with N consecutive orange wedges starting at angle
+  // A: 3 wedges top-left (~300° start)
+  q15_optA: () => <WedgeCircle10 count={3} startAngle={270} />,
+  // B: 2 wedges right (~0° start)
+  q15_optB: () => <WedgeCircle10 count={2} startAngle={0} />,
+  // C: 3 wedges bottom-center (~90° start)
+  q15_optC: () => <WedgeCircle10 count={3} startAngle={90} />,
+  // D: 2 wedges bottom-right (~45° start)
+  q15_optD: () => <WedgeCircle10 count={2} startAngle={45} />,
+  // E: 3 wedges bottom-left (~135° start)
+  q15_optE: () => <WedgeCircle10 count={3} startAngle={135} />,
+  // F (correct): 2 wedges bottom-left (~135° start)
+  q15_optF: () => <WedgeCircle10 count={2} startAngle={135} />,
+
   // ── Answer shapes for Q13 (3×3 grid orange cell patterns) ──
   // A: left+right columns, top 2 rows [0,1,3,5] → cols 0,2 rows 0,1
   q13_optA: () => (
