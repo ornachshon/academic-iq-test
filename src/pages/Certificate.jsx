@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo } from "react";
 import { useLocation } from "react-router-dom";
 import { format } from "date-fns";
 import IQCertificate from "@/components/certificate/IQCertificate";
