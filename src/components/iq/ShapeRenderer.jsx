@@ -198,6 +198,23 @@ const shapes = {
   circle_25pct_bottom: () => <FilledCircle pct={0.25} startAngle={-180} />,
   circle_50pct_bottom: () => <FilledCircle pct={0.50} startAngle={0} />,
 
+  // ── Answer shapes for Q3 ─────────────────────────────────
+  tall_rect: () => (
+    <Svg><rect x="16" y="6" width="16" height="36" /></Svg>
+  ),
+  wide_rect: () => (
+    <Svg><rect x="6" y="16" width="36" height="16" /></Svg>
+  ),
+  triangle: () => (
+    <Svg><polygon points="24,8 42,40 6,40" /></Svg>
+  ),
+  vertical_line: () => (
+    <Svg><line x1="24" y1="6" x2="24" y2="42" /></Svg>
+  ),
+  oval: () => (
+    <Svg><ellipse cx="24" cy="24" rx="18" ry="10" /></Svg>
+  ),
+
   // ── Hexagon wedge fills for Q14 (simplified) ────────────
   navy_dominant_left_orange: () => <HexWedge orangeFraction={0.15} rotOffset={0} />,
   navy_dominant_right_orange: () => <HexWedge orangeFraction={0.15} rotOffset={60} />,
