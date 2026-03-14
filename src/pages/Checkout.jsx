@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Star, HelpCircle } from 'lucide-react';
+import { useNavigate, useLocation } from 'react-router-dom';
 import CheckoutFooter from '@/components/checkout/CheckoutFooter';
 
 const reviews = [
