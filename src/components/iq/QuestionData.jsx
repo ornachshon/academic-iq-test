@@ -376,6 +376,18 @@ const questions = [
     options: ["A", "B", "C", "D", "E", "F"],
     correct: 2,
     explanation: "Pattern: Reading left-to-right, top-to-bottom shows numerical sequence with a quadratic progression. Row 3, col 3: 33+66+? follows the pattern where col 3 sequence (9, 34, ?) increases by 25 then 31. Answer: C (65)."
+  },
+  {
+    id: 29,
+    type: "image_options",
+    category: "Spatial Reasoning",
+    category_question: "Visuospatial Insight",
+    question: "Which Shape is missing?",
+    image: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69b1aedc5a0abb358cd40ec0/b1f2266ca_image.png",
+    options_image: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69b1aedc5a0abb358cd40ec0/5fd0f2dd2_image.png",
+    options: ["A", "B", "C", "D", "E", "F"],
+    correct: 0,
+    explanation: "The missing section shows horizontal orange stripes with vertical blue dividing lines and a diagonal blue line in the bottom-left corner. Answer: A."
   }
 ];
 
