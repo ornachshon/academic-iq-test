@@ -136,9 +136,9 @@ export default function Checkout() {
           </div>
 
           {/* CTA Button */}
-          <button className="bg-[#F5921B] text-[#0C3547] py-3 text-base font-extrabold rounded-md w-full hover:bg-[#e0830f] transition-colors">
-
-
+          <button
+            onClick={() => navigate("/Payment", { state: { score } })}
+            className="bg-[#F5921B] text-[#0C3547] py-3 text-base font-extrabold rounded-md w-full hover:bg-[#e0830f] transition-colors">
             Continue to Payment
           </button>
         </div>
