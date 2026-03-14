@@ -154,17 +154,14 @@ const questions = [
   },
   {
     id: 11,
-    type: "numerical",
-    category: "Numerical Reasoning",
-    question: "Which number is missing? The grid contains: Row 1: 7, 10, 8 | Row 2: 11, 9, 12 | Row 3: 10, 13, ?",
-    grid: [
-      [7, 10, 8],
-      [11, 9, 12],
-      [10, 13, "?"]
-    ],
-    options: ["9", "10", "11", "12", "14", "15"],
-    correct: 2,
-    explanation: "Diagonal pattern (top-left to bottom-right): 7, 9, ? → each increases by 2, so ? = 11. Answer: C (11)."
+    type: "spatial",
+    category: "Spatial Reasoning",
+    category_question: "Visuospatial Insight",
+    question: "How many squares are in the picture?",
+    image: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69b1aedc5a0abb358cd40ec0/917abef75_image.png",
+    options: ["9", "10", "11", "12", "13", "14"],
+    correct: 5,
+    explanation: "Count all squares: 9 small (1×1) + 4 medium (2×2) + 1 large (3×3) = 14. Answer: F (14)."
   },
   {
     id: 12,
