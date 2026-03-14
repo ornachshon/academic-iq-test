@@ -167,15 +167,12 @@ const questions = [
     id: 12,
     type: "numerical",
     category: "Numerical Reasoning",
-    question: "Which number is missing? The grid contains: Row 1: 43, 42, 40 | Row 2: 37, 33, 28 | Row 3: 22, 15, ?",
-    grid: [
-      [43, 42, 40],
-      [37, 33, 28],
-      [22, 15, "?"]
-    ],
-    options: ["10", "7", "8", "21", "5", "14"],
-    correct: 1,
-    explanation: "Differences across each row increase: Row 1: -1,-2; Row 2: -4,-5; Row 3: -7,-8. So 15-8=7. Answer: B (7)."
+    category_question: "Numerical Pattern Reasoning",
+    question: "Which number is missing?",
+    image: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69b1aedc5a0abb358cd40ec0/a4e1b34c5_image.png",
+    options: ["38", "43", "40", "42", "41", "39"],
+    correct: 2,
+    explanation: "Reading all numbers left-to-right top-to-bottom: 4,5,7,10,14,19,25,32,? The differences are 1,2,3,4,5,6,7,8 — so ?=32+8=40. Answer: C (40)."
   },
   {
     id: 13,
