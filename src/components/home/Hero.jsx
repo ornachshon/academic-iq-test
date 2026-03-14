@@ -42,7 +42,7 @@ export default function Hero() {
             </h2>
 
             <Link to={createPageUrl("IQTest")}>
-              <button className="bg-[#F5921B] text-[#0C3547] mb-8 px-10 py-4 text-xl font-extrabold rounded-md hover:bg-[#e07a0c] transition-colors shadow-sm">
+              <button className="bg-[#F5921B] text-white mb-8 px-10 py-4 text-xl font-extrabold rounded-md hover:bg-[#e07a0c] transition-colors shadow-sm">
                 Start IQ Test
               </button>
             </Link>
