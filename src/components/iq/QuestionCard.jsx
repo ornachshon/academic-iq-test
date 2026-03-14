@@ -68,6 +68,7 @@ export default function QuestionCard({ question, selectedAnswer, onSelectAnswer 
           <div className="grid grid-cols-2 gap-3">
             {question.options.map((option, idx) => {
               const isImageOption = typeof option === "object" && option.image;
+              const isSvgOption = typeof option === "object" && option.svg;
               return (
                 <motion.button
                   key={idx}
@@ -90,6 +91,10 @@ export default function QuestionCard({ question, selectedAnswer, onSelectAnswer 
                   {isImageOption ? (
                     <div className="w-full h-20 flex items-center justify-center">
                       <img src={option.image} alt={option.text} className="h-full w-full object-contain" />
+                    </div>
+                  ) : isSvgOption ? (
+                    <div className="w-full h-16 flex items-center justify-center">
+                      <ShapeRenderer shapeName={option.svg} />
                     </div>
                   ) : (
                     <span className="font-semibold text-[#0C3547] text-base leading-tight text-left w-full">{option}</span>
