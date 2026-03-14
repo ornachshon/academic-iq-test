@@ -12,6 +12,7 @@ import Checkout from './pages/Checkout';
 import Email from './pages/Email';
 import Payment from './pages/Payment';
 import Certificate from './pages/Certificate';
+import Info from './pages/Info';
 
 const LayoutWrapper = ({ children, currentPageName }) => (
   <Layout currentPageName={currentPageName}>{children}</Layout>
@@ -30,6 +31,7 @@ function App() {
           <Route path="/Email" element={<Email />} />
           <Route path="/Payment" element={<Payment />} />
           <Route path="/Certificate" element={<Certificate />} />
+          <Route path="/Info" element={<Info />} />
           <Route path="*" element={<PageNotFound />} />
         </Routes>
         <Toaster />
