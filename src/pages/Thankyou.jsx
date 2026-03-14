@@ -30,7 +30,7 @@ export default function Thankyou() {
           <h1 className="text-3xl font-bold text-[#0C3547] mb-3">
             Your <span className="text-[#F5921B]">IQ Score</span> is:
           </h1>
-          <p className="text-6xl font-black text-[#F5921B]">{score ?? "—"}</p>
+          <p className="text-6xl font-black text-[#F5921B]">{score ?? "XXX"}</p>
           <p className="text-gray-500 mt-5 text-base">We've prepared everything for you</p>
         </div>
 
