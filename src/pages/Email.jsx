@@ -11,6 +11,8 @@ export default function Email() {
   const [email, setEmail] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
 
+  const isValidEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim());
+
   // State passed from IQTest via navigate
   const { answers = {}, startTime = Date.now() } = location.state || {};
 
