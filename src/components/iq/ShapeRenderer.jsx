@@ -268,7 +268,7 @@ const shapes = {
     <svg width="100%" height="100%" viewBox="0 0 60 60" fill="none">
       <rect x="2" y="2" width="56" height="56" rx="2" fill="#f0f0f0" stroke="#0C3547" strokeWidth="2.5"/>
       <rect x="38" y="8" width="14" height="14" fill="#F5921B"/>
-      <circle cx="16" cy="44" r="7" fill="#F5921B"/>
+      <circle cx="16" cy="16" r="7" fill="#F5921B"/>
     </svg>
   ),
   // B: orange square top-right, orange circle bottom-left (correct)
