@@ -37,16 +37,16 @@ export default function Email() {
 
     const score = calculateIQ(correct);
 
-    const result = await base44.entities.IQResult.create({
+    await base44.entities.IQResult.create({
       score,
       correct_answers: correct,
-      total_questions: 20,
+      total_questions: 30,
       time_taken_seconds: timeTaken,
       answers: answerDetails,
       email: email.trim()
     });
 
-    navigate(createPageUrl("Checkout") + `?id=${result.id}`);
+    navigate("/Checkout", { state: { score, email: email.trim() } });
   };
 
   return (
