@@ -60,25 +60,21 @@ const questions = [
   },
   {
     id: 5,
-    type: "pattern",
-    category: "Pattern Recognition",
-    category_question: "Visuospatial Pattern Reasoning",
-    question: "Which shape is missing? Row 1: circle, circle-in-diamond, diamond. Row 2: square-in-circle, nested-square-dot, diamond-dot. Row 3: square, square-dot, ?",
-    grid: [
-      ["circle", "circle_in_diamond", "diamond"],
-      ["square_in_circle", "nested_square_with_dot", "diamond_with_dot"],
-      ["square", "square_with_dot", "?"]
-    ],
+    type: "svg_options",
+    category: "Spatial Reasoning",
+    category_question: "Visuospatial Insight",
+    question: "What box was created from the image?",
+    image: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69b1aedc5a0abb358cd40ec0/6e78a099b_image.png",
     options: [
-      "Circle with dot",
-      "Empty circle",
-      "Diamond with dot",
-      "Empty square",
-      "Nested square with diagonals",
-      "Dot only"
+      { text: "A", svg: "cube_right_filled" },
+      { text: "B", svg: "cube_bottom_filled" },
+      { text: "C", svg: "cube_top_filled" },
+      { text: "D", svg: "cube_all_filled" },
+      { text: "E", svg: "cube_left_top_filled" },
+      { text: "F", svg: "cube_top_only_filled" }
     ],
-    correct: 5,
-    explanation: "Column 3 shows only the innermost element with a dot. In row 3, the shape progression loses its outer container, leaving just the dot. Answer: F (dot only)."
+    correct: 4,
+    explanation: "The net has navy squares on top, left, right, and bottom of center, with a white center and white far-right panel. When folded, the top and left faces are navy. Answer: E."
   },
   {
     id: 6,
