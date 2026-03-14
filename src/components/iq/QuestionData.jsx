@@ -364,6 +364,18 @@ const questions = [
     options: ["A", "B", "C", "D", "E", "F"],
     correct: 1,
     explanation: "The pattern shows arrows rotating and shapes transforming. Row 3, col 3 completes the sequence with an upper-right pointing arrow. Answer: B."
+  },
+  {
+    id: 28,
+    type: "image_options",
+    category: "Numerical Reasoning",
+    category_question: "Numerical Pattern Reasoning",
+    question: "Which number is missing?",
+    image: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69b1aedc5a0abb358cd40ec0/0f3336ab9_image.png",
+    options_image: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69b1aedc5a0abb358cd40ec0/1aec79263_image.png",
+    options: ["A", "B", "C", "D", "E", "F"],
+    correct: 2,
+    explanation: "Pattern: Reading left-to-right, top-to-bottom shows numerical sequence with a quadratic progression. Row 3, col 3: 33+66+? follows the pattern where col 3 sequence (9, 34, ?) increases by 25 then 31. Answer: C (65)."
   }
 ];
 
