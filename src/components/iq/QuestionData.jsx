@@ -304,6 +304,18 @@ const questions = [
     options: ["A", "B", "C", "D", "E", "F"],
     correct: 4,
     explanation: "Pattern: col3(row) = col1(row) + col2(row) - col3(previous row). Row 2: 9+7-4=12. Row 3: 10+15-12=13. Answer: E (13)."
+  },
+  {
+    id: 23,
+    type: "image_options",
+    category: "Spatial Reasoning",
+    category_question: "Visuospatial Insight",
+    question: "How many squares are in the picture?",
+    image: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69b1aedc5a0abb358cd40ec0/2257fe334_image.png",
+    options_image: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69b1aedc5a0abb358cd40ec0/357541e1e_image.png",
+    options: ["A", "B", "C", "D", "E", "F"],
+    correct: 2,
+    explanation: "Count all squares: 6 individual cells (1×1) + 3 medium squares (2×2 combinations) + 2 larger regions = 11 total. Answer: C (11)."
   }
 ];
 
