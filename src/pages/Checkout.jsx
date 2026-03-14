@@ -84,10 +84,10 @@ export default function Checkout() {
                 <p className="text-gray-400 text-xs italic">(High Quality Downloadable PDF)</p>
               </div>
             </div>
-            <img
-              src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69b1aedc5a0abb358cd40ec0/371bfdeb6_image.png"
-              alt="Certificate"
-              className="w-20 h-auto ml-4 flex-shrink-0" />
+            <img src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69b1aedc5a0abb358cd40ec0/400b59f43_Certificate-Example.svg"
+
+            alt="Certificate" className="w-20 h-auto ml-4 flex-shrink-0" />
+
 
           </div>
 
