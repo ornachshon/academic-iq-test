@@ -388,6 +388,18 @@ const questions = [
     options: ["A", "B", "C", "D", "E", "F"],
     correct: 0,
     explanation: "The missing section shows horizontal orange stripes with vertical blue dividing lines and a diagonal blue line in the bottom-left corner. Answer: A."
+  },
+  {
+    id: 30,
+    type: "image_options",
+    category: "Pattern Recognition",
+    category_question: "Visuospatial Pattern Reasoning",
+    question: "Which Shape is missing?",
+    image: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69b1aedc5a0abb358cd40ec0/a303f138a_image.png",
+    options_image: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69b1aedc5a0abb358cd40ec0/ddaf7d447_image.png",
+    options: ["A", "B", "C", "D", "E", "F"],
+    correct: 3,
+    explanation: "The pattern shows decreasing circles and squares across rows and columns. Row 3, col 3 has only orange squares at the bottom with no circles. Answer: D."
   }
 ];
 
