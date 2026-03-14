@@ -107,21 +107,21 @@ const questions = [
   },
   {
     id: 8,
-    type: "image_options",
+    type: "svg_options",
     category: "Pattern Recognition",
     category_question: "Visuospatial Pattern Reasoning",
     question: "Which Shape is missing?",
     image: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69b1aedc5a0abb358cd40ec0/3d58041b4_image.png",
     options: [
-      { text: "A", image: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69b1aedc5a0abb358cd40ec0/0b89ffb00_image.png", crop: { x: 0, y: 0, w: 50, h: 16.67 } },
-      { text: "B", image: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69b1aedc5a0abb358cd40ec0/0b89ffb00_image.png", crop: { x: 0, y: 16.67, w: 50, h: 16.67 } },
-      { text: "C", image: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69b1aedc5a0abb358cd40ec0/0b89ffb00_image.png", crop: { x: 0, y: 33.33, w: 50, h: 16.67 } },
-      { text: "D", image: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69b1aedc5a0abb358cd40ec0/0b89ffb00_image.png", crop: { x: 0, y: 50, w: 50, h: 16.67 } },
-      { text: "E", image: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69b1aedc5a0abb358cd40ec0/0b89ffb00_image.png", crop: { x: 0, y: 66.67, w: 50, h: 16.67 } },
-      { text: "F", image: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69b1aedc5a0abb358cd40ec0/0b89ffb00_image.png", crop: { x: 0, y: 83.33, w: 50, h: 16.67 } }
+      { text: "A", svg: "q8_optA" },
+      { text: "B", svg: "q8_optB" },
+      { text: "C", svg: "q8_optC" },
+      { text: "D", svg: "q8_optD" },
+      { text: "E", svg: "q8_optE" },
+      { text: "F", svg: "q8_optF" }
     ],
     correct: 1,
-    explanation: "The pattern shows shapes rotating/moving positions. The missing piece has an orange square top-right and orange circle bottom-left. Answer: B."
+    explanation: "The missing piece has an orange square top-right and orange circle bottom-left. Answer: B."
   },
   {
     id: 9,
