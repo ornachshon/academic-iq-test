@@ -596,6 +596,35 @@ function FilledCircle({ pct, startAngle }) {
   );
 }
 
+// ── Helper: Circle with N orange wedges (out of 10, no dividers) ─────────
+function WedgeCircle10({ count, startAngle }) {
+  const cx = 24, cy = 24, r = 16;
+  const total = 10;
+  const step = 360 / total;
+  const toRad = (d) => (d * Math.PI) / 180;
+  return (
+    <svg width="100%" height="100%" viewBox="0 0 48 48">
+      <circle cx={cx} cy={cy} r={r} fill="white" stroke="#0C3547" strokeWidth="2"/>
+      {Array.from({ length: total }, (_, i) => {
+        const a1 = toRad(startAngle + i * step);
+        const a2 = toRad(startAngle + (i + 1) * step);
+        const x1 = cx + r * Math.cos(a1);
+        const y1 = cy + r * Math.sin(a1);
+        const x2 = cx + r * Math.cos(a2);
+        const y2 = cy + r * Math.sin(a2);
+        const filled = i < count;
+        return (
+          <path key={i}
+            d={`M${cx},${cy} L${x1},${y1} A${r},${r} 0 0,1 ${x2},${y2} Z`}
+            fill={filled ? "#F5921B" : "none"}
+            stroke="#0C3547" strokeWidth="1.2"/>
+        );
+      })}
+      <circle cx={cx} cy={cy} r="2.5" fill="#0C3547"/>
+    </svg>
+  );
+}
+
 // ── Helper: Circle with N orange wedges (out of 10) ───────────────────────
 function WedgeCircle({ count, startAngle }) {
   const cx = 24, cy = 24, r = 16;
