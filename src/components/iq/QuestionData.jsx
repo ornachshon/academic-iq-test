@@ -107,19 +107,21 @@ const questions = [
   },
   {
     id: 8,
-    type: "spatial",
-    category: "Spatial Reasoning",
-    question: "Which shape is missing? A large rectangle with horizontal orange and navy stripes and diagonal blue lines crossing through the center, where the center piece is hidden.",
+    type: "image_options",
+    category: "Pattern Recognition",
+    category_question: "Visuospatial Pattern Reasoning",
+    question: "Which Shape is missing?",
+    image: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69b1aedc5a0abb358cd40ec0/3d58041b4_image.png",
     options: [
-      "Orange stripes only, blue lines top-left",
-      "Orange and navy stripes, blue lines top-right",
-      "Navy lines with partial orange",
-      "Orange and navy stripes with diagonal blue lines centered",
-      "Orange top only with blue diagonal",
-      "Blue lines only with orange bottom stripe"
+      { text: "A", image: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69b1aedc5a0abb358cd40ec0/0b89ffb00_image.png", crop: { x: 0, y: 0, w: 50, h: 16.67 } },
+      { text: "B", image: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69b1aedc5a0abb358cd40ec0/0b89ffb00_image.png", crop: { x: 0, y: 16.67, w: 50, h: 16.67 } },
+      { text: "C", image: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69b1aedc5a0abb358cd40ec0/0b89ffb00_image.png", crop: { x: 0, y: 33.33, w: 50, h: 16.67 } },
+      { text: "D", image: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69b1aedc5a0abb358cd40ec0/0b89ffb00_image.png", crop: { x: 0, y: 50, w: 50, h: 16.67 } },
+      { text: "E", image: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69b1aedc5a0abb358cd40ec0/0b89ffb00_image.png", crop: { x: 0, y: 66.67, w: 50, h: 16.67 } },
+      { text: "F", image: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69b1aedc5a0abb358cd40ec0/0b89ffb00_image.png", crop: { x: 0, y: 83.33, w: 50, h: 16.67 } }
     ],
-    correct: 3,
-    explanation: "The center piece must contain the horizontal orange/navy stripes plus the two diagonal blue lines passing through the middle. Answer: D."
+    correct: 1,
+    explanation: "The pattern shows shapes rotating/moving positions. The missing piece has an orange square top-right and orange circle bottom-left. Answer: B."
   },
   {
     id: 9,
