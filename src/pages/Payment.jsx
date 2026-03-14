@@ -5,7 +5,10 @@ import { Shield } from "lucide-react";
 export default function Payment() {
   const location = useLocation();
   const score = location.state?.score || "???";
+  const navigate = useNavigate();
   const [payMethod, setPayMethod] = useState("oneclick"); // "oneclick" | "card"
+
+  const goToInfo = () => navigate("/Info", { state: { score } });
 
   return (
     <div className="min-h-screen bg-white relative overflow-hidden">
