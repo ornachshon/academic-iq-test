@@ -292,6 +292,18 @@ const questions = [
     options: ["A", "B", "C", "D", "E", "F"],
     correct: 5,
     explanation: "Across rows and columns, containers progressively disappear while the dot remains. Row 3, col 3 has no outer container, only a dot. Answer: F."
+  },
+  {
+    id: 22,
+    type: "image_options",
+    category: "Numerical Reasoning",
+    category_question: "Numerical Pattern Reasoning",
+    question: "Which number is missing?",
+    image: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69b1aedc5a0abb358cd40ec0/04797179f_image.png",
+    options_image: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69b1aedc5a0abb358cd40ec0/ee9340ecd_image.png",
+    options: ["A", "B", "C", "D", "E", "F"],
+    correct: 4,
+    explanation: "Pattern: col3(row) = col1(row) + col2(row) - col3(previous row). Row 2: 9+7-4=12. Row 3: 10+15-12=13. Answer: E (13)."
   }
 ];
 
