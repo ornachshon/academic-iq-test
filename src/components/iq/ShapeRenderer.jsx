@@ -262,6 +262,76 @@ const shapes = {
     </svg>
   ),
 
+  // ── Answer shapes for Q10 (3×3 grid with orange cells) ──
+  // Helper: 3x3 grid with specified cells filled orange
+  // cells = array of [row, col] (0-indexed)
+  // A: mid-center + mid-right (rows 1, cols 1 and 2)
+  q10_optA: () => (
+    <svg width="100%" height="100%" viewBox="0 0 60 60" fill="none">
+      <rect x="2" y="2" width="56" height="56" rx="1" fill="white" stroke="#0C3547" strokeWidth="3"/>
+      {[0,1,2].map(r => [0,1,2].map(c => (
+        <rect key={`${r}${c}`} x={4+c*18} y={4+r*18} width="16" height="16"
+          fill={((r===1&&c===1)||(r===1&&c===2)) ? "#F5921B" : "white"}
+          stroke="#0C3547" strokeWidth="1.5"/>
+      )))}
+    </svg>
+  ),
+  // B: top-right + center-middle (correct) — [0,2] and [1,1]
+  q10_optB: () => (
+    <svg width="100%" height="100%" viewBox="0 0 60 60" fill="none">
+      <rect x="2" y="2" width="56" height="56" rx="1" fill="white" stroke="#0C3547" strokeWidth="3"/>
+      {[0,1,2].map(r => [0,1,2].map(c => (
+        <rect key={`${r}${c}`} x={4+c*18} y={4+r*18} width="16" height="16"
+          fill={((r===0&&c===2)||(r===1&&c===1)) ? "#F5921B" : "white"}
+          stroke="#0C3547" strokeWidth="1.5"/>
+      )))}
+    </svg>
+  ),
+  // C: center + bottom-left — [1,1] and [2,0]
+  q10_optC: () => (
+    <svg width="100%" height="100%" viewBox="0 0 60 60" fill="none">
+      <rect x="2" y="2" width="56" height="56" rx="1" fill="white" stroke="#0C3547" strokeWidth="3"/>
+      {[0,1,2].map(r => [0,1,2].map(c => (
+        <rect key={`${r}${c}`} x={4+c*18} y={4+r*18} width="16" height="16"
+          fill={((r===1&&c===1)||(r===2&&c===0)) ? "#F5921B" : "white"}
+          stroke="#0C3547" strokeWidth="1.5"/>
+      )))}
+    </svg>
+  ),
+  // D: center + bottom-center — [1,1] and [2,1]
+  q10_optD: () => (
+    <svg width="100%" height="100%" viewBox="0 0 60 60" fill="none">
+      <rect x="2" y="2" width="56" height="56" rx="1" fill="white" stroke="#0C3547" strokeWidth="3"/>
+      {[0,1,2].map(r => [0,1,2].map(c => (
+        <rect key={`${r}${c}`} x={4+c*18} y={4+r*18} width="16" height="16"
+          fill={((r===1&&c===1)||(r===2&&c===1)) ? "#F5921B" : "white"}
+          stroke="#0C3547" strokeWidth="1.5"/>
+      )))}
+    </svg>
+  ),
+  // E: top-left + center — [0,0] and [1,1]
+  q10_optE: () => (
+    <svg width="100%" height="100%" viewBox="0 0 60 60" fill="none">
+      <rect x="2" y="2" width="56" height="56" rx="1" fill="white" stroke="#0C3547" strokeWidth="3"/>
+      {[0,1,2].map(r => [0,1,2].map(c => (
+        <rect key={`${r}${c}`} x={4+c*18} y={4+r*18} width="16" height="16"
+          fill={((r===0&&c===0)||(r===1&&c===1)) ? "#F5921B" : "white"}
+          stroke="#0C3547" strokeWidth="1.5"/>
+      )))}
+    </svg>
+  ),
+  // F: top-center + center — [0,1] and [1,1]
+  q10_optF: () => (
+    <svg width="100%" height="100%" viewBox="0 0 60 60" fill="none">
+      <rect x="2" y="2" width="56" height="56" rx="1" fill="white" stroke="#0C3547" strokeWidth="3"/>
+      {[0,1,2].map(r => [0,1,2].map(c => (
+        <rect key={`${r}${c}`} x={4+c*18} y={4+r*18} width="16" height="16"
+          fill={((r===0&&c===1)||(r===1&&c===1)) ? "#F5921B" : "white"}
+          stroke="#0C3547" strokeWidth="1.5"/>
+      )))}
+    </svg>
+  ),
+
   // ── Answer shapes for Q8 (box with orange shapes in corners) ──
   // A: orange square top-right, orange circle top-left
   q8_optA: () => (
