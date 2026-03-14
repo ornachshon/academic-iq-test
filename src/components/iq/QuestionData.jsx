@@ -247,24 +247,15 @@ const questions = [
   },
   {
     id: 18,
-    type: "pattern",
-    category: "Pattern Recognition",
-    question: "Which shape is missing? Each item is a 3×3 grid of cells. Orange cell count decreases across each row and changes position. Row 1: 4, 3, 2 cells. Row 2: 6, 5, 4 cells. Row 3: 4, 5, ?",
-    grid: [
-      ["4_orange_cells_left", "3_orange_cells_left", "2_orange_cells_top"],
-      ["6_orange_cells", "5_orange_cells", "4_orange_cells_right"],
-      ["4_orange_cells_left_col", "5_orange_cells_mid", "?"]
-    ],
-    options: [
-      "4 orange cells top-left block",
-      "6 orange cells right-heavy",
-      "3 orange cells top-right",
-      "6 orange cells left-heavy",
-      "4 orange cells bottom-left",
-      "2 orange cells right column"
-    ],
-    correct: 3,
-    explanation: "Column 3 values: 2, 4, ? — each increases by 2, so ? = 6. The orange fills the right/bottom side. Answer: D (6 orange cells)."
+    type: "image_options",
+    category: "Numerical Reasoning",
+    category_question: "Numerical Pattern Reasoning",
+    question: "Which number is missing?",
+    image: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69b1aedc5a0abb358cd40ec0/74472e8be_image.png",
+    options_image: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69b1aedc5a0abb358cd40ec0/330a468bb_image.png",
+    options: ["A", "B", "C", "D", "E", "F"],
+    correct: 1,
+    explanation: "Reading left-to-right: 43,42,40,37,33,28,22,15,? — differences are 1,2,3,4,5,6,7,8 increasing. So ?=15-8=7. Answer: B (7)."
   },
   {
     id: 19,
