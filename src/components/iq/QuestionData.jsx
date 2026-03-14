@@ -235,24 +235,15 @@ const questions = [
   },
   {
     id: 17,
-    type: "pattern",
+    type: "image_options",
     category: "Pattern Recognition",
-    question: "Which shape is missing? Each circle is filled with varying amounts of dark navy. Row 1: ~25%, ~50%, ~75% filled. Row 2: ~25% rotating. Row 3: ~25%, ~50%, ?",
-    grid: [
-      ["circle_25pct", "circle_50pct", "circle_75pct"],
-      ["circle_25pct_rotated", "circle_25pct_more_rotated", "circle_25pct_further"],
-      ["circle_25pct_bottom", "circle_50pct_bottom", "?"]
-    ],
-    options: [
-      "Half filled left",
-      "75% filled with small white wedge",
-      "Quarter filled top-left",
-      "Quarter filled bottom-right",
-      "Quarter filled bottom-left",
-      "Fully filled"
-    ],
-    correct: 1,
-    explanation: "Column 3 consistently shows 75% fill (only a small white wedge visible). Row 3 col 3 should show approximately 75% navy filled. Answer: B."
+    category_question: "Visuospatial Pattern Reasoning",
+    question: "Which Shape is missing?",
+    image: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69b1aedc5a0abb358cd40ec0/472f99349_image.png",
+    options_image: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69b1aedc5a0abb358cd40ec0/d0a990e8c_image.png",
+    options: ["A", "B", "C", "D", "E", "F"],
+    correct: 5,
+    explanation: "Row 3 removes all outer containers. Col 3 strips all inner shapes. The missing piece is just a plain square with no circle or triangle. Answer: F."
   },
   {
     id: 18,
