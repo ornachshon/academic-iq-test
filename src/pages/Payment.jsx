@@ -80,7 +80,7 @@ export default function Payment() {
             <>
               <p className="text-xs text-gray-400 text-center mb-3">The faster, easier way to pay</p>
               {/* Google Pay */}
-              <button className="w-full mb-2 bg-black text-white rounded-lg py-3 flex items-center justify-center gap-2 hover:bg-gray-900 transition-colors font-medium text-sm">
+              <button onClick={goToInfo} className="w-full mb-2 bg-black text-white rounded-lg py-3 flex items-center justify-center gap-2 hover:bg-gray-900 transition-colors font-medium text-sm">
                 <svg viewBox="0 0 41 17" width="50" height="20" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M19.526 2.635v4.083h2.518c.6 0 1.096-.202 1.488-.605.403-.402.605-.882.605-1.437 0-.544-.202-1.018-.605-1.422-.392-.413-.888-.62-1.488-.62h-2.518zm0 5.52v4.736h-1.504V1.198h3.99c1.013 0 1.873.337 2.582 1.012.72.675 1.08 1.497 1.08 2.466 0 .99-.36 1.819-1.08 2.482-.698.665-1.559.996-2.583.996h-2.485zM27.194 10.655c0 .392.166.718.499.98.332.26.722.39 1.168.39.633 0 1.196-.234 1.692-.701.497-.469.744-1.019.744-1.651-.469-.37-1.123-.555-1.962-.555-.61 0-1.12.148-1.528.442-.409.294-.613.657-.613 1.095m1.946-5.442c1.075 0 1.924.287 2.546.862.623.574.934 1.361.934 2.362v4.765h-1.439v-1.073h-.063c-.601.882-1.402 1.323-2.4 1.323-.854 0-1.566-.253-2.138-.758-.572-.506-.858-1.139-.858-1.9 0-.802.303-1.44.91-1.915.607-.475 1.415-.712 2.425-.712.862 0 1.572.158 2.13.474v-.332c0-.507-.2-.935-.6-1.283a2.077 2.077 0 00-1.415-.522c-.82 0-1.468.345-1.945 1.036l-1.322-.831c.726-1.045 1.8-1.568 3.235-1.568M40.24 5.467l-5.02 11.54H33.67l1.864-4.034-3.306-7.506h1.695l2.384 5.76h.032l2.32-5.76z" fill="white"/>
                   <path d="M13.16 8.467c0-.468-.04-.92-.116-1.35H6.7v2.56h3.633a3.104 3.104 0 01-1.343 2.035v1.69h2.175c1.27-1.17 2.003-2.9 2.003-4.935" fill="#4285F4"/>
@@ -91,7 +91,7 @@ export default function Payment() {
                 <span className="text-white font-semibold text-base tracking-wide">Pay</span>
               </button>
               {/* PayPal */}
-              <button className="w-full mb-2 bg-[#FFC439] rounded-lg py-3 flex items-center justify-center hover:bg-[#f0b429] transition-colors">
+              <button onClick={goToInfo} className="w-full mb-2 bg-[#FFC439] rounded-lg py-3 flex items-center justify-center hover:bg-[#f0b429] transition-colors">
                 <svg viewBox="0 0 100 26" width="80" xmlns="http://www.w3.org/2000/svg">
                   <path fill="#003087" d="M12.237 2.094H7.234c-.345 0-.638.25-.692.59L4.4 17.295c-.04.25.152.476.405.476h2.417c.345 0 .638-.25.693-.59l.592-3.752c.054-.34.348-.59.692-.59h1.573c3.27 0 5.157-1.582 5.65-4.717.222-1.372.009-2.449-.63-3.202-.704-.826-1.952-1.226-3.555-1.226z"/>
                   <path fill="#003087" d="M13.048 6.877c-.271 1.78-1.63 1.78-2.946 1.78h-.748l.525-3.324a.415.415 0 01.41-.351h.343c.896 0 1.741 0 2.178.511.26.305.34.759.238 1.384z"/>
@@ -146,7 +146,7 @@ export default function Payment() {
                   className="w-1/2 border border-gray-200 rounded-lg px-3 py-2.5 text-sm text-gray-500 placeholder-gray-300 focus:outline-none focus:border-gray-400"
                 />
               </div>
-              <button className="w-full bg-[#1a56db] hover:bg-[#1648c7] text-white font-bold py-3 rounded-lg text-sm transition-colors">
+              <button onClick={goToInfo} className="w-full bg-[#1a56db] hover:bg-[#1648c7] text-white font-bold py-3 rounded-lg text-sm transition-colors">
                 Get My IQ Result
               </button>
             </div>
