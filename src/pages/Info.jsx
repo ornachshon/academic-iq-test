@@ -21,7 +21,7 @@ export default function Info() {
     const serialNumber = Math.random().toString(36).substring(2, 10).toUpperCase();
     const date = format(new Date(), "MMMM dd, yyyy");
     const fullName = `${firstName.trim()} ${lastName.trim()}`;
-    navigate("/Certificate", { state: { name: fullName, score, serialNumber, date } });
+    navigate("/Thankyou", { state: { name: fullName, score, serialNumber, date } });
   };
 
   return (
