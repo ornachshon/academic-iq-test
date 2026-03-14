@@ -136,24 +136,21 @@ const questions = [
   },
   {
     id: 10,
-    type: "pattern",
+    type: "svg_options",
     category: "Pattern Recognition",
-    question: "Which shape is missing? Each item is a 3×3 grid of cells. Orange cells move diagonally. Row 1: top-left, top-center, top-right. Row 2: mid-left, center, mid-right. Row 3: bottom-left, bottom-center, ?",
-    grid: [
-      ["orange_top_left", "orange_top_center", "orange_top_right"],
-      ["orange_mid_left", "orange_center", "orange_mid_right"],
-      ["orange_bottom_left", "orange_bottom_center", "?"]
-    ],
+    category_question: "Visuospatial Pattern Reasoning",
+    question: "Which Shape is missing?",
+    image: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69b1aedc5a0abb358cd40ec0/745c01c52_image.png",
     options: [
-      "Orange bottom-right cell",
-      "Orange top-right and bottom-left",
-      "Orange left column",
-      "Orange top row",
-      "Orange full grid",
-      "Orange right column"
+      { text: "A", svg: "q10_optA" },
+      { text: "B", svg: "q10_optB" },
+      { text: "C", svg: "q10_optC" },
+      { text: "D", svg: "q10_optD" },
+      { text: "E", svg: "q10_optE" },
+      { text: "F", svg: "q10_optF" }
     ],
-    correct: 0,
-    explanation: "The orange cell moves one position to the right per column. Row 3 col 3 should have orange in the bottom-right cell. Answer: A."
+    correct: 1,
+    explanation: "The orange cells shift diagonally. The missing piece has orange top-right and center-middle cells. Answer: B."
   },
   {
     id: 11,
