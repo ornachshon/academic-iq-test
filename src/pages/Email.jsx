@@ -13,6 +13,7 @@ export default function Email() {
 
   const isValidEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim());
 
+
   // State passed from IQTest via navigate
   const { answers = {}, startTime = Date.now() } = location.state || {};
 
