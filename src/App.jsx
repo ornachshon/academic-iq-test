@@ -27,13 +27,13 @@ function App() {
           <Route path="/" element={<Navigate to="/Home" replace />} />
           <Route path="/Home" element={<LayoutWrapper currentPageName="Home"><Home /></LayoutWrapper>} />
           <Route path="/IQTest" element={<LayoutWrapper currentPageName="IQTest"><IQTest /></LayoutWrapper>} />
-          <Route path="/Results" element={<LayoutWrapper currentPageName="Results"><Results /></LayoutWrapper>} />
-          <Route path="/Checkout" element={<Checkout />} />
           <Route path="/Email" element={<Email />} />
+          <Route path="/Checkout" element={<Checkout />} />
           <Route path="/Payment" element={<Payment />} />
-          <Route path="/Certificate" element={<Certificate />} />
           <Route path="/Info" element={<Info />} />
           <Route path="/Thankyou" element={<Thankyou />} />
+          <Route path="/Certificate" element={<Certificate />} />
+          <Route path="/Results" element={<LayoutWrapper currentPageName="Results"><Results /></LayoutWrapper>} />
           <Route path="*" element={<PageNotFound />} />
         </Routes>
         <Toaster />
