@@ -15,6 +15,7 @@ import Certificate from './pages/Certificate';
 import Info from './pages/Info';
 import Thankyou from './pages/Thankyou';
 import Privacy_Policy from './pages/Privacy_Policy';
+import Terms_Conditions from './pages/Terms_Conditions';
 
 const LayoutWrapper = ({ children, currentPageName }) => (
   <Layout currentPageName={currentPageName}>{children}</Layout>
