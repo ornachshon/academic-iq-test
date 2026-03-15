@@ -26,122 +26,112 @@ export default function IQCertificate({ name, score, serialNumber, date }) {
       <div
         ref={certRef}
         style={{
-          width: "820px",
-          height: "580px",
-          background: "#fdfaf3",
+          width: "850px",
+          height: "600px",
+          background: "#faf7f0",
           position: "relative",
           fontFamily: "Georgia, serif",
           overflow: "hidden",
+          boxSizing: "border-box",
         }}
       >
-        {/* Diagonal watermark lines */}
-        <svg style={{ position: "absolute", inset: 0, width: "100%", height: "100%", opacity: 0.07 }}>
-          {Array.from({ length: 30 }).map((_, i) => (
-            <line key={i} x1={i * 40 - 200} y1="0" x2={i * 40 + 400} y2="580" stroke="#888" strokeWidth="1" />
-          ))}
-        </svg>
-
         {/* Outer gold border */}
         <div style={{
-          position: "absolute", inset: "12px",
-          border: "2px solid #c9a84c",
+          position: "absolute", inset: "14px",
+          border: "2px solid #b8972e",
           pointerEvents: "none",
-        }} />
-        {/* Inner thin border */}
-        <div style={{
-          position: "absolute", inset: "20px",
-          border: "1px solid #c9a84c",
-          pointerEvents: "none",
+          zIndex: 1,
         }} />
 
-        {/* Corner dots */}
-        {[
-          { top: "8px", left: "8px" },
-          { top: "8px", right: "8px" },
-          { bottom: "8px", left: "8px" },
-          { bottom: "8px", right: "8px" },
-        ].map((pos, i) => (
-          <div key={i} style={{
-            position: "absolute", ...pos,
-            width: "10px", height: "10px",
-            borderRadius: "50%",
-            background: "#c9a84c",
-          }} />
-        ))}
+        {/* Corner ornaments (L-shaped gold brackets) */}
+        {/* Top-left */}
+        <div style={{ position: "absolute", top: "6px", left: "6px", width: "28px", height: "28px", borderTop: "4px solid #b8972e", borderLeft: "4px solid #b8972e", zIndex: 2 }} />
+        {/* Top-right */}
+        <div style={{ position: "absolute", top: "6px", right: "6px", width: "28px", height: "28px", borderTop: "4px solid #b8972e", borderRight: "4px solid #b8972e", zIndex: 2 }} />
+        {/* Bottom-left */}
+        <div style={{ position: "absolute", bottom: "6px", left: "6px", width: "28px", height: "28px", borderBottom: "4px solid #b8972e", borderLeft: "4px solid #b8972e", zIndex: 2 }} />
+        {/* Bottom-right */}
+        <div style={{ position: "absolute", bottom: "6px", right: "6px", width: "28px", height: "28px", borderBottom: "4px solid #b8972e", borderRight: "4px solid #b8972e", zIndex: 2 }} />
 
         {/* Content area */}
-        <div style={{ padding: "36px 60px 28px 60px", height: "100%", boxSizing: "border-box", display: "flex", flexDirection: "column" }}>
+        <div style={{ padding: "40px 70px 30px 70px", height: "100%", boxSizing: "border-box", display: "flex", flexDirection: "column", position: "relative", zIndex: 3 }}>
 
-          {/* Top row: logo + title */}
-          <div style={{ display: "flex", alignItems: "flex-start", gap: "24px" }}>
-            {/* Logo */}
-            <div style={{ flexShrink: 0, textAlign: "center" }}>
+          {/* Top row: logo (left) + title (center) */}
+          <div style={{ display: "flex", alignItems: "flex-start", gap: "0px" }}>
+            {/* Logo in circle */}
+            <div style={{
+              flexShrink: 0,
+              width: "88px", height: "88px",
+              borderRadius: "50%",
+              border: "2px solid #1a3a4a",
+              display: "flex", flexDirection: "column",
+              alignItems: "center", justifyContent: "center",
+              background: "#faf7f0",
+            }}>
               <img
                 src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69b1aedc5a0abb358cd40ec0/6feaa6fe0_aiq_academic_iq_test_logo.svg"
-                alt="Academic IQ Test"
-                style={{ width: "60px", height: "60px", objectFit: "contain" }}
+                alt="AIQ"
+                style={{ width: "48px", height: "48px", objectFit: "contain" }}
                 crossOrigin="anonymous"
               />
-              <div style={{ fontSize: "9px", color: "#1a3a4a", fontWeight: "bold", marginTop: "2px", fontFamily: "Arial, sans-serif", letterSpacing: "0.5px" }}>
-                ACADEMIC<br />IQ TEST
-              </div>
             </div>
 
             {/* Title block */}
-            <div style={{ flex: 1, textAlign: "center", paddingTop: "4px" }}>
-              <div style={{ fontSize: "13px", color: "#444", letterSpacing: "2px", fontFamily: "Arial, sans-serif", marginBottom: "2px" }}>
+            <div style={{ flex: 1, textAlign: "center", paddingTop: "0px" }}>
+              <div style={{ fontSize: "13px", color: "#444", letterSpacing: "3px", fontFamily: "Arial, sans-serif", textTransform: "uppercase", marginBottom: "4px" }}>
                 Academic IQ Test
               </div>
-              <div style={{ fontSize: "52px", fontWeight: "bold", color: "#1a3a4a", letterSpacing: "6px", lineHeight: 1, fontFamily: "Georgia, serif", textTransform: "uppercase" }}>
+              <div style={{ fontSize: "62px", fontWeight: "900", color: "#1a1a1a", letterSpacing: "4px", lineHeight: 1, fontFamily: "Georgia, serif", textTransform: "uppercase" }}>
                 CERTIFICATE
               </div>
-              <div style={{ fontSize: "14px", color: "#555", fontFamily: "Arial, sans-serif", marginTop: "6px", fontStyle: "italic" }}>
+              <div style={{ fontSize: "15px", color: "#444", fontFamily: "Georgia, serif", marginTop: "10px", fontStyle: "italic" }}>
                 awarded to
               </div>
             </div>
           </div>
 
           {/* Name */}
-          <div style={{ textAlign: "center", marginTop: "10px" }}>
-            <div style={{ fontSize: "38px", color: "#c9a84c", fontFamily: "Georgia, serif", fontStyle: "italic", fontWeight: "normal" }}>
+          <div style={{ textAlign: "center", marginTop: "8px" }}>
+            <div style={{ fontSize: "42px", color: "#b8972e", fontFamily: "Georgia, serif", fontStyle: "italic", fontWeight: "normal", letterSpacing: "1px" }}>
               {displayName}
             </div>
           </div>
 
           {/* Recognition text */}
-          <div style={{ textAlign: "center", marginTop: "14px", color: "#444", fontSize: "13.5px", fontFamily: "Arial, sans-serif", lineHeight: "1.6" }}>
+          <div style={{ textAlign: "center", marginTop: "16px", color: "#333", fontSize: "14px", fontFamily: "Georgia, serif", lineHeight: "1.7", fontStyle: "italic" }}>
             in recognition of successful completion of the<br />
             Academic IQ Test with a score of:
           </div>
 
           {/* Score row */}
-          <div style={{ display: "flex", alignItems: "center", justifyContent: "center", marginTop: "10px", position: "relative" }}>
-            <div style={{ flex: 1, height: "1px", background: "#c9a84c", margin: "0 30px 0 0", maxWidth: "140px", marginLeft: "auto" }} />
-            <div style={{ fontSize: "52px", fontWeight: "bold", color: "#1a3a4a", fontFamily: "Georgia, serif", lineHeight: 1, padding: "0 20px" }}>
+          <div style={{ display: "flex", alignItems: "center", justifyContent: "center", marginTop: "16px", position: "relative", gap: "0" }}>
+            <div style={{ flex: 1, height: "1px", background: "#b8972e", maxWidth: "160px", marginLeft: "auto" }} />
+            <div style={{ fontSize: "58px", fontWeight: "bold", color: "#1a1a1a", fontFamily: "Georgia, serif", lineHeight: 1, padding: "0 24px" }}>
               {displayScore}
             </div>
-            <div style={{ flex: 1, height: "1px", background: "#c9a84c", margin: "0 0 0 30px", maxWidth: "140px" }} />
+            <div style={{ flex: 1, height: "1px", background: "#b8972e", maxWidth: "160px" }} />
 
             {/* Watermark stamp */}
             <div style={{
-              position: "absolute", right: "30px", bottom: "-20px",
-              width: "80px", height: "80px", borderRadius: "50%",
-              border: "2px solid #bbb", opacity: 0.25,
+              position: "absolute", right: "0px", top: "-10px",
+              width: "85px", height: "85px", borderRadius: "50%",
+              border: "2px solid #aaa", opacity: 0.3,
               display: "flex", alignItems: "center", justifyContent: "center",
-              textAlign: "center", color: "#555", fontSize: "9px", fontWeight: "bold",
-              fontFamily: "Arial, sans-serif", lineHeight: "1.3", letterSpacing: "0.5px"
+              textAlign: "center", color: "#555", fontSize: "10px", fontWeight: "bold",
+              fontFamily: "Arial, sans-serif", lineHeight: "1.4", letterSpacing: "1px",
+              textTransform: "uppercase",
             }}>
-              Academic<br />IQ<br />Test
+              ACADEMIC<br />IQ TEST
             </div>
           </div>
 
           {/* Footer */}
-          <div style={{ marginTop: "auto", display: "flex", justifyContent: "space-between", alignItems: "flex-end", paddingTop: "16px", borderTop: "1px solid #ddd" }}>
+          <div style={{ marginTop: "auto", display: "flex", justifyContent: "space-between", alignItems: "flex-end", paddingTop: "0px" }}>
             <div style={{ fontSize: "11px", color: "#555", fontFamily: "Arial, sans-serif" }}>
-              Certificate Serial Number: <strong>#{displaySerial}</strong>
+              Certificate Serial Number: &nbsp;<strong>#{displaySerial}</strong>
             </div>
             <div style={{ fontSize: "11px", color: "#555", fontFamily: "Arial, sans-serif" }}>
-              Date: <strong>{displayDate}</strong>
+              Date: &nbsp;<strong>{displayDate}</strong>
             </div>
           </div>
         </div>
