@@ -405,17 +405,75 @@ const questions = [
 
 export default questions;
 
-// Scoring: maps correct answers to approximate IQ score (out of 20 questions)
+// Category definitions with total question counts
+export const CATEGORY_TOTALS = {
+  "Numerical Pattern Reasoning": 7,
+  "Visuospatial Insight": 11,
+  "Visuospatial Pattern Reasoning": 12,
+};
+
+/**
+ * Full scoring engine for the 30-question IQ test.
+ *
+ * @param {Array} answers - Array of { question_id, selected_answer, correct }
+ * @param {number} mu    - Population mean raw score (default 0.5)
+ * @param {number} sigma - Population std deviation (default 0.15)
+ * @returns {Object} Detailed score breakdown
+ */
+export function calculateDetailedIQ(answers, mu = 0.5, sigma = 0.15) {
+  // Per-category correct counts
+  const categoryCounts = {
+    "Numerical Pattern Reasoning": { correct: 0, total: CATEGORY_TOTALS["Numerical Pattern Reasoning"] },
+    "Visuospatial Insight":        { correct: 0, total: CATEGORY_TOTALS["Visuospatial Insight"] },
+    "Visuospatial Pattern Reasoning": { correct: 0, total: CATEGORY_TOTALS["Visuospatial Pattern Reasoning"] },
+  };
+
+  let totalCorrect = 0;
+
+  answers.forEach(({ question_id, correct }) => {
+    const q = questions.find(q => q.id === question_id);
+    if (!q) return;
+    const cat = q.category_question;
+    if (correct) {
+      totalCorrect++;
+      if (categoryCounts[cat]) categoryCounts[cat].correct++;
+    }
+  });
+
+  // Category scores as percentages
+  const categoryScores = {};
+  Object.entries(categoryCounts).forEach(([cat, { correct, total }]) => {
+    categoryScores[cat] = total > 0 ? (correct / total) * 100 : 0;
+  });
+
+  // Raw score (0–1)
+  const rawScore = totalCorrect / 30;
+
+  // Z-score
+  const zScore = (rawScore - mu) / sigma;
+
+  // IQ score, clamped 55–145
+  const iqRaw = 100 + 15 * zScore;
+  const iqScore = Math.round(Math.max(55, Math.min(145, iqRaw)));
+
+  return {
+    totalCorrect,
+    rawScorePercent: rawScore * 100,       // e.g. 60 means 60%
+    categoryScores,                         // { "Numerical Pattern Reasoning": 71.4, ... }
+    zScore: Math.round(zScore * 100) / 100, // rounded to 2 decimals
+    iqScore,
+    mu,
+    sigma,
+  };
+}
+
+// Legacy wrapper — kept for backward compatibility
 export function calculateIQ(correctAnswers) {
-  // Bell curve approximation: mean = 10 correct → IQ 100
-  // Each additional correct answer adds ~5 IQ points
-  const baseIQ = 55;
-  const pointsPerCorrect = 5;
-  let score = Math.round(baseIQ + (correctAnswers * pointsPerCorrect));
-
-  // Add slight randomness for realism (+/- 2)
-  score += Math.floor(Math.random() * 5) - 2;
-
-  // Clamp between 55 and 155
-  return Math.max(55, Math.min(155, score));
+  const { iqScore } = calculateDetailedIQ(
+    Array.from({ length: correctAnswers }, (_, i) => ({
+      question_id: questions[i]?.id ?? i + 1,
+      correct: true,
+    }))
+  );
+  return iqScore;
 }
