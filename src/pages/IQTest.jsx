@@ -53,6 +53,29 @@ export default function IQTest() {
   }, [goToEmail]);
 
   const answeredCount = Object.keys(answers).length;
+  const completedRef = useRef(false);
+
+  // Mark as completed so abandonment doesn't fire on finish
+  const goToEmail = useCallback(() => {
+    completedRef.current = true;
+    navigate("/Email", { state: { answers, startTime } });
+  }, [navigate, answers, startTime]);
+
+  // Track abandonment when user leaves the test mid-way
+  useEffect(() => {
+    if (showIntro) return;
+    return () => {
+      if (!completedRef.current) {
+        base44.analytics.track({
+          eventName: "test_abandoned",
+          properties: {
+            question_number: currentQ + 1,
+            questions_answered: Object.keys(answers).length,
+          }
+        });
+      }
+    };
+  }, [showIntro]);
 
   if (showIntro) {
     return (
