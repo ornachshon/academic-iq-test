@@ -35,7 +35,7 @@ export default function Email() {
       };
     });
 
-    const score = calculateIQ(correct);
+    const { iqScore: score } = calculateDetailedIQ(answerDetails);
 
     await base44.entities.IQResult.create({
       score,
