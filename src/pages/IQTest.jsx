@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { ChevronLeft, SkipForward, ArrowRight } from "lucide-react";
 
+import { base44 } from "@/api/base44Client";
 import questions from "@/components/iq/QuestionData";
 import Timer from "@/components/iq/Timer";
 import QuestionCard from "@/components/iq/QuestionCard";
