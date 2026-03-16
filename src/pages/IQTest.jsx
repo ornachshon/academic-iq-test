@@ -40,6 +40,13 @@ export default function IQTest() {
     }
   };
 
+  const completedRef = useRef(false);
+
+  const goToEmail = useCallback(() => {
+    completedRef.current = true;
+    navigate("/Email", { state: { answers, startTime } });
+  }, [navigate, answers, startTime]);
+
   const handleFinishClick = () => {
     goToEmail();
   };
@@ -49,13 +56,6 @@ export default function IQTest() {
   }, [goToEmail]);
 
   const answeredCount = Object.keys(answers).length;
-  const completedRef = useRef(false);
-
-  // Mark as completed so abandonment doesn't fire on finish
-  const goToEmail = useCallback(() => {
-    completedRef.current = true;
-    navigate("/Email", { state: { answers, startTime } });
-  }, [navigate, answers, startTime]);
 
   // Track abandonment when user leaves the test mid-way
   useEffect(() => {
