@@ -86,7 +86,10 @@ export default function IQTest() {
           <motion.button
             whileHover={{ scale: 1.03 }}
             whileTap={{ scale: 0.97 }}
-            onClick={() => setShowIntro(false)}
+            onClick={() => {
+              base44.analytics.track({ eventName: "iq_test_started" });
+              setShowIntro(false);
+            }}
             className="w-full bg-[#F5921B] hover:bg-[#e0830f] text-white font-bold py-4 rounded-xl text-lg shadow-lg shadow-orange-500/25 transition-colors">
 
             Start Test
