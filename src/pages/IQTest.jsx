@@ -40,10 +40,6 @@ export default function IQTest() {
     }
   };
 
-  const goToEmail = useCallback(() => {
-    navigate("/Email", { state: { answers, startTime } });
-  }, [navigate, answers, startTime]);
-
   const handleFinishClick = () => {
     goToEmail();
   };
