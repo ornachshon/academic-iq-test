@@ -46,6 +46,11 @@ export default function Email() {
       email: email.trim()
     });
 
+    base44.analytics.track({
+      eventName: "assessment_completed",
+      properties: { score, correct_answers: correct }
+    });
+
     navigate("/Checkout", { state: { score, email: email.trim() } });
   };
 
