@@ -3,7 +3,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
 import { base44 } from "@/api/base44Client";
 import { createPageUrl } from "@/utils";
-import questions, { calculateIQ } from "@/components/iq/QuestionData";
+import questions, { calculateDetailedIQ } from "@/components/iq/QuestionData";
 
 export default function Email() {
   const navigate = useNavigate();
