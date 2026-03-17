@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { Shield } from "lucide-react";
+import { trackFunnel } from "@/lib/trackFunnel";
 
 export default function Payment() {
   const location = useLocation();
