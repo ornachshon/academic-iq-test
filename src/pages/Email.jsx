@@ -44,6 +44,7 @@ export default function Email() {
       });
     } catch (_) {}
 
+    base44.analytics.track({ eventName: "email_inserted" });
     navigate("/Checkout", { state: { score, email: email.trim() } });
   };
 
