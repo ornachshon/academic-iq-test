@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useLocation, Link } from "react-router-dom";
 import { Download, FileText } from "lucide-react";
 import { base44 } from "@/api/base44Client";
+import { trackFunnel } from "@/lib/trackFunnel";
 
 export default function Thankyou() {
   const location = useLocation();
