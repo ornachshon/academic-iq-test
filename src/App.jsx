@@ -39,6 +39,7 @@ function App() {
           <Route path="/Results" element={<LayoutWrapper currentPageName="Results"><Results /></LayoutWrapper>} />
           <Route path="/Privacy_Policy" element={<Privacy_Policy />} />
           <Route path="/Terms_Conditions" element={<Terms_Conditions />} />
+          <Route path="/Analytics" element={<Analytics />} />
           <Route path="*" element={<PageNotFound />} />
         </Routes>
         <Toaster />
