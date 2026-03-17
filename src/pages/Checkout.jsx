@@ -138,7 +138,7 @@ export default function Checkout() {
 
           {/* CTA Button */}
           <button
-            onClick={() => navigate("/Payment", { state: { score } })}
+            onClick={() => { base44.analytics.track({ eventName: "payment_initiated" }); navigate("/Payment", { state: { score } }); }}
             className="bg-[#F5921B] text-white py-3 text-base font-extrabold rounded-md w-full hover:bg-[#e0830f] transition-colors">
             Continue to Payment
           </button>
