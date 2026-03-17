@@ -27,7 +27,7 @@ export default function Layout({ children, currentPageName }) {
             {/* CTA buttons */}
             {currentPageName !== "IQTest" &&
             <div className="flex items-center gap-3">
-                <Link to={createPageUrl("IQTest")}>
+                <Link to={createPageUrl("IQTest")} onClick={() => base44.analytics.track({ eventName: "start_iq_test_clicked" })}>
                   <button className="bg-[#F5921B] text-white px-5 py-2.5 text-sm font-bold rounded-md hover:bg-[#e0830f] transition-colors">
                     Start IQ Test
                   </button>
