@@ -44,6 +44,10 @@ export default function IQTest() {
 
   const goToEmail = useCallback(() => {
     completedRef.current = true;
+    base44.analytics.track({
+      eventName: "test_finished",
+      properties: { questions_answered: Object.keys(answers).length }
+    });
     navigate("/Email", { state: { answers, startTime } });
   }, [navigate, answers, startTime]);
 
