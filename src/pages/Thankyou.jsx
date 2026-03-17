@@ -1,10 +1,15 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useLocation, Link } from "react-router-dom";
 import { Download, FileText } from "lucide-react";
+import { base44 } from "@/api/base44Client";
 
 export default function Thankyou() {
   const location = useLocation();
   const { name, score, serialNumber, date } = location.state || {};
+
+  useEffect(() => {
+    base44.analytics.track({ eventName: "payment_completed", properties: { score } });
+  }, []);
 
   return (
     <div className="min-h-screen bg-white flex flex-col" style={{ fontFamily: "'Segoe UI', Arial, sans-serif" }}>
