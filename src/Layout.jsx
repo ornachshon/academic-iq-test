@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { createPageUrl } from "@/utils";
 import AiqLogo from "@/components/AiqLogo";
+import { base44 } from "@/api/base44Client";
 
 export default function Layout({ children, currentPageName }) {
   return (
