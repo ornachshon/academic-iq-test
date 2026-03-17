@@ -9,6 +9,8 @@ export default function Payment() {
   const navigate = useNavigate();
   const [payMethod, setPayMethod] = useState("oneclick"); // "oneclick" | "card"
 
+  useEffect(() => { trackFunnel("payment_page_viewed"); }, []);
+
   const goToInfo = () => navigate("/Info", { state: { score } });
 
   return (
