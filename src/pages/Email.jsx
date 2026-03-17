@@ -37,15 +37,6 @@ export default function Email() {
 
     const { iqScore: score } = calculateDetailedIQ(answerDetails);
 
-    await base44.entities.IQResult.create({
-      score,
-      correct_answers: correct,
-      total_questions: 30,
-      time_taken_seconds: timeTaken,
-      answers: answerDetails,
-      email: email.trim()
-    });
-
     base44.analytics.track({
       eventName: "assessment_completed",
       properties: { score, correct_answers: correct }
