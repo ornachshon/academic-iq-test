@@ -9,7 +9,7 @@ export default function Thankyou() {
   const { name, score, serialNumber, date } = location.state || {};
 
   useEffect(() => {
-    base44.analytics.track({ eventName: "payment_completed", properties: { score } });
+    trackFunnel("payment_completed");
   }, []);
 
   return (
