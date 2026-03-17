@@ -2,17 +2,30 @@ import React, { useState, useEffect } from "react";
 import { base44 } from "@/api/base44Client";
 import { Link } from "react-router-dom";
 
+const FUNNEL_STEPS = [
+  { key: "start_iq_test_clicked", label: "1. Start IQ Test Clicked", color: "#0C3547" },
+  { key: "test_finished",         label: "2. Finished Test",          color: "#1a5c7a" },
+  { key: "email_inserted",        label: "3. Email Inserted",         color: "#1abc9c" },
+  { key: "payment_initiated",     label: "4. Payment Initiated",      color: "#f39c12" },
+  { key: "payment_page_viewed",   label: "5. Payment Page Viewed",    color: "#e67e22" },
+  { key: "payment_completed",     label: "6. Thank You Page",         color: "#27ae60" },
+];
+
 export default function Analytics() {
-  const [results, setResults] = useState([]);
+  const [counts, setCounts] = useState({});
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     async function fetchData() {
       try {
-        const data = await base44.entities.IQResult.list('-created_date', 10000);
-        setResults(data || []);
+        const events = await base44.entities.FunnelEvent.list('-created_date', 50000);
+        const c = {};
+        (events || []).forEach(e => {
+          c[e.event_name] = (c[e.event_name] || 0) + 1;
+        });
+        setCounts(c);
       } catch (e) {
-        setResults([]);
+        setCounts({});
       } finally {
         setLoading(false);
       }
@@ -20,39 +33,11 @@ export default function Analytics() {
     fetchData();
   }, []);
 
-  const total        = results.length;
-  const withEmail    = results.filter(r => r.email && r.email.trim() !== "").length;
-  const withScore    = results.filter(r => r.score != null).length;
-
-  // Funnel steps derived from IQResult entity
-  const funnelSteps = [
-    { label: "Test Completed",     count: total,     color: "#0C3547" },
-    { label: "Email Collected",    count: withEmail,  color: "#1abc9c" },
-    { label: "Score Calculated",   count: withScore,  color: "#2980b9" },
-  ];
-
-  const topCount = total || 1;
-
-  // Score distribution
-  const scoreBuckets = [
-    { label: "< 85",    min: 0,   max: 84  },
-    { label: "85–99",   min: 85,  max: 99  },
-    { label: "100–114", min: 100, max: 114 },
-    { label: "115–129", min: 115, max: 129 },
-    { label: "130+",    min: 130, max: 999 },
-  ].map(b => ({
-    ...b,
-    count: results.filter(r => r.score >= b.min && r.score <= b.max).length,
-  }));
-
-  const maxBucket = Math.max(...scoreBuckets.map(b => b.count), 1);
-
-  const avgScore = total > 0
-    ? Math.round(results.reduce((sum, r) => sum + (r.score || 0), 0) / total)
-    : null;
-
-  const conversionRate = total > 0 && withEmail > 0
-    ? ((withEmail / total) * 100).toFixed(1)
+  const topCount = counts["start_iq_test_clicked"] || 1;
+  const startCount = counts["start_iq_test_clicked"] || 0;
+  const completedCount = counts["payment_completed"] || 0;
+  const conversionRate = startCount > 0 && completedCount > 0
+    ? ((completedCount / startCount) * 100).toFixed(1)
     : null;
 
   return (
@@ -80,10 +65,10 @@ export default function Analytics() {
             {/* Summary cards */}
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-10">
               {[
-                { label: "Tests Completed",   value: total },
-                { label: "Emails Collected",  value: withEmail },
-                { label: "Avg IQ Score",       value: avgScore ?? "—" },
-                { label: "Email Capture Rate", value: conversionRate ? `${conversionRate}%` : "—" },
+                { label: "Test Starts",        value: startCount },
+                { label: "Emails Collected",   value: counts["email_inserted"] || 0 },
+                { label: "Payments Initiated", value: counts["payment_initiated"] || 0 },
+                { label: "Payments Completed", value: completedCount },
               ].map(({ label, value }) => (
                 <div key={label} className="bg-white rounded-xl border border-gray-200 p-5 text-center shadow-sm">
                   <p className="text-3xl font-black text-[#F5921B]">{value}</p>
@@ -92,35 +77,45 @@ export default function Analytics() {
               ))}
             </div>
 
+            {/* Overall conversion */}
+            {conversionRate && (
+              <div className="bg-white rounded-xl border border-gray-200 p-5 mb-10 text-center shadow-sm">
+                <p className="text-gray-500 text-sm mb-1">Overall Conversion Rate</p>
+                <p className="text-4xl font-black text-[#27ae60]">{conversionRate}%</p>
+                <p className="text-xs text-gray-400 mt-1">Start → Payment Completed</p>
+              </div>
+            )}
+
             {/* Funnel */}
             <h2 className="text-xl font-bold text-[#0C3547] mb-4">Conversion Funnel</h2>
-            <div className="bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden mb-10">
-              {funnelSteps.map((step, idx) => {
-                const pct = Math.min(100, (step.count / topCount) * 100);
-                const dropOff = idx > 0 ? funnelSteps[idx - 1].count - step.count : 0;
-                const dropPct = idx > 0 && funnelSteps[idx - 1].count > 0
-                  ? ((dropOff / funnelSteps[idx - 1].count) * 100).toFixed(1)
+            <div className="bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden">
+              {FUNNEL_STEPS.map((step, idx) => {
+                const count = counts[step.key] || 0;
+                const pct = startCount > 0 ? Math.min(100, (count / topCount) * 100) : 0;
+                const prev = idx > 0 ? counts[FUNNEL_STEPS[idx - 1].key] || 0 : 0;
+                const dropPct = idx > 0 && prev > 0
+                  ? (((prev - count) / prev) * 100).toFixed(1)
                   : null;
+
                 return (
-                  <div key={step.label} className={`px-6 py-5 ${idx !== funnelSteps.length - 1 ? "border-b border-gray-100" : ""}`}>
+                  <div
+                    key={step.key}
+                    className={`px-6 py-5 ${idx !== FUNNEL_STEPS.length - 1 ? "border-b border-gray-100" : ""}`}
+                  >
                     <div className="flex items-center justify-between mb-2">
-                      <div className="flex items-center gap-3">
-                        <span
-                          className="w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold text-white"
-                          style={{ backgroundColor: step.color }}
-                        >
-                          {idx + 1}
-                        </span>
+                      <div className="flex items-center gap-3 flex-wrap">
                         <span className="text-sm font-semibold text-[#0C3547]">{step.label}</span>
-                        {dropPct && (
+                        {dropPct !== null && Number(dropPct) > 0 && (
                           <span className="text-xs text-red-400 bg-red-50 px-2 py-0.5 rounded-full">
                             −{dropPct}% drop-off
                           </span>
                         )}
                       </div>
-                      <div className="flex items-center gap-3">
-                        <span className="text-sm font-bold text-gray-700">{step.count.toLocaleString()}</span>
-                        <span className="text-xs text-gray-400 w-12 text-right">{pct.toFixed(1)}%</span>
+                      <div className="flex items-center gap-3 ml-4 shrink-0">
+                        <span className="text-sm font-bold text-gray-700">{count.toLocaleString()}</span>
+                        {startCount > 0 && (
+                          <span className="text-xs text-gray-400 w-12 text-right">{pct.toFixed(1)}%</span>
+                        )}
                       </div>
                     </div>
                     <div className="w-full bg-gray-100 rounded-full h-3">
@@ -134,22 +129,11 @@ export default function Analytics() {
               })}
             </div>
 
-            {/* Score Distribution */}
-            <h2 className="text-xl font-bold text-[#0C3547] mb-4">IQ Score Distribution</h2>
-            <div className="bg-white rounded-xl border border-gray-200 shadow-sm p-6">
-              <div className="flex items-end gap-3 h-40">
-                {scoreBuckets.map(b => {
-                  const heightPct = (b.count / maxBucket) * 100;
-                  return (
-                    <div key={b.label} className="flex-1 flex flex-col items-center gap-1">
-                      <span className="text-xs font-bold text-gray-600">{b.count}</span>
-                      <div className="w-full rounded-t-md transition-all duration-700" style={{ height: `${Math.max(heightPct, 2)}%`, backgroundColor: "#0C3547" }} />
-                      <span className="text-xs text-gray-400 text-center">{b.label}</span>
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
+            {startCount === 0 && (
+              <p className="text-center text-gray-400 mt-8 text-sm">
+                No funnel data yet. Events will appear here as users go through the flow.
+              </p>
+            )}
           </>
         )}
       </main>
