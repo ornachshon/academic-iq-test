@@ -45,10 +45,7 @@ export default function IQTest() {
 
   const goToEmail = useCallback(() => {
     completedRef.current = true;
-    base44.analytics.track({
-      eventName: "test_finished",
-      properties: { questions_answered: Object.keys(answers).length }
-    });
+    trackFunnel("test_finished");
     navigate("/Email", { state: { answers, startTime } });
   }, [navigate, answers, startTime]);
 
@@ -67,13 +64,7 @@ export default function IQTest() {
     if (showIntro) return;
     return () => {
       if (!completedRef.current) {
-        base44.analytics.track({
-          eventName: "test_abandoned",
-          properties: {
-            question_number: currentQ + 1,
-            questions_answered: Object.keys(answers).length,
-          }
-        });
+        base44.analytics.track({ eventName: "test_abandoned" });
       }
     };
   }, [showIntro]);
@@ -111,7 +102,7 @@ export default function IQTest() {
             whileHover={{ scale: 1.03 }}
             whileTap={{ scale: 0.97 }}
             onClick={() => {
-              base44.analytics.track({ eventName: "iq_test_started" });
+              trackFunnel("iq_test_started");
               setShowIntro(false);
             }}
             className="w-full bg-[#F5921B] hover:bg-[#e0830f] text-white font-bold py-4 rounded-xl text-lg shadow-lg shadow-orange-500/25 transition-colors">

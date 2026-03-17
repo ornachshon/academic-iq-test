@@ -39,13 +39,10 @@ export default function Email() {
     const { iqScore: score } = calculateDetailedIQ(answerDetails);
 
     try {
-      base44.analytics.track({
-        eventName: "assessment_completed",
-        properties: { score, correct_answers: correct }
-      });
+      base44.analytics.track({ eventName: "assessment_completed", properties: { score, correct_answers: correct } });
     } catch (_) {}
 
-    base44.analytics.track({ eventName: "email_inserted" });
+    trackFunnel("email_inserted");
     navigate("/Checkout", { state: { score, email: email.trim() } });
   };
 
