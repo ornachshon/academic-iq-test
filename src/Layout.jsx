@@ -13,8 +13,8 @@ export default function Layout({ children, currentPageName }) {
     <div className="min-h-screen bg-white" style={{ fontFamily: "'Segoe UI', Arial, sans-serif" }}>
       {/* Top navbar */}
       <header
-        className="bg-white border-b border-gray-200 sticky top-0 z-50"
-        style={{ minHeight: `${settings.headerHeight}px` }}
+        className="border-b border-gray-200 sticky top-0 z-50"
+        style={{ minHeight: `${settings.headerHeight}px`, backgroundImage: `url('https://media.base44.com/images/public/69b1aedc5a0abb358cd40ec0/3787a550b_image.png')`, backgroundSize: 'cover', backgroundPosition: 'center' }}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full">
           <div className="flex items-center justify-between" style={{ minHeight: `${settings.headerHeight}px` }}>
