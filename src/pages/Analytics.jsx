@@ -79,6 +79,24 @@ export default function Analytics() {
               ))}
             </div>
 
+            {/* Bar Chart */}
+            <div className="bg-white rounded-xl border border-gray-200 shadow-sm p-6 mb-10">
+              <h2 className="text-base font-bold text-[#0C3547] mb-4">Funnel Overview</h2>
+              <ResponsiveContainer width="100%" height={260}>
+                <BarChart data={FUNNEL_STEPS.map(s => ({ name: s.label.replace(/^\d+\.\s*/, ""), count: counts[s.key] || 0, color: s.color }))} margin={{ top: 5, right: 10, left: 0, bottom: 60 }}>
+                  <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#f0f0f0" />
+                  <XAxis dataKey="name" tick={{ fontSize: 11, fill: "#6b7280" }} angle={-35} textAnchor="end" interval={0} />
+                  <YAxis tick={{ fontSize: 11, fill: "#6b7280" }} allowDecimals={false} />
+                  <Tooltip formatter={(value) => [value, "Events"]} />
+                  <Bar dataKey="count" radius={[4, 4, 0, 0]}>
+                    {FUNNEL_STEPS.map((step, idx) => (
+                      <Cell key={idx} fill={step.color} />
+                    ))}
+                  </Bar>
+                </BarChart>
+              </ResponsiveContainer>
+            </div>
+
             {/* Overall conversion */}
             {conversionRate && (
               <div className="bg-white rounded-xl border border-gray-200 p-5 mb-10 text-center shadow-sm">
