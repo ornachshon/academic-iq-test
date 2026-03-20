@@ -21,8 +21,8 @@ export default function Layout({ children, currentPageName }) {
           backgroundImage: `url("https://media.base44.com/images/public/69b1aedc5a0abb358cd40ec0/e70d95bd4_image.png")`,
           backgroundSize: 'cover',
           backgroundPosition: 'center'
-        }}
-      >
+        }}>
+        
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full">
           <div className="flex items-center justify-between" style={{ minHeight: `${settings.headerHeight}px` }}>
             {/* Logo */}
@@ -31,8 +31,8 @@ export default function Layout({ children, currentPageName }) {
                 src="https://media.base44.com/images/public/69b1aedc5a0abb358cd40ec0/cbc52774d_AIQlogo-Square.png"
                 alt="Academic IQ Test"
                 style={{ width: `${settings.headerLogoSize * 0.75}px`, height: `${settings.headerLogoSize * 0.75}px` }}
-                className="object-contain"
-              />
+                className="object-contain" />
+              
             </Link>
 
             {/* Nav links */}
@@ -41,13 +41,13 @@ export default function Layout({ children, currentPageName }) {
 
             {/* CTA buttons */}
             <div className="flex items-center gap-3">
-              {currentPageName !== "IQTest" && (
-                <Link to={createPageUrl("IQTest")} onClick={() => trackFunnel("start_iq_test_clicked")}>
-                  <button className="bg-[#F5921B] text-white px-6 py-3 text-base font-bold rounded-md hover:bg-[#e0830f] transition-colors">
+              {currentPageName !== "IQTest" &&
+              <Link to={createPageUrl("IQTest")} onClick={() => trackFunnel("start_iq_test_clicked")}>
+                  <button className="bg-[#F5921B] text-white px-6 py-3 text-base font-bold text-left normal-case rounded-md hover:bg-[#e0830f] transition-colors">
                     Start IQ Test
                   </button>
                 </Link>
-              )}
+              }
 
             </div>
           </div>
@@ -57,6 +57,6 @@ export default function Layout({ children, currentPageName }) {
       <main>{children}</main>
 
       {showSettings && <SiteSettingsPanel onClose={() => setShowSettings(false)} />}
-    </div>
-  );
+    </div>);
+
 }
