@@ -18,9 +18,9 @@ export default function Layout({ children, currentPageName }) {
           minHeight: `${settings.headerHeight}px`,
           paddingTop: '12px',
           paddingBottom: '12px',
-          backgroundColor: '#ffffff',
-          backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='100'%3E%3Cpath d='M28 66L0 50V16L28 0l28 16v34L28 66zm0-2l26-15V18L28 2 2 18v31l26 15z' fill='%23f0e8d8' fill-opacity='0.5'/%3E%3Cpath d='M28 100L0 84V50l28-16 28 16v34L28 100zm0-2l26-15V52L28 36 2 52v31l26 15z' fill='%23f0e8d8' fill-opacity='0.5'/%3E%3C/svg%3E")`,
-          backgroundSize: '56px 100px'
+          backgroundImage: `url("https://media.base44.com/images/public/69b1aedc5a0abb358cd40ec0/e70d95bd4_image.png")`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center'
         }}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full">
