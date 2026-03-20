@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { createPageUrl } from "@/utils";
 import { getCountryByCode, defaultCountry } from "./countryData";
 import { base44 } from "@/api/base44Client";
+import { trackFunnel } from "@/lib/trackFunnel";
 
 export default function Hero() {
   const [country, setCountry] = useState(defaultCountry);
