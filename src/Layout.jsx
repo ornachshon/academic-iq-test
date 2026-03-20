@@ -4,7 +4,6 @@ import { createPageUrl } from "@/utils";
 import { base44 } from "@/api/base44Client";
 import { trackFunnel } from "@/lib/trackFunnel";
 import SiteSettingsPanel, { useSiteSettings } from "@/components/admin/SiteSettings";
-import { Settings } from "lucide-react";
 
 export default function Layout({ children, currentPageName }) {
   const [showSettings, setShowSettings] = useState(false);
