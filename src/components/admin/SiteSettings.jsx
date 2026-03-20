@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 
 const DEFAULTS = {
-  headerHeight: 64,
+  headerHeight: 80,
   footerPaddingY: 40,
   headerLogoSize: 112,
   footerLogoSize: 96,
