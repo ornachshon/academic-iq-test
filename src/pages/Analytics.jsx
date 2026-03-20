@@ -110,6 +110,24 @@ export default function Analytics() {
               </ResponsiveContainer>
             </div>
 
+            {/* Line Chart: Test Finished & Email Inserted over time */}
+            {dailyData.length > 0 && (
+              <div className="bg-white rounded-xl border border-gray-200 shadow-sm p-6 mb-10">
+                <h2 className="text-base font-bold text-[#0C3547] mb-4">Tests Finished & Emails Inserted Over Time</h2>
+                <ResponsiveContainer width="100%" height={260}>
+                  <LineChart data={dailyData} margin={{ top: 5, right: 10, left: 0, bottom: 5 }}>
+                    <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#f0f0f0" />
+                    <XAxis dataKey="date" tick={{ fontSize: 11, fill: "#6b7280" }} />
+                    <YAxis tick={{ fontSize: 11, fill: "#6b7280" }} allowDecimals={false} />
+                    <Tooltip />
+                    <Legend />
+                    <Line type="monotone" dataKey="test_finished" name="Test Finished" stroke="#1a5c7a" strokeWidth={2} dot={{ r: 4 }} />
+                    <Line type="monotone" dataKey="email_inserted" name="Email Inserted" stroke="#1abc9c" strokeWidth={2} dot={{ r: 4 }} />
+                  </LineChart>
+                </ResponsiveContainer>
+              </div>
+            )}
+
             {/* Overall conversion */}
             {conversionRate && (
               <div className="bg-white rounded-xl border border-gray-200 p-5 mb-10 text-center shadow-sm">
