@@ -43,7 +43,7 @@ export default function Layout({ children, currentPageName }) {
             <div className="flex items-center gap-3">
               {currentPageName !== "IQTest" && (
                 <Link to={createPageUrl("IQTest")} onClick={() => trackFunnel("start_iq_test_clicked")}>
-                  <button className="bg-[#F5921B] text-white px-5 py-2.5 text-sm font-bold rounded-md hover:bg-[#e0830f] transition-colors">
+                  <button className="bg-[#F5921B] text-white px-6 py-3 text-base font-bold rounded-md hover:bg-[#e0830f] transition-colors">
                     Start IQ Test
                   </button>
                 </Link>
