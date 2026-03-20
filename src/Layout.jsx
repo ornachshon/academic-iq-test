@@ -41,14 +41,7 @@ export default function Layout({ children, currentPageName }) {
                   </button>
                 </Link>
               )}
-              {/* Edit button */}
-              <button
-                onClick={() => setShowSettings((v) => !v)}
-                title="Edit site settings"
-                className="p-2 rounded-full hover:bg-gray-100 transition-colors text-gray-400 hover:text-[#0C3547]"
-              >
-                <Settings className="w-5 h-5" />
-              </button>
+
             </div>
           </div>
         </div>
