@@ -14,6 +14,7 @@ const FUNNEL_STEPS = [
 
 export default function Analytics() {
   const [counts, setCounts] = useState({});
+  const [dailyData, setDailyData] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -21,12 +22,24 @@ export default function Analytics() {
       try {
         const events = await base44.entities.FunnelEvent.list('-created_date', 50000);
         const c = {};
+        const byDay = {};
         (events || []).forEach(e => {
           c[e.event_name] = (c[e.event_name] || 0) + 1;
+          // Build daily breakdown for line chart
+          const day = e.created_date ? e.created_date.slice(0, 10) : null;
+          if (day) {
+            if (!byDay[day]) byDay[day] = { date: day, test_finished: 0, email_inserted: 0 };
+            if (e.event_name === "test_finished") byDay[day].test_finished++;
+            if (e.event_name === "email_inserted") byDay[day].email_inserted++;
+          }
         });
         setCounts(c);
+        // Sort days ascending
+        const sorted = Object.values(byDay).sort((a, b) => a.date.localeCompare(b.date));
+        setDailyData(sorted);
       } catch (e) {
         setCounts({});
+        setDailyData([]);
       } finally {
         setLoading(false);
       }
