@@ -43,7 +43,7 @@ export default function Hero() {
               Take this IQ test and check<br />what is your IQ
             </h2>
 
-            <Link to={createPageUrl("IQTest")} onClick={() => base44.analytics.track({ eventName: "start_iq_test_clicked" })}>
+            <Link to={createPageUrl("IQTest")} onClick={() => trackFunnel("start_iq_test_clicked")}>
               <button className="bg-[#F5921B] text-white mb-8 px-10 py-4 text-xl font-extrabold rounded-md hover:bg-[#e07a0c] transition-colors shadow-sm">
                 Start IQ Test
               </button>
