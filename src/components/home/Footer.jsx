@@ -1,15 +1,22 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { createPageUrl } from "@/utils";
+import { useSiteSettings } from "@/components/admin/SiteSettings";
 
 export default function Footer() {
+  const { settings } = useSiteSettings();
+
   return (
-    <footer className="bg-[#0C3547] text-white py-10">
+    <footer className="bg-[#0C3547] text-white" style={{ paddingTop: `${settings.footerPaddingY}px`, paddingBottom: `${settings.footerPaddingY}px` }}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col md:flex-row justify-between items-center gap-6">
           {/* Logo */}
           <div className="flex items-center gap-3">
-            <img src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69b1aedc5a0abb358cd40ec0/d89997424_aiq_academic_iq_test_logo.svg" alt="Academic IQ Test" className="h-24 w-24 object-contain bg-white rounded-full" />
+            <img
+              src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69b1aedc5a0abb358cd40ec0/d89997424_aiq_academic_iq_test_logo.svg"
+              alt="Academic IQ Test"
+              style={{ width: `${settings.footerLogoSize}px`, height: `${settings.footerLogoSize}px` }}
+              className="object-contain bg-white rounded-full"
+            />
           </div>
 
           {/* Links */}
@@ -24,6 +31,6 @@ export default function Footer() {
           </p>
         </div>
       </div>
-    </footer>);
-
+    </footer>
+  );
 }
