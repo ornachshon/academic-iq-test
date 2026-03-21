@@ -4,13 +4,13 @@ import { createPageUrl } from "@/utils";
 
 export default function AboutSection() {
   return (
-    <section className="py-16 bg-white">
+    <section className="bg-transparent py-16">
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         <h2 className="text-3xl md:text-4xl font-extrabold text-center text-[#0C3547] mb-8">Academic IQ Test
 
         </h2>
 
-        <div className="grid md:grid-cols-2 gap-12 items-center">
+        <div className="bg-[#f0f0f0] grid md:grid-cols-2 gap-12 items-center">
           <div>
             <p className="text-gray-600 leading-relaxed mb-6">The Academic IQ Test is part of an ambitious effort to deliver fun, stimulating and engaging online measures of human cognitive abilities, as well as social and emotional learning skills for the global community.
 
@@ -65,7 +65,7 @@ export default function AboutSection() {
         </div>
 
         {/* Why section */}
-        <div className="bg-transparent mt-16 grid md:grid-cols-2 gap-10 items-center">
+        <div className="bg-slate-200 mt-16 grid md:grid-cols-2 gap-10 items-center">
           <div className="flex items-center justify-center">
             <img
               src="https://media.base44.com/images/public/69b1aedc5a0abb358cd40ec0/ccd006c18_image.png"
