@@ -21,6 +21,11 @@ export default function IQTest() {
 
   const handleSelect = (optionIdx) => {
     setAnswers((prev) => ({ ...prev, [currentQ]: optionIdx }));
+    setTimeout(() => {
+      if (currentQ < questions.length - 1) {
+        setCurrentQ((q) => q + 1);
+      }
+    }, 400);
   };
 
   const handleNext = () => {
