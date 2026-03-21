@@ -30,7 +30,7 @@ export default function Layout({ children, currentPageName }) {
               <img
                 src="https://media.base44.com/images/public/69b1aedc5a0abb358cd40ec0/cbc52774d_AIQlogo-Square.png"
                 alt="Academic IQ Test"
-                style={{ width: `${settings.headerLogoSize * 0.75}px`, height: `${settings.headerLogoSize * 0.75}px` }}
+                style={{ width: `${settings.headerLogoSize * 0.825}px`, height: `${settings.headerLogoSize * 0.825}px` }}
                 className="object-contain" />
               
             </Link>
