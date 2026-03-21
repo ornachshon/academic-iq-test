@@ -15,7 +15,7 @@ export default function Footer() {
               src="https://media.base44.com/images/public/69b1aedc5a0abb358cd40ec0/cbc52774d_AIQlogo-Square.png"
               alt="Academic IQ Test"
               style={{ width: `${settings.footerLogoSize}px`, height: `${settings.footerLogoSize}px` }}
-              className="object-contain bg-white rounded-full"
+              className="object-contain"
             />
           </div>
 
