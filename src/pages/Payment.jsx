@@ -11,7 +11,10 @@ export default function Payment() {
 
   useEffect(() => { trackFunnel("payment_page_viewed"); }, []);
 
-  const goToInfo = () => navigate("/Info", { state: { score } });
+  const goToInfo = (method) => {
+    trackFunnel("payment_initiated", { payment_method: method });
+    navigate("/Info", { state: { score } });
+  };
 
   return (
     <div className="min-h-screen bg-white relative overflow-hidden">

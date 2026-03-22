@@ -10,13 +10,16 @@ function getSessionId() {
   return id;
 }
 
-export function trackFunnel(eventName) {
+export function trackFunnel(eventName, params = {}) {
   try {
     base44.entities.FunnelEvent.create({
       event_name: eventName,
       session_id: getSessionId(),
     });
-    // Also keep the existing analytics tracking
     base44.analytics.track({ eventName });
+    // Send to Google Analytics
+    if (typeof window.gtag === "function") {
+      window.gtag("event", eventName, params);
+    }
   } catch (_) {}
 }
