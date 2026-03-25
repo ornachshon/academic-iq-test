@@ -4,6 +4,7 @@ import { createPageUrl } from "@/utils";
 import { base44 } from "@/api/base44Client";
 import { trackFunnel } from "@/lib/trackFunnel";
 import SiteSettingsPanel, { useSiteSettings } from "@/components/admin/SiteSettings";
+import LanguageSelector from "@/components/header/LanguageSelector";
 
 export default function Layout({ children, currentPageName }) {
   const [showSettings, setShowSettings] = useState(false);
@@ -41,6 +42,7 @@ export default function Layout({ children, currentPageName }) {
 
             {/* CTA buttons */}
             <div className="flex items-center gap-3">
+              <LanguageSelector />
               {currentPageName !== "IQTest" &&
               <Link to={createPageUrl("IQTest")} onClick={() => trackFunnel("start_iq_test_clicked")}>
                   <button className="bg-[#F5921B] text-white px-6 py-3 text-lg font-bold text-left normal-case rounded-md hover:bg-[#e0830f] transition-colors">
