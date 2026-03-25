@@ -4,12 +4,13 @@ import { Link } from "react-router-dom";
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Cell, LineChart, Line, Legend } from "recharts";
 
 const FUNNEL_STEPS = [
-  { key: "start_iq_test_clicked", label: "1. Start IQ Test Clicked", color: "#0C3547" },
-  { key: "test_finished",         label: "2. Finished Test",          color: "#1a5c7a" },
-  { key: "email_inserted",        label: "3. Email Inserted",         color: "#1abc9c" },
-  { key: "payment_initiated",     label: "4. Payment Initiated",      color: "#f39c12" },
-  { key: "payment_page_viewed",   label: "5. Payment Page Viewed",    color: "#e67e22" },
-  { key: "payment_completed",     label: "6. Thank You Page",         color: "#27ae60" },
+  { key: "home_page_visited",     label: "1. Page Visits",            color: "#4a90d9" },
+  { key: "start_iq_test_clicked", label: "2. Start IQ Test Clicked",  color: "#0C3547" },
+  { key: "test_finished",         label: "3. Finished Test",          color: "#1a5c7a" },
+  { key: "email_inserted",        label: "4. Email Inserted",         color: "#1abc9c" },
+  { key: "payment_initiated",     label: "5. Payment Initiated",      color: "#f39c12" },
+  { key: "payment_page_viewed",   label: "6. Payment Page Viewed",    color: "#e67e22" },
+  { key: "payment_completed",     label: "7. Thank You Page",         color: "#27ae60" },
 ];
 
 export default function Analytics() {
@@ -51,7 +52,7 @@ export default function Analytics() {
     fetchData();
   }, [dateFrom, dateTo]);
 
-  const topCount = counts["start_iq_test_clicked"] || 1;
+  const topCount = counts["home_page_visited"] || counts["start_iq_test_clicked"] || 1;
   const startCount = counts["start_iq_test_clicked"] || 0;
   const completedCount = counts["payment_completed"] || 0;
   const conversionRate = startCount > 0 && completedCount > 0
