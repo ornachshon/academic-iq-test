@@ -17,9 +17,16 @@ export function trackFunnel(eventName, params = {}) {
       session_id: getSessionId(),
     });
     base44.analytics.track({ eventName });
-    // Send to Google Analytics
-    if (typeof window.gtag === "function") {
-      window.gtag("event", eventName, params);
-    }
-  } catch (_) {}
+
+    // --- UPDATED FOR GOOGLE TAG MANAGER ---
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({
+      event: eventName,
+      ...params,
+      session_id: getSessionId() // Optional: sends your internal session ID to GTM too
+    });
+    
+  } catch (_) {
+    // Silently fail if tracking fails
+  }
 }
