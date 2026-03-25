@@ -16,6 +16,8 @@ export default function Analytics() {
   const [counts, setCounts] = useState({});
   const [dailyData, setDailyData] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [dateFrom, setDateFrom] = useState("");
+  const [dateTo, setDateTo] = useState("");
 
   useEffect(() => {
     async function fetchData() {
@@ -24,9 +26,12 @@ export default function Analytics() {
         const c = {};
         const byDay = {};
         (events || []).forEach(e => {
-          c[e.event_name] = (c[e.event_name] || 0) + 1;
-          // Build daily breakdown for line chart
           const day = e.created_date ? e.created_date.slice(0, 10) : null;
+          // Apply date filter
+          if (dateFrom && day && day < dateFrom) return;
+          if (dateTo && day && day > dateTo) return;
+
+          c[e.event_name] = (c[e.event_name] || 0) + 1;
           if (day) {
             if (!byDay[day]) byDay[day] = { date: day, test_finished: 0, email_inserted: 0 };
             if (e.event_name === "test_finished") byDay[day].test_finished++;
@@ -34,7 +39,6 @@ export default function Analytics() {
           }
         });
         setCounts(c);
-        // Sort days ascending
         const sorted = Object.values(byDay).sort((a, b) => a.date.localeCompare(b.date));
         setDailyData(sorted);
       } catch (e) {
@@ -45,7 +49,7 @@ export default function Analytics() {
       }
     }
     fetchData();
-  }, []);
+  }, [dateFrom, dateTo]);
 
   const topCount = counts["start_iq_test_clicked"] || 1;
   const startCount = counts["start_iq_test_clicked"] || 0;
@@ -72,6 +76,36 @@ export default function Analytics() {
       </header>
 
       <main className="max-w-4xl mx-auto px-4 py-10">
+        {/* Date Filter */}
+        <div className="flex flex-wrap items-center gap-3 mb-8 bg-white border border-gray-200 rounded-xl p-4 shadow-sm">
+          <span className="text-sm font-semibold text-[#0C3547]">Date Range:</span>
+          <div className="flex items-center gap-2">
+            <label className="text-xs text-gray-500">From</label>
+            <input
+              type="date"
+              value={dateFrom}
+              onChange={e => setDateFrom(e.target.value)}
+              className="border border-gray-200 rounded-lg px-3 py-1.5 text-sm text-gray-700 focus:outline-none focus:border-[#0C3547]"
+            />
+          </div>
+          <div className="flex items-center gap-2">
+            <label className="text-xs text-gray-500">To</label>
+            <input
+              type="date"
+              value={dateTo}
+              onChange={e => setDateTo(e.target.value)}
+              className="border border-gray-200 rounded-lg px-3 py-1.5 text-sm text-gray-700 focus:outline-none focus:border-[#0C3547]"
+            />
+          </div>
+          {(dateFrom || dateTo) && (
+            <button
+              onClick={() => { setDateFrom(""); setDateTo(""); }}
+              className="text-xs text-red-400 hover:text-red-600 underline ml-auto"
+            >
+              Clear
+            </button>
+          )}
+        </div>
         {loading ? (
           <div className="text-center text-gray-400 py-20 text-lg">Loading...</div>
         ) : (
