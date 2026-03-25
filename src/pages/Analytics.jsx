@@ -111,8 +111,9 @@ export default function Analytics() {
         ) : (
           <>
             {/* Summary cards */}
-            <div className="grid grid-cols-2 md:grid-cols-5 gap-4 mb-10">
+            <div className="grid grid-cols-2 md:grid-cols-6 gap-4 mb-10">
               {[
+                { label: "Page Visits",        value: counts["home_page_visited"] || 0 },
                 { label: "Test Starts",        value: startCount },
                 { label: "Tests Finished",     value: counts["test_finished"] || 0 },
                 { label: "Emails Collected",   value: counts["email_inserted"] || 0 },
