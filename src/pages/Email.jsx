@@ -43,7 +43,7 @@ export default function Email() {
     } catch (_) {}
 
     trackFunnel("email_inserted");
-    navigate("/Checkout", { state: { score, email: email.trim() } });
+    navigate("/Checkout", { state: { score, email: email.trim(), timeTaken } });
   };
 
   return (

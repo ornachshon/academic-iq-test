@@ -30,12 +30,18 @@ export default function Checkout() {
   const navigate = useNavigate();
   const location = useLocation();
   const score = location.state?.score;
+  const timeTaken = location.state?.timeTaken || 0;
+  const formatTime = (secs) => {
+    const m = Math.floor(secs / 60).toString().padStart(2, '0');
+    const s = (secs % 60).toString().padStart(2, '0');
+    return `${m}:${s}`;
+  };
 
   return (
     <div className="min-h-screen bg-gray-100 text-sm text-gray-800">
       {/* Top banner */}
       <div className="bg-[#0C3547] text-white text-center py-4 px-4">
-        <p className="text-base">You completed the test in <strong>00:22 minutes</strong></p>
+        <p className="text-base">You completed the test in <strong>{formatTime(timeTaken)} minutes</strong></p>
         <p className="text-base">It seems that you are highly competent in <strong>Visuospatial Pattern Reasoning</strong></p>
       </div>
 
