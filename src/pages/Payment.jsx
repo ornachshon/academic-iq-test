@@ -168,7 +168,7 @@ export default function Payment() {
                   className="w-1/2 border border-gray-200 rounded-lg px-3 py-2.5 text-sm text-gray-500 placeholder-gray-300 focus:outline-none focus:border-gray-400"
                 />
               </div>
-              <button onClick={() => goToCheckout("credit_card")} disabled={loading} className="w-full bg-[#1a56db] hover:bg-[#1648c7] text-white font-bold py-3 rounded-lg text-sm transition-colors disabled:opacity-60">
+              <button onClick={() => goToCheckout("credit_card")} disabled={loading} className="w-full bg-[#F5921B] hover:bg-[#e0830f] text-white font-bold py-3 rounded-lg text-sm transition-colors disabled:opacity-60">
                 Get My IQ Result
               </button>
             </div>
