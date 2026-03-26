@@ -87,7 +87,7 @@ export default function Checkout() {
               </div>
             </div>
             <img src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69b1aedc5a0abb358cd40ec0/400b59f43_Certificate-Example.svg"
-              alt="Certificate" className="w-28 h-auto ml-4 flex-shrink-0 border border-gray-200 rounded shadow-sm" />
+            alt="Certificate" className="w-28 h-auto ml-4 flex-shrink-0 border border-gray-200 rounded shadow-sm" />
           </div>
 
           {/* Item 3 */}
@@ -136,8 +136,8 @@ export default function Checkout() {
 
           {/* CTA Button */}
           <button
-            onClick={() => { trackFunnel("payment_initiated"); navigate("/Payment", { state: { score } }); }}
-            className="bg-[#F5921B] text-white py-3 text-base font-extrabold rounded-md w-full hover:bg-[#e0830f] transition-colors">
+            onClick={() => {trackFunnel("payment_initiated");navigate("/Payment", { state: { score } });}} className="bg-[#F5921B] text-white py-3 text-xl font-bold rounded-md w-full hover:bg-[#e0830f] transition-colors">
+            
             Continue to Payment
           </button>
         </div>
