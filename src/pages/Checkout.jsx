@@ -47,66 +47,63 @@ export default function Checkout() {
 
       </div>
 
-      <div className="max-w-2xl mx-auto px-4 py-6 space-y-4">
+      <div className="max-w-5xl mx-auto px-4 py-6 space-y-4">
 
         {/* Order Details Header */}
-        <div className="bg-[#F5921B] text-white text-center font-bold py-3 rounded-sm tracking-widest text-sm uppercase">
+        <div className="bg-[#F5921B] text-white text-center font-black py-4 rounded-t-sm tracking-widest text-lg uppercase">
           Order Details
         </div>
 
         {/* Order Items */}
-        <div className="bg-white border border-gray-200 rounded-sm divide-y divide-gray-200">
+        <div className="bg-white border border-gray-200 rounded-b-sm divide-y divide-gray-200 -mt-4">
           {/* Item 1 */}
-          <div className="flex items-center justify-between px-5 py-4">
-            <div className="flex items-start gap-3">
-              <span className="font-bold text-gray-500 text-base mt-0.5">1.</span>
+          <div className="flex items-center justify-between px-6 py-5">
+            <div className="flex items-start gap-5">
+              <span className="font-black text-[#0C3547] text-2xl w-8 shrink-0">1.</span>
               <div>
-                <p className="font-bold text-gray-800">IQ Evaluation Score</p>
-                <p className="text-gray-500 text-xs mt-0.5">Your overall Academic IQ score</p>
+                <p className="font-bold text-[#0C3547] text-lg">IQ Evaluation Score</p>
+                <p className="text-gray-500 text-sm mt-0.5">Your overall World Wide IQ score</p>
               </div>
             </div>
-            <div className="flex items-center gap-2 text-right">
+            <div className="flex items-center gap-3 shrink-0">
               <div className="text-center leading-tight">
-                <p className="text-[10px] font-bold text-gray-500 uppercase tracking-wide">Your</p>
-                <p className="text-[10px] font-bold text-gray-500 uppercase tracking-wide">IQ Score</p>
+                <p className="text-xs font-bold text-[#0C3547] uppercase tracking-widest">Your</p>
+                <p className="text-xs font-bold text-[#0C3547] uppercase tracking-widest">IQ Score</p>
               </div>
-              <div className="w-8 h-8 rounded-full border-2 border-gray-400 flex items-center justify-center">
-                <HelpCircle className="w-4 h-4 text-gray-400" />
+              <div className="w-12 h-12 rounded-full border-2 border-gray-300 bg-gray-100 flex items-center justify-center">
+                <HelpCircle className="w-6 h-6 text-gray-400" />
               </div>
             </div>
           </div>
 
           {/* Item 2 */}
-          <div className="flex items-center justify-between px-5 py-4">
-            <div className="flex items-start gap-3">
-              <span className="font-bold text-gray-500 text-base mt-0.5">2.</span>
+          <div className="flex items-center justify-between px-6 py-5">
+            <div className="flex items-start gap-5">
+              <span className="font-black text-[#0C3547] text-2xl w-8 shrink-0">2.</span>
               <div>
-                <p className="font-bold text-gray-800">Printable Academic IQ Certificate</p>
-                <p className="text-gray-500 text-xs mt-0.5">Your very own Academic IQ Certificate</p>
-                <p className="text-gray-400 text-xs italic">(High Quality Downloadable PDF)</p>
+                <p className="font-bold text-[#0C3547] text-lg">Printable Academic IQ Certificate</p>
+                <p className="text-gray-500 text-sm mt-0.5">Your very own Academic IQ Certificate</p>
+                <p className="text-gray-400 text-sm italic">(High Quality Downloadable PDF)</p>
               </div>
             </div>
             <img src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69b1aedc5a0abb358cd40ec0/400b59f43_Certificate-Example.svg"
-
-            alt="Certificate" className="w-20 h-auto ml-4 flex-shrink-0" />
-
-
+              alt="Certificate" className="w-28 h-auto ml-4 flex-shrink-0 border border-gray-200 rounded shadow-sm" />
           </div>
 
           {/* Item 3 */}
-          <div className="flex items-center justify-between px-5 py-4">
-            <div className="flex items-start gap-3">
-              <span className="font-bold text-gray-500 text-base mt-0.5">3.</span>
+          <div className="flex items-center justify-between px-6 py-5">
+            <div className="flex items-start gap-5">
+              <span className="font-black text-[#0C3547] text-2xl w-8 shrink-0">3.</span>
               <div>
-                <p className="font-bold text-gray-800">Academic IQ Test details report</p>
-                <p className="text-gray-500 text-xs mt-0.5">With a full statistical analysis of your result </p>
+                <p className="font-bold text-[#0C3547] text-lg">Academic IQ Test details report</p>
+                <p className="text-gray-500 text-sm mt-0.5">With a full statistical analysis of your result</p>
               </div>
             </div>
           </div>
         </div>
 
         {/* Total & Payment */}
-        <div className="bg-white border border-gray-200 rounded-sm px-5 py-5 space-y-4">
+        <div className="bg-white border border-gray-200 rounded-sm px-6 py-5 space-y-4">
           <div className="flex justify-between items-center font-bold text-base bg-[#0C3547] text-white px-4 py-3 -mx-5 -mt-5 rounded-t-sm">
             <span>Total today:</span>
             <span>$4.99</span>
@@ -152,7 +149,7 @@ export default function Checkout() {
 
 
         {/* Reviews Section */}
-        <div className="bg-white border border-gray-200 rounded-sm px-5 py-6">
+        <div className="bg-white border border-gray-200 rounded-sm px-6 py-6">
           <h2 className="text-lg font-bold text-center text-gray-800 mb-1">Customer Reviews & Feedback</h2>
           <p className="text-center text-gray-500 text-xs mb-3">After you get your results you are welcome to also share a review</p>
           <div className="flex items-center justify-center gap-2 mb-6">
