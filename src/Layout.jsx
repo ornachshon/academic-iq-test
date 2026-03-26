@@ -13,7 +13,7 @@ export default function Layout({ children, currentPageName }) {
   return (
     <div className="min-h-screen bg-white" style={{ fontFamily: "'Segoe UI', Arial, sans-serif" }}>
       {/* Top navbar */}
-      <header
+      {currentPageName === "Home" && <header
         className="border-b border-gray-200 sticky top-0 z-50"
         style={{
           minHeight: `${settings.headerHeight}px`,
@@ -54,7 +54,7 @@ export default function Layout({ children, currentPageName }) {
             </div>
           </div>
         </div>
-      </header>
+      </header>}
 
       <main>{children}</main>
 
