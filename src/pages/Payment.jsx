@@ -80,6 +80,10 @@ export default function Payment() {
       {/* ── Payment popup ── */}
       <div className="absolute inset-0 flex items-center justify-center px-4">
         <div className="bg-white rounded-xl shadow-2xl w-full max-w-sm p-6 relative z-10">
+          {/* Close button */}
+          <button onClick={() => navigate(-1)} className="absolute top-3 right-3 text-gray-400 hover:text-gray-600 transition-colors">
+            <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+          </button>
           {/* Title */}
           <h2 className="text-center text-lg font-bold text-gray-800 mb-1">Quick Checkout</h2>
           <div className="flex justify-between items-center text-sm text-gray-500 mb-4 border-b pb-3">
