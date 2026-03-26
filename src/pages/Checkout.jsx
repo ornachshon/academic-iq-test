@@ -50,7 +50,7 @@ export default function Checkout() {
       <div className="max-w-5xl mx-auto px-4 py-6 space-y-4">
 
         {/* Order Details Header */}
-        <div className="bg-[#F5921B] text-white text-center font-black py-4 rounded-t-sm tracking-widest text-lg uppercase">
+        <div className="bg-[#F5921B] text-white text-center font-medium py-4 rounded-t-sm tracking-wide text-base uppercase">
           Order Details
         </div>
 
