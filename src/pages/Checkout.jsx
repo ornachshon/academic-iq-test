@@ -106,7 +106,7 @@ export default function Checkout() {
               </div>
             </div>
             <img src="https://media.base44.com/images/public/69b1aedc5a0abb358cd40ec0/03c9e0491_AIQreportsnap.png"
-              alt="IQ Report" className="w-28 h-auto ml-4 flex-shrink-0 border border-gray-200 rounded shadow-sm" />
+              alt="IQ Report" className="w-32 h-auto ml-4 flex-shrink-0 rounded" />
           </div>
         </div>
 
