@@ -92,12 +92,8 @@ export default function Checkout() {
                 <p className="text-gray-400 text-sm italic">(High Quality Downloadable PDF)</p>
               </div>
             </div>
-            <div className="ml-4 flex-shrink-0 flex flex-col gap-2">
-              <img src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69b1aedc5a0abb358cd40ec0/400b59f43_Certificate-Example.svg"
-              alt="Certificate" className="w-28 h-auto border border-gray-200 rounded shadow-sm" />
-              <img src="https://media.base44.com/images/public/69b1aedc5a0abb358cd40ec0/03c9e0491_AIQreportsnap.png"
-              alt="IQ Report" className="w-28 h-auto border border-gray-200 rounded shadow-sm" />
-            </div>
+            <img src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69b1aedc5a0abb358cd40ec0/400b59f43_Certificate-Example.svg"
+            alt="Certificate" className="w-28 h-auto ml-4 flex-shrink-0 border border-gray-200 rounded shadow-sm" />
           </div>
 
           {/* Item 3 */}
@@ -109,6 +105,8 @@ export default function Checkout() {
                 <p className="text-gray-500 text-sm mt-0.5">With a full statistical analysis of your result</p>
               </div>
             </div>
+            <img src="https://media.base44.com/images/public/69b1aedc5a0abb358cd40ec0/03c9e0491_AIQreportsnap.png"
+              alt="IQ Report" className="w-28 h-auto ml-4 flex-shrink-0 border border-gray-200 rounded shadow-sm" />
           </div>
         </div>
 
