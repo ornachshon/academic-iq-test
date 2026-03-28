@@ -1,11 +1,14 @@
 import React, { useState } from "react";
 import { useNavigate, useLocation, Link } from "react-router-dom";
 import { format } from "date-fns";
+import { base44 } from "@/api/base44Client";
 
 export default function Info() {
   const navigate = useNavigate();
   const location = useLocation();
-  const { score } = location.state || {};
+  const urlParams = new URLSearchParams(window.location.search);
+  const score = location.state?.score || urlParams.get("score");
+  const emailFromUrl = location.state?.email || urlParams.get("email") || "";
 
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -21,6 +24,27 @@ export default function Info() {
     const serialNumber = Math.random().toString(36).substring(2, 10).toUpperCase();
     const date = format(new Date(), "MMMM dd, yyyy");
     const fullName = `${firstName.trim()} ${lastName.trim()}`;
+
+    // Brevo: track payment event with full details (fire-and-forget)
+    const email = emailFromUrl;
+    const language = localStorage.getItem("selectedLanguage") || "en";
+    const baseUrl = window.location.origin;
+    const certificateUrl = `${baseUrl}/Certificate`;
+    const reportUrl = `${baseUrl}/Results`;
+    if (email) {
+      base44.functions.invoke("trackBrevoEvent", {
+        eventName: "payment",
+        email,
+        properties: {
+          name: fullName,
+          iq_score: score,
+          language,
+          certificate_url: certificateUrl,
+          report_url: reportUrl,
+        }
+      }).catch(() => {});
+    }
+
     navigate("/Thankyou", { state: { name: fullName, score, serialNumber, date } });
   };
 

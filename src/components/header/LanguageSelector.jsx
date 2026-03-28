@@ -8,7 +8,10 @@ const languages = [
 ];
 
 export default function LanguageSelector() {
-  const [selected, setSelected] = useState(languages[0]);
+  const [selected, setSelected] = useState(() => {
+    const saved = localStorage.getItem("selectedLanguage");
+    return languages.find(l => l.code === saved) || languages[0];
+  });
   const [open, setOpen] = useState(false);
   const ref = useRef(null);
 
@@ -36,7 +39,7 @@ export default function LanguageSelector() {
           {languages.map((lang) => (
             <button
               key={lang.code}
-              onClick={() => { setSelected(lang); setOpen(false); }}
+              onClick={() => { setSelected(lang); localStorage.setItem("selectedLanguage", lang.code); setOpen(false); }}
               className={`w-full flex items-center gap-2 px-3 py-2.5 text-sm text-left hover:bg-gray-50 transition-colors ${selected.code === lang.code ? "bg-gray-50 font-medium" : "text-gray-700"}`}
             >
               <span className="text-base leading-none">{lang.flag}</span>

@@ -36,7 +36,7 @@ Deno.serve(async (req) => {
           },
           callbackUrls: {
             postFlowUrl: `${origin}/Home`,
-            thankYouPageUrl: `${origin}/Info?score=${encodeURIComponent(score || "")}`,
+            thankYouPageUrl: `${origin}/Info?score=${encodeURIComponent(score || "")}&email=${encodeURIComponent(email || "")}`,
           },
         }),
       }

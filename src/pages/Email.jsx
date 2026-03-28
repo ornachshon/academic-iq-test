@@ -45,7 +45,8 @@ export default function Email() {
     trackFunnel("email_inserted");
 
     // Brevo: track email insert event (fire-and-forget)
-    base44.functions.invoke("trackBrevoEvent", { eventName: "insert_email", email: email.trim() }).catch(() => {});
+    const language = localStorage.getItem("selectedLanguage") || "en";
+    base44.functions.invoke("trackBrevoEvent", { eventName: "insert_email", email: email.trim(), properties: { iq_score: score, language } }).catch(() => {});
 
     navigate("/Checkout", { state: { score, email: email.trim(), timeTaken } });
   };
