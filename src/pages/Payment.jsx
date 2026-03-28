@@ -23,7 +23,8 @@ export default function Payment() {
         score,
         email: location.state?.email || "",
       });
-      const { redirectUrl } = res.data;
+      const redirectUrl = res.data?.redirectUrl;
+      if (!redirectUrl) throw new Error("No redirect URL received");
       window.location.href = redirectUrl;
     } catch (err) {
       console.error(err);

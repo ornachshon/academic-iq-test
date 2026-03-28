@@ -3,12 +3,17 @@ import { createClientFromRequest } from 'npm:@base44/sdk@0.8.23';
 Deno.serve(async (req) => {
   try {
     const base44 = createClientFromRequest(req);
+    const user = await base44.auth.me();
+    // Allow unauthenticated users (public funnel)
 
-    const origin = req.headers.get("Origin") || "https://your-app.base44.app";
-    const { score, email } = await req.json();
+    const body = await req.json();
+    const { score, email } = body;
 
     const WIX_API_KEY = Deno.env.get("PAYMENTS_BY_WIX_API_KEY");
     const WIX_SITE_ID = Deno.env.get("PAYMENTS_BY_WIX_SITE_ID");
+
+    // Derive base URL from the Origin header
+    const origin = req.headers.get("origin") || req.headers.get("Origin") || "https://app.base44.com";
 
     const response = await fetch(
       "https://www.wixapis.com/payments/platform/v1/checkout-sessions/construct",
@@ -23,7 +28,7 @@ Deno.serve(async (req) => {
           cart: {
             items: [
               {
-                name: "IQ Test Results & Certificate",
+                name: "IQ Evaluation Score + Certificate + Report",
                 quantity: 1,
                 price: "4.99",
               },
@@ -31,7 +36,7 @@ Deno.serve(async (req) => {
           },
           callbackUrls: {
             postFlowUrl: `${origin}/Home`,
-            thankYouPageUrl: `${origin}/Certificate`,
+            thankYouPageUrl: `${origin}/Info?score=${encodeURIComponent(score || "")}`,
           },
         }),
       }
@@ -41,10 +46,15 @@ Deno.serve(async (req) => {
 
     if (!response.ok) {
       console.error("Wix API error:", JSON.stringify(data));
-      return Response.json({ error: data.message || "Failed to create checkout" }, { status: response.status });
+      return Response.json(
+        { error: data?.message || "Failed to create checkout session" },
+        { status: response.status }
+      );
     }
 
-    return Response.json({ redirectUrl: data.checkoutSession.redirectUrl });
+    const { redirectUrl, id } = data.checkoutSession;
+    return Response.json({ redirectUrl, checkoutSessionId: id });
+
   } catch (error) {
     console.error("createCheckout error:", error.message);
     return Response.json({ error: error.message }, { status: 500 });
