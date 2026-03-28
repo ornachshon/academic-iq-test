@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
-import { Star, HelpCircle, Loader2 } from 'lucide-react';
+import { Star, HelpCircle } from 'lucide-react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import Footer from '@/components/home/Footer';
-import { base44 } from '@/api/base44Client';
 import { trackFunnel } from '@/lib/trackFunnel';
 
 const reviews = [
@@ -27,27 +26,10 @@ function StarRating({ count, total = 5 }) {
 
 export default function Checkout() {
   const [agreed, setAgreed] = useState(false);
-  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
   const score = location.state?.score;
   const timeTaken = location.state?.timeTaken || 0;
-
-  const handlePayment = async () => {
-    setLoading(true);
-    trackFunnel("payment_initiated");
-    try {
-      const res = await base44.functions.invoke("createCheckout", {
-        score,
-        email: location.state?.email || "",
-      });
-      const { redirectUrl } = res.data;
-      window.location.href = redirectUrl;
-    } catch (err) {
-      console.error(err);
-      setLoading(false);
-    }
-  };
   const formatTime = (secs) => {
     const m = Math.floor(secs / 60).toString().padStart(2, '0');
     const s = (secs % 60).toString().padStart(2, '0');
@@ -161,10 +143,8 @@ export default function Checkout() {
 
           {/* CTA Button */}
           <button
-            onClick={handlePayment}
-            disabled={loading}
-            className="bg-[#F5921B] text-white py-3 text-xl font-bold rounded-md w-full hover:bg-[#e0830f] transition-colors disabled:opacity-60 flex items-center justify-center gap-2">
-            {loading && <Loader2 className="w-5 h-5 animate-spin" />}
+            onClick={() => { trackFunnel("payment_initiated"); navigate("/Payment", { state: { score } }); }}
+            className="bg-[#F5921B] text-white py-3 text-xl font-bold rounded-md w-full hover:bg-[#e0830f] transition-colors">
             Continue to Payment
           </button>
         </div>
