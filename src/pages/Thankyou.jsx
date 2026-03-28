@@ -10,6 +10,7 @@ export default function Thankyou() {
 
   useEffect(() => {
     trackFunnel("payment_completed");
+    trackFunnel("thank_you_page");
   }, []);
 
   return (
