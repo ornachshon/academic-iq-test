@@ -43,6 +43,10 @@ export default function Email() {
     } catch (_) {}
 
     trackFunnel("email_inserted");
+
+    // Brevo: track email insert event (fire-and-forget)
+    base44.functions.invoke("trackBrevoEvent", { eventName: "insert_email", email: email.trim() }).catch(() => {});
+
     navigate("/Checkout", { state: { score, email: email.trim(), timeTaken } });
   };
 

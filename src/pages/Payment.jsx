@@ -25,6 +25,11 @@ export default function Payment() {
       });
       const redirectUrl = res.data?.redirectUrl;
       if (!redirectUrl) throw new Error("No redirect URL received");
+
+      // Brevo: track payment event (fire-and-forget)
+      const email = location.state?.email || "";
+      if (email) base44.functions.invoke("trackBrevoEvent", { eventName: "payment", email }).catch(() => {});
+
       window.location.href = redirectUrl;
     } catch (err) {
       console.error(err);
