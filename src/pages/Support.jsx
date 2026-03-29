@@ -1,7 +1,30 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { base44 } from "@/api/base44Client";
 
 export default function Support() {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [message, setMessage] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
+  const [error, setError] = useState("");
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (!name.trim() || !email.trim() || !message.trim()) return;
+    setLoading(true);
+    setError("");
+    try {
+      await base44.functions.invoke("sendSupportTicket", { name, email, message });
+      setSubmitted(true);
+    } catch (err) {
+      setError("Something went wrong. Please try again.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <div className="min-h-screen bg-white flex flex-col" style={{ fontFamily: "'Segoe UI', Arial, sans-serif" }}>
       <header className="bg-white border-b border-gray-200 sticky top-0 z-50">
@@ -18,10 +41,67 @@ export default function Support() {
         </div>
       </header>
 
-      <main className="flex-1 px-4 py-16">
-        <div className="max-w-2xl mx-auto">
-          <h1 className="text-3xl font-bold text-[#0C3547] mb-4">Contact Support</h1>
-          {/* Content will be added here */}
+      <main className="flex-1 flex items-center justify-center px-4 py-16">
+        <div className="w-full max-w-xl">
+          <div className="text-center mb-10">
+            <h1 className="text-4xl font-bold text-[#0C3547] mb-3">Contact us</h1>
+            <p className="text-gray-500 text-base">We're here to help with any questions or feedback you have!</p>
+          </div>
+
+          {submitted ? (
+            <div className="text-center bg-[#dce8f5] rounded-xl p-10">
+              <div className="text-5xl mb-4">✅</div>
+              <h2 className="text-xl font-bold text-[#0C3547] mb-2">Message sent!</h2>
+              <p className="text-gray-500">We'll get back to you at <span className="font-semibold">{email}</span> as soon as possible.</p>
+            </div>
+          ) : (
+            <form onSubmit={handleSubmit} className="space-y-5">
+              <div>
+                <label className="block text-sm font-semibold text-[#0C3547] mb-1">Name</label>
+                <input
+                  type="text"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  required
+                  className="w-full border border-gray-300 rounded-md px-4 py-2.5 text-sm text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#0C3547]"
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm font-semibold text-[#0C3547] mb-1">Email</label>
+                <input
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  required
+                  className="w-full border border-gray-300 rounded-md px-4 py-2.5 text-sm text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#0C3547]"
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm font-semibold text-[#0C3547] mb-1">Message</label>
+                <textarea
+                  value={message}
+                  onChange={(e) => setMessage(e.target.value)}
+                  required
+                  rows={5}
+                  className="w-full border border-gray-300 rounded-md px-4 py-2.5 text-sm text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#0C3547] resize-y"
+                />
+              </div>
+
+              {error && <p className="text-red-500 text-sm">{error}</p>}
+
+              <div className="flex justify-end">
+                <button
+                  type="submit"
+                  disabled={loading}
+                  className="bg-[#F5921B] hover:bg-[#e0830f] text-white font-bold px-8 py-2.5 rounded-md text-sm transition-colors disabled:opacity-60"
+                >
+                  {loading ? "Sending..." : "Send"}
+                </button>
+              </div>
+            </form>
+          )}
         </div>
       </main>
     </div>
