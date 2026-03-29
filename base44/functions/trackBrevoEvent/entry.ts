@@ -6,6 +6,7 @@ Deno.serve(async (req) => {
 
     const BREVO_API_KEY = Deno.env.get("BREVO_API_KEY");
 
+    // Track the event
     const payload = {
       event_name: eventName,
       identifiers: { email_id: email },
@@ -16,7 +17,7 @@ Deno.serve(async (req) => {
       payload.event_properties = properties;
     }
 
-    const response = await fetch("https://api.brevo.com/v3/events", {
+    const eventResponse = await fetch("https://api.brevo.com/v3/events", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -25,10 +26,34 @@ Deno.serve(async (req) => {
       body: JSON.stringify(payload),
     });
 
-    if (!response.ok) {
-      const err = await response.text();
-      console.error("Brevo API error:", err);
-      return Response.json({ error: err }, { status: response.status });
+    if (!eventResponse.ok) {
+      const err = await eventResponse.text();
+      console.error("Brevo event API error:", err);
+      return Response.json({ error: err }, { status: eventResponse.status });
+    }
+
+    // If iq_score is present, save it as a contact attribute in Brevo
+    if (email && properties?.iq_score !== undefined) {
+      const contactPayload = {
+        attributes: {
+          IQ_SCORE: properties.iq_score,
+        },
+      };
+
+      const contactResponse = await fetch(`https://api.brevo.com/v3/contacts/${encodeURIComponent(email)}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          "api-key": BREVO_API_KEY,
+        },
+        body: JSON.stringify(contactPayload),
+      });
+
+      if (!contactResponse.ok) {
+        const err = await contactResponse.text();
+        console.error("Brevo contact update error:", err);
+        // Don't fail the whole request, just log the error
+      }
     }
 
     return Response.json({ success: true });
