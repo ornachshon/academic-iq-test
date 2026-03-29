@@ -105,7 +105,7 @@ export default function QuestionCard({ question, selectedAnswer, onSelectAnswer 
                   <span className={`text-base font-bold flex-shrink-0 w-8 text-left ${
                     isSelected ? "text-[#F5921B]" : "text-[#0C3547]"
                   }`}>
-                    {labels[idx]}
+                    {labels[idx]})
                   </span>
                   {isImageOption ? (
                     <div className="flex-1 flex items-center justify-center h-16">
