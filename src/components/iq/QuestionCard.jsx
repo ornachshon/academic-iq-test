@@ -61,8 +61,8 @@ export default function QuestionCard({ question, selectedAnswer, onSelectAnswer 
 
         {/* Answers Area */}
         <div className="bg-white rounded-2xl border border-gray-200 p-6 md:p-8 shadow-sm">
-          <h4 className="text-[#0C3547] font-bold mb-6 border-b-2 border-[#F5921B] pb-3 inline-block">
-            Choose an answer:
+          <h4 className="text-[#0C3547] font-bold text-lg mb-4 border-b border-[#0C3547]/30 pb-3 w-full">
+            Please choose an answer:
           </h4>
 
           {question.options_image ? (
@@ -72,54 +72,51 @@ export default function QuestionCard({ question, selectedAnswer, onSelectAnswer 
                 {question.options.map((label, idx) => (
                   <motion.button
                     key={idx}
-                    whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.97 }}
                     onClick={() => onSelectAnswer(idx)}
                     className={`py-2 rounded-xl border-2 font-bold text-sm transition-all ${
                       selectedAnswer === idx
                         ? "border-[#F5921B] bg-[#F5921B] text-white shadow-md"
-                        : "border-gray-200 text-gray-600 hover:border-[#0C3547]/30 hover:bg-gray-50"
+                        : "border-gray-200 text-gray-600 hover:border-[#0C3547]/30 hover:bg-gray-100"
                     }`}
                   >
-                    {label}
+                    {labels[idx]}
                   </motion.button>
                 ))}
               </div>
             </div>
           ) : (
-          <div className="grid grid-cols-2 gap-3">
+          <div className="grid grid-cols-2 gap-0">
             {question.options.map((option, idx) => {
               const isImageOption = typeof option === "object" && option.image;
               const isSvgOption = typeof option === "object" && option.svg;
+              const isSelected = selectedAnswer === idx;
               return (
                 <motion.button
                   key={idx}
-                  whileHover={{ scale: 1.03 }}
                   whileTap={{ scale: 0.97 }}
                   onClick={() => onSelectAnswer(idx)}
-                  className={`flex flex-col items-center gap-2 p-3 rounded-xl border-2 transition-all ${
-                    selectedAnswer === idx
-                      ? "border-[#F5921B] bg-[#F5921B]/10 shadow-md"
-                      : "border-gray-200 hover:border-[#0C3547]/30 hover:bg-gray-50"
+                  className={`group flex items-center gap-3 p-4 transition-all rounded-lg ${
+                    isSelected
+                      ? "bg-[#F5921B]/15 border border-[#F5921B]"
+                      : "border border-transparent hover:bg-gray-100"
                   }`}
                 >
-                  <span className={`w-8 h-8 rounded-lg flex items-center justify-center text-sm font-bold flex-shrink-0 self-start ${
-                    selectedAnswer === idx
-                      ? "bg-[#F5921B] text-white"
-                      : "bg-gray-100 text-gray-500"
+                  <span className={`text-base font-bold flex-shrink-0 w-8 text-left ${
+                    isSelected ? "text-[#F5921B]" : "text-[#0C3547]"
                   }`}>
-                    {labels[idx]}
+                    {labels[idx]})
                   </span>
                   {isImageOption ? (
-                    <div className="w-full h-20 flex items-center justify-center">
+                    <div className="flex-1 flex items-center justify-center h-16">
                       <img src={option.image} alt={option.text} className="h-full w-full object-contain" />
                     </div>
                   ) : isSvgOption ? (
-                    <div className="w-full h-16 flex items-center justify-center">
+                    <div className="flex-1 flex items-center justify-center h-14">
                       <ShapeRenderer shapeName={option.svg} />
                     </div>
                   ) : (
-                    <span className="font-semibold text-[#0C3547] text-base leading-tight text-left w-full">{option}</span>
+                    <span className={`font-semibold text-base leading-tight text-left ${isSelected ? "text-[#F5921B]" : "text-[#0C3547]"}`}>{option}</span>
                   )}
                 </motion.button>
               );
