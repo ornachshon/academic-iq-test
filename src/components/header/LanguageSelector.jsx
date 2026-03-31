@@ -1,19 +1,18 @@
 import React, { useState, useRef, useEffect } from "react";
 import { ChevronDown } from "lucide-react";
+import { useTranslation } from "@/hooks/useTranslation";
 
 const languages = [
   { code: "en", label: "English", flag: "🇺🇸" },
   { code: "ja", label: "日本語", flag: "🇯🇵" },
-  { code: "ko", label: "한국어", flag: "🇰🇷" },
 ];
 
 export default function LanguageSelector() {
-  const [selected, setSelected] = useState(() => {
-    const saved = localStorage.getItem("selectedLanguage");
-    return languages.find(l => l.code === saved) || languages[0];
-  });
+  const { lang, setLanguage } = useTranslation();
   const [open, setOpen] = useState(false);
   const ref = useRef(null);
+
+  const selected = languages.find(l => l.code === lang) || languages[0];
 
   useEffect(() => {
     const handleClickOutside = (e) => {
@@ -36,14 +35,14 @@ export default function LanguageSelector() {
 
       {open && (
         <div className="absolute right-0 mt-1 w-36 bg-white border border-gray-200 rounded-md shadow-lg z-50 overflow-hidden">
-          {languages.map((lang) => (
+          {languages.map((l) => (
             <button
-              key={lang.code}
-              onClick={() => { setSelected(lang); localStorage.setItem("selectedLanguage", lang.code); setOpen(false); }}
-              className={`w-full flex items-center gap-2 px-3 py-2.5 text-sm text-left hover:bg-gray-50 transition-colors ${selected.code === lang.code ? "bg-gray-50 font-medium" : "text-gray-700"}`}
+              key={l.code}
+              onClick={() => { setLanguage(l.code); setOpen(false); }}
+              className={`w-full flex items-center gap-2 px-3 py-2.5 text-sm text-left hover:bg-gray-50 transition-colors ${selected.code === l.code ? "bg-gray-50 font-medium" : "text-gray-700"}`}
             >
-              <span className="text-base leading-none">{lang.flag}</span>
-              <span>{lang.label}</span>
+              <span className="text-base leading-none">{l.flag}</span>
+              <span>{l.name || l.label}</span>
             </button>
           ))}
         </div>

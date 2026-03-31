@@ -4,6 +4,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import Footer from '@/components/home/Footer';
 import { trackFunnel } from '@/lib/trackFunnel';
 import { useGeoPrice } from '@/hooks/useGeoPrice';
+import { useTranslation } from '@/hooks/useTranslation';
 
 const reviews = [
 { name: "Cecilie Perri", rating: 5, text: "Nice test with clear presentation and intuitive control. The questions involved critical thinking more than rote logic, which I appreciated. The only minor surprise was the way results are accessed – but, clear once you proceed. Fun and mentally stimulating!" },
@@ -32,6 +33,7 @@ export default function Checkout() {
   const score = location.state?.score;
   const timeTaken = location.state?.timeTaken || 0;
   const { pricing, loading: priceLoading, formatPrice } = useGeoPrice();
+  const { t } = useTranslation();
   const formatTime = (secs) => {
     const m = Math.floor(secs / 60).toString().padStart(2, '0');
     const s = (secs % 60).toString().padStart(2, '0');
@@ -42,13 +44,13 @@ export default function Checkout() {
     <div className="min-h-screen bg-gray-100 text-sm text-gray-800">
       {/* Top banner */}
       <div className="bg-[#0C3547] text-white text-center py-4 px-4">
-        <p className="text-base">You completed the test in <strong>{formatTime(timeTaken)} minutes</strong></p>
-        <p className="text-base">It seems that you are highly competent in <strong>Visuospatial Pattern Reasoning</strong></p>
+        <p className="text-base">{t("checkout.completed_in")} <strong>{formatTime(timeTaken)} {t("checkout.minutes")}</strong></p>
+        <p className="text-base">{t("checkout.competent_in")} <strong>{t("checkout.reasoning_type")}</strong></p>
       </div>
 
       {/* Subtitle */}
       <div className="text-center py-5 px-4 bg-white border-b border-gray-200">
-        <p className="text-gray-600">Your IQ test was analyzed and compared to other participants' results in your country.</p>
+        <p className="text-gray-600">{t("checkout.analyzed")}</p>
         
 
 
@@ -58,7 +60,7 @@ export default function Checkout() {
 
         {/* Order Details Header */}
         <div className="bg-[#F5921B] text-white text-center font-medium py-4 rounded-t-sm tracking-wide text-base uppercase">
-          Order Details
+          {t("checkout.order_details")}
         </div>
 
         {/* Order Items */}
@@ -68,8 +70,8 @@ export default function Checkout() {
             <div className="flex items-start gap-5">
               <span className="font-black text-[#0C3547] text-2xl w-8 shrink-0">1.</span>
               <div>
-                <p className="font-bold text-[#0C3547] text-lg">IQ Evaluation Score</p>
-                <p className="text-gray-500 text-sm mt-0.5">Your overall World Wide IQ score</p>
+                <p className="font-bold text-[#0C3547] text-lg">{t("checkout.item1_title")}</p>
+                <p className="text-gray-500 text-sm mt-0.5">{t("checkout.item1_desc")}</p>
               </div>
             </div>
             <div className="flex items-center gap-3 shrink-0">
@@ -88,9 +90,9 @@ export default function Checkout() {
             <div className="flex items-start gap-5">
               <span className="font-black text-[#0C3547] text-2xl w-8 shrink-0">2.</span>
               <div>
-                <p className="font-bold text-[#0C3547] text-lg">Printable Academic IQ Certificate</p>
-                <p className="text-gray-500 text-sm mt-0.5">Your very own Academic IQ Certificate</p>
-                <p className="text-gray-400 text-sm italic">(High Quality Downloadable PDF)</p>
+                <p className="font-bold text-[#0C3547] text-lg">{t("checkout.item2_title")}</p>
+                <p className="text-gray-500 text-sm mt-0.5">{t("checkout.item2_desc")}</p>
+                <p className="text-gray-400 text-sm italic">{t("checkout.item2_sub")}</p>
               </div>
             </div>
             <img src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69b1aedc5a0abb358cd40ec0/400b59f43_Certificate-Example.svg"
@@ -102,8 +104,8 @@ export default function Checkout() {
             <div className="flex items-start gap-5">
               <span className="font-black text-[#0C3547] text-2xl w-8 shrink-0">3.</span>
               <div>
-                <p className="font-bold text-[#0C3547] text-lg">Academic IQ Test details report</p>
-                <p className="text-gray-500 text-sm mt-0.5">With a full statistical analysis of your result</p>
+                <p className="font-bold text-[#0C3547] text-lg">{t("checkout.item3_title")}</p>
+                <p className="text-gray-500 text-sm mt-0.5">{t("checkout.item3_desc")}</p>
               </div>
             </div>
             <img src="https://media.base44.com/images/public/69b1aedc5a0abb358cd40ec0/03c9e0491_AIQreportsnap.png"
@@ -114,7 +116,7 @@ export default function Checkout() {
         {/* Total & Payment */}
         <div className="bg-white border border-gray-200 rounded-sm px-6 py-5 space-y-4">
           <div className="flex justify-between items-center font-bold text-base bg-[#0C3547] text-white px-4 py-3 -mx-5 -mt-5 rounded-t-sm">
-            <span>Total today:</span>
+            <span>{t("checkout.total")}</span>
             <span>{priceLoading ? "..." : formatPrice(pricing.price)}</span>
           </div>
 
@@ -147,7 +149,7 @@ export default function Checkout() {
           <button
             onClick={() => { trackFunnel("payment_initiated"); navigate("/Payment", { state: { score } }); }}
             className="bg-[#F5921B] text-white py-3 text-xl font-bold rounded-md w-full hover:bg-[#e0830f] transition-colors">
-            Continue to Payment
+            {t("checkout.cta")}
           </button>
         </div>
 
@@ -159,10 +161,10 @@ export default function Checkout() {
 
         {/* Reviews Section */}
         <div className="bg-white border border-gray-200 rounded-sm px-6 py-6">
-          <h2 className="text-lg font-bold text-center text-gray-800 mb-1">Customer Reviews & Feedback</h2>
-          <p className="text-center text-gray-500 text-xs mb-3">After you get your results you are welcome to also share a review</p>
+          <h2 className="text-lg font-bold text-center text-gray-800 mb-1">{t("checkout.reviews_title")}</h2>
+          <p className="text-center text-gray-500 text-xs mb-3">{t("checkout.reviews_sub")}</p>
           <div className="flex items-center justify-center gap-2 mb-6">
-            <span className="text-sm font-semibold text-gray-700">Average Rating: Very good</span>
+            <span className="text-sm font-semibold text-gray-700">{t("checkout.avg_rating")}</span>
             <StarRating count={4} />
           </div>
 
