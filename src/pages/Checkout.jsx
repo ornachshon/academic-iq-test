@@ -3,6 +3,7 @@ import { Star, HelpCircle } from 'lucide-react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import Footer from '@/components/home/Footer';
 import { trackFunnel } from '@/lib/trackFunnel';
+import { useGeoPrice } from '@/hooks/useGeoPrice';
 
 const reviews = [
 { name: "Cecilie Perri", rating: 5, text: "Nice test with clear presentation and intuitive control. The questions involved critical thinking more than rote logic, which I appreciated. The only minor surprise was the way results are accessed – but, clear once you proceed. Fun and mentally stimulating!" },
@@ -30,6 +31,7 @@ export default function Checkout() {
   const location = useLocation();
   const score = location.state?.score;
   const timeTaken = location.state?.timeTaken || 0;
+  const { pricing, loading: priceLoading, formatPrice } = useGeoPrice();
   const formatTime = (secs) => {
     const m = Math.floor(secs / 60).toString().padStart(2, '0');
     const s = (secs % 60).toString().padStart(2, '0');
@@ -113,7 +115,7 @@ export default function Checkout() {
         <div className="bg-white border border-gray-200 rounded-sm px-6 py-5 space-y-4">
           <div className="flex justify-between items-center font-bold text-base bg-[#0C3547] text-white px-4 py-3 -mx-5 -mt-5 rounded-t-sm">
             <span>Total today:</span>
-            <span>$4.99</span>
+            <span>{priceLoading ? "..." : formatPrice(pricing.price)}</span>
           </div>
 
           {/* Payment logos */}

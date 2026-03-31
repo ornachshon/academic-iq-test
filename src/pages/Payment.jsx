@@ -3,6 +3,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { Shield, Loader2 } from "lucide-react";
 import { trackFunnel } from "@/lib/trackFunnel";
 import { base44 } from "@/api/base44Client";
+import { useGeoPrice } from "@/hooks/useGeoPrice";
 
 export default function Payment() {
   const location = useLocation();
@@ -11,6 +12,7 @@ export default function Payment() {
   const [payMethod, setPayMethod] = useState("oneclick"); // "oneclick" | "card"
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const { pricing, loading: priceLoading, formatPrice } = useGeoPrice();
 
   useEffect(() => { trackFunnel("payment_page_viewed"); }, []);
 
@@ -22,6 +24,8 @@ export default function Payment() {
       const res = await base44.functions.invoke("createCheckout", {
         score,
         email: location.state?.email || "",
+        currency_code: pricing.currency_code,
+        price: pricing.price,
       });
       const redirectUrl = res.data?.redirectUrl;
       if (!redirectUrl) throw new Error("No redirect URL received");
@@ -90,7 +94,9 @@ export default function Payment() {
           <h2 className="text-center text-lg font-bold text-gray-800 mb-1">Quick Checkout</h2>
           <div className="flex justify-between items-center text-sm text-gray-500 mb-4 border-b pb-3">
             <span className="font-medium text-gray-700">Total:</span>
-            <span className="font-bold text-gray-800">$4.99</span>
+            <span className="font-bold text-gray-800">
+              {priceLoading ? "..." : formatPrice(pricing.price)}
+            </span>
           </div>
 
           {/* One-click payment option */}

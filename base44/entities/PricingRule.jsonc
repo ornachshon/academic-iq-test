@@ -1,0 +1,60 @@
+{
+  "name": "PricingRule",
+  "type": "object",
+  "properties": {
+    "region_name": {
+      "type": "string",
+      "description": "Human-readable region name (e.g., United States, Europe, Israel)"
+    },
+    "country_codes": {
+      "type": "array",
+      "description": "List of ISO 3166-1 alpha-2 country codes (e.g., US, IL, GB)",
+      "items": {
+        "type": "string"
+      }
+    },
+    "languages": {
+      "type": "array",
+      "description": "Optional: language codes this rule applies to (e.g., he, ar, en). Empty = all languages.",
+      "items": {
+        "type": "string"
+      }
+    },
+    "currency_code": {
+      "type": "string",
+      "description": "ISO 4217 currency code (e.g., USD, EUR, ILS)"
+    },
+    "currency_symbol": {
+      "type": "string",
+      "description": "Display symbol for the currency (e.g., $, \u20ac, \u20aa)"
+    },
+    "price": {
+      "type": "number",
+      "description": "Price for this region"
+    },
+    "original_price": {
+      "type": "number",
+      "description": "Original/strikethrough price (for showing discount)"
+    },
+    "is_active": {
+      "type": "boolean",
+      "description": "Whether this pricing rule is active",
+      "default": true
+    },
+    "priority": {
+      "type": "number",
+      "description": "Higher priority rules are matched first (useful for language-specific overrides)",
+      "default": 0
+    },
+    "label": {
+      "type": "string",
+      "description": "Optional internal label/notes for this rule"
+    }
+  },
+  "required": [
+    "region_name",
+    "currency_code",
+    "currency_symbol",
+    "price"
+  ]
+}
