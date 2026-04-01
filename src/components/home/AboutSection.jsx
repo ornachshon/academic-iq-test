@@ -1,29 +1,53 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { createPageUrl } from "@/utils";
-import { useTranslation } from "@/hooks/useTranslation";
 
 export default function AboutSection() {
-  const { t } = useTranslation();
   return (
     <section className="py-16 bg-white">
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 className="text-3xl md:text-4xl font-extrabold text-center text-[#0C3547] mb-8">{t("about.title")}</h2>
+        <h2 className="text-3xl md:text-4xl font-extrabold text-center text-[#0C3547] mb-8">Academic IQ Test
+
+        </h2>
 
         <div className="grid md:grid-cols-2 gap-12 items-center">
           <div>
-            <p className="text-gray-600 leading-relaxed mb-6">{t("about.p1")}</p>
-            <p className="text-gray-600 leading-relaxed mb-6">{t("about.p2")}</p>
-            <p className="text-gray-600 leading-relaxed">{t("about.p3")}</p>
+            <p className="text-gray-600 leading-relaxed mb-6">The Academic IQ Test is part of an ambitious effort to deliver fun, stimulating and engaging online measures of human cognitive abilities, as well as social and emotional learning skills for the global community.
+
+
+
+            </p>
+            <p className="text-gray-600 leading-relaxed mb-6">
+              We aim to provide you with accurate and precise information about important aspects of
+              your intellectual abilities and personality characteristics, and where they may benefit
+              the most from further development, regardless of your academic, professional, or
+              cultural background.
+            </p>
+            <p className="text-gray-600 leading-relaxed">
+              The current version measures several dimensions of general fluid intelligence, including
+              visuospatial pattern reasoning, visuospatial insight, and numerical pattern reasoning
+              skills.
+            </p>
           </div>
 
           {/* Steps */}
           <div className="space-y-8">
             {[
-            { num: "01.", title: t("about.step1_title"), desc: t("about.step1_desc") },
-            { num: "02.", title: t("about.step2_title"), desc: t("about.step2_desc") },
-            { num: "03.", title: t("about.step3_title"), desc: t("about.step3_desc") }
-            ].
+            {
+              num: "01.",
+              title: "Take the IQ Test",
+              desc: "Designed by experts and test developers"
+            },
+            {
+              num: "02.",
+              title: "Find out your scores",
+              desc: "Get your customized score report and learn how you compare to thousands of adults from all over the world"
+            },
+            {
+              num: "03.",
+              title: "Start your brain power journey",
+              desc: "Unleash your full potential with brain training designed to improve your memory, focus and problem-solving skills"
+            }].
             map((step) =>
             <div key={step.num} className="flex gap-4">
                 <span className="text-2xl font-black text-[#0C3547] leading-tight flex-shrink-0">
@@ -55,12 +79,20 @@ export default function AboutSection() {
           </div>
 
           <div className="bg-transparent p-8 opacity-100 rounded">
-            <h3 className="text-2xl font-extrabold text-[#0C3547] mb-4">{t("about.why_title")}</h3>
-            <p className="text-gray-600 leading-relaxed mb-6">{t("about.why_p1")}</p>
-            <p className="text-gray-600 leading-relaxed mb-6">{t("about.why_p2")}</p>
+            <h3 className="text-2xl font-extrabold text-[#0C3547] mb-4">Why this IQ test?</h3>
+            <p className="text-gray-600 leading-relaxed mb-6">The Academic IQ Test presents you with a short series of fun, challenging problems designed to measure your fluid intelligence abilities and provide you with both accurate and precise scores.
+
+
+
+            </p>
+            <p className="text-gray-600 leading-relaxed mb-6">
+              You can take the test online anytime from any mobile device or desktop computer and
+              immediately receive a detailed score report that tells you how your performance compares
+              to thousands of adults from all over the world.
+            </p>
             <Link to={createPageUrl("IQTest")}>
               <button className="bg-[#F5921B] text-[#ffffff] px-7 py-3 font-bold opacity-100 rounded-md hover:bg-[#e07a0c] transition-colors">
-                {t("hero.start_btn")}
+                Start IQ Test
               </button>
             </Link>
           </div>
