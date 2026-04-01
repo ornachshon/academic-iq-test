@@ -1,6 +1,6 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback, useMemo } from "react";
 import { base44 } from "@/api/base44Client";
-import { Languages, Save, RefreshCw, Zap, CheckCircle, AlertCircle, ChevronDown, ChevronUp, Search } from "lucide-react";
+import { Languages, Save, RefreshCw, Zap, CheckCircle, AlertCircle, ChevronDown, ChevronUp, Search, ArrowUpDown, ArrowUp, ArrowDown, X, SlidersHorizontal } from "lucide-react";
 
 const SUPPORTED_LANGS = [{ code: "ja", name: "Japanese", flag: "🇯🇵" }];
 const SECTIONS = ["all", "hero", "about", "email", "checkout", "iqtest", "nav", "general"];
@@ -12,6 +12,9 @@ export default function TranslationAdmin() {
   const [autoTranslating, setAutoTranslating] = useState({});
   const [filter, setFilter] = useState("all");
   const [search, setSearch] = useState("");
+  const [langFilter, setLangFilter] = useState("all"); // all, missing_ja, has_ja
+  const [sortField, setSortField] = useState("key"); // key, section, en, ja
+  const [sortDir, setSortDir] = useState("asc"); // asc, desc
   const [expandedKeys, setExpandedKeys] = useState(new Set());
   const [toast, setToast] = useState(null);
 
@@ -111,15 +114,41 @@ export default function TranslationAdmin() {
     });
   };
 
-  const filteredTranslations = Object.fromEntries(
-    Object.entries(translations).filter(([key, val]) => {
+  const handleSort = (field) => {
+    if (sortField === field) {
+      setSortDir(d => d === "asc" ? "desc" : "asc");
+    } else {
+      setSortField(field);
+      setSortDir("asc");
+    }
+  };
+
+  const filteredTranslations = useMemo(() => {
+    const q = search.toLowerCase();
+    const entries = Object.entries(translations).filter(([key, val]) => {
       const sectionMatch = filter === "all" || val.section === filter;
-      const searchMatch = !search || key.toLowerCase().includes(search.toLowerCase()) ||
-        val.en?.value?.toLowerCase().includes(search.toLowerCase()) ||
-        val.ja?.value?.toLowerCase().includes(search.toLowerCase());
-      return sectionMatch && searchMatch;
-    })
-  );
+      const langMatch = langFilter === "all" ||
+        (langFilter === "missing_ja" && !val.ja?.value) ||
+        (langFilter === "has_ja" && !!val.ja?.value);
+      const searchMatch = !q ||
+        key.toLowerCase().includes(q) ||
+        (val.section || "").toLowerCase().includes(q) ||
+        (val.en?.value || "").toLowerCase().includes(q) ||
+        (val.ja?.value || "").toLowerCase().includes(q);
+      return sectionMatch && langMatch && searchMatch;
+    });
+
+    entries.sort(([aKey, aVal], [bKey, bVal]) => {
+      let a = "", b = "";
+      if (sortField === "key") { a = aKey; b = bKey; }
+      else if (sortField === "section") { a = aVal.section || ""; b = bVal.section || ""; }
+      else if (sortField === "en") { a = aVal.en?.value || ""; b = bVal.en?.value || ""; }
+      else if (sortField === "ja") { a = aVal.ja?.value || ""; b = bVal.ja?.value || ""; }
+      return sortDir === "asc" ? a.localeCompare(b) : b.localeCompare(a);
+    });
+
+    return Object.fromEntries(entries);
+  }, [translations, filter, langFilter, search, sortField, sortDir]);
 
   const totalKeys = Object.keys(translations).length;
   const translatedJA = Object.values(translations).filter(v => v.ja?.value).length;
@@ -152,35 +181,83 @@ export default function TranslationAdmin() {
 
       <div className="max-w-6xl mx-auto px-4 py-6 space-y-4">
         {/* Controls */}
-        <div className="flex flex-wrap gap-3 items-center justify-between">
-          <div className="flex items-center gap-3 flex-wrap">
-            {/* Section filter */}
+        <div className="bg-white border border-gray-200 rounded-xl p-4 space-y-3">
+          {/* Row 1: search + action buttons */}
+          <div className="flex flex-wrap gap-3 items-center justify-between">
+            <div className="relative flex-1 min-w-[200px] max-w-sm">
+              <Search size={14} className="absolute left-2.5 top-1/2 -translate-y-1/2 text-gray-400" />
+              <input
+                className="border border-gray-300 rounded-md pl-8 pr-8 py-2 text-sm w-full focus:outline-none focus:ring-2 focus:ring-[#F5921B]"
+                placeholder="Search by key, section, English or Japanese text..."
+                value={search} onChange={e => setSearch(e.target.value)}
+              />
+              {search && (
+                <button onClick={() => setSearch("")} className="absolute right-2.5 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600">
+                  <X size={13} />
+                </button>
+              )}
+            </div>
+            <div className="flex gap-2">
+              <button onClick={load} className="flex items-center gap-1.5 border border-gray-300 text-gray-600 px-3 py-2 rounded-lg text-sm hover:bg-gray-50 transition-colors">
+                <RefreshCw size={14} /> Refresh
+              </button>
+              <button onClick={handleAutoTranslateAll} className="flex items-center gap-1.5 bg-purple-600 text-white px-3 py-2 rounded-lg text-sm font-bold hover:bg-purple-700 transition-colors">
+                <Zap size={14} /> Auto-translate All
+              </button>
+            </div>
+          </div>
+
+          {/* Row 2: section + language filters + sort */}
+          <div className="flex flex-wrap gap-3 items-center">
+            <div className="flex items-center gap-1.5 text-xs text-gray-500 font-medium">
+              <SlidersHorizontal size={13} /> Filters:
+            </div>
+
+            {/* Section pills */}
             <div className="flex gap-1 flex-wrap">
               {SECTIONS.map(s => (
                 <button key={s} onClick={() => setFilter(s)}
-                  className={`px-3 py-1.5 rounded-full text-xs font-medium transition-colors ${filter === s ? "bg-[#0C3547] text-white" : "bg-white border border-gray-300 text-gray-600 hover:border-[#0C3547]"}`}>
+                  className={`px-2.5 py-1 rounded-full text-xs font-medium transition-colors ${filter === s ? "bg-[#0C3547] text-white" : "bg-gray-100 text-gray-600 hover:bg-gray-200"}`}>
                   {s}
                 </button>
               ))}
             </div>
-            {/* Search */}
-            <div className="relative">
-              <Search size={14} className="absolute left-2.5 top-1/2 -translate-y-1/2 text-gray-400" />
-              <input
-                className="border border-gray-300 rounded-md pl-8 pr-3 py-1.5 text-sm w-48 focus:outline-none focus:ring-2 focus:ring-[#F5921B]"
-                placeholder="Search keys or text..."
-                value={search} onChange={e => setSearch(e.target.value)}
-              />
+
+            {/* Language status filter */}
+            <div className="flex gap-1 border-l border-gray-200 pl-3">
+              {[["all", "All"], ["has_ja", "✅ Has JA"], ["missing_ja", "⚠ Missing JA"]].map(([val, label]) => (
+                <button key={val} onClick={() => setLangFilter(val)}
+                  className={`px-2.5 py-1 rounded-full text-xs font-medium transition-colors ${langFilter === val ? "bg-[#F5921B] text-white" : "bg-gray-100 text-gray-600 hover:bg-gray-200"}`}>
+                  {label}
+                </button>
+              ))}
+            </div>
+
+            {/* Sort controls */}
+            <div className="flex gap-1 border-l border-gray-200 pl-3 items-center">
+              <span className="text-xs text-gray-500 font-medium">Sort:</span>
+              {[["key", "Key"], ["section", "Section"], ["en", "English"], ["ja", "Japanese"]].map(([field, label]) => {
+                const active = sortField === field;
+                const Icon = active ? (sortDir === "asc" ? ArrowUp : ArrowDown) : ArrowUpDown;
+                return (
+                  <button key={field} onClick={() => handleSort(field)}
+                    className={`flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium transition-colors ${active ? "bg-blue-600 text-white" : "bg-gray-100 text-gray-600 hover:bg-gray-200"}`}>
+                    <Icon size={11} /> {label}
+                  </button>
+                );
+              })}
             </div>
           </div>
-          <div className="flex gap-2">
-            <button onClick={load} className="flex items-center gap-1.5 border border-gray-300 text-gray-600 px-4 py-2 rounded-lg text-sm hover:bg-gray-50 transition-colors">
-              <RefreshCw size={14} /> Refresh
-            </button>
-            <button onClick={handleAutoTranslateAll} className="flex items-center gap-1.5 bg-purple-600 text-white px-4 py-2 rounded-lg text-sm font-bold hover:bg-purple-700 transition-colors">
-              <Zap size={14} /> Auto-translate All
-            </button>
-          </div>
+
+          {/* Active filters summary */}
+          {(filter !== "all" || langFilter !== "all" || search) && (
+            <div className="flex items-center gap-2 text-xs text-gray-500 pt-1 border-t border-gray-100">
+              <span>{Object.keys(filteredTranslations).length} result{Object.keys(filteredTranslations).length !== 1 ? "s" : ""}</span>
+              {filter !== "all" && <span className="bg-[#0C3547]/10 text-[#0C3547] px-2 py-0.5 rounded-full">section: {filter} <button onClick={() => setFilter("all")} className="ml-1 hover:text-red-500">×</button></span>}
+              {langFilter !== "all" && <span className="bg-[#F5921B]/10 text-[#F5921B] px-2 py-0.5 rounded-full">{langFilter === "missing_ja" ? "Missing JA" : "Has JA"} <button onClick={() => setLangFilter("all")} className="ml-1 hover:text-red-500">×</button></span>}
+              {search && <span className="bg-gray-100 text-gray-600 px-2 py-0.5 rounded-full">"{search}" <button onClick={() => setSearch("")} className="ml-1 hover:text-red-500">×</button></span>}
+            </div>
+          )}
         </div>
 
         {/* Translation rows */}
