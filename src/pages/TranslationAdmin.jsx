@@ -37,20 +37,31 @@ export default function TranslationAdmin() {
 
   useEffect(() => { load(); }, [load]);
 
+  const updateLocalTranslation = (key, lang, value, id) => {
+    setTranslations(prev => ({
+      ...prev,
+      [key]: {
+        ...prev[key],
+        [lang]: { value, id: id || prev[key]?.[lang]?.id }
+      }
+    }));
+  };
+
   const handleSave = async (key, lang, value) => {
     setSaving(s => ({ ...s, [`${key}_${lang}`]: true }));
     try {
       const existing = translations[key]?.[lang];
       if (existing?.id) {
         await base44.entities.Translation.update(existing.id, { value });
+        updateLocalTranslation(key, lang, value, existing.id);
       } else {
-        await base44.entities.Translation.create({
+        const created = await base44.entities.Translation.create({
           key, language: lang, value,
           section: translations[key]?.section || "general",
           notes: translations[key]?.notes || ""
         });
+        updateLocalTranslation(key, lang, value, created.id);
       }
-      await load();
       showToast(`Saved ${lang.toUpperCase()} for "${key}"`);
     } finally {
       setSaving(s => ({ ...s, [`${key}_${lang}`]: false }));
@@ -63,16 +74,19 @@ export default function TranslationAdmin() {
       const existing = translations[key]?.en;
       if (existing?.id) {
         await base44.entities.Translation.update(existing.id, { value });
+        updateLocalTranslation(key, "en", value, existing.id);
       } else {
-        await base44.entities.Translation.create({
+        const created = await base44.entities.Translation.create({
           key, language: "en", value,
           section: translations[key]?.section || "general",
           notes: translations[key]?.notes || ""
         });
+        updateLocalTranslation(key, "en", value, created.id);
       }
       showToast(`Saved EN for "${key}" — auto-translating...`);
       // Auto-translate to all other languages
       await autoTranslateKey(key, value);
+      // Reload only to sync auto-translated values
       await load();
     } finally {
       setSaving(s => ({ ...s, [`${key}_en`]: false }));
@@ -82,12 +96,24 @@ export default function TranslationAdmin() {
   const autoTranslateKey = async (key, englishText) => {
     setAutoTranslating(s => ({ ...s, [key]: true }));
     try {
-      await base44.functions.invoke("autoTranslate", {
+      const res = await base44.functions.invoke("autoTranslate", {
         key,
         englishText,
         targetLanguages: SUPPORTED_LANGS.map(l => l.code),
         section: translations[key]?.section || "general",
         notes: translations[key]?.notes || ""
+      });
+      // Update local state immediately with returned translations
+      const results = res?.data?.results || {};
+      setTranslations(prev => {
+        const updated = { ...prev };
+        for (const [lang, value] of Object.entries(results)) {
+          updated[key] = {
+            ...updated[key],
+            [lang]: { value, id: updated[key]?.[lang]?.id }
+          };
+        }
+        return updated;
       });
       showToast(`Auto-translated "${key}" to all languages`, "success");
     } catch (e) {
