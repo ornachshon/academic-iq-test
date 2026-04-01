@@ -54,6 +54,7 @@ const ALL_COLUMNS = [
   { id: "currency",     label: "Currency",      width: "w-24"  },
   { id: "price",        label: "Sale Price",    width: "w-28"  },
   { id: "original_price", label: "Orig. Price", width: "w-28"  },
+  { id: "price_usd",    label: "≈ USD",         width: "w-24"  },
   { id: "priority",     label: "Priority",      width: "w-20"  },
   { id: "status",       label: "Status",        width: "w-20"  },
   { id: "actions",      label: "Actions",       width: "w-24"  },
@@ -171,7 +172,7 @@ function RuleForm({ rule, onSave, onCancel }) {
   );
 }
 
-function CellContent({ colId, rule, onEdit, onDelete, onToggle }) {
+function CellContent({ colId, rule, onEdit, onDelete, onToggle, rates }) {
   switch (colId) {
     case "drag": return null; // handle in row
     case "region_name": return (
@@ -199,6 +200,14 @@ function CellContent({ colId, rule, onEdit, onDelete, onToggle }) {
     case "original_price": return rule.original_price
       ? <span className="text-sm text-gray-400 line-through">{rule.currency_symbol}{rule.original_price}</span>
       : <span className="text-xs text-gray-300">—</span>;
+    case "price_usd": {
+      if (!rates || !rule.price) return <span className="text-xs text-gray-300">—</span>;
+      if (rule.currency_code === "USD") return <span className="text-sm font-medium text-green-700">${Number(rule.price).toFixed(2)}</span>;
+      const rate = rates[rule.currency_code];
+      if (!rate) return <span className="text-xs text-gray-400 italic">N/A</span>;
+      const usd = (rule.price / rate).toFixed(2);
+      return <span className="text-sm font-medium text-green-700">${usd}</span>;
+    }
     case "priority": return rule.priority > 0
       ? <span className="text-xs bg-purple-100 text-purple-700 px-2 py-0.5 rounded-full font-medium">{rule.priority}</span>
       : <span className="text-xs text-gray-300">0</span>;
@@ -224,6 +233,8 @@ export default function PricingAdmin() {
   const [editingId, setEditingId] = useState(null);
   const [showNewForm, setShowNewForm] = useState(false);
   const [columns, setColumns] = useState(ALL_COLUMNS);
+  const [rates, setRates] = useState(null);
+  const [ratesUpdated, setRatesUpdated] = useState(null);
   const [testResult, setTestResult] = useState(null);
   const [testLoading, setTestLoading] = useState(false);
   const [testCountry, setTestCountry] = useState("");
@@ -236,7 +247,15 @@ export default function PricingAdmin() {
     setLoading(false);
   };
 
-  useEffect(() => { load(); }, []);
+  useEffect(() => {
+    load();
+    base44.functions.invoke("getExchangeRates", {}).then((res) => {
+      if (res.data?.rates) {
+        setRates(res.data.rates);
+        setRatesUpdated(res.data.updated);
+      }
+    }).catch(() => {});
+  }, []);
 
   const handleCreate = async (data) => { await base44.entities.PricingRule.create(data); setShowNewForm(false); load(); };
   const handleUpdate = async (id, data) => { await base44.entities.PricingRule.update(id, data); setEditingId(null); load(); };
@@ -316,6 +335,9 @@ export default function PricingAdmin() {
             <h2 className="text-sm font-semibold text-gray-500 uppercase tracking-wider flex items-center gap-2">
               <Tag size={14} /> Pricing Rules ({rules.length})
             </h2>
+            {ratesUpdated && (
+              <span className="text-xs text-gray-400">Rates updated: {new Date(ratesUpdated).toLocaleDateString()}</span>
+            )}
           </div>
 
           {loading ? (
@@ -399,6 +421,7 @@ export default function PricingAdmin() {
                                         onEdit={() => setEditingId(rule.id)}
                                         onDelete={() => handleDelete(rule.id)}
                                         onToggle={() => handleToggle(rule)}
+                                        rates={rates}
                                       />
                                     )}
                                   </td>
