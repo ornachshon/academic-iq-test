@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { base44 } from "@/api/base44Client";
-import { Languages, Save, RefreshCw, Zap, CheckCircle, AlertCircle, ChevronDown, ChevronUp, Search, ArrowUpDown } from "lucide-react";
+import { Languages, Save, RefreshCw, Zap, CheckCircle, AlertCircle, ChevronDown, ChevronUp, Search } from "lucide-react";
 
 const SUPPORTED_LANGS = [{ code: "ja", name: "Japanese", flag: "🇯🇵" }];
 const SECTIONS = ["all", "hero", "about", "email", "checkout", "iqtest", "nav", "general"];
@@ -14,7 +14,6 @@ export default function TranslationAdmin() {
   const [search, setSearch] = useState("");
   const [expandedKeys, setExpandedKeys] = useState(new Set());
   const [toast, setToast] = useState(null);
-  const [sortBy, setSortBy] = useState("key"); // key | section | missing
 
   const showToast = (msg, type = "success") => {
     setToast({ msg, type });
@@ -113,23 +112,13 @@ export default function TranslationAdmin() {
   };
 
   const filteredTranslations = Object.fromEntries(
-    Object.entries(translations)
-      .filter(([key, val]) => {
-        const sectionMatch = filter === "all" || val.section === filter;
-        const searchMatch = !search || key.toLowerCase().includes(search.toLowerCase()) ||
-          val.en?.value?.toLowerCase().includes(search.toLowerCase()) ||
-          val.ja?.value?.toLowerCase().includes(search.toLowerCase());
-        return sectionMatch && searchMatch;
-      })
-      .sort(([keyA, valA], [keyB, valB]) => {
-        if (sortBy === "section") return (valA.section || "").localeCompare(valB.section || "") || keyA.localeCompare(keyB);
-        if (sortBy === "missing") {
-          const aMissing = !valA.ja?.value ? 0 : 1;
-          const bMissing = !valB.ja?.value ? 0 : 1;
-          return aMissing - bMissing || keyA.localeCompare(keyB);
-        }
-        return keyA.localeCompare(keyB); // default: key
-      })
+    Object.entries(translations).filter(([key, val]) => {
+      const sectionMatch = filter === "all" || val.section === filter;
+      const searchMatch = !search || key.toLowerCase().includes(search.toLowerCase()) ||
+        val.en?.value?.toLowerCase().includes(search.toLowerCase()) ||
+        val.ja?.value?.toLowerCase().includes(search.toLowerCase());
+      return sectionMatch && searchMatch;
+    })
   );
 
   const totalKeys = Object.keys(translations).length;
@@ -184,16 +173,7 @@ export default function TranslationAdmin() {
               />
             </div>
           </div>
-          <div className="flex gap-2 items-center flex-wrap">
-            {/* Sort */}
-            <div className="flex items-center gap-1.5 border border-gray-300 rounded-lg px-3 py-2 bg-white text-sm text-gray-600">
-              <ArrowUpDown size={14} />
-              <select value={sortBy} onChange={e => setSortBy(e.target.value)} className="focus:outline-none bg-transparent cursor-pointer">
-                <option value="key">Sort: Key (A-Z)</option>
-                <option value="section">Sort: Section</option>
-                <option value="missing">Sort: Missing first</option>
-              </select>
-            </div>
+          <div className="flex gap-2">
             <button onClick={load} className="flex items-center gap-1.5 border border-gray-300 text-gray-600 px-4 py-2 rounded-lg text-sm hover:bg-gray-50 transition-colors">
               <RefreshCw size={14} /> Refresh
             </button>
