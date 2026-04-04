@@ -30,6 +30,7 @@ export default function Checkout() {
   const navigate = useNavigate();
   const location = useLocation();
   const score = location.state?.score;
+  const email = location.state?.email || "";
   const timeTaken = location.state?.timeTaken || 0;
   const { pricing, loading: priceLoading, formatPrice } = useGeoPrice();
   const formatTime = (secs) => {
@@ -145,7 +146,7 @@ export default function Checkout() {
 
           {/* CTA Button */}
           <button
-            onClick={() => { trackFunnel("payment_initiated"); navigate("/Payment", { state: { score } }); }}
+            onClick={() => { trackFunnel("payment_initiated"); navigate("/Info", { state: { score, email } }); }}
             className="bg-[#F5921B] text-white py-3 text-xl font-bold rounded-md w-full hover:bg-[#e0830f] transition-colors">
             Continue to Payment
           </button>
