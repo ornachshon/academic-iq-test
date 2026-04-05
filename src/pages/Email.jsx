@@ -1,20 +1,21 @@
 import React, { useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
 import { base44 } from "@/api/base44Client";
 import { trackFunnel } from "@/lib/trackFunnel";
+import { createPageUrl } from "@/utils";
 import questions, { calculateDetailedIQ } from "@/components/iq/QuestionData";
 import { useLanguage } from "@/lib/LanguageContext";
-import { useGeoPrice } from "@/hooks/useGeoPrice";
 
 export default function Email() {
   const { t } = useLanguage();
+  const navigate = useNavigate();
   const location = useLocation();
   const [email, setEmail] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const { pricing } = useGeoPrice();
 
   const isValidEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim());
+
 
   // State passed from IQTest via navigate
   const { answers = {}, startTime = Date.now() } = location.state || {};
@@ -49,23 +50,7 @@ export default function Email() {
     const language = localStorage.getItem("selectedLanguage") || "en";
     base44.functions.invoke("trackBrevoEvent", { eventName: "insert_email", email: email.trim(), properties: { iq_score: score, language, IQ_SCORE: score } }).catch(() => {});
 
-    trackFunnel("payment_initiated");
-    try {
-      const response = await base44.functions.invoke("createCheckout", {
-        price: String(pricing?.price || "9.99"),
-        currency: pricing?.currency_code || "USD",
-        score,
-        email: email.trim(),
-      });
-      const { redirectUrl } = response.data;
-      if (redirectUrl) {
-        window.location.href = redirectUrl;
-      }
-    } catch (err) {
-      console.error("Payment error:", err);
-      alert("Something went wrong initiating payment. Please try again.");
-      setIsSubmitting(false);
-    }
+    navigate("/Checkout", { state: { score, email: email.trim(), timeTaken } });
   };
 
   return (
