@@ -6,6 +6,7 @@ import { ChevronLeft, SkipForward, ArrowRight } from "lucide-react";
 
 import { base44 } from "@/api/base44Client";
 import { trackFunnel } from "@/lib/trackFunnel";
+import { useLanguage } from "@/lib/LanguageContext";
 import questions from "@/components/iq/QuestionData";
 import Timer from "@/components/iq/Timer";
 import QuestionCard from "@/components/iq/QuestionCard";
@@ -13,6 +14,7 @@ import QuestionNavigator from "@/components/iq/QuestionNavigator";
 
 
 export default function IQTest() {
+  const { t } = useLanguage();
   const navigate = useNavigate();
   const [currentQ, setCurrentQ] = useState(0);
   const [answers, setAnswers] = useState({});
@@ -85,22 +87,20 @@ export default function IQTest() {
           <div className="w-20 h-20 bg-[#0C3547] rounded-2xl flex items-center justify-center mx-auto mb-6">
             <span className="text-3xl font-black text-[#F5921B]">IQ</span>
           </div>
-          <h1 className="text-3xl font-bold text-[#0C3547] mb-4">Ready to Begin?</h1>
-          <p className="text-gray-500 mb-6 leading-relaxed">
-            You'll answer 30 questions in 20 minutes. The test measures pattern recognition, numerical reasoning, and spatial intelligence.
-          </p>
+          <h1 className="text-3xl font-bold text-[#0C3547] mb-4">{t("readyToBegin")}</h1>
+          <p className="text-gray-500 mb-6 leading-relaxed">{t("introDesc")}</p>
           <div className="grid grid-cols-3 gap-4 mb-8">
             <div className="bg-gray-50 rounded-xl p-4">
               <p className="text-2xl font-bold text-[#0C3547]">30</p>
-              <p className="text-xs text-gray-500">Questions</p>
+              <p className="text-xs text-gray-500">{t("questionsLabel")}</p>
             </div>
             <div className="bg-gray-50 rounded-xl p-4">
               <p className="text-2xl font-bold text-[#0C3547]">20</p>
-              <p className="text-xs text-gray-500">Minutes</p>
+              <p className="text-xs text-gray-500">{t("minutesLabel")}</p>
             </div>
             <div className="bg-gray-50 rounded-xl p-4">
               <p className="text-2xl font-bold text-[#0C3547]">3</p>
-              <p className="text-xs text-gray-500">Categories</p>
+              <p className="text-xs text-gray-500">{t("categoriesLabel")}</p>
             </div>
           </div>
           <motion.button
@@ -112,7 +112,7 @@ export default function IQTest() {
             }}
             className="w-full bg-[#F5921B] hover:bg-[#e0830f] text-white font-bold py-4 rounded-xl text-lg shadow-lg shadow-orange-500/25 transition-colors">
 
-            Start Test
+            {t("startTest")}
           </motion.button>
         </motion.div>
       </div>);
@@ -125,7 +125,7 @@ export default function IQTest() {
       <div className="bg-[#0C3547] px-4 py-4 shadow-lg">
         <div className="max-w-6xl mx-auto flex items-center justify-between">
           <h2 className="text-white font-bold text-lg">
-            Question {currentQ + 1}
+            {t("questionLabel")} {currentQ + 1}
             <span className="text-gray-400 font-normal">/{questions.length}</span>
           </h2>
           <Timer totalSeconds={1200} onTimeUp={handleTimeUp} />
@@ -159,7 +159,7 @@ export default function IQTest() {
             className="gap-2">
 
             <ChevronLeft className="w-4 h-4" />
-            Back
+            {t("back")}
           </Button>
 
           <div className="flex gap-3">
@@ -170,7 +170,7 @@ export default function IQTest() {
               className="gap-2 border-[#F5921B] text-[#F5921B] hover:bg-[#F5921B]/10">
 
               <SkipForward className="w-4 h-4" />
-              Skip
+              {t("skip")}
             </Button>
 
             {currentQ === questions.length - 1 || answeredCount === questions.length ?
@@ -178,7 +178,7 @@ export default function IQTest() {
               onClick={handleFinishClick} className="bg-[#F5921B] text-[#000000] px-6 py-2 text-sm font-medium rounded-md inline-flex items-center justify-center whitespace-nowrap transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 shadow h-9 gap-2 hover:bg-[#e0830f]">
 
 
-                Finish Test
+                {t("finishTest")}
                 <ArrowRight className="w-4 h-4" />
               </Button> :
 
@@ -187,7 +187,7 @@ export default function IQTest() {
               disabled={answers[currentQ] === undefined}
               className="gap-2 bg-[#0C3547] hover:bg-[#0e3d52] text-white px-6">
 
-                Next
+                {t("next")}
                 <ArrowRight className="w-4 h-4" />
               </Button>
             }
@@ -203,7 +203,7 @@ export default function IQTest() {
 
         
         <p className="text-center text-sm text-gray-400 mt-4">
-          {answeredCount} of {questions.length} questions answered
+          {t("questionsAnswered", answeredCount, questions.length)}
         </p>
       </div>
 

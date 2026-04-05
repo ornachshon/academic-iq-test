@@ -16,22 +16,19 @@ const translations = {
     compareWorldwide: "See how you compare to people worldwide",
     detailedReport: "Detailed cognitive performance report",
 
-    // IQ Test
-    iqTestTitle: "IQ Test",
-    questionsCount: "30 Questions",
-    timeLimit: "20 Minutes",
+    // IQ Test Page
+    readyToBegin: "Ready to Begin?",
+    introDesc: "You'll answer 30 questions in 20 minutes. The test measures pattern recognition, numerical reasoning, and spatial intelligence.",
+    questionsLabel: "Questions",
+    minutesLabel: "Minutes",
+    categoriesLabel: "Categories",
     startTest: "Start Test",
-    next: "Next",
+    questionLabel: "Question",
+    back: "Back",
     skip: "Skip",
-    finish: "Finish",
-    question: "Question",
-    of: "of",
-    timeRemaining: "Time Remaining",
-    testIntroTitle: "Academic IQ Test",
-    testIntroSubtitle: "Measure your intelligence with our scientifically designed test",
-    testIntroDesc: "This test contains 30 questions covering pattern recognition, spatial reasoning, and numerical reasoning.",
-    testIntroTime: "You have 20 minutes to complete the test.",
-    testIntroReady: "Are you ready?",
+    next: "Next",
+    finishTest: "Finish Test",
+    questionsAnswered: (answered, total) => `${answered} of ${total} questions answered`,
 
     // Email modal
     almostThere: "Almost there!",
@@ -52,6 +49,7 @@ const translations = {
     orderDetails: "Order Details",
     iqEvaluationScore: "IQ Evaluation Score",
     yourOverallScore: "Your overall World Wide IQ score",
+    yourIQScore: "Your IQ Score",
     printableCertificate: "Printable Academic IQ Certificate",
     yourCertificate: "Your very own Academic IQ Certificate",
     highQualityPDF: "(High Quality Downloadable PDF)",
@@ -62,7 +60,6 @@ const translations = {
     customerReviews: "Customer Reviews & Feedback",
     afterResults: "After you get your results you are welcome to also share a review",
     averageRating: "Average Rating: Very good",
-    yourIQScore: "Your IQ Score",
 
     // Info page
     oneMoreStep: "One more step before your results!",
@@ -106,7 +103,6 @@ const translations = {
     emailModalTitle1: "Where to send your IQ score",
     emailModalTitle2: "and performance report?",
     emailModalSubtitle: "Please enter your email:",
-    getMyResults: "Get my IQ Results",
     processing: "Processing...",
     privacyNote: "We value your privacy. Your email will never be shared with anyone.",
 
@@ -132,22 +128,19 @@ const translations = {
     compareWorldwide: "世界中の人々と比較",
     detailedReport: "詳細な認知パフォーマンスレポート",
 
-    // IQ Test
-    iqTestTitle: "IQテスト",
-    questionsCount: "30問",
-    timeLimit: "20分",
-    startTest: "テスト開始",
-    next: "次へ",
+    // IQ Test Page
+    readyToBegin: "始める準備はできましたか？",
+    introDesc: "20分間で30問に答えていただきます。テストはパターン認識、数値推論、空間知性を測定します。",
+    questionsLabel: "問題数",
+    minutesLabel: "分",
+    categoriesLabel: "カテゴリ",
+    startTest: "テストを開始する",
+    questionLabel: "問題",
+    back: "戻る",
     skip: "スキップ",
-    finish: "終了",
-    question: "問題",
-    of: "/",
-    timeRemaining: "残り時間",
-    testIntroTitle: "学術IQテスト",
-    testIntroSubtitle: "科学的に設計されたテストで知性を測定する",
-    testIntroDesc: "このテストには、パターン認識、空間推論、数値推論をカバーする30問が含まれています。",
-    testIntroTime: "テストを完了するための時間は20分です。",
-    testIntroReady: "準備はできましたか？",
+    next: "次へ",
+    finishTest: "テストを終了する",
+    questionsAnswered: (answered, total) => `${total}問中${answered}問回答済み`,
 
     // Email modal
     almostThere: "もう少し！",
@@ -168,6 +161,7 @@ const translations = {
     orderDetails: "注文詳細",
     iqEvaluationScore: "IQ評価スコア",
     yourOverallScore: "あなたの世界全体のIQスコア",
+    yourIQScore: "あなたのIQスコア",
     printableCertificate: "印刷可能な学術IQ証明書",
     yourCertificate: "あなただけの学術IQ証明書",
     highQualityPDF: "（高品質ダウンロード可能PDF）",
@@ -178,7 +172,6 @@ const translations = {
     customerReviews: "お客様のレビューとフィードバック",
     afterResults: "結果を受け取った後、レビューを共有することができます",
     averageRating: "平均評価：非常に良い",
-    yourIQScore: "あなたのIQスコア",
 
     // Info page
     oneMoreStep: "結果を表示する前にもう一ステップ！",
@@ -222,7 +215,6 @@ const translations = {
     emailModalTitle1: "IQスコアと",
     emailModalTitle2: "パフォーマンスレポートの送り先は？",
     emailModalSubtitle: "メールアドレスを入力してください：",
-    getMyResults: "IQ結果を取得する",
     processing: "処理中...",
     privacyNote: "プライバシーを大切にしています。メールアドレスが第三者に共有されることはありません。",
 
@@ -249,7 +241,10 @@ export function LanguageProvider({ children }) {
     return () => window.removeEventListener("languageChanged", handleStorage);
   }, []);
 
-  const t = (key) => translations[lang]?.[key] ?? translations["en"][key] ?? key;
+  const t = (key, ...args) => {
+    const val = translations[lang]?.[key] ?? translations["en"][key] ?? key;
+    return typeof val === "function" ? val(...args) : val;
+  };
 
   return (
     <LanguageContext.Provider value={{ lang, setLang, t }}>
