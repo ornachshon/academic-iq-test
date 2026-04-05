@@ -41,14 +41,6 @@ export default function Checkout() {
   const handlePayment = async () => {
     setLoadingPayment(true);
     trackFunnel("payment_initiated");
-
-    // Open popup immediately on click to avoid browser popup blocker
-    const width = 950;
-    const height = 750;
-    const left = (window.screen.width - width) / 2;
-    const top = (window.screen.height - height) / 2;
-    const popup = window.open("about:blank", "wix_checkout", `width=${width},height=${height},left=${left},top=${top},resizable=yes,scrollbars=yes`);
-
     try {
       const response = await base44.functions.invoke("createCheckout", {
         price: String(pricing.price || "9.99"),
@@ -57,16 +49,12 @@ export default function Checkout() {
         email,
       });
       const { redirectUrl } = response.data;
-      if (redirectUrl && popup) {
-        popup.location.href = redirectUrl;
-      } else {
-        popup?.close();
+      if (redirectUrl) {
+        window.location.href = redirectUrl;
       }
     } catch (err) {
       console.error("Payment error:", err);
-      popup?.close();
       alert("Something went wrong initiating payment. Please try again.");
-    } finally {
       setLoadingPayment(false);
     }
   };
