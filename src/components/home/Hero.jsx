@@ -4,8 +4,10 @@ import { createPageUrl } from "@/utils";
 import { getCountryByCode, defaultCountry } from "./countryData";
 import { base44 } from "@/api/base44Client";
 import { trackFunnel } from "@/lib/trackFunnel";
+import { useLanguage } from "@/lib/LanguageContext";
 
 export default function Hero() {
+  const { t } = useLanguage();
   const [country, setCountry] = useState(defaultCountry);
 
   useEffect(() => {
@@ -31,30 +33,30 @@ export default function Hero() {
             <div className="flex items-center gap-2 mb-4">
               <span className="text-base">{country.flag}</span>
               <span className="text-sm text-gray-600 italic">
-                Over 8 million people have taken this test
+                {t("overMillionPeople")}
               </span>
             </div>
 
             <h1 className="text-4xl md:text-5xl font-extrabold text-[#0C3547] leading-tight mb-3">
-              The average IQ in<br />{country.name} is {country.iq}
+              {t("averageIQ")}<br />{country.name} {t("averageIQSuffix")} {country.iq}
             </h1>
 
             <h2 className="text-xl md:text-2xl font-bold text-[#0C3547] mb-7">
-              Take this IQ test and check<br />what is your IQ
+              {t("takeTest")}<br />{t("whatIsYourIQ")}
             </h2>
 
             <Link to={createPageUrl("IQTest")} onClick={() => trackFunnel("start_iq_test_clicked")}>
               <button className="bg-[#F5921B] text-white mb-8 px-10 py-4 text-xl font-bold rounded-md hover:bg-[#e07a0c] transition-colors shadow-sm">
-                Start IQ Test
+                {t("startIQTest")}
               </button>
             </Link>
 
             <ul className="space-y-2 text-gray-700 text-sm">
               {[
-              "Answer 30 questions",
-              "Get your IQ score instantly for free",
-              "See how you compare to people worldwide",
-              "Detailed cognitive performance report"].
+              t("answer30Questions"),
+              t("getFreeScore"),
+              t("compareWorldwide"),
+              t("detailedReport")].
               map((item) =>
               <li key={item} className="flex items-start gap-2">
                   <span className="text-gray-500 mt-0.5">-</span>

@@ -1,9 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { useSiteSettings } from "@/components/admin/SiteSettings";
+import { useLanguage } from "@/lib/LanguageContext";
 
 export default function Footer() {
   const { settings } = useSiteSettings();
+  const { t } = useLanguage();
 
   return (
     <footer className="bg-[#0C3547] text-white" style={{ paddingTop: `${settings.footerPaddingY}px`, paddingBottom: `${settings.footerPaddingY}px` }}>
@@ -21,13 +23,13 @@ export default function Footer() {
 
           {/* Links */}
           <div className="flex items-center gap-6 text-sm text-gray-300">
-            <Link to="/Privacy_Policy" className="hover:text-white transition-colors">Privacy Policy</Link>
-            <Link to="/Terms_Conditions" className="hover:text-white transition-colors">Terms & Conditions</Link>
-            <Link to="/Support" className="hover:text-white transition-colors">Contact Support</Link>
+            <Link to="/Privacy_Policy" className="hover:text-white transition-colors">{t("privacyPolicyLink")}</Link>
+            <Link to="/Terms_Conditions" className="hover:text-white transition-colors">{t("termsLink")}</Link>
+            <Link to="/Support" className="hover:text-white transition-colors">{t("contactUs")}</Link>
           </div>
 
           <p className="text-xs text-gray-400">
-            © {new Date().getFullYear()} Academic IQ Test. All rights reserved.
+            © {new Date().getFullYear()} Academic IQ Test. {t("allRightsReserved")}.
           </p>
         </div>
       </div>

@@ -39,7 +39,7 @@ export default function LanguageSelector() {
           {languages.map((lang) => (
             <button
               key={lang.code}
-              onClick={() => { setSelected(lang); localStorage.setItem("selectedLanguage", lang.code); setOpen(false); }}
+              onClick={() => { setSelected(lang); localStorage.setItem("selectedLanguage", lang.code); window.dispatchEvent(new Event("languageChanged")); setOpen(false); }}
               className={`w-full flex items-center gap-2 px-3 py-2.5 text-sm text-left hover:bg-gray-50 transition-colors ${selected.code === lang.code ? "bg-gray-50 font-medium" : "text-gray-700"}`}
             >
               <span className="text-base leading-none">{lang.flag}</span>

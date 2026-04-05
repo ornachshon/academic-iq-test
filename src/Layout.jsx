@@ -5,10 +5,12 @@ import { base44 } from "@/api/base44Client";
 import { trackFunnel } from "@/lib/trackFunnel";
 import SiteSettingsPanel, { useSiteSettings } from "@/components/admin/SiteSettings";
 import LanguageSelector from "@/components/header/LanguageSelector";
+import { useLanguage } from "@/lib/LanguageContext";
 
 export default function Layout({ children, currentPageName }) {
   const [showSettings, setShowSettings] = useState(false);
   const { settings } = useSiteSettings();
+  const { t } = useLanguage();
 
   return (
     <div className="min-h-screen bg-white" style={{ fontFamily: "'Segoe UI', Arial, sans-serif" }}>
@@ -45,7 +47,7 @@ export default function Layout({ children, currentPageName }) {
               {currentPageName !== "IQTest" &&
               <Link to={createPageUrl("IQTest")} onClick={() => trackFunnel("start_iq_test_clicked")}>
                   <button className="bg-[#F5921B] text-white px-6 py-3 text-lg font-bold text-left normal-case rounded-md hover:bg-[#e0830f] transition-colors">
-                    Start IQ Test
+                    {t("startIQTest")}
                   </button>
                 </Link>
               }
