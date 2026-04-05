@@ -10,7 +10,6 @@ import Home from './pages/Home';
 import IQTest from './pages/IQTest';
 import Results from './pages/Results';
 import Email from './pages/Email';
-import Checkout from './pages/Checkout';
 import Payment from './pages/Payment';
 import Certificate from './pages/Certificate';
 import Info from './pages/Info';
@@ -34,7 +33,6 @@ function App() {
           <Route path="/Home" element={<LayoutWrapper currentPageName="Home"><Home /></LayoutWrapper>} />
           <Route path="/IQTest" element={<LayoutWrapper currentPageName="IQTest"><IQTest /></LayoutWrapper>} />
           <Route path="/Email" element={<Email />} />
-          <Route path="/Checkout" element={<Checkout />} />
           <Route path="/Payment" element={<Payment />} />
           <Route path="/Info" element={<Info />} />
           <Route path="/Thankyou" element={<Thankyou />} />
