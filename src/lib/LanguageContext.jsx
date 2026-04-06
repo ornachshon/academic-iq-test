@@ -229,8 +229,16 @@ const translations = {
 
 const LanguageContext = createContext();
 
+function detectDefaultLanguage() {
+  const saved = localStorage.getItem("selectedLanguage");
+  if (saved) return saved;
+  const browserLang = navigator.language || navigator.userLanguage || "";
+  if (browserLang.toLowerCase().startsWith("ja")) return "ja";
+  return "en";
+}
+
 export function LanguageProvider({ children }) {
-  const [lang, setLang] = useState(() => localStorage.getItem("selectedLanguage") || "en");
+  const [lang, setLang] = useState(() => detectDefaultLanguage());
 
   useEffect(() => {
     const handleStorage = () => {
