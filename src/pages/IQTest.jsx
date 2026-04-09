@@ -21,6 +21,11 @@ export default function IQTest() {
   const [startTime] = useState(Date.now());
   const [showIntro, setShowIntro] = useState(false);
 
+  // Fire GTM event when test page loads
+  useEffect(() => {
+    trackFunnel("iq_test_started");
+  }, []);
+
   const handleSelect = (optionIdx) => {
     setAnswers((prev) => ({ ...prev, [currentQ]: optionIdx }));
     setTimeout(() => {

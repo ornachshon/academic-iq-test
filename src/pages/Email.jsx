@@ -42,6 +42,8 @@ export default function Email() {
 
     try {
       base44.analytics.track({ eventName: "assessment_completed", properties: { score, correct_answers: correct } });
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({ event: "assessment_completed", score, correct_answers: correct });
     } catch (_) {}
 
     trackFunnel("email_inserted");
