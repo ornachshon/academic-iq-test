@@ -198,7 +198,7 @@ const questions = [
     category: "Spatial Reasoning",
     category_question: "Visuospatial Insight",
     question: "How many squares are in the picture?",
-    image: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69b1aedc5a0abb358cd40ec0/2e344e9e8_image.png",
+    image: "https://media.base44.com/images/public/69b1aedc5a0abb358cd40ec0/326fcc911_image.png",
     options: ["4", "9", "7", "8", "6", "5"],
     correct: 2,
     explanation: "Count all squares of all sizes: 5 individual cells + 1 large (2×2 top-right area) + 1 outer = 7. Answer: C (7)."
