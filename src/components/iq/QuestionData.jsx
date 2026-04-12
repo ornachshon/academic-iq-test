@@ -24,7 +24,7 @@ const questions = [
     category: "Spatial Reasoning",
     category_question: "Visuospatial Insight",
     question: "How many triangles are in the picture?",
-    image: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69b1aedc5a0abb358cd40ec0/ef3611d3d_image.png",
+    image: "https://media.base44.com/images/public/69b1aedc5a0abb358cd40ec0/dc7b21276_image.png",
     options: ["3", "8", "7", "6", "5", "4"],
     correct: 3,
     explanation: "A large triangle with 2 internal lines from the apex creates 3 small triangles at the base, 2 medium triangles, and 1 large outer triangle = 6 total. Answer: D (6)."
