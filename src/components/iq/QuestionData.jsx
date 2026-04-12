@@ -158,7 +158,7 @@ const questions = [
     category: "Spatial Reasoning",
     category_question: "Visuospatial Insight",
     question: "How many squares are in the picture?",
-    image: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69b1aedc5a0abb358cd40ec0/917abef75_image.png",
+    image: "https://media.base44.com/images/public/69b1aedc5a0abb358cd40ec0/c0df17ac6_image.png",
     options: ["9", "10", "11", "12", "13", "14"],
     correct: 5,
     explanation: "Count all squares: 9 small (1×1) + 4 medium (2×2) + 1 large (3×3) = 14. Answer: F (14)."
