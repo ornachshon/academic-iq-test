@@ -347,7 +347,7 @@ const questions = [
     category: "Numerical Reasoning",
     category_question: "Numerical Pattern Reasoning",
     question: "Which number is missing?",
-    image: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69b1aedc5a0abb358cd40ec0/266fa1924_image.png",
+    image: "https://media.base44.com/images/public/69b1aedc5a0abb358cd40ec0/f191bead7_image.png",
     options_image: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69b1aedc5a0abb358cd40ec0/809001f23_image.png",
     options: ["A", "B", "C", "D", "E", "F"],
     correct: 2,
