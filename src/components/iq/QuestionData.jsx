@@ -64,7 +64,7 @@ const questions = [
     category: "Spatial Reasoning",
     category_question: "Visuospatial Insight",
     question: "What box was created from the image?",
-    image: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69b1aedc5a0abb358cd40ec0/6e78a099b_image.png",
+    image: "https://media.base44.com/images/public/69b1aedc5a0abb358cd40ec0/dfa14cf91_image.png",
     options: [
       { text: "A", svg: "cube_right_filled" },
       { text: "B", svg: "cube_bottom_filled" },
