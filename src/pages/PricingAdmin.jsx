@@ -1,4 +1,7 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+
+const IS_ADMIN_PANEL = window.self !== window.top || window.location.hostname === 'localhost';
 import { base44 } from "@/api/base44Client";
 import { DragDropContext, Droppable, Draggable } from "@hello-pangea/dnd";
 import { Plus, Pencil, Trash2, Save, X, Globe, Tag, ToggleLeft, ToggleRight, ChevronDown, GripVertical, GripHorizontal } from "lucide-react";
@@ -228,6 +231,17 @@ function CellContent({ colId, rule, onEdit, onDelete, onToggle, rates }) {
 }
 
 export default function PricingAdmin() {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    // Only accessible from the admin panel (embedded in iframe)
+    // Redirect to Home if accessed directly as a website URL
+    const isEmbedded = window.self !== window.top;
+    if (!isEmbedded) {
+      navigate('/Home', { replace: true });
+    }
+  }, []);
+
   const [rules, setRules] = useState([]);
   const [loading, setLoading] = useState(true);
   const [editingId, setEditingId] = useState(null);
