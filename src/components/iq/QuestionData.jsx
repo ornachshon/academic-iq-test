@@ -100,7 +100,7 @@ const questions = [
     category: "Spatial Reasoning",
     category_question: "Visuospatial Insight",
     question: "How many triangles are in the picture?",
-    image: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69b1aedc5a0abb358cd40ec0/270e31938_image.png",
+    image: "https://media.base44.com/images/public/69b1aedc5a0abb358cd40ec0/02b990636_image.png",
     options: ["3", "9", "7", "6", "5", "4"],
     correct: 4,
     explanation: "There are 4 small upward triangles, 1 small downward triangle, and the large outer triangle = 5 total (but also counting medium compositions). Answer: E (5)."
