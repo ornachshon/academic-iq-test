@@ -82,7 +82,7 @@ const questions = [
     category: "Spatial Reasoning",
     category_question: "Visuospatial Insight",
     question: "Which Shape is missing?",
-    image: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69b1aedc5a0abb358cd40ec0/f9b82aec0_image.png",
+    image: "https://media.base44.com/images/public/69b1aedc5a0abb358cd40ec0/0350b226e_image.png",
     options: [
       { text: "A", svg: "q6_optA" },
       { text: "B", svg: "q6_optB" },
