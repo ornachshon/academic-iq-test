@@ -169,7 +169,7 @@ const questions = [
     category: "Numerical Reasoning",
     category_question: "Numerical Pattern Reasoning",
     question: "Which number is missing?",
-    image: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69b1aedc5a0abb358cd40ec0/a4e1b34c5_image.png",
+    image: "https://media.base44.com/images/public/69b1aedc5a0abb358cd40ec0/0676c6571_image.png",
     options: ["38", "43", "40", "42", "41", "39"],
     correct: 2,
     explanation: "Reading all numbers left-to-right top-to-bottom: 4,5,7,10,14,19,25,32,? The differences are 1,2,3,4,5,6,7,8 — so ?=32+8=40. Answer: C (40)."
