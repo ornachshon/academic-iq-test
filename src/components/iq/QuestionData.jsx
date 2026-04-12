@@ -335,7 +335,7 @@ const questions = [
     category: "Spatial Reasoning",
     category_question: "Visuospatial Insight",
     question: "What box was created from the image?",
-    image: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69b1aedc5a0abb358cd40ec0/0b713acdd_image.png",
+    image: "https://media.base44.com/images/public/69b1aedc5a0abb358cd40ec0/28592b8f9_image.png",
     options_image: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69b1aedc5a0abb358cd40ec0/300450d61_image.png",
     options: ["A", "B", "C", "D", "E", "F"],
     correct: 0,
