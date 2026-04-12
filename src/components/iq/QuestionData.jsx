@@ -53,7 +53,7 @@ const questions = [
     category: "Numerical Reasoning",
     category_question: "Numerical Pattern Reasoning",
     question: "Which number is missing?",
-    image: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69b1aedc5a0abb358cd40ec0/23df53e6f_image.png",
+    image: "https://media.base44.com/images/public/69b1aedc5a0abb358cd40ec0/353098a0f_image.png",
     options: ["30", "55", "25", "15", "50", "20"],
     correct: 0,
     explanation: "Pattern: col1 × 2 = col2, col2 × 3 = col3. Row 3: 5×2=10, 10×3=30. Answer: A (30)."
