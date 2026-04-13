@@ -35,13 +35,15 @@ Deno.serve(async (req) => {
     // If iq_score is present, save it as a contact attribute in Brevo
     if (email && properties?.iq_score !== undefined) {
       const contactPayload = {
+        email,
         attributes: {
           IQ_SCORE: properties.iq_score,
         },
+        updateEnabled: true,
       };
 
-      const contactResponse = await fetch(`https://api.brevo.com/v3/contacts/${encodeURIComponent(email)}`, {
-        method: "PUT",
+      const contactResponse = await fetch(`https://api.brevo.com/v3/contacts`, {
+        method: "POST",
         headers: {
           "Content-Type": "application/json",
           "api-key": BREVO_API_KEY,
