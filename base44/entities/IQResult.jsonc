@@ -1,0 +1,53 @@
+{
+  "name": "IQResult",
+  "type": "object",
+  "allow_public_create": true,
+  "properties": {
+    "user_id": {
+      "type": "string",
+      "description": "Unique identifier for this test submission"
+    },
+    "score": {
+      "type": "number",
+      "description": "The calculated IQ score"
+    },
+    "correct_answers": {
+      "type": "number",
+      "description": "Number of correct answers out of 30"
+    },
+    "total_questions": {
+      "type": "number",
+      "description": "Total number of questions (30)"
+    },
+    "time_taken_seconds": {
+      "type": "number",
+      "description": "Time taken to complete the test in seconds"
+    },
+    "email": {
+      "type": "string",
+      "description": "User's email address collected after test"
+    },
+    "answers": {
+      "type": "array",
+      "description": "Array of user answers",
+      "items": {
+        "type": "object",
+        "properties": {
+          "question_id": {
+            "type": "number"
+          },
+          "selected_answer": {
+            "type": "number"
+          },
+          "correct": {
+            "type": "boolean"
+          }
+        }
+      }
+    }
+  },
+  "required": [
+    "score",
+    "correct_answers"
+  ]
+}

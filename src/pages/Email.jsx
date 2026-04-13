@@ -16,7 +16,6 @@ export default function Email() {
 
   const isValidEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim());
 
-
   // State passed from IQTest via navigate
   const { answers = {}, startTime = Date.now() } = location.state || {};
 
@@ -48,11 +47,15 @@ export default function Email() {
 
     trackFunnel("email_inserted");
 
+    // Generate a readable unique user_id for this submission
+    const user_id = `USR-${Date.now().toString(36).toUpperCase()}-${Math.random().toString(36).substring(2, 6).toUpperCase()}`;
+
     // Save IQ result to get a unique ID for this user
     const language = localStorage.getItem("selectedLanguage") || "en";
     let resultId = null;
     try {
       const savedResult = await base44.entities.IQResult.create({
+        user_id,
         score,
         correct_answers: correct,
         total_questions: questions.length,
@@ -61,7 +64,7 @@ export default function Email() {
         answers: answerDetails,
       });
       resultId = savedResult.id;
-      console.log("IQResult created:", resultId);
+      console.log("IQResult created:", resultId, "user_id:", user_id);
     } catch (err) {
       console.error("IQResult create failed:", err);
     }
@@ -116,7 +119,6 @@ export default function Email() {
               placeholder="" />
           </div>
 
-
           <button
             type={isValidEmail ? "submit" : "button"}
             disabled={isSubmitting}
@@ -132,5 +134,4 @@ export default function Email() {
         </p>
       </motion.div>
     </div>);
-
 }
