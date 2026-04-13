@@ -38,6 +38,8 @@ Deno.serve(async (req) => {
         email,
         attributes: {
           IQ_SCORE: properties.iq_score,
+          ...(properties.result_url ? { RESULT_URL: properties.result_url } : {}),
+          ...(properties.language ? { LANGUAGE: properties.language } : {}),
         },
         updateEnabled: true,
       };
