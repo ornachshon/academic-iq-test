@@ -48,11 +48,31 @@ export default function Email() {
 
     trackFunnel("email_inserted");
 
-    // Brevo: track email insert event (fire-and-forget)
+    // Save IQ result to get a unique ID for this user
     const language = localStorage.getItem("selectedLanguage") || "en";
-    base44.functions.invoke("trackBrevoEvent", { eventName: "insert_email", email: email.trim(), properties: { iq_score: score, language, IQ_SCORE: score } }).catch(() => {});
+    let resultId = null;
+    try {
+      const savedResult = await base44.entities.IQResult.create({
+        score,
+        correct_answers: correct,
+        total_questions: questions.length,
+        time_taken_seconds: timeTaken,
+        email: email.trim(),
+        answers: answerDetails,
+      });
+      resultId = savedResult.id;
+    } catch (_) {}
 
-    navigate("/Checkout", { state: { score, email: email.trim(), timeTaken } });
+    // Brevo: track email insert event with unique result URL
+    const baseUrl = window.location.origin;
+    const resultUrl = resultId ? `${baseUrl}/Results?id=${resultId}` : null;
+    base44.functions.invoke("trackBrevoEvent", {
+      eventName: "insert_email",
+      email: email.trim(),
+      properties: { iq_score: score, language, IQ_SCORE: score, ...(resultUrl ? { result_url: resultUrl } : {}) }
+    }).catch(() => {});
+
+    navigate("/Checkout", { state: { score, email: email.trim(), timeTaken, resultId } });
   };
 
   return (
