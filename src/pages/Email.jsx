@@ -61,16 +61,24 @@ export default function Email() {
         answers: answerDetails,
       });
       resultId = savedResult.id;
-    } catch (_) {}
+      console.log("IQResult created:", resultId);
+    } catch (err) {
+      console.error("IQResult create failed:", err);
+    }
 
-    // Brevo: track email insert event with unique result URL
+    // Brevo: track email insert event with unique result URL (awaited so it completes before navigation)
     const baseUrl = window.location.origin;
     const resultUrl = resultId ? `${baseUrl}/Results?id=${resultId}` : null;
-    base44.functions.invoke("trackBrevoEvent", {
-      eventName: "insert_email",
-      email: email.trim(),
-      properties: { iq_score: score, language, IQ_SCORE: score, ...(resultUrl ? { result_url: resultUrl } : {}) }
-    }).catch(() => {});
+    try {
+      await base44.functions.invoke("trackBrevoEvent", {
+        eventName: "insert_email",
+        email: email.trim(),
+        properties: { iq_score: score, language, IQ_SCORE: score, ...(resultUrl ? { result_url: resultUrl } : {}) }
+      });
+      console.log("Brevo insert_email sent, resultUrl:", resultUrl);
+    } catch (err) {
+      console.error("Brevo trackBrevoEvent failed:", err);
+    }
 
     navigate("/Checkout", { state: { score, email: email.trim(), timeTaken, resultId } });
   };
