@@ -7,6 +7,10 @@
       "type": "string",
       "description": "Unique identifier for this test submission"
     },
+    "timestamp": {
+      "type": "string",
+      "description": "Date and time when the test was completed"
+    },
     "score": {
       "type": "number",
       "description": "The calculated IQ score"

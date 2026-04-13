@@ -56,6 +56,7 @@ export default function Email() {
     try {
       const savedResult = await base44.entities.IQResult.create({
         user_id,
+        timestamp: new Date().toISOString(),
         score,
         correct_answers: correct,
         total_questions: questions.length,
