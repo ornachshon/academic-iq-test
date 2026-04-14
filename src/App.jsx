@@ -1,3 +1,4 @@
+import React from "react";
 import { Toaster } from "@/components/ui/toaster"
 import { QueryClientProvider } from '@tanstack/react-query'
 import { LanguageProvider } from '@/lib/LanguageContext'
@@ -24,11 +25,25 @@ const LayoutWrapper = ({ children, currentPageName }) => (
   <Layout currentPageName={currentPageName}>{children}</Layout>
 );
 
+const UTM_KEYS = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content', 'gclid'];
+
+function CaptureUTM() {
+  React.useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    UTM_KEYS.forEach(key => {
+      const val = params.get(key);
+      if (val) localStorage.setItem(key, val);
+    });
+  }, []);
+  return null;
+}
+
 function App() {
   return (
     <QueryClientProvider client={queryClientInstance}>
       <LanguageProvider>
       <Router>
+        <CaptureUTM />
         <Routes>
           <Route path="/" element={<Navigate to="/Home" replace />} />
           <Route path="/Home" element={<LayoutWrapper currentPageName="Home"><Home /></LayoutWrapper>} />
