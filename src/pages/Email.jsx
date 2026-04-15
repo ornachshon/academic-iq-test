@@ -77,6 +77,7 @@ export default function Email() {
       const val = localStorage.getItem(key);
       if (val) utmAttributes[key.toUpperCase()] = val;
     });
+    console.log("UTM attributes from localStorage:", utmAttributes);
 
     // Brevo: track email insert event with unique result URL (awaited so it completes before navigation)
     const baseUrl = window.location.origin;

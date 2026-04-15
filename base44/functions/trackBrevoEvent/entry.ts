@@ -39,31 +39,33 @@ Deno.serve(async (req) => {
       if (properties?.[key]) utmAttrs[key] = properties[key];
     });
 
-    if (email && properties?.iq_score !== undefined) {
-      const contactPayload = {
-        email,
-        attributes: {
-          IQ_SCORE: properties.iq_score,
-          ...(properties.result_url ? { RESULT_URL: properties.result_url } : {}),
-          ...(properties.language ? { LANGUAGE: properties.language } : {}),
-          ...utmAttrs,
-        },
-        updateEnabled: true,
+    if (email) {
+      const attributes = {
+        ...(properties?.iq_score !== undefined ? { IQ_SCORE: properties.iq_score } : {}),
+        ...(properties?.result_url ? { RESULT_URL: properties.result_url } : {}),
+        ...(properties?.language ? { LANGUAGE: properties.language } : {}),
+        ...utmAttrs,
       };
 
-      const contactResponse = await fetch(`https://api.brevo.com/v3/contacts`, {
+      // First try to create the contact (handles new contacts)
+      const createResponse = await fetch(`https://api.brevo.com/v3/contacts`, {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "api-key": BREVO_API_KEY,
-        },
-        body: JSON.stringify(contactPayload),
+        headers: { "Content-Type": "application/json", "api-key": BREVO_API_KEY },
+        body: JSON.stringify({ email, attributes, updateEnabled: true }),
       });
 
-      if (!contactResponse.ok) {
-        const err = await contactResponse.text();
-        console.error("Brevo contact update error:", err);
-        // Don't fail the whole request, just log the error
+      const createText = await createResponse.text();
+      console.log("Brevo create/update contact response:", createResponse.status, createText);
+
+      // If contact already exists (409), update via PUT
+      if (createResponse.status === 409) {
+        const updateResponse = await fetch(`https://api.brevo.com/v3/contacts/${encodeURIComponent(email)}`, {
+          method: "PUT",
+          headers: { "Content-Type": "application/json", "api-key": BREVO_API_KEY },
+          body: JSON.stringify({ attributes }),
+        });
+        const updateText = await updateResponse.text();
+        console.log("Brevo PUT contact response:", updateResponse.status, updateText);
       }
     }
 
