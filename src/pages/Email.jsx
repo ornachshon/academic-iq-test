@@ -67,7 +67,7 @@ export default function Email() {
       resultId = savedResult.id;
       console.log("IQResult created:", resultId, "user_id:", user_id);
     } catch (err) {
-      console.error("IQResult create failed:", err);
+      console.error("IQResult create failed — status:", err?.response?.status, "message:", err?.message, "data:", JSON.stringify(err?.response?.data));
     }
 
     // Read UTM params from localStorage
