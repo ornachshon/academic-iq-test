@@ -33,6 +33,12 @@ Deno.serve(async (req) => {
     }
 
     // If iq_score is present, save it as a contact attribute in Brevo
+    const UTM_ATTR_KEYS = ['UTM_SOURCE', 'UTM_MEDIUM', 'UTM_CAMPAIGN', 'UTM_TERM', 'UTM_CONTENT', 'GCLID'];
+    const utmAttrs = {};
+    UTM_ATTR_KEYS.forEach(key => {
+      if (properties?.[key]) utmAttrs[key] = properties[key];
+    });
+
     if (email && properties?.iq_score !== undefined) {
       const contactPayload = {
         email,
@@ -40,6 +46,7 @@ Deno.serve(async (req) => {
           IQ_SCORE: properties.iq_score,
           ...(properties.result_url ? { RESULT_URL: properties.result_url } : {}),
           ...(properties.language ? { LANGUAGE: properties.language } : {}),
+          ...utmAttrs,
         },
         updateEnabled: true,
       };

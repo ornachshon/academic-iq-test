@@ -70,6 +70,14 @@ export default function Email() {
       console.error("IQResult create failed:", err);
     }
 
+    // Read UTM params from localStorage
+    const UTM_KEYS = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content', 'gclid'];
+    const utmAttributes = {};
+    UTM_KEYS.forEach(key => {
+      const val = localStorage.getItem(key);
+      if (val) utmAttributes[key.toUpperCase()] = val;
+    });
+
     // Brevo: track email insert event with unique result URL (awaited so it completes before navigation)
     const baseUrl = window.location.origin;
     const resultUrl = resultId ? `${baseUrl}/Results?id=${resultId}` : null;
@@ -77,7 +85,7 @@ export default function Email() {
       await base44.functions.invoke("trackBrevoEvent", {
         eventName: "insert_email",
         email: email.trim(),
-        properties: { iq_score: score, language, IQ_SCORE: score, ...(resultUrl ? { result_url: resultUrl } : {}) }
+        properties: { iq_score: score, language, IQ_SCORE: score, ...(resultUrl ? { result_url: resultUrl } : {}), ...utmAttributes }
       });
       console.log("Brevo insert_email sent, resultUrl:", resultUrl);
     } catch (err) {
