@@ -25,7 +25,7 @@ const LayoutWrapper = ({ children, currentPageName }) => (
   <Layout currentPageName={currentPageName}>{children}</Layout>
 );
 
-// Capture UTM params synchronously on every page load
+// Capture UTM params and brevo_id synchronously on every page load
 (function captureUTM() {
   const UTM_KEYS = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content', 'gclid'];
   const params = new URLSearchParams(window.location.search);
@@ -33,6 +33,8 @@ const LayoutWrapper = ({ children, currentPageName }) => (
     const val = params.get(key);
     if (val) localStorage.setItem(key, val);
   });
+  const brevoId = params.get('brevo_id');
+  if (brevoId) localStorage.setItem('brevo_id', brevoId);
 })();
 
 function App() {
