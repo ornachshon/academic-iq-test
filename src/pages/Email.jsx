@@ -77,6 +77,8 @@ export default function Email() {
       const val = localStorage.getItem(key);
       if (val) utmAttributes[key.toUpperCase()] = val;
     });
+    const brevoId = localStorage.getItem('brevo_id');
+    if (brevoId) utmAttributes['BREVO_ID'] = brevoId;
     console.log("UTM attributes from localStorage:", utmAttributes);
 
     // Brevo: track email insert event with unique result URL (awaited so it completes before navigation)
