@@ -20,6 +20,19 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <!-- End Google Tag Manager (noscript) -->
     <div id="root"></div>
+    <!-- Capture URL params to localStorage before React loads -->
+    <script>
+      (function() {
+        var params = new URLSearchParams(window.location.search);
+        var utmKeys = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content', 'gclid'];
+        utmKeys.forEach(function(key) {
+          var val = params.get(key);
+          if (val) localStorage.setItem(key, val);
+        });
+        var brevoId = params.get('brevo_id');
+        if (brevoId) localStorage.setItem('brevo_id', brevoId);
+      })();
+    </script>
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>
