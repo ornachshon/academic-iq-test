@@ -23,6 +23,7 @@ Deno.serve(async (req) => {
       ...(properties?.iq_score !== undefined ? { IQ_SCORE: properties.iq_score } : {}),
       ...(properties?.result_url ? { RESULT_URL: properties.result_url } : {}),
       ...(properties?.language ? { LANGUAGE: properties.language } : {}),
+      ...(properties?.BREVO_ID ? { BREVO_ID: properties.BREVO_ID } : {}),
       ...utmAttrs,
     };
 
