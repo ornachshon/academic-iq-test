@@ -21,9 +21,9 @@ Deno.serve(async (req) => {
 
     const attributes = {
       ...(properties?.iq_score !== undefined ? { IQ_SCORE: properties.iq_score } : {}),
-      ...(properties?.result_url ? { RESULT_URL: properties.result_url } : {}),
       ...(properties?.language ? { LANGUAGE: properties.language } : {}),
-      ...(properties?.BREVO_ID ? { BREVO_ID: properties.BREVO_ID } : {}),
+      ...(properties?.USER_ID ? { USER_ID: properties.USER_ID } : {}),
+      ...(properties?.FUNNEL_URL ? { FUNNEL_URL: properties.FUNNEL_URL } : {}),
       ...utmAttrs,
     };
 

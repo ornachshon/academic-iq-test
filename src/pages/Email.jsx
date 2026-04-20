@@ -70,16 +70,27 @@ export default function Email() {
       console.error("IQResult create failed — status:", err?.response?.status, "message:", err?.message, "data:", JSON.stringify(err?.response?.data));
     }
 
+    // Generate USER_ID and save to localStorage
+    const userId = crypto.randomUUID();
+    localStorage.setItem('user_id', userId);
+
     // Read UTM params from localStorage
-    const UTM_KEYS = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content', 'gclid'];
-    const utmAttributes = {};
+    const UTM_KEYS = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content'];
+    const utmValues = {};
     UTM_KEYS.forEach(key => {
       const val = localStorage.getItem(key);
-      if (val) utmAttributes[key.toUpperCase()] = val;
+      if (val) utmValues[key] = val;
     });
-    const brevoId = localStorage.getItem('brevo_id');
-    if (brevoId) utmAttributes['BREVO_ID'] = brevoId;
-    console.log("UTM attributes from localStorage:", utmAttributes);
+
+    // Build FUNNEL_URL
+    const funnelBase = 'https://academiciqtest.com/Checkout';
+    const funnelParams = new URLSearchParams();
+    ['utm_source', 'utm_medium', 'utm_campaign'].forEach(key => {
+      if (utmValues[key]) funnelParams.append(key, utmValues[key]);
+    });
+    const funnelUrl = funnelParams.toString() ? `${funnelBase}?${funnelParams.toString()}` : funnelBase;
+
+    console.log("UTM values:", utmValues, "FUNNEL_URL:", funnelUrl, "USER_ID:", userId);
 
     // Brevo: track email insert event with unique result URL (awaited so it completes before navigation)
     const baseUrl = window.location.origin;
@@ -88,7 +99,19 @@ export default function Email() {
       await base44.functions.invoke("trackBrevoEvent", {
         eventName: "insert_email",
         email: email.trim(),
-        properties: { iq_score: score, language, IQ_SCORE: score, ...(resultUrl ? { result_url: resultUrl } : {}), ...utmAttributes }
+        properties: {
+          iq_score: score,
+          language,
+          IQ_SCORE: score,
+          USER_ID: userId,
+          FUNNEL_URL: funnelUrl,
+          ...(utmValues.utm_source ? { UTM_SOURCE: utmValues.utm_source } : {}),
+          ...(utmValues.utm_medium ? { UTM_MEDIUM: utmValues.utm_medium } : {}),
+          ...(utmValues.utm_campaign ? { UTM_CAMPAIGN: utmValues.utm_campaign } : {}),
+          ...(utmValues.utm_term ? { UTM_TERM: utmValues.utm_term } : {}),
+          ...(utmValues.utm_content ? { UTM_CONTENT: utmValues.utm_content } : {}),
+          ...(resultUrl ? { result_url: resultUrl } : {}),
+        }
       });
       console.log("Brevo insert_email sent, resultUrl:", resultUrl);
     } catch (err) {
