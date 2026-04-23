@@ -27,7 +27,7 @@ Deno.serve(async (req) => {
       ...utmAttrs,
     };
 
-    const contactBody = { email, attributes, updateEnabled: true };
+    const contactBody = { email, attributes, listIds: [7], updateEnabled: true };
     console.log("Brevo upsert contact request body:", JSON.stringify(contactBody));
 
     const contactResponse = await fetch("https://api.brevo.com/v3/contacts", {
