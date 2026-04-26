@@ -11,6 +11,14 @@ export default function Thankyou() {
   useEffect(() => {
     trackFunnel("payment_completed");
     trackFunnel("thank_you_page");
+
+    // Move contact from list 7 to list 9 in Brevo
+    const email = localStorage.getItem("userEmail") || location.state?.email;
+    if (email) {
+      base44.functions.invoke("moveBrevoContact", { email }).catch(err => {
+        console.error("moveBrevoContact failed:", err);
+      });
+    }
   }, []);
 
   return (
