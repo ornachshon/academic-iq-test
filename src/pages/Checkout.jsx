@@ -5,6 +5,7 @@ import Footer from '@/components/home/Footer';
 import { trackFunnel } from '@/lib/trackFunnel';
 import { useGeoPrice } from '@/hooks/useGeoPrice';
 import { useLanguage } from '@/lib/LanguageContext';
+import { base44 } from '@/api/base44Client';
 
 const reviews = [
 { name: "Cecilie Perri", rating: 5, text: "Nice test with clear presentation and intuitive control. The questions involved critical thinking more than rote logic, which I appreciated. The only minor surprise was the way results are accessed – but, clear once you proceed. Fun and mentally stimulating!" },
@@ -29,12 +30,37 @@ function StarRating({ count, total = 5 }) {
 export default function Checkout() {
   const { t } = useLanguage();
   const [agreed, setAgreed] = useState(false);
+  const [isRedirecting, setIsRedirecting] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
   const score = location.state?.score;
   const email = location.state?.email || "";
   const timeTaken = location.state?.timeTaken || 0;
+  const resultId = location.state?.resultId || "";
   const { pricing, loading: priceLoading, formatPrice } = useGeoPrice();
+
+  const handlePayment = async () => {
+    trackFunnel("payment_initiated");
+    setIsRedirecting(true);
+    try {
+      const res = await base44.functions.invoke("createStripeCheckout", {
+        email,
+        score,
+        priceAmount: pricing.price,
+        priceCurrency: pricing.currency_code,
+        resultId,
+      });
+      if (res.data?.url) {
+        window.location.href = res.data.url;
+      } else {
+        console.error("No URL returned from Stripe checkout");
+        setIsRedirecting(false);
+      }
+    } catch (err) {
+      console.error("Stripe checkout error:", err);
+      setIsRedirecting(false);
+    }
+  };
   const formatTime = (secs) => {
     const m = Math.floor(secs / 60).toString().padStart(2, '0');
     const s = (secs % 60).toString().padStart(2, '0');
@@ -147,9 +173,10 @@ export default function Checkout() {
 
           {/* CTA Button */}
           <button
-            onClick={() => { trackFunnel("payment_initiated"); navigate("/Info", { state: { score, email } }); }}
-            className="bg-[#F5921B] text-white py-3 text-xl font-bold rounded-md w-full hover:bg-[#e0830f] transition-colors">
-            {t("continueToPayment")}
+            onClick={handlePayment}
+            disabled={isRedirecting || priceLoading}
+            className="bg-[#F5921B] text-white py-3 text-xl font-bold rounded-md w-full hover:bg-[#e0830f] transition-colors disabled:opacity-70 disabled:cursor-not-allowed">
+            {isRedirecting ? "Redirecting to payment..." : t("continueToPayment")}
           </button>
         </div>
 

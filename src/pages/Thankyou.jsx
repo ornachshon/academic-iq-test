@@ -6,7 +6,9 @@ import { trackFunnel } from "@/lib/trackFunnel";
 
 export default function Thankyou() {
   const location = useLocation();
-  const { name, score, serialNumber, date } = location.state || {};
+  const { name, serialNumber, date } = location.state || {};
+  // Score may come from router state or localStorage (after Stripe redirect)
+  const score = location.state?.score ?? localStorage.getItem("iq_score");
 
   useEffect(() => {
     trackFunnel("payment_completed");

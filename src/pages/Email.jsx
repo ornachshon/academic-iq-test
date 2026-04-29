@@ -70,8 +70,9 @@ export default function Email() {
       console.error("IQResult create failed — status:", err?.response?.status, "message:", err?.message, "data:", JSON.stringify(err?.response?.data));
     }
 
-    // Save email and generate USER_ID, persist both to localStorage
+    // Save email, score, and generate USER_ID, persist to localStorage
     localStorage.setItem('userEmail', email.trim());
+    localStorage.setItem('iq_score', String(score));
     const userId = crypto.randomUUID();
     localStorage.setItem('user_id', userId);
 
