@@ -14,7 +14,7 @@ Deno.serve(async (req) => {
     const stripe = new Stripe(STRIPE_SECRET_KEY);
 
     const origin = req.headers.get("Origin") || "https://academiciqtest.com";
-    const successUrl = `${origin}/Thankyou?session_id={CHECKOUT_SESSION_ID}`;
+    const successUrl = `${origin}/Info?session_id={CHECKOUT_SESSION_ID}&score=${encodeURIComponent(score || "")}&email=${encodeURIComponent(email || "")}`;
     const cancelUrl = `${origin}/Checkout`;
 
     // Amount in smallest currency unit (cents for USD, etc.)
