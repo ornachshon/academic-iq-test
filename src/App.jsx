@@ -20,6 +20,7 @@ import Privacy_Policy from './pages/Privacy_Policy';
 import Terms_Conditions from './pages/Terms_Conditions';
 import Analytics from './pages/Analytics';
 import PricingAdmin from './pages/PricingAdmin';
+import Support from './pages/Support';
 
 const LayoutWrapper = ({ children, currentPageName }) => (
   <Layout currentPageName={currentPageName}>{children}</Layout>
@@ -57,6 +58,7 @@ function App() {
           <Route path="/Terms_Conditions" element={<Terms_Conditions />} />
           <Route path="/Analytics" element={<Analytics />} />
           <Route path="/PricingAdmin" element={<PricingAdmin />} />
+          <Route path="/Support" element={<Support />} />
           <Route path="*" element={<PageNotFound />} />
         </Routes>
         <Toaster />
