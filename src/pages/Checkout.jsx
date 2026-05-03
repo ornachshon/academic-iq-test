@@ -93,7 +93,7 @@ export default function Checkout() {
         {/* Order Items */}
         <div className="bg-white border border-gray-200 rounded-b-sm divide-y divide-gray-200 -mt-4">
           {/* Item 1 */}
-          <div className="flex items-center justify-between px-6 py-5">
+          <div className="flex flex-col md:flex-row md:items-center md:justify-between px-6 py-5">
             <div className="flex items-start gap-5">
               <span className="font-black text-[#0C3547] text-2xl w-8 shrink-0">1.</span>
               <div>
@@ -101,7 +101,7 @@ export default function Checkout() {
                 <p className="text-gray-500 text-sm mt-0.5">{t("yourOverallScore")}</p>
               </div>
             </div>
-            <div className="flex items-center gap-3 shrink-0">
+            <div className="flex items-center gap-3 shrink-0 mt-4 md:mt-0 ml-13 md:ml-0">
               <div className="text-center leading-tight">
                 <p className="text-xs font-bold text-[#0C3547] uppercase tracking-widest">{t("yourIQScore")}</p>
               </div>
@@ -112,7 +112,7 @@ export default function Checkout() {
           </div>
 
           {/* Item 2 */}
-          <div className="flex items-center justify-between px-6 py-5">
+          <div className="flex flex-col md:flex-row md:items-center md:justify-between px-6 py-5">
             <div className="flex items-start gap-5">
               <span className="font-black text-[#0C3547] text-2xl w-8 shrink-0">2.</span>
               <div>
@@ -122,11 +122,11 @@ export default function Checkout() {
               </div>
             </div>
             <img src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69b1aedc5a0abb358cd40ec0/400b59f43_Certificate-Example.svg"
-            alt="Certificate" className="w-28 h-auto ml-2 flex-shrink-0 border border-gray-200 rounded shadow-sm" />
+            alt="Certificate" className="w-28 h-auto mt-4 md:mt-0 ml-13 md:ml-2 flex-shrink-0 border border-gray-200 rounded shadow-sm" />
           </div>
 
           {/* Item 3 */}
-          <div className="flex items-center justify-between px-6 py-5">
+          <div className="flex flex-col md:flex-row md:items-center md:justify-between px-6 py-5">
             <div className="flex items-start gap-5">
               <span className="font-black text-[#0C3547] text-2xl w-8 shrink-0">3.</span>
               <div>
@@ -135,7 +135,7 @@ export default function Checkout() {
               </div>
             </div>
             <img src="https://media.base44.com/images/public/69b1aedc5a0abb358cd40ec0/03c9e0491_AIQreportsnap.png"
-            alt="IQ Report" className="w-32 h-auto ml-4 flex-shrink-0 rounded" />
+            alt="IQ Report" className="w-32 h-auto mt-4 md:mt-0 ml-13 md:ml-4 flex-shrink-0 rounded" />
           </div>
         </div>
 
