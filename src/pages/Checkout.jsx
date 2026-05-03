@@ -14,7 +14,7 @@ const reviews = [
 { name: "H Ladani", rating: 4, text: "I am more impressed to see this type of work because it is worth of time and my 20 minutes of this quiz saves me to distract from wasting my time in any other social media app or other nonimportant work. Read after correct grammatical mistakes. Thank you!" },
 { name: "Gregory Gomes", rating: 5, text: "I took the test on my phone one evening while in bed and was initially unsure about paying to see the results. In the end, curiosity won out, and after going through others\u2019 reviews, I decided to unlock them. I was pleasantly surprised to find my score matched one I had received years earlier on a similar test. Overall, I\u2019m very satisfied with the experience." },
 { name: "Ivah Brown", rating: 5, text: "I really enjoyed the test! It was well-structured, consistent, and thoughtfully designed. The performance report at the end was detailed, and understanding my results gave my confidence a nice boost. I especially appreciated the explanations behind the score, including which aspects of intelligence were assessed and how they relate to everyday life. Overall, it was an engaging and informative experience. " },
-{ name: "Ida Nolan", rating: 4, text: "" }];
+{ name: "Ida Nolan", rating: 4, text: "Clean, refined presentation paired with insightful feedback." }];
 
 
 function StarRating({ count, total = 5 }) {
