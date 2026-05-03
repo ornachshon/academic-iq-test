@@ -61,28 +61,35 @@ export default function QuestionCard({ question, selectedAnswer, onSelectAnswer 
 
         {/* Answers Area */}
         <div className="bg-white rounded-2xl border border-gray-200 p-6 md:p-8 shadow-sm">
-          <h4 className="text-[#0C3547] font-bold text-lg mb-4 border-b border-[#0C3547]/30 pb-3 w-full">
-            Please choose an answer:
-          </h4>
+          {!question.options_image && (
+            <h4 className="text-[#0C3547] font-bold text-lg mb-4 border-b border-[#0C3547]/30 pb-3 w-full">
+              Please choose an answer:
+            </h4>
+          )}
 
           {question.options_image ? (
-            <div className="relative">
-              <img src={question.options_image} alt="Answer options" className="w-full rounded-xl" />
-              {/* 2-column × 3-row clickable overlay grid */}
-              <div className="absolute inset-0 grid grid-cols-2 grid-rows-3">
-                {question.options.map((label, idx) => (
+            <div className="relative select-none">
+              <img src={question.options_image} alt="Answer options" className="w-full rounded-xl" draggable={false} />
+              {/* Clickable overlays aligned to each A-F option cell (below the header ~18%, 2 cols × 3 rows) */}
+              {[0,1,2,3,4,5].map((idx) => {
+                const col = idx % 2;
+                const row = Math.floor(idx / 2);
+                const left = col === 0 ? "2%" : "52%";
+                const top = `${18 + row * 27}%`;
+                return (
                   <motion.button
                     key={idx}
                     whileTap={{ scale: 0.97 }}
                     onClick={() => onSelectAnswer(idx)}
-                    className={`rounded-none transition-all ${
+                    style={{ position: "absolute", left, top, width: "46%", height: "24%" }}
+                    className={`rounded-xl transition-all cursor-pointer ${
                       selectedAnswer === idx
-                        ? "bg-[#F5921B]/30 ring-2 ring-inset ring-[#F5921B]"
-                        : "bg-transparent hover:bg-[#0C3547]/10"
+                        ? "bg-[#F5921B]/25 ring-2 ring-inset ring-[#F5921B]"
+                        : "bg-transparent hover:bg-[#0C3547]/8"
                     }`}
                   />
-                ))}
-              </div>
+                );
+              })}
             </div>
           ) : (
           <div className="grid grid-cols-2 gap-0">
