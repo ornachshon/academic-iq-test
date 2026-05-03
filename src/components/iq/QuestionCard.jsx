@@ -85,7 +85,7 @@ export default function QuestionCard({ question, selectedAnswer, onSelectAnswer 
                     className={`rounded-xl transition-all cursor-pointer ${
                       selectedAnswer === idx
                         ? "bg-[#F5921B]/25 ring-2 ring-inset ring-[#F5921B]"
-                        : "bg-transparent hover:bg-[#0C3547]/8"
+                        : "bg-transparent hover:bg-gray-200/70"
                     }`}
                   />
                 );
