@@ -62,7 +62,7 @@ export default function Email() {
         total_questions: questions.length,
         time_taken_seconds: timeTaken,
         email: email.trim(),
-        answers: answerDetails,
+        answers: answerDetails
       });
       resultId = savedResult.id;
       console.log("IQResult created:", resultId, "user_id:", user_id);
@@ -79,7 +79,7 @@ export default function Email() {
     // Read UTM params from localStorage
     const UTM_KEYS = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content'];
     const utmValues = {};
-    UTM_KEYS.forEach(key => {
+    UTM_KEYS.forEach((key) => {
       const val = localStorage.getItem(key);
       if (val) utmValues[key] = val;
     });
@@ -87,7 +87,7 @@ export default function Email() {
     // Build FUNNEL_URL
     const funnelBase = 'https://academiciqtest.com/Checkout';
     const funnelParams = new URLSearchParams();
-    ['utm_source', 'utm_medium', 'utm_campaign'].forEach(key => {
+    ['utm_source', 'utm_medium', 'utm_campaign'].forEach((key) => {
       if (utmValues[key]) funnelParams.append(key, utmValues[key]);
     });
     const funnelUrl = funnelParams.toString() ? `${funnelBase}?${funnelParams.toString()}` : funnelBase;
@@ -112,7 +112,7 @@ export default function Email() {
           ...(utmValues.utm_campaign ? { UTM_CAMPAIGN: utmValues.utm_campaign } : {}),
           ...(utmValues.utm_term ? { UTM_TERM: utmValues.utm_term } : {}),
           ...(utmValues.utm_content ? { UTM_CONTENT: utmValues.utm_content } : {}),
-          ...(resultUrl ? { result_url: resultUrl } : {}),
+          ...(resultUrl ? { result_url: resultUrl } : {})
         }
       });
       console.log("Brevo insert_email sent, resultUrl:", resultUrl);
@@ -135,10 +135,10 @@ export default function Email() {
         transition={{ duration: 0.3, ease: "easeOut" }}
         className="relative bg-white rounded-2xl shadow-2xl w-full max-w-md mx-4 p-8 text-center">
 
-        <h2 className="text-2xl font-bold text-[#0C3547] mb-1">
+        <h2 className="text-[#0C3547] mb-1 text-xl font-bold">
           {t("emailModalTitle1")}
         </h2>
-        <h2 className="text-2xl font-bold text-[#0C3547] mb-4">
+        <h2 className="text-[#0C3547] mb-4 text-xl font-bold">
           {t("emailModalTitle2")}
         </h2>
 
@@ -146,7 +146,7 @@ export default function Email() {
 
         <form onSubmit={handleSubmit} className="flex flex-col items-center gap-4">
           <div className="relative w-full">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#9ca3af" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#9ca3af" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none"><rect width="20" height="16" x="2" y="4" rx="2" /><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" /></svg>
             <input
               type="email"
               required
@@ -166,7 +166,7 @@ export default function Email() {
         </form>
 
         <p className="text-xs text-gray-400 mt-4 leading-relaxed flex items-center justify-center gap-1">
-          <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="18" height="11" x="3" y="11" rx="2" ry="2" /><path d="M7 11V7a5 5 0 0 1 10 0v4" /></svg>
           {t("privacyNote")}
         </p>
       </motion.div>
