@@ -142,7 +142,7 @@ export default function IQTest() {
       </div>
 
       {/* Question Content */}
-      <div className="max-w-6xl mx-auto px-4 mt-6">
+      <div className="max-w-6xl mx-auto px-4 mt-5">
         <QuestionCard
           question={questions[currentQ]}
           selectedAnswer={answers[currentQ]}
