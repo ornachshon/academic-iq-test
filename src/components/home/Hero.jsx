@@ -69,8 +69,7 @@ export default function Hero() {
           {/* Right image */}
           <div className="flex justify-center md:justify-end">
             <img src="https://media.base44.com/images/public/69b1aedc5a0abb358cd40ec0/33bb2f99c_4_screens_homepage_no_BG.jpg"
-
-            alt="IQ Test on devices" className="w-full max-w-lg" />
+            alt="IQ Test on devices" className="w-full max-w-lg mix-blend-multiply" />
             
 
           </div>
