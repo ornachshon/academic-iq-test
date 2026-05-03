@@ -175,7 +175,8 @@ export default function IQTest() {
             {currentQ === questions.length - 1 && (
               <Button
                 onClick={handleFinishClick}
-                className="bg-[#F5921B] text-[#000000] px-6 py-2 text-sm font-medium rounded-md inline-flex items-center justify-center whitespace-nowrap transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 shadow h-9 gap-2 hover:bg-[#e0830f]">
+                disabled={answers[currentQ] === undefined}
+                className="bg-[#F5921B] text-[#000000] px-6 py-2 text-sm font-medium rounded-md inline-flex items-center justify-center whitespace-nowrap transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-30 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 shadow h-9 gap-2 hover:bg-[#e0830f]">
                 {t("finishTest")}
                 <ArrowRight className="w-4 h-4" />
               </Button>
