@@ -66,22 +66,21 @@ export default function QuestionCard({ question, selectedAnswer, onSelectAnswer 
           </h4>
 
           {question.options_image ? (
-            <div>
-              <img src={question.options_image} alt="Answer options" className="w-full rounded-xl mb-4" />
-              <div className="grid grid-cols-3 gap-2">
+            <div className="relative">
+              <img src={question.options_image} alt="Answer options" className="w-full rounded-xl" />
+              {/* 2-column × 3-row clickable overlay grid */}
+              <div className="absolute inset-0 grid grid-cols-2 grid-rows-3">
                 {question.options.map((label, idx) => (
                   <motion.button
                     key={idx}
                     whileTap={{ scale: 0.97 }}
                     onClick={() => onSelectAnswer(idx)}
-                    className={`py-2 rounded-xl border-2 font-bold text-sm transition-all ${
+                    className={`rounded-none transition-all ${
                       selectedAnswer === idx
-                        ? "border-[#F5921B] bg-[#F5921B] text-white shadow-md"
-                        : "border-gray-200 text-gray-600 hover:border-[#0C3547]/30 hover:bg-gray-100"
+                        ? "bg-[#F5921B]/30 ring-2 ring-inset ring-[#F5921B]"
+                        : "bg-transparent hover:bg-[#0C3547]/10"
                     }`}
-                  >
-                    {labels[idx]}
-                  </motion.button>
+                  />
                 ))}
               </div>
             </div>
