@@ -68,7 +68,7 @@ export default function QuestionCard({ question, selectedAnswer, onSelectAnswer 
           )}
 
           {question.options_image ? (
-            <div className="relative select-none" style={question.id === 17 ? { width: "85%", margin: "4% auto 0" } : {}}>
+            <div className="relative select-none" style={(question.id === 17 || question.id === 19) ? { width: "85%", margin: "4% auto 0" } : {}}>
               <img src={question.options_image} alt="Answer options" className="w-full rounded-xl" draggable={false} />
               {/* Clickable overlays aligned to each A-F option cell (below the header ~18%, 2 cols × 3 rows) */}
               {[0,1,2,3,4,5].map((idx) => {
