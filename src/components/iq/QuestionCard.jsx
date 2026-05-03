@@ -86,6 +86,7 @@ export default function QuestionCard({ question, selectedAnswer, onSelectAnswer 
                   : question.id === 22 ? [-15, -9, -6]
                   : question.id === 23 ? [-15, -9, -6]
                   : question.id === 24 ? [-15, -9, -6]
+                  : question.id === 25 ? [-15, -9, 0]
                   : [0, 0, 0];
                 const top = `${rowTopPercents[row] + questionRowOffsets[row]}%`;
                 return (
