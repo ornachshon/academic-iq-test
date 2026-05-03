@@ -7,14 +7,8 @@ const questions = [
     category_question: "Visuospatial Pattern Reasoning",
     question: "Which Shape is missing?",
     image: "https://media.base44.com/images/public/69b1aedc5a0abb358cd40ec0/727ce5af6_image.png",
-    options: [
-      { text: "A", image: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69b1aedc5a0abb358cd40ec0/ab415a971_image.png" },
-      { text: "B", image: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69b1aedc5a0abb358cd40ec0/9266dd486_image.png" },
-      { text: "C", image: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69b1aedc5a0abb358cd40ec0/54db03d83_image.png" },
-      { text: "D", image: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69b1aedc5a0abb358cd40ec0/97b3ddde9_image.png" },
-      { text: "E", image: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69b1aedc5a0abb358cd40ec0/7656b7547_image.png" },
-      { text: "F", image: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69b1aedc5a0abb358cd40ec0/f43917ea7_image.png" }
-    ],
+    options_image: "https://media.base44.com/images/public/69b1aedc5a0abb358cd40ec0/2107b9748_image.png",
+    options: ["A", "B", "C", "D", "E", "F"],
     correct: 5,
     explanation: "The correct answer is F — a fully filled dark circle."
   },
