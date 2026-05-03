@@ -71,7 +71,8 @@ export default function Hero() {
             <img
               src="https://media.base44.com/images/public/69b1aedc5a0abb358cd40ec0/117b59b0b_4screenshomepagenoBG.jpg"
               alt="IQ Test on devices"
-              className="w-full max-w-lg" />
+              className="w-full max-w-lg"
+              style={{ mixBlendMode: "multiply" }} />
 
           </div>
         </div>
