@@ -8,7 +8,7 @@ import { useLanguage } from '@/lib/LanguageContext';
 import { base44 } from '@/api/base44Client';
 
 const reviews = [
-{ name: "Cecilie Perri", rating: 5, text: "Nice test with clear presentation and intuitive control. The questions involved critical thinking more than rote logic, which I appreciated. The only minor surprise was the way results are accessed – but, clear once you proceed. Fun and mentally stimulating!" },
+{ name: "Cecilie Perri", rating: 5, text: "Great test with a clear layout and easy-to-use controls. The questions leaned more toward critical thinking rather than simple logic, which I liked. The only small confusion was how to view the results, though it becomes clear as you continue. Overall, enjoyable and engaging!" },
 { name: "Leonora Winthleiser", rating: 4, text: "Appreciated the breakdown details of my performance and what it implied. I have had no other IQ test to compare but it felt like a standard timed test. A good recommendation to others who may want to take up the challenge and see what they can do." },
 { name: "P Khan", rating: 5, text: "It's a great experience to enjoy this test after a long gap of learning such practices. As a teacher who is guiding many aspirants for services, I felt so privileged to share my level in your platform and thanks a lot for giving me and others such a nice platform to test our intelligence. Thank you so much 🙏" },
 { name: "H Ladani", rating: 4, text: "I am more impressed to see this type of work because it is worth of time and my 20 minutes of this quiz saves me to distract from wasting my time in any other social media app or other nonimportant work. Read after correct grammatical mistakes. Thank you!" },
@@ -48,7 +48,7 @@ export default function Checkout() {
         score,
         priceAmount: pricing.price,
         priceCurrency: pricing.currency_code,
-        resultId,
+        resultId
       });
       if (res.data?.url) {
         window.location.href = res.data.url;
@@ -135,7 +135,7 @@ export default function Checkout() {
               </div>
             </div>
             <img src="https://media.base44.com/images/public/69b1aedc5a0abb358cd40ec0/03c9e0491_AIQreportsnap.png"
-              alt="IQ Report" className="w-32 h-auto ml-4 flex-shrink-0 rounded" />
+            alt="IQ Report" className="w-32 h-auto ml-4 flex-shrink-0 rounded" />
           </div>
         </div>
 
