@@ -13,7 +13,7 @@ export default function QuestionCard({ question, selectedAnswer, onSelectAnswer 
         animate={{ opacity: 1, x: 0 }}
         exit={{ opacity: 0, x: -30 }}
         transition={{ duration: 0.3 }}
-        className="grid md:grid-cols-[1.2fr_1fr] gap-6"
+        className="grid md:grid-cols-[1.2fr_1fr] gap-4"
       >
         {/* Question Area */}
         <div className="bg-white rounded-2xl border border-gray-200 p-6 md:p-8 shadow-sm">
