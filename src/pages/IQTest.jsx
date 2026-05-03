@@ -35,12 +35,6 @@ export default function IQTest() {
     }, 400);
   };
 
-  const handleNext = () => {
-    if (currentQ < questions.length - 1) {
-      setCurrentQ(currentQ + 1);
-    }
-  };
-
   const handleBack = () => {
     if (currentQ > 0) {
       setCurrentQ(currentQ - 1);
@@ -168,34 +162,24 @@ export default function IQTest() {
           </Button>
 
           <div className="flex gap-3">
-            <Button
-              variant="outline"
-              onClick={handleSkip}
-              disabled={currentQ === questions.length - 1}
-              className="gap-2 border-[#F5921B] text-[#F5921B] hover:bg-[#F5921B]/10">
+            {currentQ < questions.length - 1 && (
+              <Button
+                variant="outline"
+                onClick={handleSkip}
+                className="gap-2 border-[#F5921B] text-[#F5921B] hover:bg-[#F5921B]/10">
+                <SkipForward className="w-4 h-4" />
+                {t("skip")}
+              </Button>
+            )}
 
-              <SkipForward className="w-4 h-4" />
-              {t("skip")}
-            </Button>
-
-            {currentQ === questions.length - 1 || answeredCount === questions.length ?
-            <Button
-              onClick={handleFinishClick} className="bg-[#F5921B] text-[#000000] px-6 py-2 text-sm font-medium rounded-md inline-flex items-center justify-center whitespace-nowrap transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 shadow h-9 gap-2 hover:bg-[#e0830f]">
-
-
+            {currentQ === questions.length - 1 && (
+              <Button
+                onClick={handleFinishClick}
+                className="bg-[#F5921B] text-[#000000] px-6 py-2 text-sm font-medium rounded-md inline-flex items-center justify-center whitespace-nowrap transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 shadow h-9 gap-2 hover:bg-[#e0830f]">
                 {t("finishTest")}
                 <ArrowRight className="w-4 h-4" />
-              </Button> :
-
-            <Button
-              onClick={handleNext}
-              disabled={answers[currentQ] === undefined}
-              className="gap-2 bg-[#0C3547] hover:bg-[#0e3d52] text-white px-6">
-
-                {t("next")}
-                <ArrowRight className="w-4 h-4" />
               </Button>
-            }
+            )}
           </div>
         </div>
 
