@@ -14,12 +14,12 @@ const reviews = [
 { name: "H Ladani", rating: 4, text: "I am more impressed to see this type of work because it is worth of time and my 20 minutes of this quiz saves me to distract from wasting my time in any other social media app or other nonimportant work. Read after correct grammatical mistakes. Thank you!" },
 { name: "Gregory Gomes", rating: 5, text: "I took the test on my phone one evening while in bed and was initially unsure about paying to see the results. In the end, curiosity won out, and after going through others\u2019 reviews, I decided to unlock them. I was pleasantly surprised to find my score matched one I had received years earlier on a similar test. Overall, I\u2019m very satisfied with the experience." },
 { name: "Ivah Brown", rating: 5, text: "I loved the test, it was coherent, and well-planned. Lastly, the performance report was detailed, and knowing my performance details also helped me boost my confidence. Knowing the whys is also important to get more involved and immersed in the experience, to a report about which parts of intelligence were tested and how it is useful in our daily lives was very informative. Overall I enjoyed the experience." },
-{ name: "Ida Nolan", rating: 4, text: "Polished presentation and meaningful feedback - I liked the way it highlighted specific thinking areas." }];
+{ name: "Ida Nolan", rating: 4, text: "" }];
 
 
 function StarRating({ count, total = 5 }) {
   return (
-    <div className="flex gap-0.5">
+    <div className="flex gap-0.5 hidden">
       {Array.from({ length: total }).map((_, i) =>
       <Star key={i} className={`w-4 h-4 ${i < count ? 'text-yellow-400 fill-yellow-400' : 'text-gray-300 fill-gray-300'}`} />
       )}
@@ -198,7 +198,7 @@ export default function Checkout() {
           <div className="space-y-5">
             {reviews.map((r, i) =>
             <div key={i} className="border-b border-gray-100 pb-4 last:border-0 last:pb-0">
-                <p className="font-bold text-gray-800 mb-1">{r.name}</p>
+                <p className="font-bold text-gray-800 mb-1 hidden">{r.name}</p>
                 <StarRating count={r.rating} />
                 <p className="text-gray-600 text-xs mt-1 leading-relaxed">{r.text}</p>
               </div>
