@@ -75,8 +75,8 @@ export default function QuestionCard({ question, selectedAnswer, onSelectAnswer 
                 const col = idx % 2;
                 const row = Math.floor(idx / 2);
                 const left = col === 0 ? "1%" : "51%";
-                const rowOffsets = [-11, -4, 0];
-                const top = `${16 + row * 28 + rowOffsets[row]}%`;
+                const rowTopPercents = [18, 45, 72];
+                const top = `${rowTopPercents[row]}%`;
                 return (
                   <motion.button
                     key={idx}
