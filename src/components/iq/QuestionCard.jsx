@@ -74,15 +74,15 @@ export default function QuestionCard({ question, selectedAnswer, onSelectAnswer 
               {[0,1,2,3,4,5].map((idx) => {
                 const col = idx % 2;
                 const row = Math.floor(idx / 2);
-                const left = col === 0 ? "2%" : "52%";
-                const top = `${18 + row * 27}%`;
+                const left = col === 0 ? "1%" : "51%";
+                const top = `${16 + row * 28}%`;
                 return (
                   <motion.button
                     key={idx}
                     whileTap={{ scale: 0.97 }}
                     onClick={() => onSelectAnswer(idx)}
-                    style={{ position: "absolute", left, top, width: "46%", height: "24%" }}
-                    className={`rounded-xl transition-all cursor-pointer ${
+                    style={{ position: "absolute", left, top, width: "48%", height: "26%" }}
+                    className={`rounded-lg transition-all cursor-pointer ${
                       selectedAnswer === idx
                         ? "bg-[#F5921B]/25 ring-2 ring-inset ring-[#F5921B]"
                         : "bg-transparent hover:bg-gray-200/70"
