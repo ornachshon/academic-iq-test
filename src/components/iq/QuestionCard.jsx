@@ -80,7 +80,7 @@ export default function QuestionCard({ question, selectedAnswer, onSelectAnswer 
                 const questionRowOffsets = question.id === 16 ? [-11, -4, 0]
                   : question.id === 17 ? [-15, -4, 0]
                   : question.id === 18 ? [-18, -7, -4]
-                  : question.id === 19 ? [-18, -11, -4]
+                  : question.id === 19 ? [-15, -11, -4]
                   : [0, 0, 0];
                 const top = `${rowTopPercents[row] + questionRowOffsets[row]}%`;
                 return (
