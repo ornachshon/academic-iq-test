@@ -17,7 +17,7 @@ export default function QuestionCard({ question, selectedAnswer, onSelectAnswer 
       >
         {/* Question Area */}
         <div className="bg-white rounded-2xl border border-gray-200 p-6 md:p-8 shadow-sm">
-          <h3 className="text-[#0C3547] font-bold text-lg mb-2 border-b-2 border-[#F5921B] pb-3 inline-block">
+          <h3 className="text-[#0C3547] font-bold text-lg mb-1 border-b-2 border-[#F5921B] pb-3 inline-block">
             {question.question || "Which shape is missing?"}
           </h3>
 
