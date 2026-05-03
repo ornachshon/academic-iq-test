@@ -121,19 +121,19 @@ export default function IQTest() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 pb-12">
       {/* Top Bar */}
-      <div className="bg-[#0C3547] px-4 py-4 shadow-lg">
+      <div className="bg-[#0C3547] px-4 py-2 shadow-lg">
         <div className="max-w-6xl mx-auto flex items-center justify-between">
-          <h2 className="text-white font-bold text-lg">
+          <h2 className="text-white font-bold text-sm">
             {t("questionLabel")} {currentQ + 1}
             <span className="text-gray-400 font-normal">/{questions.length}</span>
           </h2>
           <Timer totalSeconds={1200} onTimeUp={handleTimeUp} />
         </div>
         {/* Progress bar */}
-        <div className="max-w-6xl mx-auto mt-3">
-          <div className="w-full bg-white/10 rounded-full h-1.5">
+        <div className="max-w-6xl mx-auto mt-1.5">
+          <div className="w-full bg-white/10 rounded-full h-1">
             <motion.div
-              className="bg-[#F5921B] h-1.5 rounded-full"
+              className="bg-[#F5921B] h-1 rounded-full"
               animate={{ width: `${(currentQ + 1) / questions.length * 100}%` }}
               transition={{ duration: 0.3 }} />
 
