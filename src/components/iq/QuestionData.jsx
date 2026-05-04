@@ -269,7 +269,7 @@ const questions = [
     category: "Spatial Reasoning",
     category_question: "Visuospatial Insight",
     question: "How many triangles are in the picture?",
-    image: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69b1aedc5a0abb358cd40ec0/009baad94_image.png",
+    image: "https://media.base44.com/images/public/69b1aedc5a0abb358cd40ec0/d3020f88e_image.png",
     options_image: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69b1aedc5a0abb358cd40ec0/70ab73c58_image.png",
     options: ["A", "B", "C", "D", "E", "F"],
     correct: 2,
