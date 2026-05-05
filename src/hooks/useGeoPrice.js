@@ -2,8 +2,8 @@ import { useState, useEffect } from "react";
 import { base44 } from "@/api/base44Client";
 
 const DEFAULT_PRICE = {
-  price: 0.10,
-  original_price: 0.10,
+  price: 4.99,
+  original_price: 9.99,
   currency_code: "USD",
   currency_symbol: "$",
   region_name: "Default",

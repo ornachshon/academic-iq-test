@@ -21,8 +21,8 @@ Deno.serve(async (req) => {
     const ZERO_DECIMAL_CURRENCIES = ["jpy", "krw", "vnd", "clp", "gnf", "mga", "pyg", "rwf", "ugx", "xaf", "xof"];
     const currency = (priceCurrency || "usd").toLowerCase();
     const unitAmount = ZERO_DECIMAL_CURRENCIES.includes(currency)
-      ? Math.round(priceAmount || 10)
-      : Math.round((priceAmount || 0.10) * 100);
+      ? Math.round(priceAmount || 990)
+      : Math.round((priceAmount || 9.99) * 100);
 
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ["card"],
