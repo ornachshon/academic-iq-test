@@ -17,8 +17,12 @@ Deno.serve(async (req) => {
     const successUrl = `${origin}/Info?session_id={CHECKOUT_SESSION_ID}&score=${encodeURIComponent(score || "")}&email=${encodeURIComponent(email || "")}`;
     const cancelUrl = `${origin}/Checkout`;
 
-    // Amount in smallest currency unit (cents for USD, etc.)
-    const unitAmount = Math.round((priceAmount || 9.99) * 100);
+    // Zero-decimal currencies (Stripe expects the amount as-is, not multiplied by 100)
+    const ZERO_DECIMAL_CURRENCIES = ["jpy", "krw", "vnd", "clp", "gnf", "mga", "pyg", "rwf", "ugx", "xaf", "xof"];
+    const currency = (priceCurrency || "usd").toLowerCase();
+    const unitAmount = ZERO_DECIMAL_CURRENCIES.includes(currency)
+      ? Math.round(priceAmount || 990)
+      : Math.round((priceAmount || 9.99) * 100);
 
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ["card"],
