@@ -26,8 +26,16 @@ export default function IQTest() {
     trackFunnel("iq_test_started");
   }, []);
 
+  const finishButtonRef = useRef(null);
+
   const handleSelect = (optionIdx) => {
     setAnswers((prev) => ({ ...prev, [currentQ]: optionIdx }));
+    // On mobile, if this is the last question, scroll to the Finish button
+    if (currentQ === questions.length - 1 && window.innerWidth < 768) {
+      setTimeout(() => {
+        finishButtonRef.current?.scrollIntoView({ behavior: "smooth", block: "center" });
+      }, 450);
+    }
     setTimeout(() => {
       if (currentQ < questions.length - 1) {
         setCurrentQ((q) => q + 1);
@@ -174,6 +182,7 @@ export default function IQTest() {
 
             {currentQ === questions.length - 1 && (
               <Button
+                ref={finishButtonRef}
                 onClick={handleFinishClick}
                 disabled={answers[currentQ] === undefined}
                 className="bg-[#F5921B] text-[#000000] px-6 py-2 text-sm font-medium rounded-md inline-flex items-center justify-center whitespace-nowrap transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-30 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 shadow h-9 gap-2 hover:bg-[#e0830f]">
