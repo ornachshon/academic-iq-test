@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
+import { base44 } from "@/api/base44Client";
 
 const translations = {
   en: {
@@ -239,6 +240,20 @@ function detectDefaultLanguage() {
 
 export function LanguageProvider({ children }) {
   const [lang, setLang] = useState(() => detectDefaultLanguage());
+
+  useEffect(() => {
+    // If no language manually saved, detect from geo location
+    const saved = localStorage.getItem("selectedLanguage");
+    if (!saved) {
+      base44.functions.invoke("getLocationPrice", { language: "en" })
+        .then((res) => {
+          if (res.data?.detected_country === "JP") {
+            setLang("ja");
+          }
+        })
+        .catch(() => {});
+    }
+  }, []);
 
   useEffect(() => {
     const handleStorage = () => {
