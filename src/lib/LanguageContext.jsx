@@ -242,9 +242,9 @@ export function LanguageProvider({ children }) {
   const [lang, setLang] = useState(() => detectDefaultLanguage());
 
   useEffect(() => {
-    // If no language manually saved, detect from geo location
-    const saved = localStorage.getItem("selectedLanguage");
-    if (!saved) {
+    // Always check geo on first visit (only skip if user manually picked a language)
+    const manuallySet = localStorage.getItem("manualLanguageSet");
+    if (!manuallySet) {
       base44.functions.invoke("getLocationPrice", { language: "en" })
         .then((res) => {
           if (res.data?.detected_country === "JP") {

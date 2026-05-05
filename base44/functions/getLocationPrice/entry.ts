@@ -53,8 +53,8 @@ Deno.serve(async (req) => {
 
     console.log(`Detected country: ${detectedCountry}, language: ${language}`);
 
-    // Fetch all active pricing rules
-    const rules = await base44.asServiceRole.entities.PricingRule.filter({ is_active: true });
+    // Fetch all active pricing rules (service role — no user auth required)
+    const rules = await base44.asServiceRole.entities.PricingRule.filter({ is_active: true }, "-priority", 100);
 
     if (!rules || rules.length === 0) {
       console.log("No pricing rules found, returning default");

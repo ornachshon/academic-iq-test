@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import { ChevronDown } from "lucide-react";
+import { useLanguage } from "@/lib/LanguageContext";
 
 const languages = [
   { code: "en", label: "EN" },
@@ -8,12 +9,10 @@ const languages = [
 ];
 
 export default function LanguageSelector() {
-  const [selected, setSelected] = useState(() => {
-    const saved = localStorage.getItem("selectedLanguage");
-    return languages.find(l => l.code === saved) || languages[0];
-  });
+  const { lang } = useLanguage();
   const [open, setOpen] = useState(false);
   const ref = useRef(null);
+  const selected = languages.find(l => l.code === lang) || languages[0];
 
   useEffect(() => {
     const handleClickOutside = (e) => {
@@ -38,7 +37,7 @@ export default function LanguageSelector() {
           {languages.map((lang) => (
             <button
               key={lang.code}
-              onClick={() => { setSelected(lang); localStorage.setItem("selectedLanguage", lang.code); window.dispatchEvent(new Event("languageChanged")); setOpen(false); }}
+              onClick={() => { localStorage.setItem("selectedLanguage", lang.code); localStorage.setItem("manualLanguageSet", "true"); window.dispatchEvent(new Event("languageChanged")); setOpen(false); }}
               className={`w-full flex items-center justify-center px-2 py-2 text-xs text-left hover:bg-gray-50 transition-colors ${selected.code === lang.code ? "bg-gray-50 font-medium" : "text-gray-700"}`}
             >
               <span>{lang.label}</span>
