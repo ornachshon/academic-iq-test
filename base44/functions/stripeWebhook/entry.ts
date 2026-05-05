@@ -42,6 +42,53 @@ Deno.serve(async (req) => {
 
       console.log("Processing payment for email:", email);
 
+      // Send receipt email via Brevo
+      const score = session.metadata?.score || "";
+      const amountTotal = session.amount_total;
+      const currency = (session.currency || "usd").toUpperCase();
+      const formattedAmount = amountTotal ? `${(amountTotal / 100).toFixed(2)} ${currency}` : "";
+
+      const receiptRes = await fetch("https://api.brevo.com/v3/smtp/email", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", "api-key": BREVO_API_KEY },
+        body: JSON.stringify({
+          to: [{ email }],
+          subject: "Your Academic IQ Test – Payment Receipt",
+          htmlContent: `
+            <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; color: #333;">
+              <div style="background: #0C3547; padding: 24px; text-align: center;">
+                <img src="https://media.base44.com/images/public/69b1aedc5a0abb358cd40ec0/cbc52774d_AIQlogo-Square.png" alt="Academic IQ Test" style="height: 60px;" />
+              </div>
+              <div style="padding: 32px;">
+                <h2 style="color: #0C3547;">Payment Receipt</h2>
+                <p>Thank you for your purchase! Here is your receipt summary:</p>
+                <table style="width: 100%; border-collapse: collapse; margin: 20px 0;">
+                  <tr style="border-bottom: 1px solid #eee;">
+                    <td style="padding: 10px 0; color: #555;">Product</td>
+                    <td style="padding: 10px 0; text-align: right; font-weight: bold;">Academic IQ Test – Full Report & Certificate</td>
+                  </tr>
+                  ${score ? `<tr style="border-bottom: 1px solid #eee;">
+                    <td style="padding: 10px 0; color: #555;">Your IQ Score</td>
+                    <td style="padding: 10px 0; text-align: right; font-weight: bold; color: #F5921B; font-size: 20px;">${score}</td>
+                  </tr>` : ""}
+                  ${formattedAmount ? `<tr>
+                    <td style="padding: 10px 0; color: #555;">Amount Paid</td>
+                    <td style="padding: 10px 0; text-align: right; font-weight: bold;">${formattedAmount}</td>
+                  </tr>` : ""}
+                </table>
+                <p style="margin-top: 24px;">You can now access your detailed results and download your certificate by visiting the website.</p>
+                <p style="color: #888; font-size: 13px; margin-top: 32px;">If you have any questions, please contact us at support@academiciqtest.com</p>
+              </div>
+              <div style="background: #f5f5f5; padding: 16px; text-align: center; font-size: 12px; color: #aaa;">
+                © Academic IQ Test. All rights reserved.
+              </div>
+            </div>
+          `
+        })
+      });
+      const receiptText = await receiptRes.text();
+      console.log("Receipt email sent:", receiptRes.status, receiptText);
+
       const headers = { "Content-Type": "application/json", "api-key": BREVO_API_KEY };
       const emailBody = JSON.stringify({ emails: [email] });
 
