@@ -33,7 +33,13 @@ export default function IQTest() {
     // On mobile, if this is the last question, scroll to the Finish button
     if (currentQ === questions.length - 1 && window.innerWidth < 768) {
       setTimeout(() => {
-        finishButtonRef.current?.scrollIntoView({ behavior: "smooth", block: "center" });
+        if (finishButtonRef.current) {
+          const rect = finishButtonRef.current.getBoundingClientRect();
+          const isVisible = rect.top >= 0 && rect.bottom <= window.innerHeight;
+          if (!isVisible) {
+            finishButtonRef.current.scrollIntoView({ behavior: "smooth", block: "nearest" });
+          }
+        }
       }, 450);
     }
     setTimeout(() => {
