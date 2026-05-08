@@ -60,7 +60,7 @@ export default function QuestionCard({ question, selectedAnswer, onSelectAnswer 
         </div>
 
         {/* Answers Area */}
-        <div className="bg-white rounded-2xl border border-gray-200 p-6 md:p-8 shadow-sm">
+        <div className="bg-white rounded-2xl border border-gray-200 p-4 md:p-8 shadow-sm">
           {!question.options_image && (
             <h4 className="text-[#0C3547] font-bold text-lg mb-4 border-b border-[#0C3547]/30 pb-3 w-full">
               Please choose an answer:
@@ -68,8 +68,8 @@ export default function QuestionCard({ question, selectedAnswer, onSelectAnswer 
           )}
 
           {question.options_image ? (
-            <div className="relative select-none" style={(question.id === 17 || question.id === 19) ? { width: "85%", margin: "4% auto 0" } : {}}>
-              <img src={question.options_image} alt="Answer options" className="w-full rounded-xl" draggable={false} />
+            <div className="relative select-none" style={(question.id === 17 || question.id === 19) ? { width: "85%", margin: "4% auto 0" } : { width: "100%" }}>
+              <img src={question.options_image} alt="Answer options" className="w-full rounded-xl" draggable={false} style={{ display: "block" }} />
               {/* Clickable overlays aligned to each A-F option cell (below the header ~18%, 2 cols × 3 rows) */}
               {[0,1,2,3,4,5].map((idx) => {
                 const col = idx % 2;
