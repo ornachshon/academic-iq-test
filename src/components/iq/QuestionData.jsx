@@ -7,7 +7,7 @@ const questions = [
     category_question: "Visuospatial Pattern Reasoning",
     question: "Which Shape is missing?",
     image: "https://media.base44.com/images/public/69b1aedc5a0abb358cd40ec0/727ce5af6_image.png",
-    options_image: "https://media.base44.com/images/public/69b1aedc5a0abb358cd40ec0/76e56ebdc_image.png",
+    options_image: "https://media.base44.com/images/public/69b1aedc5a0abb358cd40ec0/2107b9748_image.png",
     options: ["A", "B", "C", "D", "E", "F"],
     correct: 5,
     explanation: "The correct answer is F — a fully filled dark circle."
