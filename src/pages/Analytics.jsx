@@ -263,6 +263,7 @@ export default function Analytics() {
                 <thead>
                   <tr className="border-b border-gray-100 text-left">
                     <th className="px-4 py-3 text-xs font-semibold text-gray-500 uppercase">Email</th>
+                    <th className="px-4 py-3 text-xs font-semibold text-gray-500 uppercase">User ID</th>
                     <th className="px-4 py-3 text-xs font-semibold text-gray-500 uppercase">Score</th>
                     <th className="px-4 py-3 text-xs font-semibold text-gray-500 uppercase">Correct</th>
                     <th className="px-4 py-3 text-xs font-semibold text-gray-500 uppercase">Time (s)</th>
@@ -275,6 +276,7 @@ export default function Analytics() {
                     .map((r, idx) => (
                       <tr key={r.id || idx} className="border-b border-gray-50 hover:bg-gray-50 transition-colors">
                         <td className="px-4 py-3 text-gray-700">{r.email || <span className="text-gray-300">—</span>}</td>
+                        <td className="px-4 py-3 text-gray-400 text-xs">{r.user_id || "—"}</td>
                         <td className="px-4 py-3 font-bold text-[#F5921B]">{r.score}</td>
                         <td className="px-4 py-3 text-gray-600">{r.correct_answers}/{r.total_questions || 30}</td>
                         <td className="px-4 py-3 text-gray-600">{r.time_taken_seconds || "—"}</td>
