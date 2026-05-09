@@ -3,6 +3,10 @@
   "type": "object",
   "allow_public_create": true,
   "properties": {
+    "email": {
+      "type": "string",
+      "description": "User's email address collected after test"
+    },
     "user_id": {
       "type": "string",
       "description": "Unique identifier for this test submission"
@@ -27,10 +31,6 @@
       "type": "number",
       "description": "Time taken to complete the test in seconds"
     },
-    "email": {
-      "type": "string",
-      "description": "User's email address collected after test"
-    },
     "answers": {
       "type": "array",
       "description": "Array of user answers",
@@ -53,5 +53,30 @@
   "required": [
     "score",
     "correct_answers"
-  ]
+  ],
+  "rls": {
+    "create": {},
+    "read": {
+      "$or": [
+        {
+          "data.email": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
 }
