@@ -20,6 +20,25 @@ export default function Analytics() {
   const [dateFrom, setDateFrom] = useState("");
   const [dateTo, setDateTo] = useState("");
 
+  // IQ Results state
+  const [iqResults, setIqResults] = useState([]);
+  const [iqLoading, setIqLoading] = useState(true);
+  const [emailFilter, setEmailFilter] = useState("");
+
+  useEffect(() => {
+    async function fetchIQResults() {
+      try {
+        const results = await base44.entities.IQResult.list('-created_date', 50000);
+        setIqResults(results || []);
+      } catch {
+        setIqResults([]);
+      } finally {
+        setIqLoading(false);
+      }
+    }
+    fetchIQResults();
+  }, []);
+
   useEffect(() => {
     async function fetchData() {
       try {
@@ -223,6 +242,55 @@ export default function Analytics() {
             )}
           </>
         )}
+
+        {/* IQ Results Section */}
+        <div className="mt-12">
+          <h2 className="text-xl font-bold text-[#0C3547] mb-4">IQ Results</h2>
+          <div className="bg-white border border-gray-200 rounded-xl shadow-sm p-4 mb-4">
+            <input
+              type="text"
+              placeholder="Filter by email..."
+              value={emailFilter}
+              onChange={e => setEmailFilter(e.target.value)}
+              className="border border-gray-200 rounded-lg px-3 py-2 text-sm text-gray-700 w-full max-w-xs focus:outline-none focus:border-[#0C3547]"
+            />
+          </div>
+          {iqLoading ? (
+            <div className="text-center text-gray-400 py-10">Loading...</div>
+          ) : (
+            <div className="bg-white rounded-xl border border-gray-200 shadow-sm overflow-x-auto">
+              <table className="w-full text-sm">
+                <thead>
+                  <tr className="border-b border-gray-100 text-left">
+                    <th className="px-4 py-3 text-xs font-semibold text-gray-500 uppercase">Email</th>
+                    <th className="px-4 py-3 text-xs font-semibold text-gray-500 uppercase">Score</th>
+                    <th className="px-4 py-3 text-xs font-semibold text-gray-500 uppercase">Correct</th>
+                    <th className="px-4 py-3 text-xs font-semibold text-gray-500 uppercase">Time (s)</th>
+                    <th className="px-4 py-3 text-xs font-semibold text-gray-500 uppercase">Date</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {iqResults
+                    .filter(r => !emailFilter || (r.email || "").toLowerCase().includes(emailFilter.toLowerCase()))
+                    .map((r, idx) => (
+                      <tr key={r.id || idx} className="border-b border-gray-50 hover:bg-gray-50 transition-colors">
+                        <td className="px-4 py-3 text-gray-700">{r.email || <span className="text-gray-300">—</span>}</td>
+                        <td className="px-4 py-3 font-bold text-[#F5921B]">{r.score}</td>
+                        <td className="px-4 py-3 text-gray-600">{r.correct_answers}/{r.total_questions || 30}</td>
+                        <td className="px-4 py-3 text-gray-600">{r.time_taken_seconds || "—"}</td>
+                        <td className="px-4 py-3 text-gray-400 text-xs">{r.created_date ? r.created_date.slice(0, 10) : "—"}</td>
+                      </tr>
+                    ))}
+                  {iqResults.filter(r => !emailFilter || (r.email || "").toLowerCase().includes(emailFilter.toLowerCase())).length === 0 && (
+                    <tr>
+                      <td colSpan={5} className="px-4 py-8 text-center text-gray-400">No results found.</td>
+                    </tr>
+                  )}
+                </tbody>
+              </table>
+            </div>
+          )}
+        </div>
       </main>
     </div>
   );
