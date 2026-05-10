@@ -192,50 +192,60 @@ export default function Analytics() {
               </div>
             )}
 
-            {/* Funnel */}
+            {/* Funnel Table */}
             <h2 className="text-xl font-bold text-[#0C3547] mb-4">Conversion Funnel</h2>
-            <div className="bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden">
-              {FUNNEL_STEPS.map((step, idx) => {
-                const count = counts[step.key] || 0;
-                const pct = startCount > 0 ? Math.min(100, (count / topCount) * 100) : 0;
-                const prev = idx > 0 ? counts[FUNNEL_STEPS[idx - 1].key] || 0 : 0;
-                const dropPct = idx > 0 && prev > 0
-                  ? (((prev - count) / prev) * 100).toFixed(1)
-                  : null;
+            <div className="bg-white rounded-xl border border-gray-200 shadow-sm overflow-x-auto">
+              <table className="w-full text-sm">
+                <thead>
+                  <tr className="border-b border-gray-100 bg-gray-50 text-left">
+                    <th className="px-5 py-3 text-xs font-semibold text-gray-500 uppercase">Step</th>
+                    <th className="px-5 py-3 text-xs font-semibold text-gray-500 uppercase text-right">Count</th>
+                    <th className="px-5 py-3 text-xs font-semibold text-gray-500 uppercase text-right">% of Top</th>
+                    <th className="px-5 py-3 text-xs font-semibold text-gray-500 uppercase text-right">Drop-off</th>
+                    <th className="px-5 py-3 text-xs font-semibold text-gray-500 uppercase w-40">Progress</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {FUNNEL_STEPS.map((step, idx) => {
+                    const count = counts[step.key] || 0;
+                    const pct = topCount > 0 ? Math.min(100, (count / topCount) * 100) : 0;
+                    const prev = idx > 0 ? counts[FUNNEL_STEPS[idx - 1].key] || 0 : 0;
+                    const dropPct = idx > 0 && prev > 0
+                      ? (((prev - count) / prev) * 100).toFixed(1)
+                      : null;
 
-                return (
-                  <div
-                    key={step.key}
-                    className={`px-6 py-5 ${idx !== FUNNEL_STEPS.length - 1 ? "border-b border-gray-100" : ""}`}
-                  >
-                    <div className="flex items-center justify-between mb-2">
-                      <div className="flex items-center gap-3 flex-wrap">
-                        <span className="text-sm font-semibold text-[#0C3547]">{step.label}</span>
-                        {dropPct !== null && Number(dropPct) > 0 && (
-                          <span className="text-xs text-red-400 bg-red-50 px-2 py-0.5 rounded-full">
-                            −{dropPct}% drop-off
-                          </span>
-                        )}
-                      </div>
-                      <div className="flex items-center gap-3 ml-4 shrink-0">
-                        <span className="text-sm font-bold text-gray-700">{count.toLocaleString()}</span>
-                        {startCount > 0 && (
-                          <span className="text-xs text-gray-400 w-12 text-right">{pct.toFixed(1)}%</span>
-                        )}
-                      </div>
-                    </div>
-                    <div className="w-full bg-gray-100 rounded-full h-3">
-                      <div
-                        className="h-3 rounded-full transition-all duration-700"
-                        style={{ width: `${pct}%`, backgroundColor: step.color }}
-                      />
-                    </div>
-                  </div>
-                );
-              })}
+                    return (
+                      <tr key={step.key} className="border-b border-gray-50 hover:bg-gray-50 transition-colors last:border-0">
+                        <td className="px-5 py-4">
+                          <div className="flex items-center gap-2">
+                            <span className="w-2.5 h-2.5 rounded-full shrink-0" style={{ backgroundColor: step.color }} />
+                            <span className="font-medium text-[#0C3547]">{step.label}</span>
+                          </div>
+                        </td>
+                        <td className="px-5 py-4 text-right font-bold text-gray-800">{count.toLocaleString()}</td>
+                        <td className="px-5 py-4 text-right text-gray-500">{topCount > 0 ? `${pct.toFixed(1)}%` : "—"}</td>
+                        <td className="px-5 py-4 text-right">
+                          {dropPct !== null && Number(dropPct) > 0
+                            ? <span className="text-xs text-red-500 bg-red-50 px-2 py-0.5 rounded-full">−{dropPct}%</span>
+                            : <span className="text-gray-300">—</span>
+                          }
+                        </td>
+                        <td className="px-5 py-4">
+                          <div className="w-full bg-gray-100 rounded-full h-2">
+                            <div
+                              className="h-2 rounded-full transition-all duration-700"
+                              style={{ width: `${pct}%`, backgroundColor: step.color }}
+                            />
+                          </div>
+                        </td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </table>
             </div>
 
-            {startCount === 0 && (
+            {Object.keys(counts).length === 0 && (
               <p className="text-center text-gray-400 mt-8 text-sm">
                 No funnel data yet. Events will appear here as users go through the flow.
               </p>
