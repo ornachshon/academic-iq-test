@@ -84,10 +84,10 @@ export default function Email() {
       if (val) utmValues[key] = val;
     });
 
-    // Build FUNNEL_URL
+    // Build FUNNEL_URL (include all UTM params)
     const funnelBase = 'https://academiciqtest.com/Checkout';
     const funnelParams = new URLSearchParams();
-    ['utm_source', 'utm_medium', 'utm_campaign'].forEach((key) => {
+    ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content'].forEach((key) => {
       if (utmValues[key]) funnelParams.append(key, utmValues[key]);
     });
     const funnelUrl = funnelParams.toString() ? `${funnelBase}?${funnelParams.toString()}` : funnelBase;
