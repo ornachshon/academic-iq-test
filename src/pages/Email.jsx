@@ -8,7 +8,7 @@ import questions, { calculateDetailedIQ } from "@/components/iq/QuestionData";
 import { useLanguage } from "@/lib/LanguageContext";
 
 export default function Email() {
-  const { t } = useLanguage();
+  const { t, lang } = useLanguage();
   const navigate = useNavigate();
   const location = useLocation();
   const [email, setEmail] = useState("");
@@ -51,7 +51,7 @@ export default function Email() {
     const user_id = `USR-${Date.now().toString(36).toUpperCase()}-${Math.random().toString(36).substring(2, 6).toUpperCase()}`;
 
     // Save IQ result to get a unique ID for this user
-    const language = localStorage.getItem("selectedLanguage") || "en";
+    const language = lang || localStorage.getItem("selectedLanguage") || "en";
     let resultId = null;
     try {
       const savedResult = await base44.entities.IQResult.create({
