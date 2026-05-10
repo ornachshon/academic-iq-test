@@ -1,6 +1,5 @@
 import { useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { trackFunnel } from "@/lib/trackFunnel";
 
 export default function Payment() {
   const location = useLocation();
@@ -9,7 +8,6 @@ export default function Payment() {
   const email = location.state?.email || "";
 
   useEffect(() => {
-    trackFunnel("payment_completed");
     navigate("/Info", { state: { score, email }, replace: true });
   }, []);
 
