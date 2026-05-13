@@ -3,7 +3,13 @@ import { Toaster } from "@/components/ui/toaster"
 import { QueryClientProvider } from '@tanstack/react-query'
 import { LanguageProvider } from '@/lib/LanguageContext'
 import { queryClientInstance } from '@/lib/query-client'
-import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes, Navigate, useSearchParams } from 'react-router-dom';
+
+const NavigateWithParams = ({ to }) => {
+  const [search] = useSearchParams();
+  const qs = search.toString();
+  return <Navigate to={qs ? `${to}?${qs}` : to} replace />;
+};
 import PageNotFound from './lib/PageNotFound';
 import Layout from './Layout';
 
@@ -47,7 +53,7 @@ function App() {
       <LanguageProvider>
       <Router>
         <Routes>
-          <Route path="/" element={<Navigate to="/Home" replace />} />
+          <Route path="/" element={<NavigateWithParams to="/Home" />} />
           <Route path="/Home" element={<LayoutWrapper currentPageName="Home"><Home /></LayoutWrapper>} />
           <Route path="/IQTest" element={<LayoutWrapper currentPageName="IQTest"><IQTest /></LayoutWrapper>} />
           <Route path="/Email" element={<Email />} />
