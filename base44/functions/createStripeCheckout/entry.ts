@@ -4,7 +4,7 @@ import { createClientFromRequest } from "npm:@base44/sdk@0.8.25";
 Deno.serve(async (req) => {
   try {
     const base44 = createClientFromRequest(req);
-    const { email, score, priceAmount, priceCurrency, resultId } = await req.json();
+    const { email, score, priceAmount, priceCurrency, resultId, couponId } = await req.json();
 
     const STRIPE_SECRET_KEY = Deno.env.get("STRIPE_SECRET_KEY");
     if (!STRIPE_SECRET_KEY) {
@@ -41,6 +41,7 @@ Deno.serve(async (req) => {
           quantity: 1,
         },
       ],
+      ...(couponId ? { discounts: [{ coupon: couponId }] } : {}),
       metadata: {
         score: String(score || ""),
         email: email || "",
