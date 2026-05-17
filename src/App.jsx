@@ -30,6 +30,7 @@ import Support from './pages/Support';
 import Blog from './pages/Blog.jsx';
 import BlogArticle from './pages/BlogArticle.jsx';
 import BlogAdmin from './pages/BlogAdmin.jsx';
+import CheckoutDiscount from './pages/CheckoutDiscount.jsx';
 
 const LayoutWrapper = ({ children, currentPageName }) => (
   <Layout currentPageName={currentPageName}>{children}</Layout>
@@ -71,6 +72,7 @@ function App() {
           <Route path="/Blog" element={<Blog />} />
           <Route path="/Blog/:slug" element={<BlogArticle />} />
           <Route path="/BlogAdmin" element={<BlogAdmin />} />
+          <Route path="/checkout-discount" element={<CheckoutDiscount />} />
           <Route path="*" element={<PageNotFound />} />
         </Routes>
         <Toaster />
