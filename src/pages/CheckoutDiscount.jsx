@@ -41,7 +41,7 @@ export default function CheckoutDiscount() {
       const res = await base44.functions.invoke('createStripeCheckout', {
         email,
         score: resultData?.score || null,
-        priceAmount: discountedPrice,
+        priceAmount: pricing.price,
         priceCurrency: pricing.currency_code,
         resultId: resultData?.id || null,
         couponId: couponId || undefined,
