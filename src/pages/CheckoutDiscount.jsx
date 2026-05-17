@@ -15,41 +15,35 @@ export default function CheckoutDiscount() {
   const [resultData, setResultData] = useState(null);
   const [loadingResult, setLoadingResult] = useState(true);
   const [isRedirecting, setIsRedirecting] = useState(false);
-  const [error, setError] = useState('');
 
   const discountedPrice = pricing.price * 0.5;
 
   useEffect(() => {
     if (!email) {
       setLoadingResult(false);
-      setError('No email provided.');
       return;
     }
-    base44.entities.IQResult.filter({ email })
-      .then((results) => {
-        if (results && results.length > 0) {
-          // Use the most recent result
-          const latest = results.sort((a, b) => new Date(b.created_date) - new Date(a.created_date))[0];
-          setResultData(latest);
-        } else {
-          setError('No result found for this email.');
+    base44.functions.invoke('getResultByEmail', { email })
+      .then((res) => {
+        if (res.data?.result) {
+          setResultData(res.data.result);
         }
+        // If no result found, we still allow checkout — just without score/resultId
       })
-      .catch(() => setError('Failed to load your result.'))
+      .catch((err) => console.error('Could not load result:', err))
       .finally(() => setLoadingResult(false));
   }, [email]);
 
   const handlePayment = async () => {
-    if (!resultData) return;
     trackFunnel('payment_initiated_discount');
     setIsRedirecting(true);
     try {
       const res = await base44.functions.invoke('createStripeCheckout', {
         email,
-        score: resultData.score,
+        score: resultData?.score || null,
         priceAmount: discountedPrice,
         priceCurrency: pricing.currency_code,
-        resultId: resultData.id,
+        resultId: resultData?.id || null,
         couponId: couponId || undefined,
       });
       if (res.data?.url) {
@@ -117,15 +111,10 @@ export default function CheckoutDiscount() {
             </div>
           </div>
 
-          {/* Error state */}
-          {error && (
-            <p className="text-red-500 text-sm text-center">{error}</p>
-          )}
-
           {/* CTA Button */}
           <button
             onClick={handlePayment}
-            disabled={isRedirecting || priceLoading || loadingResult || !!error}
+            disabled={isRedirecting || priceLoading || loadingResult}
             className="bg-[#F5921B] text-white py-3 text-xl font-bold rounded-md w-full hover:bg-[#e0830f] transition-colors disabled:opacity-70 disabled:cursor-not-allowed"
           >
             {isRedirecting ? 'Redirecting to payment...' : loadingResult ? 'Loading...' : 'Get My Results Now'}
