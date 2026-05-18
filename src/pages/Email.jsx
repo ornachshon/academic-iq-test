@@ -58,12 +58,11 @@ export default function Email() {
     let resultId = existingResultId;
     try {
       if (existingResultId) {
-        // Update the pre-saved record with the email
-        await base44.entities.IQResult.update(existingResultId, { email: email.trim() });
-        console.log("IQResult updated with email:", existingResultId);
+        // Update the pre-saved record with the email via backend function
+        await base44.functions.invoke('saveIQResult', { resultId: existingResultId, email: email.trim() });
       } else {
-        // Fallback: create a new record (in case pre-save failed)
-        const savedResult = await base44.entities.IQResult.create({
+        // Fallback: create a new record via backend function
+        const res = await base44.functions.invoke('saveIQResult', {
           user_id,
           timestamp: new Date().toISOString(),
           score,
@@ -73,8 +72,7 @@ export default function Email() {
           email: email.trim(),
           answers: answerDetails
         });
-        resultId = savedResult.id;
-        console.log("IQResult created (fallback):", resultId);
+        resultId = res.data?.id || null;
       }
     } catch (err) {
       console.error("IQResult save failed:", err?.message);

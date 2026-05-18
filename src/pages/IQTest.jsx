@@ -81,7 +81,7 @@ export default function IQTest() {
 
     let resultId = null;
     try {
-      const saved = await base44.entities.IQResult.create({
+      const res = await base44.functions.invoke('saveIQResult', {
         user_id,
         timestamp: new Date().toISOString(),
         score,
@@ -90,7 +90,7 @@ export default function IQTest() {
         time_taken_seconds: timeTaken,
         answers: answerDetails
       });
-      resultId = saved.id;
+      resultId = res.data?.id || null;
     } catch (err) {
       console.error("IQResult pre-save failed:", err?.message);
     }
