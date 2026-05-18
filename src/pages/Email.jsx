@@ -17,27 +17,30 @@ export default function Email() {
   const isValidEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim());
 
   // State passed from IQTest via navigate
-  const { answers = {}, startTime = Date.now() } = location.state || {};
+  const { answers = {}, startTime = Date.now(), resultId: existingResultId = null, score: existingScore = null, correct: existingCorrect = null, timeTaken: existingTimeTaken = null } = location.state || {};
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!email.trim() || isSubmitting) return;
     setIsSubmitting(true);
 
-    const timeTaken = Math.floor((Date.now() - startTime) / 1000);
-    let correct = 0;
-    const answerDetails = questions.map((q, idx) => {
-      const selected = answers[idx];
-      const isCorrect = selected === q.correct;
-      if (isCorrect) correct++;
-      return {
-        question_id: q.id,
-        selected_answer: selected ?? -1,
-        correct: isCorrect
-      };
-    });
+    // Use pre-computed values from IQTest (passed via state), fallback to recalculating
+    let timeTaken = existingTimeTaken ?? Math.floor((Date.now() - startTime) / 1000);
+    let correct = existingCorrect ?? 0;
+    let score = existingScore;
+    let answerDetails;
 
-    const { iqScore: score } = calculateDetailedIQ(answerDetails);
+    if (score === null) {
+      correct = 0;
+      answerDetails = questions.map((q, idx) => {
+        const selected = answers[idx];
+        const isCorrect = selected === q.correct;
+        if (isCorrect) correct++;
+        return { question_id: q.id, selected_answer: selected ?? -1, correct: isCorrect };
+      });
+      const { iqScore } = calculateDetailedIQ(answerDetails);
+      score = iqScore;
+    }
 
     try {
       base44.analytics.track({ eventName: "assessment_completed", properties: { score, correct_answers: correct } });
@@ -50,24 +53,31 @@ export default function Email() {
     // Generate a readable unique user_id for this submission
     const user_id = `USR-${Date.now().toString(36).toUpperCase()}-${Math.random().toString(36).substring(2, 6).toUpperCase()}`;
 
-    // Save IQ result to get a unique ID for this user
+    // Update or create IQ result with email
     const language = lang || localStorage.getItem("selectedLanguage") || "en";
-    let resultId = null;
+    let resultId = existingResultId;
     try {
-      const savedResult = await base44.entities.IQResult.create({
-        user_id,
-        timestamp: new Date().toISOString(),
-        score,
-        correct_answers: correct,
-        total_questions: questions.length,
-        time_taken_seconds: timeTaken,
-        email: email.trim(),
-        answers: answerDetails
-      });
-      resultId = savedResult.id;
-      console.log("IQResult created:", resultId, "user_id:", user_id);
+      if (existingResultId) {
+        // Update the pre-saved record with the email
+        await base44.entities.IQResult.update(existingResultId, { email: email.trim() });
+        console.log("IQResult updated with email:", existingResultId);
+      } else {
+        // Fallback: create a new record (in case pre-save failed)
+        const savedResult = await base44.entities.IQResult.create({
+          user_id,
+          timestamp: new Date().toISOString(),
+          score,
+          correct_answers: correct,
+          total_questions: questions.length,
+          time_taken_seconds: timeTaken,
+          email: email.trim(),
+          answers: answerDetails
+        });
+        resultId = savedResult.id;
+        console.log("IQResult created (fallback):", resultId);
+      }
     } catch (err) {
-      console.error("IQResult create failed — status:", err?.response?.status, "message:", err?.message, "data:", JSON.stringify(err?.response?.data));
+      console.error("IQResult save failed:", err?.message);
     }
 
     // Save email, score, and generate USER_ID, persist to localStorage

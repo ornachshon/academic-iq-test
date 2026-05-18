@@ -7,7 +7,7 @@ import { ChevronLeft, SkipForward, ArrowRight } from "lucide-react";
 import { base44 } from "@/api/base44Client";
 import { trackFunnel } from "@/lib/trackFunnel";
 import { useLanguage } from "@/lib/LanguageContext";
-import questions from "@/components/iq/QuestionData";
+import questions, { calculateDetailedIQ } from "@/components/iq/QuestionData";
 import Timer from "@/components/iq/Timer";
 import QuestionCard from "@/components/iq/QuestionCard";
 import QuestionNavigator from "@/components/iq/QuestionNavigator";
@@ -63,10 +63,39 @@ export default function IQTest() {
 
   const completedRef = useRef(false);
 
-  const goToEmail = useCallback(() => {
+  const goToEmail = useCallback(async () => {
     completedRef.current = true;
     trackFunnel("test_finished");
-    navigate("/Email", { state: { answers, startTime } });
+
+    // Save IQResult immediately (without email) so no data is lost
+    const timeTaken = Math.floor((Date.now() - startTime) / 1000);
+    let correct = 0;
+    const answerDetails = questions.map((q, idx) => {
+      const selected = answers[idx];
+      const isCorrect = selected === q.correct;
+      if (isCorrect) correct++;
+      return { question_id: q.id, selected_answer: selected ?? -1, correct: isCorrect };
+    });
+    const { iqScore: score } = calculateDetailedIQ(answerDetails);
+    const user_id = `USR-${Date.now().toString(36).toUpperCase()}-${Math.random().toString(36).substring(2, 6).toUpperCase()}`;
+
+    let resultId = null;
+    try {
+      const saved = await base44.entities.IQResult.create({
+        user_id,
+        timestamp: new Date().toISOString(),
+        score,
+        correct_answers: correct,
+        total_questions: questions.length,
+        time_taken_seconds: timeTaken,
+        answers: answerDetails
+      });
+      resultId = saved.id;
+    } catch (err) {
+      console.error("IQResult pre-save failed:", err?.message);
+    }
+
+    navigate("/Email", { state: { answers, startTime, resultId, score, correct, timeTaken } });
   }, [navigate, answers, startTime]);
 
   const handleFinishClick = () => {
