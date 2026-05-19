@@ -17,6 +17,17 @@ export default function Analytics() {
   const [counts, setCounts] = useState({});
   const [dailyData, setDailyData] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [authorized, setAuthorized] = useState(false);
+
+  useEffect(() => {
+    base44.auth.me().then(user => {
+      if (user?.role === 'admin') {
+        setAuthorized(true);
+      } else {
+        window.location.replace('/Home');
+      }
+    }).catch(() => window.location.replace('/Home'));
+  }, []);
   const [dateFrom, setDateFrom] = useState("");
   const [dateTo, setDateTo] = useState("");
 
@@ -77,6 +88,8 @@ export default function Analytics() {
   const conversionRate = startCount > 0 && completedCount > 0
     ? ((completedCount / startCount) * 100).toFixed(1)
     : null;
+
+  if (!authorized) return null;
 
   return (
     <div className="min-h-screen bg-gray-50" style={{ fontFamily: "'Segoe UI', Arial, sans-serif" }}>

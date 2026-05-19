@@ -234,12 +234,11 @@ export default function PricingAdmin() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    // Only accessible from the admin panel (embedded in iframe)
-    // Redirect to Home if accessed directly as a website URL
-    const isEmbedded = window.self !== window.top;
-    if (!isEmbedded) {
-      navigate('/Home', { replace: true });
-    }
+    base44.auth.me().then(user => {
+      if (user?.role !== 'admin') {
+        navigate('/Home', { replace: true });
+      }
+    }).catch(() => navigate('/Home', { replace: true }));
   }, []);
 
   const [rules, setRules] = useState([]);
