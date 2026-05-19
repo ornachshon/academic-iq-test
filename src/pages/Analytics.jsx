@@ -17,7 +17,7 @@ export default function Analytics() {
   const [counts, setCounts] = useState({});
   const [dailyData, setDailyData] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [authorized, setAuthorized] = useState(false);
+  const [authorized, setAuthorized] = useState(null);
 
   useEffect(() => {
     base44.auth.me().then(user => {
@@ -89,7 +89,7 @@ export default function Analytics() {
     ? ((completedCount / startCount) * 100).toFixed(1)
     : null;
 
-  if (!authorized) return null;
+  if (!authorized) return <div className="min-h-screen bg-gray-50 flex items-center justify-center"><p className="text-gray-400">Checking access...</p></div>;
 
   return (
     <div className="min-h-screen bg-gray-50" style={{ fontFamily: "'Segoe UI', Arial, sans-serif" }}>

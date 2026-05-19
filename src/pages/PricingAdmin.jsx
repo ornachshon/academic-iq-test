@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
-const IS_ADMIN_PANEL = window.self !== window.top || window.location.hostname === 'localhost';
 import { base44 } from "@/api/base44Client";
 import { DragDropContext, Droppable, Draggable } from "@hello-pangea/dnd";
 import { Plus, Pencil, Trash2, Save, X, Globe, Tag, ToggleLeft, ToggleRight, ChevronDown, GripVertical, GripHorizontal } from "lucide-react";
@@ -235,12 +234,15 @@ export default function PricingAdmin() {
 
   useEffect(() => {
     base44.auth.me().then(user => {
-      if (user?.role !== 'admin') {
+      if (user?.role === 'admin') {
+        setAuthorized(true);
+      } else {
         navigate('/Home', { replace: true });
       }
     }).catch(() => navigate('/Home', { replace: true }));
   }, []);
 
+  const [authorized, setAuthorized] = useState(null);
   const [rules, setRules] = useState([]);
   const [loading, setLoading] = useState(true);
   const [editingId, setEditingId] = useState(null);
@@ -307,6 +309,8 @@ export default function PricingAdmin() {
     }
     setTestLoading(false);
   };
+
+  if (!authorized) return <div className="min-h-screen bg-gray-50 flex items-center justify-center"><p className="text-gray-400">Checking access...</p></div>;
 
   return (
     <div className="min-h-screen bg-gray-50" style={{ fontFamily: "'Segoe UI', Arial, sans-serif" }}>
