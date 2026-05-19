@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { base44 } from "@/api/base44Client";
+import AdminPasswordGate from "@/components/admin/AdminPasswordGate";
 import { Link } from "react-router-dom";
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Cell, LineChart, Line, Legend } from "recharts";
 
@@ -92,6 +93,7 @@ export default function Analytics() {
   if (!authorized) return <div className="min-h-screen bg-gray-50 flex items-center justify-center"><p className="text-gray-400">Checking access...</p></div>;
 
   return (
+    <AdminPasswordGate>
     <div className="min-h-screen bg-gray-50" style={{ fontFamily: "'Segoe UI', Arial, sans-serif" }}>
       {/* Header */}
       <header className="bg-white border-b border-gray-200 sticky top-0 z-50">
@@ -318,5 +320,6 @@ export default function Analytics() {
         </div>
       </main>
     </div>
+    </AdminPasswordGate>
   );
 }

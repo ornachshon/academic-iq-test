@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-
+import AdminPasswordGate from "@/components/admin/AdminPasswordGate";
 import { base44 } from "@/api/base44Client";
 import { DragDropContext, Droppable, Draggable } from "@hello-pangea/dnd";
 import { Plus, Pencil, Trash2, Save, X, Globe, Tag, ToggleLeft, ToggleRight, ChevronDown, GripVertical, GripHorizontal } from "lucide-react";
@@ -313,6 +313,7 @@ export default function PricingAdmin() {
   if (!authorized) return <div className="min-h-screen bg-gray-50 flex items-center justify-center"><p className="text-gray-400">Checking access...</p></div>;
 
   return (
+    <AdminPasswordGate>
     <div className="min-h-screen bg-gray-50" style={{ fontFamily: "'Segoe UI', Arial, sans-serif" }}>
       {/* Header */}
       <div className="bg-[#0C3547] text-white px-6 py-5">
@@ -497,5 +498,6 @@ export default function PricingAdmin() {
         </div>
       </div>
     </div>
+    </AdminPasswordGate>
   );
 }
