@@ -69,12 +69,12 @@ export default function Checkout() {
 
   return (
     <div className="min-h-screen bg-gray-100 text-sm text-gray-800">
-      {/* Header with logo */}
-      <div className="bg-white border-b border-gray-200 flex justify-center py-3 px-4">
+      {/* Logo Header */}
+      <div className="bg-white flex justify-center py-4 border-b border-gray-200">
         <img
-          src="https://media.base44.com/images/public/69b1aedc5a0abb358cd40ec0/cbc52774d_AIQlogo-Square.png"
+          src="https://media.base44.com/images/public/69b1aedc5a0abb358cd40ec0/b0dd70e25_AIQlogo-Square.png"
           alt="Academic IQ Test"
-          className="h-12 w-12 object-contain"
+          className="h-16 w-16 object-contain"
         />
       </div>
 
