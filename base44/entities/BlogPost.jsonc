@@ -1,0 +1,115 @@
+{
+  "name": "BlogPost",
+  "type": "object",
+  "properties": {
+    "title": {
+      "type": "string",
+      "description": "Article title"
+    },
+    "slug": {
+      "type": "string",
+      "description": "URL-friendly slug (e.g. what-is-iq)"
+    },
+    "meta_description": {
+      "type": "string",
+      "description": "SEO meta description (150-160 chars)"
+    },
+    "meta_keywords": {
+      "type": "string",
+      "description": "Comma-separated SEO keywords"
+    },
+    "banner_image_url": {
+      "type": "string",
+      "description": "URL of the banner/hero image"
+    },
+    "category": {
+      "type": "string",
+      "enum": [
+        "IQ Basics",
+        "Science & Research",
+        "Test Tips",
+        "Brain Health",
+        "Child Development",
+        "Career & Success"
+      ],
+      "description": "Article category"
+    },
+    "author": {
+      "type": "string",
+      "description": "Author name",
+      "default": "Academic IQ Team"
+    },
+    "read_time_minutes": {
+      "type": "number",
+      "description": "Estimated reading time in minutes"
+    },
+    "content": {
+      "type": "string",
+      "description": "Full article HTML/Markdown content"
+    },
+    "excerpt": {
+      "type": "string",
+      "description": "Short excerpt shown in article cards (2-3 sentences)"
+    },
+    "is_published": {
+      "type": "boolean",
+      "description": "Whether the article is live",
+      "default": true
+    },
+    "is_featured": {
+      "type": "boolean",
+      "description": "Show in featured/hero slot",
+      "default": false
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Tags for filtering"
+    },
+    "views": {
+      "type": "number",
+      "description": "View count",
+      "default": 0
+    }
+  },
+  "required": [
+    "title",
+    "slug",
+    "content",
+    "excerpt"
+  ],
+  "rls": {
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "read": {},
+    "update": {
+      "$or": [
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "$or": [
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    }
+  }
+}
