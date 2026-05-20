@@ -69,6 +69,15 @@ export default function Checkout() {
 
   return (
     <div className="min-h-screen bg-gray-100 text-sm text-gray-800">
+      {/* Header with logo */}
+      <div className="bg-white border-b border-gray-200 flex justify-center py-3 px-4">
+        <img
+          src="https://media.base44.com/images/public/69b1aedc5a0abb358cd40ec0/cbc52774d_AIQlogo-Square.png"
+          alt="Academic IQ Test"
+          className="h-12 w-12 object-contain"
+        />
+      </div>
+
       {/* Top banner */}
       <div className="bg-[#0C3547] text-white text-center py-4 px-4">
         <p className="text-base">{t("youCompleted")} <strong>{formatTime(timeTaken)} {t("minutes")}</strong></p>
