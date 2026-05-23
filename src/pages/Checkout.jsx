@@ -24,7 +24,6 @@ function StarRating({ count, total = 5 }) {
       <Star key={i} className={`w-4 h-4 ${i < count ? 'text-yellow-400 fill-yellow-400' : 'text-gray-300 fill-gray-300'}`} />
       )}
     </div>);
-
 }
 
 export default function Checkout() {
@@ -61,6 +60,7 @@ export default function Checkout() {
       setIsRedirecting(false);
     }
   };
+
   const formatTime = (secs) => {
     const m = Math.floor(secs / 60).toString().padStart(2, '0');
     const s = (secs % 60).toString().padStart(2, '0');
@@ -69,14 +69,6 @@ export default function Checkout() {
 
   return (
     <div className="min-h-screen bg-gray-100 text-sm text-gray-800">
-      {/* Header with logo */}
-      <div className="bg-white border-b border-gray-200 flex justify-center py-3 px-4">
-        <img
-          src="https://media.base44.com/images/public/69b1aedc5a0abb358cd40ec0/cbc52774d_AIQlogo-Square.png"
-          alt="Academic IQ Test"
-          className="h-12 w-12 object-contain"
-        />
-      </div>
 
       {/* Top banner */}
       <div className="bg-[#0C3547] text-white text-center py-4 px-4">
@@ -87,9 +79,6 @@ export default function Checkout() {
       {/* Subtitle */}
       <div className="text-center py-5 px-4 bg-white border-b border-gray-200">
         <p className="text-gray-600">{t("iqAnalyzed")}</p>
-        
-
-
       </div>
 
       <div className="max-w-5xl mx-auto px-4 py-6 space-y-4">
@@ -163,23 +152,6 @@ export default function Checkout() {
             <img src="https://upload.wikimedia.org/wikipedia/commons/b/b5/PayPal.svg" alt="PayPal" className="h-6 object-contain" />
           </div>
 
-          {/* Terms checkbox */}
-          <div className="flex items-start gap-2">
-            
-
-
-
-
-
-
-            
-
-
-
-
-
-          </div>
-
           {/* CTA Button */}
           <button
             onClick={handlePayment}
@@ -188,12 +160,6 @@ export default function Checkout() {
             {isRedirecting ? "Redirecting to payment..." : t("continueToPayment")}
           </button>
         </div>
-
-        {/* Fine print */}
-        
-
-
-
 
         {/* Reviews Section */}
         <div className="bg-white border border-gray-200 rounded-sm px-6 py-6">
@@ -218,6 +184,6 @@ export default function Checkout() {
       </div>
 
       <Footer />
-    </div>);
-
+    </div>
+  );
 }
