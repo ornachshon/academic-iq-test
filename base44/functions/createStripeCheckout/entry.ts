@@ -48,6 +48,9 @@ Deno.serve(async (req) => {
         resultId: resultId || "",
       },
       locale: locale || "auto",
+      custom_text: {
+        submit: { message: "Get your score" },
+      },
       success_url: successUrl,
       cancel_url: cancelUrl,
     });
