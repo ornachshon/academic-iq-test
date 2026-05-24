@@ -27,7 +27,7 @@ function StarRating({ count, total = 5 }) {
 }
 
 export default function Checkout() {
-  const { t } = useLanguage();
+  const { t, lang } = useLanguage();
   const [agreed, setAgreed] = useState(false);
   const [isRedirecting, setIsRedirecting] = useState(false);
   const navigate = useNavigate();
@@ -47,7 +47,8 @@ export default function Checkout() {
         score,
         priceAmount: pricing.price,
         priceCurrency: pricing.currency_code,
-        resultId
+        resultId,
+        locale: lang || "auto"
       });
       if (res.data?.url) {
         window.location.href = res.data.url;
