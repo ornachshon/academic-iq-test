@@ -41,6 +41,7 @@ export default function Checkout() {
   const handlePayment = async () => {
     trackFunnel("payment_initiated");
     setIsRedirecting(true);
+    console.log("lang value:", lang);
     try {
       const res = await base44.functions.invoke("createStripeCheckout", {
         email,
