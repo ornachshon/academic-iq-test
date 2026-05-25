@@ -148,7 +148,10 @@ export default function Checkout() {
 
           {/* Payment logos */}
           <div className="flex items-center gap-3 flex-wrap pt-2">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/Visa_Inc._logo.svg" alt="Visa" className="h-6 object-contain" />
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 750 471" className="h-6 object-contain" aria-label="Visa">
+  <rect width="750" height="471" rx="40" fill="#1a1f71"/>
+  <text x="375" y="320" textAnchor="middle" fontFamily="Arial,sans-serif" fontWeight="bold" fontSize="220" fill="white" letterSpacing="-8">VISA</text>
+</svg>
             <img src="https://upload.wikimedia.org/wikipedia/commons/2/2a/Mastercard-logo.svg" alt="Mastercard" className="h-6 object-contain" />
             <img src="https://upload.wikimedia.org/wikipedia/commons/f/fa/American_Express_logo_%282018%29.svg" alt="Amex" className="h-6 object-contain" />
             <img src="https://upload.wikimedia.org/wikipedia/commons/b/b5/PayPal.svg" alt="PayPal" className="h-6 object-contain" />
