@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Star, HelpCircle } from 'lucide-react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import Footer from '@/components/home/Footer';
@@ -38,6 +38,18 @@ export default function Checkout() {
   const resultId = location.state?.resultId || "";
   const { pricing, loading: priceLoading, formatPrice } = useGeoPrice();
 
+  const [timeLeft, setTimeLeft] = useState(10 * 60);
+  useEffect(() => {
+    if (timeLeft <= 0) return;
+    const timer = setInterval(() => setTimeLeft(t => t - 1), 1000);
+    return () => clearInterval(timer);
+  }, [timeLeft]);
+  const formatCountdown = (secs) => {
+    const m = Math.floor(secs / 60).toString().padStart(2, '0');
+    const s = (secs % 60).toString().padStart(2, '0');
+    return `${m}:${s}`;
+  };
+
   const handlePayment = async () => {
     trackFunnel("payment_initiated");
     setIsRedirecting(true);
@@ -71,6 +83,11 @@ export default function Checkout() {
 
   return (
     <div className="min-h-screen bg-gray-100 text-sm text-gray-800">
+
+      {/* Discount countdown banner */}
+      <div className="bg-red-600 text-white text-center py-2 px-4 text-sm font-semibold">
+        80% discount reserved for: <span className="font-mono font-bold">{formatCountdown(timeLeft)}</span>
+      </div>
 
       {/* Top banner */}
       <div className="bg-[#0C3547] text-white text-center py-4 px-4">
