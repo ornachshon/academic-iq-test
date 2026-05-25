@@ -173,9 +173,19 @@ export default function Checkout() {
           <div className="flex items-center justify-center gap-2 mb-6">
             <span className="text-sm font-semibold text-gray-700">{t("averageRating")}</span>
             <div className="flex gap-0.5">
-              {Array.from({ length: 5 }).map((_, i) => (
+              {Array.from({ length: 4 }).map((_, i) => (
                 <Star key={i} className="w-4 h-4 text-yellow-400 fill-yellow-400" />
               ))}
+              {/* Half star */}
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="w-4 h-4">
+                <defs>
+                  <linearGradient id="halfGrad">
+                    <stop offset="50%" stopColor="#facc15" />
+                    <stop offset="50%" stopColor="#d1d5db" />
+                  </linearGradient>
+                </defs>
+                <path fill="url(#halfGrad)" stroke="#facc15" strokeWidth="1.5" d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+              </svg>
             </div>
           </div>
 
