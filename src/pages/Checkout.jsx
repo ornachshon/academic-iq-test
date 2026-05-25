@@ -172,7 +172,11 @@ export default function Checkout() {
           <p className="text-center text-gray-500 text-xs mb-3">{t("afterResults")}</p>
           <div className="flex items-center justify-center gap-2 mb-6">
             <span className="text-sm font-semibold text-gray-700">{t("averageRating")}</span>
-            <StarRating count={4} />
+            <div className="flex gap-0.5">
+              {Array.from({ length: 5 }).map((_, i) => (
+                <Star key={i} className="w-4 h-4 text-yellow-400 fill-yellow-400" />
+              ))}
+            </div>
           </div>
 
           <div className="space-y-5">
