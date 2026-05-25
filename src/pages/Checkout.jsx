@@ -160,12 +160,15 @@ export default function Checkout() {
         <div className="bg-white border border-gray-200 rounded-sm px-6 py-5 space-y-4">
           <div className="flex justify-between items-center font-bold text-base bg-[#0C3547] text-white px-4 py-3 -mx-5 -mt-5 rounded-t-sm">
             <span>One-time fee only</span>
-            <span className="flex items-center gap-2">
-              {!priceLoading && pricing.original_price && (
-                <span className="line-through text-gray-400 font-normal text-sm">{formatPrice(pricing.original_price)}</span>
-              )}
-              {priceLoading ? "..." : formatPrice(pricing.price)}
-            </span>
+            <div className="flex flex-col items-end">
+              <span className="flex items-center gap-2">
+                {!priceLoading && pricing.original_price && (
+                  <span className="line-through text-gray-400 font-normal text-sm">{formatPrice(pricing.original_price)}</span>
+                )}
+                {priceLoading ? "..." : formatPrice(pricing.price)}
+              </span>
+              <span className="text-[#F5921B] text-xs font-bold">You save 80%</span>
+            </div>
           </div>
 
           {/* Payment logos */}
