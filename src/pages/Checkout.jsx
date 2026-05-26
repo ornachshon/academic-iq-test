@@ -140,7 +140,7 @@ export default function Checkout() {
               </div>
             </div>
             <img src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69b1aedc5a0abb358cd40ec0/400b59f43_Certificate-Example.svg"
-            alt="Certificate" className="w-28 h-auto mt-4 md:mt-0 mx-auto md:mx-0 md:ml-2 flex-shrink-0 border border-gray-200 rounded shadow-sm" />
+            alt="Certificate" className="w-56 md:w-28 h-auto mt-4 md:mt-0 mx-auto md:mx-0 md:ml-2 flex-shrink-0 border border-gray-200 rounded shadow-sm" />
           </div>
 
           {/* Item 3 */}
@@ -153,7 +153,7 @@ export default function Checkout() {
               </div>
             </div>
             <img src="https://media.base44.com/images/public/69b1aedc5a0abb358cd40ec0/03c9e0491_AIQreportsnap.png"
-            alt="IQ Report" className="w-32 h-auto mt-4 md:mt-0 mx-auto md:mx-0 md:ml-4 flex-shrink-0 rounded" />
+            alt="IQ Report" className="w-64 md:w-32 h-auto mt-4 md:mt-0 mx-auto md:mx-0 md:ml-4 flex-shrink-0 rounded" />
           </div>
         </div>
 
