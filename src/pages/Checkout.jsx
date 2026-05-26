@@ -85,7 +85,8 @@ export default function Checkout() {
     <div className="min-h-screen bg-gray-100 text-sm text-gray-800">
 
       {/* Discount countdown banner */}
-      <div className="sticky top-0 z-50 bg-[#F5921B] text-white text-center py-2 px-4 text-sm font-semibold">
+      <div className="sticky top-0 z-50 bg-[#F5921B] text-white py-2 px-4 text-sm font-semibold flex items-center justify-center gap-2">
+        <img src="https://media.base44.com/images/public/69b1aedc5a0abb358cd40ec0/cbd00333d_image.png" alt="gift" className="w-7 h-7 object-contain" />
         80% discount reserved for: <span className="font-mono font-bold">{formatCountdown(timeLeft)}</span>
       </div>
 
