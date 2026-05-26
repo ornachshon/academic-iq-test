@@ -188,7 +188,7 @@ export default function Checkout() {
             onClick={handlePayment}
             disabled={isRedirecting || priceLoading}
             className="bg-[#F5921B] text-white py-3 text-xl font-bold rounded-md w-full hover:bg-[#e0830f] transition-colors disabled:opacity-70 disabled:cursor-not-allowed">
-            {isRedirecting ? "Redirecting to payment..." : "Get IQ Results"}
+            {isRedirecting ? "Redirecting to payment..." : "Get My IQ Results"}
           </button>
         </div>
 
