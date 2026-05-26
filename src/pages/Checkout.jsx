@@ -19,7 +19,7 @@ const reviews = [
 
 function StarRating({ count, total = 5 }) {
   return (
-    <div className="flex gap-0.5 hidden">
+    <div className="flex gap-0.5">
       {Array.from({ length: total }).map((_, i) =>
       <Star key={i} className={`w-4 h-4 ${i < count ? 'text-yellow-400 fill-yellow-400' : 'text-gray-300 fill-gray-300'}`} />
       )}
