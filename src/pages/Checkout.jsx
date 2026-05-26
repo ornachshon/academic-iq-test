@@ -85,7 +85,7 @@ export default function Checkout() {
     <div className="min-h-screen bg-gray-100 text-sm text-gray-800">
 
       {/* Discount countdown banner */}
-      <div className="bg-[#F5921B] text-white text-center py-2 px-4 text-sm font-semibold">
+      <div className="sticky top-0 z-50 bg-[#F5921B] text-white text-center py-2 px-4 text-sm font-semibold">
         80% discount reserved for: <span className="font-mono font-bold">{formatCountdown(timeLeft)}</span>
       </div>
 
