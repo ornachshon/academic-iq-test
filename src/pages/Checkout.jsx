@@ -218,7 +218,7 @@ export default function Checkout() {
           <div className="space-y-5">
             {reviews.map((r, i) =>
             <div key={i} className="border-b border-gray-100 pb-4 last:border-0 last:pb-0">
-                <p className="font-bold text-gray-800 mb-1 hidden">{r.name}</p>
+                <p className="font-bold text-gray-800 mb-1">{r.name}</p>
                 <StarRating count={r.rating} />
                 <p className="text-gray-600 text-xs mt-1 leading-relaxed">{r.text}</p>
               </div>
