@@ -7,14 +7,23 @@ import { useGeoPrice } from '@/hooks/useGeoPrice';
 import { useLanguage } from '@/lib/LanguageContext';
 import { base44 } from '@/api/base44Client';
 
-const reviews = [
+const reviewsEn = [
 { name: "Mei Lin Zhang", rating: 5, text: "Great test with a clear layout and easy-to-use controls. The questions leaned more toward critical thinking rather than simple logic, which I liked. The only small confusion was how to view the results, though it becomes clear as you continue. Overall, enjoyable and engaging!" },
-{ name: "Yuki Tanaka", rating: 4, text: "I\u2019m genuinely impressed by this kind of activity because it feels like time well spent. The 20 minutes I dedicated to the quiz helped me avoid distractions from social media and other less important tasks. Please review and correct any grammatical errors. Thank you!" },
-{ name: "Lucas M\xFCller", rating: 5, text: "It's a great experience to enjoy this test after a long gap of learning such practices. As a teacher who is guiding many aspirants for services, I felt so privileged to share my level in your platform and thanks a lot for giving me and others such a nice platform to test our intelligence. Thank you so much 🙏" },
-{ name: "Liam O\u2019Connor", rating: 4, text: "I am more impressed to see this type of work because it is worth of time and my 20 minutes of this quiz saves me to distract from wasting my time in any other social media app or other nonimportant work. Read after correct grammatical mistakes. Thank you!" },
-{ name: "G Okafor", rating: 5, text: "I took the test on my phone one evening while in bed and was initially unsure about paying to see the results. In the end, curiosity won out, and after going through others\u2019 reviews, I decided to unlock them. I was pleasantly surprised to find my score matched one I had received years earlier on a similar test. Overall, I\u2019m very satisfied with the experience." },
-{ name: "Sofia Mart\xEDnez", rating: 5, text: "I really enjoyed the test! It was well-structured, consistent, and thoughtfully designed. The performance report at the end was detailed, and understanding my results gave my confidence a nice boost. I especially appreciated the explanations behind the score, including which aspects of intelligence were assessed and how they relate to everyday life. Overall, it was an engaging and informative experience. " },
+{ name: "Yuki Tanaka", rating: 4, text: "I'm genuinely impressed by this kind of activity because it feels like time well spent. The 20 minutes I dedicated to the quiz helped me avoid distractions from social media and other less important tasks. Thank you!" },
+{ name: "Lucas Müller", rating: 5, text: "It's a great experience to enjoy this test after a long gap of learning such practices. As a teacher who is guiding many aspirants for services, I felt so privileged to share my level in your platform and thanks a lot for giving me and others such a nice platform to test our intelligence. Thank you so much 🙏" },
+{ name: "Liam O'Connor", rating: 4, text: "I am more impressed to see this type of work because it is worth of time and my 20 minutes of this quiz saves me to distract from wasting my time in any other social media app or other nonimportant work. Thank you!" },
+{ name: "G Okafor", rating: 5, text: "I took the test on my phone one evening while in bed and was initially unsure about paying to see the results. In the end, curiosity won out, and after going through others' reviews, I decided to unlock them. I was pleasantly surprised to find my score matched one I had received years earlier on a similar test. Overall, I'm very satisfied with the experience." },
+{ name: "Sofia Martínez", rating: 5, text: "I really enjoyed the test! It was well-structured, consistent, and thoughtfully designed. The performance report at the end was detailed, and understanding my results gave my confidence a nice boost. I especially appreciated the explanations behind the score. Overall, it was an engaging and informative experience." },
 { name: "James R.", rating: 4, text: "Clean, refined presentation paired with insightful feedback." }];
+
+const reviewsJa = [
+{ name: "鈴木 美咲", rating: 5, text: "レイアウトが明確で操作も簡単な素晴らしいテストでした。問題は単純な論理よりも批判的思考に重点が置かれており、好印象でした。結果の見方に少し戸惑いましたが、進めるうちに明確になりました。全体的に楽しく魅力的でした！" },
+{ name: "田中 ゆき", rating: 4, text: "この種の活動には本当に感銘を受けます。時間を有効に使えたと感じます。このクイズに費やした20分のおかげで、SNSなどの無駄な時間を避けることができました。ありがとうございます！" },
+{ name: "山本 隆", rating: 5, text: "久しぶりにこのような練習を楽しめた素晴らしい体験でした。多くの人を指導している教師として、このプラットフォームで自分のレベルを共有できたことを誇りに思います。このような素晴らしいプラットフォームをありがとうございます🙏" },
+{ name: "佐藤 健一", rating: 4, text: "この種の取り組みには非常に感銘を受けます。時間の価値があり、このクイズの20分のおかげでSNSや重要でない作業に時間を無駄にしなくて済みました。ありがとうございます！" },
+{ name: "中村 恵子", rating: 5, text: "ある夜、ベッドでスマホを使ってテストを受けましたが、最初は結果を見るために支払うか迷いました。最終的に好奇心が勝り、他の方のレビューを参考にして結果を解放しました。何年も前に受けた同様のテストとスコアが一致していて驚きました。全体的にとても満足しています。" },
+{ name: "伊藤 さくら", rating: 5, text: "テストをとても楽しみました！よく構成されており、一貫性があり、丁寧に設計されていました。最後のパフォーマンスレポートは詳細で、結果を理解することで自信がつきました。スコアの背後にある説明、特にどの知性の側面が評価されたかがわかり、日常生活との関連も明確でした。全体的に充実した体験でした。" },
+{ name: "James R.", rating: 4, text: "洗練されたデザインと的確なフィードバックが印象的でした。" }];
 
 
 function StarRating({ count, total = 5 }) {
@@ -28,6 +37,7 @@ function StarRating({ count, total = 5 }) {
 
 export default function Checkout() {
   const { t, lang } = useLanguage();
+  const reviews = lang === "ja" ? reviewsJa : reviewsEn;
   const [agreed, setAgreed] = useState(false);
   const [isRedirecting, setIsRedirecting] = useState(false);
   const navigate = useNavigate();
@@ -87,7 +97,7 @@ export default function Checkout() {
       {/* Discount countdown banner */}
       <div className="sticky top-0 z-50 bg-[#F5921B] text-white py-3 px-4 text-base font-semibold flex items-center justify-center gap-2">
         <img src="https://media.base44.com/images/public/69b1aedc5a0abb358cd40ec0/cbd00333d_image.png" alt="gift" className="w-7 h-7 object-contain" />
-        80% discount reserved for: <span className="font-mono font-bold">{formatCountdown(timeLeft)}</span>
+        {t("discountBanner")} <span className="font-mono font-bold">{formatCountdown(timeLeft)}</span>
       </div>
 
       {/* Top banner */}
@@ -160,7 +170,7 @@ export default function Checkout() {
         {/* Total & Payment */}
         <div className="bg-white border border-gray-200 rounded-sm px-6 py-5 space-y-4">
           <div className="flex justify-between items-center font-bold text-base bg-[#0C3547] text-white px-4 py-3 -mx-5 -mt-5 rounded-t-sm">
-            <span>One-time fee only</span>
+            <span>{t("oneTimeFeeOnly")}</span>
             <div className="flex flex-col items-end">
               <span className="flex items-center gap-2">
                 {!priceLoading && pricing.original_price && (
@@ -168,7 +178,7 @@ export default function Checkout() {
                 )}
                 {priceLoading ? "..." : formatPrice(pricing.price)}
               </span>
-              <span className="text-[#F5921B] text-xs font-bold">You save 80%</span>
+              <span className="text-[#F5921B] text-xs font-bold">{t("youSave80")}</span>
             </div>
           </div>
 
@@ -188,7 +198,7 @@ export default function Checkout() {
             onClick={handlePayment}
             disabled={isRedirecting || priceLoading}
             className="bg-[#F5921B] text-white py-3 text-xl font-bold rounded-md w-full hover:bg-[#e0830f] transition-colors disabled:opacity-70 disabled:cursor-not-allowed">
-            {isRedirecting ? "Redirecting to payment..." : "Get My IQ Results"}
+            {isRedirecting ? t("redirectingToPayment") : t("getMyIQResults")}
           </button>
         </div>
 

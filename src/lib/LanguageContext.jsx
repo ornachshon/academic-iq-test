@@ -61,6 +61,11 @@ const translations = {
     customerReviews: "Customer Reviews & Feedback",
     afterResults: "After you get your results you are welcome to also share a review",
     averageRating: "Average Rating: Very good",
+    discountBanner: "80% discount reserved for:",
+    oneTimeFeeOnly: "One-time fee only",
+    youSave80: "You save 80%",
+    redirectingToPayment: "Redirecting to payment...",
+    getMyIQResults: "Get My IQ Results",
 
     // Info page
     oneMoreStep: "One more step before your results!",
@@ -173,6 +178,11 @@ const translations = {
     customerReviews: "お客様のレビューとフィードバック",
     afterResults: "結果を受け取った後、レビューを共有することができます",
     averageRating: "平均評価：非常に良い",
+    discountBanner: "80%割引の残り時間：",
+    oneTimeFeeOnly: "一回限りの料金",
+    youSave80: "80%お得",
+    redirectingToPayment: "お支払いページへ移動中...",
+    getMyIQResults: "IQ結果を取得する",
 
     // Info page
     oneMoreStep: "結果を表示する前にもう一ステップ！",
