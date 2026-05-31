@@ -40,7 +40,6 @@ export default function Checkout() {
   const { t, lang } = useLanguage();
   const reviews = lang === "ja" ? reviewsJa : reviewsEn;
   const [isRedirecting, setIsRedirecting] = useState(false);
-  const [stripeUrl, setStripeUrl] = useState(null);
   const navigate = useNavigate();
   const location = useLocation();
   const score = location.state?.score;
@@ -75,17 +74,14 @@ export default function Checkout() {
         embedded: false,
       });
       if (res.data?.url) {
-        setStripeUrl(res.data.url);
         trackFunnel("checkout_loaded");
-        setTimeout(() => {
-          document.getElementById('stripe-iframe-checkout')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }, 200);
+        window.location.href = res.data.url;
       } else {
         console.error("No URL returned from Stripe checkout");
+        setIsRedirecting(false);
       }
     } catch (err) {
       console.error("Stripe checkout error:", err);
-    } finally {
       setIsRedirecting(false);
     }
   };
@@ -198,43 +194,19 @@ export default function Checkout() {
             <img src="https://upload.wikimedia.org/wikipedia/commons/b/b5/PayPal.svg" alt="PayPal" className="h-6 object-contain" />
           </div>
 
-          {/* CTA Button — hidden once checkout iframe is loaded */}
-          {!stripeUrl && (
-            <button
-              onClick={handlePayment}
-              disabled={isRedirecting || priceLoading}
-              className="bg-[#F5921B] text-white py-3 text-xl font-bold rounded-md w-full hover:bg-[#e0830f] transition-colors disabled:opacity-70 disabled:cursor-not-allowed">
-              {isRedirecting ? (
-                <span className="flex items-center justify-center gap-2">
-                  <span className="animate-spin rounded-full h-5 w-5 border-b-2 border-white inline-block"></span>
-                  Loading secure payment...
-                </span>
-              ) : t("getMyIQResults")}
-            </button>
-          )}
+          {/* CTA Button */}
+          <button
+            onClick={handlePayment}
+            disabled={isRedirecting || priceLoading}
+            className="bg-[#F5921B] text-white py-3 text-xl font-bold rounded-md w-full hover:bg-[#e0830f] transition-colors disabled:opacity-70 disabled:cursor-not-allowed">
+            {isRedirecting ? (
+              <span className="flex items-center justify-center gap-2">
+                <span className="animate-spin rounded-full h-5 w-5 border-b-2 border-white inline-block"></span>
+                Loading secure payment...
+              </span>
+            ) : t("getMyIQResults")}
+          </button>
         </div>
-
-        {/* Stripe Hosted Checkout in iframe */}
-        {stripeUrl && (
-          <div id="stripe-iframe-checkout" className="bg-white border border-gray-200 rounded-sm overflow-hidden">
-            <div className="bg-[#0C3547] text-white text-center font-medium py-3 tracking-wide text-sm uppercase flex items-center justify-center gap-2">
-              🔒 Secure Payment
-              <button
-                onClick={() => setStripeUrl(null)}
-                className="ml-4 text-xs text-gray-300 hover:text-white underline"
-              >
-                ✕ Cancel
-              </button>
-            </div>
-            <iframe
-              src={stripeUrl}
-              className="w-full border-0"
-              style={{ height: '700px' }}
-              title="Secure Payment"
-              allow="payment"
-            />
-          </div>
-        )}
 
         {/* Reviews Section */}
         <div className="bg-white border border-gray-200 rounded-sm px-6 py-6">
