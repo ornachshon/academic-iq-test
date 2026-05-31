@@ -6,6 +6,10 @@ import { trackFunnel } from '@/lib/trackFunnel';
 import { useGeoPrice } from '@/hooks/useGeoPrice';
 import { useLanguage } from '@/lib/LanguageContext';
 import { base44 } from '@/api/base44Client';
+import { loadStripe } from '@stripe/stripe-js';
+import { EmbeddedCheckoutProvider, EmbeddedCheckout } from '@stripe/react-stripe-js';
+
+const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY);
 
 const reviewsEn = [
 { name: "Mei Lin Zhang", rating: 5, text: "Great test with a clear layout and easy-to-use controls. The questions leaned more toward critical thinking rather than simple logic, which I liked. The only small confusion was how to view the results, though it becomes clear as you continue. Overall, enjoyable and engaging!" },
@@ -38,8 +42,8 @@ function StarRating({ count, total = 5 }) {
 export default function Checkout() {
   const { t, lang } = useLanguage();
   const reviews = lang === "ja" ? reviewsJa : reviewsEn;
-  const [agreed, setAgreed] = useState(false);
   const [isRedirecting, setIsRedirecting] = useState(false);
+  const [clientSecret, setClientSecret] = useState(null);
   const navigate = useNavigate();
   const location = useLocation();
   const score = location.state?.score;
@@ -63,7 +67,6 @@ export default function Checkout() {
   const handlePayment = async () => {
     trackFunnel("payment_initiated");
     setIsRedirecting(true);
-    console.log("lang value:", lang);
     try {
       const res = await base44.functions.invoke("createStripeCheckout", {
         email,
@@ -71,12 +74,17 @@ export default function Checkout() {
         priceAmount: pricing.price,
         priceCurrency: pricing.currency_code,
         resultId,
-        locale: lang || "auto"
+        locale: lang || "auto",
+        embedded: true,
       });
-      if (res.data?.url) {
-        window.location.href = res.data.url;
+      if (res.data?.clientSecret) {
+        setClientSecret(res.data.clientSecret);
+        // Scroll to the embedded checkout after a short delay
+        setTimeout(() => {
+          document.getElementById('stripe-embedded-checkout')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }, 200);
       } else {
-        console.error("No URL returned from Stripe checkout");
+        console.error("No clientSecret returned from Stripe checkout");
         setIsRedirecting(false);
       }
     } catch (err) {
@@ -193,14 +201,33 @@ export default function Checkout() {
             <img src="https://upload.wikimedia.org/wikipedia/commons/b/b5/PayPal.svg" alt="PayPal" className="h-6 object-contain" />
           </div>
 
-          {/* CTA Button */}
-          <button
-            onClick={handlePayment}
-            disabled={isRedirecting || priceLoading}
-            className="bg-[#F5921B] text-white py-3 text-xl font-bold rounded-md w-full hover:bg-[#e0830f] transition-colors disabled:opacity-70 disabled:cursor-not-allowed">
-            {isRedirecting ? t("redirectingToPayment") : t("getMyIQResults")}
-          </button>
+          {/* CTA Button — hidden once checkout is loaded */}
+          {!clientSecret && (
+            <button
+              onClick={handlePayment}
+              disabled={isRedirecting || priceLoading}
+              className="bg-[#F5921B] text-white py-3 text-xl font-bold rounded-md w-full hover:bg-[#e0830f] transition-colors disabled:opacity-70 disabled:cursor-not-allowed">
+              {isRedirecting ? (
+                <span className="flex items-center justify-center gap-2">
+                  <span className="animate-spin rounded-full h-5 w-5 border-b-2 border-white inline-block"></span>
+                  Loading secure payment...
+                </span>
+              ) : t("getMyIQResults")}
+            </button>
+          )}
         </div>
+
+        {/* Stripe Embedded Checkout */}
+        {clientSecret && (
+          <div id="stripe-embedded-checkout" className="bg-white border border-gray-200 rounded-sm overflow-hidden">
+            <div className="bg-[#0C3547] text-white text-center font-medium py-3 tracking-wide text-sm uppercase">
+              🔒 Secure Payment
+            </div>
+            <EmbeddedCheckoutProvider stripe={stripePromise} options={{ clientSecret }}>
+              <EmbeddedCheckout />
+            </EmbeddedCheckoutProvider>
+          </div>
+        )}
 
         {/* Reviews Section */}
         <div className="bg-white border border-gray-200 rounded-sm px-6 py-6">

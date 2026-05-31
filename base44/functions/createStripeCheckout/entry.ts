@@ -4,7 +4,7 @@ import { createClientFromRequest } from "npm:@base44/sdk@0.8.25";
 Deno.serve(async (req) => {
   try {
     const base44 = createClientFromRequest(req);
-    const { email, score, priceAmount, priceCurrency, resultId, couponId, locale } = await req.json();
+    const { email, score, priceAmount, priceCurrency, resultId, couponId, locale, embedded } = await req.json();
 
     const STRIPE_SECRET_KEY = Deno.env.get("STRIPE_SECRET_KEY");
     if (!STRIPE_SECRET_KEY) {
@@ -14,8 +14,6 @@ Deno.serve(async (req) => {
     const stripe = new Stripe(STRIPE_SECRET_KEY);
 
     const origin = req.headers.get("Origin") || "https://academiciqtest.com";
-    const successUrl = `${origin}/Info?session_id={CHECKOUT_SESSION_ID}&score=${encodeURIComponent(score || "")}&email=${encodeURIComponent(email || "")}`;
-    const cancelUrl = `${origin}/Checkout`;
 
     // Zero-decimal currencies (Stripe expects the amount as-is, not multiplied by 100)
     const ZERO_DECIMAL_CURRENCIES = ["jpy", "krw", "vnd", "clp", "gnf", "mga", "pyg", "rwf", "ugx", "xaf", "xof"];
@@ -24,33 +22,55 @@ Deno.serve(async (req) => {
       ? Math.round(priceAmount || 990)
       : Math.round((priceAmount || 9.99) * 100);
 
+    const lineItems = [
+      {
+        price_data: {
+          currency: currency,
+          unit_amount: unitAmount,
+          product_data: {
+            name: "IQ Evaluation & Certificate",
+            description: "Full IQ score, personalized certificate, and detailed analytical report",
+          },
+        },
+        quantity: 1,
+      },
+    ];
+
+    const metadata = {
+      score: String(score || ""),
+      email: email || "",
+      resultId: resultId || "",
+    };
+
+    // Embedded checkout mode — returns clientSecret for in-page rendering
+    if (embedded) {
+      const returnUrl = `${origin}/Info?session_id={CHECKOUT_SESSION_ID}&score=${encodeURIComponent(score || "")}&email=${encodeURIComponent(email || "")}`;
+      const session = await stripe.checkout.sessions.create({
+        ui_mode: "embedded",
+        mode: "payment",
+        customer_email: email || undefined,
+        line_items: lineItems,
+        ...(couponId ? { discounts: [{ coupon: couponId }] } : {}),
+        metadata,
+        locale: locale || "auto",
+        return_url: returnUrl,
+      });
+      console.log("Stripe embedded session created:", session.id, "for email:", email);
+      return Response.json({ clientSecret: session.client_secret });
+    }
+
+    // Standard hosted checkout — returns redirect URL (existing behaviour)
+    const successUrl = `${origin}/Info?session_id={CHECKOUT_SESSION_ID}&score=${encodeURIComponent(score || "")}&email=${encodeURIComponent(email || "")}`;
+    const cancelUrl = `${origin}/Checkout`;
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ["card"],
       mode: "payment",
       customer_email: email || undefined,
-      line_items: [
-        {
-          price_data: {
-            currency: (priceCurrency || "usd").toLowerCase(),
-            unit_amount: unitAmount,
-            product_data: {
-              name: "IQ Evaluation & Certificate",
-              description: "Full IQ score, personalized certificate, and detailed analytical report",
-            },
-          },
-          quantity: 1,
-        },
-      ],
+      line_items: lineItems,
       ...(couponId ? { discounts: [{ coupon: couponId }] } : {}),
-      metadata: {
-        score: String(score || ""),
-        email: email || "",
-        resultId: resultId || "",
-      },
+      metadata,
       locale: locale || "auto",
-      custom_text: {
-        submit: { message: "Get your score" },
-      },
+      custom_text: { submit: { message: "Get your score" } },
       success_url: successUrl,
       cancel_url: cancelUrl,
     });
