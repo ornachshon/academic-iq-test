@@ -9,8 +9,6 @@ import { base44 } from '@/api/base44Client';
 import { loadStripe } from '@stripe/stripe-js';
 import { EmbeddedCheckoutProvider, EmbeddedCheckout } from '@stripe/react-stripe-js';
 
-const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY);
-
 const reviewsEn = [
 { name: "Mei Lin Zhang", rating: 5, text: "Great test with a clear layout and easy-to-use controls. The questions leaned more toward critical thinking rather than simple logic, which I liked. The only small confusion was how to view the results, though it becomes clear as you continue. Overall, enjoyable and engaging!" },
 { name: "Yuki Tanaka", rating: 4, text: "I'm genuinely impressed by this kind of activity because it feels like time well spent. The 20 minutes I dedicated to the quiz helped me avoid distractions from social media and other less important tasks. Thank you!" },
@@ -44,6 +42,10 @@ export default function Checkout() {
   const reviews = lang === "ja" ? reviewsJa : reviewsEn;
   const [isRedirecting, setIsRedirecting] = useState(false);
   const [clientSecret, setClientSecret] = useState(null);
+  const [stripePromise] = useState(() => {
+    const key = import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY;
+    return key ? loadStripe(key) : null;
+  });
   const navigate = useNavigate();
   const location = useLocation();
   const score = location.state?.score;
