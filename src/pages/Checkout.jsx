@@ -75,7 +75,7 @@ export default function Checkout() {
       });
       if (res.data?.url) {
         trackFunnel("checkout_loaded");
-        window.location.href = res.data.url;
+        (window.top || window).location.href = res.data.url;
       } else {
         console.error("No URL returned from Stripe checkout");
         setIsRedirecting(false);
