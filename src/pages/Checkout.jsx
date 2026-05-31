@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Star, HelpCircle } from 'lucide-react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import Footer from '@/components/home/Footer';
@@ -6,8 +6,7 @@ import { trackFunnel } from '@/lib/trackFunnel';
 import { useGeoPrice } from '@/hooks/useGeoPrice';
 import { useLanguage } from '@/lib/LanguageContext';
 import { base44 } from '@/api/base44Client';
-import { loadStripe } from '@stripe/stripe-js';
-import { EmbeddedCheckoutProvider, EmbeddedCheckout } from '@stripe/react-stripe-js';
+
 
 const reviewsEn = [
 { name: "Mei Lin Zhang", rating: 5, text: "Great test with a clear layout and easy-to-use controls. The questions leaned more toward critical thinking rather than simple logic, which I liked. The only small confusion was how to view the results, though it becomes clear as you continue. Overall, enjoyable and engaging!" },
@@ -41,11 +40,7 @@ export default function Checkout() {
   const { t, lang } = useLanguage();
   const reviews = lang === "ja" ? reviewsJa : reviewsEn;
   const [isRedirecting, setIsRedirecting] = useState(false);
-  const [clientSecret, setClientSecret] = useState(null);
-  const [stripePromise] = useState(() => {
-    const key = import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY;
-    return key ? loadStripe(key) : null;
-  });
+  const [stripeUrl, setStripeUrl] = useState(null);
   const navigate = useNavigate();
   const location = useLocation();
   const score = location.state?.score;
@@ -77,20 +72,20 @@ export default function Checkout() {
         priceCurrency: pricing.currency_code,
         resultId,
         locale: lang || "auto",
-        embedded: true,
+        embedded: false,
       });
-      if (res.data?.clientSecret) {
-        setClientSecret(res.data.clientSecret);
-        // Scroll to the embedded checkout after a short delay
+      if (res.data?.url) {
+        setStripeUrl(res.data.url);
+        trackFunnel("checkout_loaded");
         setTimeout(() => {
-          document.getElementById('stripe-embedded-checkout')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          document.getElementById('stripe-iframe-checkout')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }, 200);
       } else {
-        console.error("No clientSecret returned from Stripe checkout");
-        setIsRedirecting(false);
+        console.error("No URL returned from Stripe checkout");
       }
     } catch (err) {
       console.error("Stripe checkout error:", err);
+    } finally {
       setIsRedirecting(false);
     }
   };
@@ -203,8 +198,8 @@ export default function Checkout() {
             <img src="https://upload.wikimedia.org/wikipedia/commons/b/b5/PayPal.svg" alt="PayPal" className="h-6 object-contain" />
           </div>
 
-          {/* CTA Button — hidden once checkout is loaded */}
-          {!clientSecret && (
+          {/* CTA Button — hidden once checkout iframe is loaded */}
+          {!stripeUrl && (
             <button
               onClick={handlePayment}
               disabled={isRedirecting || priceLoading}
@@ -219,15 +214,25 @@ export default function Checkout() {
           )}
         </div>
 
-        {/* Stripe Embedded Checkout */}
-        {clientSecret && (
-          <div id="stripe-embedded-checkout" className="bg-white border border-gray-200 rounded-sm overflow-hidden">
-            <div className="bg-[#0C3547] text-white text-center font-medium py-3 tracking-wide text-sm uppercase">
+        {/* Stripe Hosted Checkout in iframe */}
+        {stripeUrl && (
+          <div id="stripe-iframe-checkout" className="bg-white border border-gray-200 rounded-sm overflow-hidden">
+            <div className="bg-[#0C3547] text-white text-center font-medium py-3 tracking-wide text-sm uppercase flex items-center justify-center gap-2">
               🔒 Secure Payment
+              <button
+                onClick={() => setStripeUrl(null)}
+                className="ml-4 text-xs text-gray-300 hover:text-white underline"
+              >
+                ✕ Cancel
+              </button>
             </div>
-            <EmbeddedCheckoutProvider stripe={stripePromise} options={{ clientSecret }}>
-              <EmbeddedCheckout />
-            </EmbeddedCheckoutProvider>
+            <iframe
+              src={stripeUrl}
+              className="w-full border-0"
+              style={{ height: '700px' }}
+              title="Secure Payment"
+              allow="payment"
+            />
           </div>
         )}
 
