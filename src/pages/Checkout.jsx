@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { Star, HelpCircle } from 'lucide-react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import Footer from '@/components/home/Footer';
@@ -6,6 +6,10 @@ import { trackFunnel } from '@/lib/trackFunnel';
 import { useGeoPrice } from '@/hooks/useGeoPrice';
 import { useLanguage } from '@/lib/LanguageContext';
 import { base44 } from '@/api/base44Client';
+import { loadStripe } from '@stripe/stripe-js';
+import { EmbeddedCheckoutProvider, EmbeddedCheckout } from '@stripe/react-stripe-js';
+
+const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY);
 
 const reviewsEn = [
 { name: "Mei Lin Zhang", rating: 5, text: "Great test with a clear layout and easy-to-use controls. The questions leaned more toward critical thinking rather than simple logic, which I liked. The only small confusion was how to view the results, though it becomes clear as you continue. Overall, enjoyable and engaging!" },
@@ -41,6 +45,9 @@ export default function Checkout() {
   const [agreed, setAgreed] = useState(false);
   const [isRedirecting, setIsRedirecting] = useState(false);
   const [showPaymentModal, setShowPaymentModal] = useState(false);
+  const [stripeClientSecret, setStripeClientSecret] = useState(null);
+  const [stripeLoading, setStripeLoading] = useState(false);
+  const [stripeError, setStripeError] = useState(null);
   const navigate = useNavigate();
   const location = useLocation();
   const score = location.state?.score;
@@ -61,9 +68,32 @@ export default function Checkout() {
     return `${m}:${s}`;
   };
 
-  const handlePayment = () => {
+  const handlePayment = async () => {
     trackFunnel("payment_initiated");
+    setStripeClientSecret(null);
+    setStripeError(null);
+    setStripeLoading(true);
     setShowPaymentModal(true);
+    try {
+      const res = await base44.functions.invoke("createPaymentIntent", {
+        email,
+        score,
+        priceAmount: pricing.price,
+        priceCurrency: pricing.currency_code,
+        resultId,
+        locale: lang || "auto",
+      });
+      if (res.data?.clientSecret) {
+        setStripeClientSecret(res.data.clientSecret);
+      } else {
+        setStripeError("Failed to initialize payment. Please try again.");
+      }
+    } catch (err) {
+      console.error("Payment init error:", err);
+      setStripeError("Failed to initialize payment. Please try again.");
+    } finally {
+      setStripeLoading(false);
+    }
   };
 
   const handleOldPayment = async () => {
@@ -247,10 +277,10 @@ export default function Checkout() {
 
       {/* Payment iFrame Modal */}
       {showPaymentModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60">
-          <div className="bg-white rounded-lg shadow-2xl w-full max-w-lg mx-4 overflow-hidden">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-4">
+          <div className="bg-white rounded-lg shadow-2xl w-full max-w-lg overflow-hidden flex flex-col max-h-[90vh]">
             {/* Modal Header */}
-            <div className="flex items-center justify-between px-5 py-4 border-b border-gray-200">
+            <div className="flex items-center justify-between px-5 py-4 border-b border-gray-200 shrink-0">
               <h2 className="text-base font-bold text-[#0C3547]">Secure Payment</h2>
               <button
                 onClick={() => setShowPaymentModal(false)}
@@ -259,9 +289,26 @@ export default function Checkout() {
                 &times;
               </button>
             </div>
-            {/* iFrame placeholder */}
-            <div className="w-full h-96 flex items-center justify-center bg-gray-50 text-gray-400 text-sm">
-              Payment form will load here
+            {/* Stripe Embedded Checkout */}
+            <div className="overflow-y-auto flex-1">
+              {stripeLoading && (
+                <div className="flex items-center justify-center h-64 text-gray-500 text-sm">
+                  Loading payment form...
+                </div>
+              )}
+              {stripeError && (
+                <div className="flex items-center justify-center h-64 text-red-500 text-sm px-6 text-center">
+                  {stripeError}
+                </div>
+              )}
+              {stripeClientSecret && (
+                <EmbeddedCheckoutProvider
+                  stripe={stripePromise}
+                  options={{ clientSecret: stripeClientSecret }}
+                >
+                  <EmbeddedCheckout />
+                </EmbeddedCheckoutProvider>
+              )}
             </div>
           </div>
         </div>
