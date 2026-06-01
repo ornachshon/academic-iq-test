@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
+import { useSEO } from "@/lib/useSEO";
 import { base44 } from "@/api/base44Client";
 import { Link } from "react-router-dom";
 
 const CATEGORIES = ["All", "IQ Basics", "Science & Research", "Test Tips", "Brain Health", "Child Development", "Career & Success"];
 
 export default function Blog() {
+  useSEO({ title: 'IQ & Intelligence Blog', description: 'Science-backed articles on intelligence, IQ testing, cognitive performance, brain health, and child development from the Academic IQ Test team.' });
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState("");

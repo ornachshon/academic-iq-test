@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useSEO } from "@/lib/useSEO";
 import { base44 } from "@/api/base44Client";
 import { Link, useParams } from "react-router-dom";
 import ReactMarkdown from "react-markdown";
@@ -6,6 +7,7 @@ import ReactMarkdown from "react-markdown";
 export default function BlogArticle() {
   const { slug } = useParams();
   const [post, setPost] = useState(null);
+  useSEO(post ? { title: post.title, description: post.meta_description || post.excerpt, ogImage: post.banner_image_url, ogType: 'article' } : {});
   const [related, setRelated] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -15,7 +17,7 @@ export default function BlogArticle() {
       const article = posts[0];
       if (article) {
         setPost(article);
-        document.title = article.title + " | Academic IQ Blog";
+        // title is handled by useSEO hook
         // Update view count
         base44.entities.BlogPost.update(article.id, { views: (article.views || 0) + 1 });
         // Load related
@@ -88,7 +90,7 @@ export default function BlogArticle() {
 
         {/* CTA */}
         <div className="mt-10 bg-[#0C3547] rounded-2xl p-8 text-center text-white">
-          <h3 className="text-xl font-black mb-2">Ready to Test Your IQ?</h3>
+          <h2 className="text-xl font-black mb-2">Ready to Test Your IQ?</h2>
           <p className="text-blue-200 text-sm mb-5">Take our 30-question scientifically validated IQ assessment and get your score in minutes.</p>
           <Link to="/IQTest">
             <button className="bg-[#F5921B] text-white px-8 py-3 rounded-md font-bold hover:bg-[#e0830f] transition-colors">
@@ -100,7 +102,7 @@ export default function BlogArticle() {
         {/* Related */}
         {related.length > 0 && (
           <div className="mt-12">
-            <h3 className="text-xl font-bold text-[#0C3547] mb-5">Related Articles</h3>
+            <h2 className="text-xl font-bold text-[#0C3547] mb-5">Related Articles</h2>
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
               {related.map(r => (
                 <Link key={r.id} to={`/Blog/${r.slug}`}>

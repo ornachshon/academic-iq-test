@@ -1,4 +1,5 @@
 import React, { useMemo } from "react";
+import { useSEO } from "@/lib/useSEO";
 import { useLocation } from "react-router-dom";
 import { format } from "date-fns";
 import IQCertificate from "@/components/certificate/IQCertificate";
@@ -8,6 +9,7 @@ function generateSerial() {
 }
 
 export default function Certificate() {
+  useSEO({ title: 'Your IQ Certificate', description: 'Download your personalized IQ certificate as a high-quality PDF.' });
   const location = useLocation();
   const { name, score } = location.state || {};
 

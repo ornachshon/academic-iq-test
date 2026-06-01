@@ -1,4 +1,5 @@
 import React, { useState, useCallback, useEffect, useRef } from "react";
+import { useSEO } from "@/lib/useSEO";
 import { useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
@@ -20,6 +21,8 @@ export default function IQTest() {
   const [answers, setAnswers] = useState({});
   const [startTime] = useState(Date.now());
   const [showIntro, setShowIntro] = useState(false);
+
+  useSEO({ title: 'IQ Test – 30 Questions', description: 'Answer 30 scientifically designed questions covering pattern recognition, numerical reasoning, and spatial intelligence. Get your IQ score in minutes.' });
 
   // Fire GTM event when test page loads
   useEffect(() => {
@@ -166,10 +169,8 @@ export default function IQTest() {
       {/* Top Bar */}
       <div className="bg-[#0C3547] px-4 py-2 shadow-lg">
         <div className="max-w-6xl mx-auto flex items-center justify-between">
-          <h2 className="text-white font-bold text-sm">
-            {t("questionLabel")} {currentQ + 1}
-            <span className="text-gray-400 font-normal">/{questions.length}</span>
-          </h2>
+          <p className="text-white font-bold text-sm">
+          </p>
           <Timer totalSeconds={1200} onTimeUp={handleTimeUp} />
         </div>
         {/* Progress bar */}

@@ -1,10 +1,12 @@
 import React, { useEffect } from "react";
+import { useSEO } from "@/lib/useSEO";
 import { useLocation, Link } from "react-router-dom";
 import { Download, FileText } from "lucide-react";
 import { base44 } from "@/api/base44Client";
 import { trackFunnel } from "@/lib/trackFunnel";
 
 export default function Thankyou() {
+  useSEO({ title: 'Thank You – Your IQ Results Are Ready', description: 'Download your personalized IQ certificate and view your detailed cognitive analysis report.' });
   const location = useLocation();
   const { name, serialNumber, date } = location.state || {};
   // Score may come from router state or localStorage (after Stripe redirect)

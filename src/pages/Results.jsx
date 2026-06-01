@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useSEO } from "@/lib/useSEO";
 import { Link } from "react-router-dom";
 import { createPageUrl } from "@/utils";
 import { base44 } from "@/api/base44Client";
@@ -9,6 +10,7 @@ import ScoreGauge from "@/components/results/ScoreGauge";
 import BellCurve from "@/components/results/BellCurve";
 
 export default function Results() {
+  useSEO({ title: 'Your IQ Test Results', description: 'View your IQ score, percentile ranking, cognitive breakdown, and performance summary from your Academic IQ Test.' });
   const [result, setResult] = useState(null);
   const [loading, setLoading] = useState(true);
 
