@@ -9,7 +9,14 @@ import { base44 } from '@/api/base44Client';
 import { loadStripe } from '@stripe/stripe-js';
 import { EmbeddedCheckoutProvider, EmbeddedCheckout } from '@stripe/react-stripe-js';
 
-const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY);
+let stripePromise = null;
+const getStripePromise = () => {
+  if (!stripePromise) {
+    const key = import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY;
+    if (key) stripePromise = loadStripe(key);
+  }
+  return stripePromise;
+};
 
 const reviewsEn = [
 { name: "Mei Lin Zhang", rating: 5, text: "Great test with a clear layout and easy-to-use controls. The questions leaned more toward critical thinking rather than simple logic, which I liked. The only small confusion was how to view the results, though it becomes clear as you continue. Overall, enjoyable and engaging!" },
@@ -74,6 +81,11 @@ export default function Checkout() {
     setStripeError(null);
     setStripeLoading(true);
     setShowPaymentModal(true);
+    if (!getStripePromise()) {
+      setStripeError("Stripe is not configured. Please contact support.");
+      setStripeLoading(false);
+      return;
+    }
     try {
       const res = await base44.functions.invoke("createPaymentIntent", {
         email,
@@ -303,7 +315,7 @@ export default function Checkout() {
               )}
               {stripeClientSecret && (
                 <EmbeddedCheckoutProvider
-                  stripe={stripePromise}
+                  stripe={getStripePromise()}
                   options={{ clientSecret: stripeClientSecret }}
                 >
                   <EmbeddedCheckout />
