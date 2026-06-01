@@ -69,10 +69,13 @@ export default function Hero() {
           {/* Right image */}
           <div className="flex justify-center md:justify-end">
             <img
-              src="https://wwiqtest.com/wp-content/uploads/2021/03/banner-new-min.png"
+              src="https://media.base44.com/images/public/69b1aedc5a0abb358cd40ec0/a44d7382f_generated_image.png"
               alt="IQ Test on devices"
-              className="w-full max-w-lg" />
-
+              width="600"
+              height="450"
+              className="w-full max-w-lg"
+              fetchpriority="high"
+            />
           </div>
         </div>
       </div>
