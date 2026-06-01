@@ -9,13 +9,13 @@ import { base44 } from '@/api/base44Client';
 import { loadStripe } from '@stripe/stripe-js';
 import { EmbeddedCheckoutProvider, EmbeddedCheckout } from '@stripe/react-stripe-js';
 
-let stripePromise = null;
-const getStripePromise = () => {
-  if (!stripePromise) {
-    const key = import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY;
-    if (key) stripePromise = loadStripe(key);
+const stripePromiseCache = {};
+const getStripePromise = (publishableKey) => {
+  if (!publishableKey) return null;
+  if (!stripePromiseCache[publishableKey]) {
+    stripePromiseCache[publishableKey] = loadStripe(publishableKey);
   }
-  return stripePromise;
+  return stripePromiseCache[publishableKey];
 };
 
 const reviewsEn = [
@@ -53,6 +53,7 @@ export default function Checkout() {
   const [isRedirecting, setIsRedirecting] = useState(false);
   const [showPaymentModal, setShowPaymentModal] = useState(false);
   const [stripeClientSecret, setStripeClientSecret] = useState(null);
+  const [stripePublishableKey, setStripePublishableKey] = useState(null);
   const [stripeLoading, setStripeLoading] = useState(false);
   const [stripeError, setStripeError] = useState(null);
   const navigate = useNavigate();
@@ -78,14 +79,10 @@ export default function Checkout() {
   const handlePayment = async () => {
     trackFunnel("payment_initiated");
     setStripeClientSecret(null);
+    setStripePublishableKey(null);
     setStripeError(null);
     setStripeLoading(true);
     setShowPaymentModal(true);
-    if (!getStripePromise()) {
-      setStripeError("Stripe is not configured. Please contact support.");
-      setStripeLoading(false);
-      return;
-    }
     try {
       const res = await base44.functions.invoke("createPaymentIntent", {
         email,
@@ -95,7 +92,8 @@ export default function Checkout() {
         resultId,
         locale: lang || "auto",
       });
-      if (res.data?.clientSecret) {
+      if (res.data?.clientSecret && res.data?.publishableKey) {
+        setStripePublishableKey(res.data.publishableKey);
         setStripeClientSecret(res.data.clientSecret);
       } else {
         setStripeError("Failed to initialize payment. Please try again.");
@@ -313,9 +311,9 @@ export default function Checkout() {
                   {stripeError}
                 </div>
               )}
-              {stripeClientSecret && (
+              {stripeClientSecret && stripePublishableKey && (
                 <EmbeddedCheckoutProvider
-                  stripe={getStripePromise()}
+                  stripe={getStripePromise(stripePublishableKey)}
                   options={{ clientSecret: stripeClientSecret }}
                 >
                   <EmbeddedCheckout />

@@ -51,8 +51,9 @@ Deno.serve(async (req) => {
       return_url: returnUrl,
     });
 
+    const publishableKey = Deno.env.get("STRIPE_PUBLISHABLE_KEY");
     console.log("Stripe embedded session created:", session.id, "for email:", email);
-    return Response.json({ clientSecret: session.client_secret });
+    return Response.json({ clientSecret: session.client_secret, publishableKey });
   } catch (error) {
     console.error("createPaymentIntent error:", error.message);
     return Response.json({ error: error.message }, { status: 500 });
