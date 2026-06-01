@@ -92,6 +92,7 @@ const translations = {
     thankYouMessage: "Thank you for taking the Academic IQ Test!",
 
     // About Section
+    testIntroTitle: "Academic IQ Test",
     aboutP1: "The Academic IQ Test is part of an ambitious effort to deliver fun, stimulating and engaging online measures of human cognitive abilities, as well as social and emotional learning skills for the global community.",
     aboutP2: "We aim to provide you with accurate and precise information about important aspects of your intellectual abilities and personality characteristics, and where they may benefit the most from further development, regardless of your academic, professional, or cultural background.",
     aboutP3: "The current version measures several dimensions of general fluid intelligence, including visuospatial pattern reasoning, visuospatial insight, and numerical pattern reasoning skills.",
@@ -209,6 +210,7 @@ const translations = {
     thankYouMessage: "学術IQテストを受けていただきありがとうございます！",
 
     // About Section
+    testIntroTitle: "Academic IQ Test",
     aboutP1: "Academic IQ Testは、世界のコミュニティのために、人間の認知能力や社会的・感情的学習スキルをオンラインで楽しく、刺激的に測定するという意欲的な取り組みの一環です。",
     aboutP2: "私たちは、学術的・職業的・文化的背景に関わらず、あなたの知的能力や個性的特性の重要な側面について、正確で精密な情報を提供することを目指しています。",
     aboutP3: "現在のバージョンでは、視空間パターン推論、視空間的洞察力、数値パターン推論スキルなど、流動的知性のいくつかの次元を測定します。",
