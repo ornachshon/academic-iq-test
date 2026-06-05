@@ -56,6 +56,7 @@ export default function Analytics() {
       try {
         const events = await base44.entities.FunnelEvent.list('-created_date', 50000);
         const c = {};
+        const uniquePaymentSessions = new Set();
         const byDay = {};
         (events || []).forEach(e => {
           const day = e.created_date ? e.created_date.slice(0, 10) : null;
@@ -64,13 +65,16 @@ export default function Analytics() {
           if (dateTo && day && day > dateTo) return;
 
           c[e.event_name] = (c[e.event_name] || 0) + 1;
+          if (e.event_name === "payment_completed" && e.session_id) {
+            uniquePaymentSessions.add(e.session_id);
+          }
           if (day) {
             if (!byDay[day]) byDay[day] = { date: day, test_finished: 0, email_inserted: 0 };
             if (e.event_name === "test_finished") byDay[day].test_finished++;
             if (e.event_name === "email_inserted") byDay[day].email_inserted++;
           }
         });
-        setCounts(c);
+        setCounts({ ...c, payment_completed_unique: uniquePaymentSessions.size });
         const sorted = Object.values(byDay).sort((a, b) => a.date.localeCompare(b.date));
         setDailyData(sorted);
       } catch (e) {
@@ -146,7 +150,7 @@ export default function Analytics() {
         ) : (
           <>
             {/* Summary cards */}
-            <div className="grid grid-cols-2 md:grid-cols-6 gap-4 mb-10">
+            <div className="grid grid-cols-2 md:grid-cols-7 gap-4 mb-10">
               {[
                 { label: "Page Visits",        value: counts["home_page_visited"] || 0 },
                 { label: "Test Starts",        value: startCount },
@@ -154,6 +158,7 @@ export default function Analytics() {
                 { label: "Emails Collected",   value: counts["email_inserted"] || 0 },
                 { label: "Payments Initiated", value: counts["payment_initiated"] || 0 },
                 { label: "Payments Completed", value: completedCount },
+                { label: "Payments Completed (Unique)", value: counts["payment_completed_unique"] || 0 },
               ].map(({ label, value }) => (
                 <div key={label} className="bg-white rounded-xl border border-gray-200 p-5 text-center shadow-sm">
                   <p className="text-3xl font-black text-[#F5921B]">{value}</p>
