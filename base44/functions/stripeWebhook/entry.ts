@@ -7,11 +7,7 @@ Deno.serve(async (req) => {
 
     if (!STRIPE_SECRET_KEY) {
       console.error("STRIPE_SECRET_KEY not set");
-      return Response.json({ error: "STRIPE_SECRET_KEY not set" }, { status: 500 });
-    }
-    if (!BREVO_API_KEY) {
-      console.error("BREVO_API_KEY not set");
-      return Response.json({ error: "BREVO_API_KEY not set" }, { status: 500 });
+      return Response.json({ received: true, warning: "STRIPE_SECRET_KEY not set" }, { status: 200 });
     }
 
     const body = await req.text();
@@ -41,6 +37,11 @@ Deno.serve(async (req) => {
       }
 
       console.log("Processing payment for email:", email);
+
+      if (!BREVO_API_KEY) {
+        console.error("BREVO_API_KEY not set — skipping Brevo actions");
+        return Response.json({ received: true });
+      }
 
       // Send receipt email via Brevo
       const score = session.metadata?.score || "";
@@ -116,6 +117,7 @@ Deno.serve(async (req) => {
     return Response.json({ received: true });
   } catch (error) {
     console.error("stripeWebhook error:", error.message);
-    return Response.json({ error: error.message }, { status: 400 });
+    // Always return 200 so Stripe doesn't retry — log the error for debugging
+    return Response.json({ received: true, error: error.message }, { status: 200 });
   }
 });
