@@ -15,7 +15,7 @@ Deno.serve(async (req) => {
     const base44 = createClientFromRequest(req);
 
     const body = await req.json().catch(() => ({}));
-    const { language } = body;
+    const { language, force_country } = body;
 
     // Detect user's country from Cloudflare headers or similar
     const cfCountry = req.headers.get("cf-ipcountry") ||
@@ -24,7 +24,7 @@ Deno.serve(async (req) => {
                       null;
 
     // Also try ip-api for more geo info
-    let detectedCountry = cfCountry;
+    let detectedCountry = force_country || cfCountry;
     let detectedCity = null;
     let detectedRegion = null;
 

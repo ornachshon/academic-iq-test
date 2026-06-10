@@ -12,10 +12,20 @@ const DEFAULT_PRICE = {
 export function useGeoPrice() {
   const [pricing, setPricing] = useState(DEFAULT_PRICE);
   const [loading, setLoading] = useState(true);
+  const [language, setLanguage] = useState(() => localStorage.getItem("selectedLanguage") || "en");
 
   useEffect(() => {
-    const language = localStorage.getItem("selectedLanguage") || "en";
-    base44.functions.invoke("getLocationPrice", { language })
+    const handleLanguageChange = () => {
+      setLanguage(localStorage.getItem("selectedLanguage") || "en");
+    };
+    window.addEventListener("languageChanged", handleLanguageChange);
+    return () => window.removeEventListener("languageChanged", handleLanguageChange);
+  }, []);
+
+  useEffect(() => {
+    setLoading(true);
+    const forceCountry = language === "ja" ? "JP" : undefined;
+    base44.functions.invoke("getLocationPrice", { language, ...(forceCountry && { force_country: forceCountry }) })
       .then((res) => {
         if (res.data && res.data.price) {
           setPricing(res.data);
@@ -25,7 +35,7 @@ export function useGeoPrice() {
         // Keep default on error
       })
       .finally(() => setLoading(false));
-  }, []);
+  }, [language]);
 
   const formatPrice = (amount) =>
     `${pricing.currency_symbol}${Number(amount).toFixed(2)}`;
