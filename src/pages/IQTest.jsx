@@ -22,6 +22,7 @@ export default function IQTest() {
   const [startTime] = useState(Date.now());
   const [showIntro, setShowIntro] = useState(false);
   const [showHalfway, setShowHalfway] = useState(false);
+  const [showCalculating, setShowCalculating] = useState(false);
   const halfwayShownRef = useRef(false);
 
   useSEO({ title: 'IQ Test – 30 Questions', description: 'Answer 30 scientifically designed questions covering pattern recognition, numerical reasoning, and spatial intelligence. Get your IQ score in minutes.' });
@@ -109,7 +110,10 @@ export default function IQTest() {
   }, [navigate, answers, startTime]);
 
   const handleFinishClick = () => {
-    goToEmail();
+    setShowCalculating(true);
+    setTimeout(() => {
+      goToEmail();
+    }, 2500);
   };
 
   const handleTimeUp = useCallback(() => {
@@ -204,6 +208,57 @@ export default function IQTest() {
           </motion.div>
         )}
       </AnimatePresence>
+      {/* Calculating popup */}
+      <AnimatePresence>
+        {showCalculating && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black/60"
+          >
+            <motion.div
+              initial={{ scale: 0.85, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              transition={{ type: "spring", stiffness: 300, damping: 25 }}
+              className="bg-white rounded-3xl shadow-2xl p-10 max-w-sm w-full mx-4 text-center"
+            >
+              <div className="flex justify-center mb-6">
+                <div className="relative w-20 h-20">
+                  <svg className="w-20 h-20 -rotate-90" viewBox="0 0 80 80">
+                    <circle cx="40" cy="40" r="34" fill="none" stroke="#e5e7eb" strokeWidth="6" />
+                    <motion.circle
+                      cx="40" cy="40" r="34"
+                      fill="none" stroke="#F5921B" strokeWidth="6"
+                      strokeLinecap="round"
+                      strokeDasharray={213.6}
+                      initial={{ strokeDashoffset: 213.6 }}
+                      animate={{ strokeDashoffset: 0 }}
+                      transition={{ duration: 2.5, ease: "easeInOut" }}
+                    />
+                  </svg>
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <span className="text-2xl font-black text-[#0C3547]">IQ</span>
+                  </div>
+                </div>
+              </div>
+              <h2 className="text-2xl font-bold text-[#0C3547] mb-2">Calculating Results</h2>
+              <p className="text-gray-400 text-sm">Analyzing your answers...</p>
+              <div className="flex justify-center gap-1.5 mt-5">
+                {[0, 1, 2].map((i) => (
+                  <motion.div
+                    key={i}
+                    className="w-2 h-2 rounded-full bg-[#F5921B]"
+                    animate={{ opacity: [0.3, 1, 0.3] }}
+                    transition={{ duration: 1.2, repeat: Infinity, delay: i * 0.3 }}
+                  />
+                ))}
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       {/* Top Bar */}
       <div className="bg-[#0C3547] px-4 py-2 shadow-lg">
         <div className="max-w-6xl mx-auto flex items-center justify-between">
