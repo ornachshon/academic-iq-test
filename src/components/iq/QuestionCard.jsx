@@ -23,7 +23,7 @@ export default function QuestionCard({ question, selectedAnswer, onSelectAnswer 
 
           {question.image && (
             <div className="flex justify-center my-4">
-              <img src={question.image} alt="Question" className="max-w-full rounded-xl" />
+              <img src={question.image} alt="Question" className="max-w-full rounded-xl max-h-48 md:max-h-none object-contain" />
             </div>
           )}
 
