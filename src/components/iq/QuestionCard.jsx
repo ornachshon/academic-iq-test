@@ -28,14 +28,14 @@ export default function QuestionCard({ question, selectedAnswer, onSelectAnswer 
           )}
 
           {!question.image && question.grid && (
-            <div className="flex justify-center my-6">
+            <div className="flex justify-center my-4">
               <div className="inline-grid gap-0.5 bg-gray-200 p-0.5 rounded-xl">
                 {question.grid.map((row, rIdx) => (
                   <div key={rIdx} className="flex gap-0.5">
                     {row.map((cell, cIdx) => (
                       <div
                         key={cIdx}
-                        className={`w-16 h-16 sm:w-20 sm:h-20 flex items-center justify-center text-xl sm:text-2xl font-bold rounded-lg ${
+                        className={`w-12 h-12 sm:w-16 sm:h-16 md:w-20 md:h-20 flex items-center justify-center text-xl sm:text-2xl font-bold rounded-lg ${
                           cell === "?"
                             ? "bg-[#F5921B] text-white text-3xl"
                             : "bg-white text-[#0C3547]"
@@ -51,7 +51,7 @@ export default function QuestionCard({ question, selectedAnswer, onSelectAnswer 
           )}
 
           {!question.image && !question.grid && (
-            <div className="flex items-center justify-center min-h-[200px]">
+            <div className="flex items-center justify-center min-h-[120px] md:min-h-[200px]">
               <p className="text-2xl sm:text-3xl font-bold text-[#0C3547] text-center">
                 {question.question.includes("?") ? "" : question.question}
               </p>
