@@ -140,7 +140,7 @@ export default function IQTest() {
               <p className="text-xs text-gray-500">{t("questionsLabel")}</p>
             </div>
             <div className="bg-gray-50 rounded-xl p-4">
-              <p className="text-2xl font-bold text-[#0C3547]">20</p>
+              <p className="text-2xl font-bold text-[#0C3547]">15</p>
               <p className="text-xs text-gray-500">{t("minutesLabel")}</p>
             </div>
             <div className="bg-gray-50 rounded-xl p-4">
@@ -171,7 +171,7 @@ export default function IQTest() {
         <div className="max-w-6xl mx-auto flex items-center justify-between">
           <p className="text-white font-bold text-sm">
           </p>
-          <Timer totalSeconds={1200} onTimeUp={handleTimeUp} />
+          <Timer totalSeconds={900} onTimeUp={handleTimeUp} />
         </div>
         {/* Progress bar */}
         <div className="max-w-6xl mx-auto mt-1.5">

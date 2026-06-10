@@ -299,111 +299,15 @@ const questions = [
     correct: 4,
     explanation: "Pattern: col3(row) = col1(row) + col2(row) - col3(previous row). Row 2: 9+7-4=12. Row 3: 10+15-12=13. Answer: E (13)."
   },
-  {
-    id: 23,
-    type: "image_options",
-    category: "Spatial Reasoning",
-    category_question: "Visuospatial Insight",
-    question: "How many squares are in the picture?",
-    image: "https://media.base44.com/images/public/69b1aedc5a0abb358cd40ec0/f53c1242d_image.png",
-    options_image: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69b1aedc5a0abb358cd40ec0/357541e1e_image.png",
-    options: ["A", "B", "C", "D", "E", "F"],
-    correct: 2,
-    explanation: "Count all squares: 6 individual cells (1×1) + 3 medium squares (2×2 combinations) + 2 larger regions = 11 total. Answer: C (11)."
-  },
-  {
-    id: 24,
-    type: "image_options",
-    category: "Pattern Recognition",
-    category_question: "Visuospatial Pattern Reasoning",
-    question: "Which Shape is missing?",
-    image: "https://media.base44.com/images/public/69b1aedc5a0abb358cd40ec0/d39bce9f0_image.png",
-    options_image: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69b1aedc5a0abb358cd40ec0/5ecdc0229_image.png",
-    options: ["A", "B", "C", "D", "E", "F"],
-    correct: 2,
-    explanation: "The hexagon sections rotate and change color pattern. Row 3, col 3 shows orange on left, navy triangles center/bottom. Answer: C."
-  },
-  {
-    id: 25,
-    type: "image_options",
-    category: "Spatial Reasoning",
-    category_question: "Visuospatial Insight",
-    question: "What box was created from the image?",
-    image: "https://media.base44.com/images/public/69b1aedc5a0abb358cd40ec0/28592b8f9_image.png",
-    options_image: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69b1aedc5a0abb358cd40ec0/300450d61_image.png",
-    options: ["A", "B", "C", "D", "E", "F"],
-    correct: 0,
-    explanation: "The net has gray top, magenta left, green right, cyan back, and orange bottom. When folded, the visible faces display magenta, green, and gray. Answer: A."
-  },
-  {
-    id: 26,
-    type: "image_options",
-    category: "Numerical Reasoning",
-    category_question: "Numerical Pattern Reasoning",
-    question: "Which number is missing?",
-    image: "https://media.base44.com/images/public/69b1aedc5a0abb358cd40ec0/f191bead7_image.png",
-    options_image: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69b1aedc5a0abb358cd40ec0/809001f23_image.png",
-    options: ["A", "B", "C", "D", "E", "F"],
-    correct: 2,
-    explanation: "Pattern: Row sums increase by 7 (25, 32, 39). Row 1: 7+10+8=25, Row 2: 11+9+12=32, Row 3: 10+13+?=39. So ?=16. Or by columns, alternating +4/-1: Col 3 follows 8→12→11. Answer: C (11)."
-  },
-  {
-    id: 27,
-    type: "image_options",
-    category: "Pattern Recognition",
-    category_question: "Visuospatial Pattern Reasoning",
-    question: "Which Shape is missing?",
-    image: "https://media.base44.com/images/public/69b1aedc5a0abb358cd40ec0/2f43a795d_image.png",
-    options_image: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69b1aedc5a0abb358cd40ec0/ad399187f_image.png",
-    options: ["A", "B", "C", "D", "E", "F"],
-    correct: 1,
-    explanation: "The pattern shows arrows rotating and shapes transforming. Row 3, col 3 completes the sequence with an upper-right pointing arrow. Answer: B."
-  },
-  {
-    id: 28,
-    type: "image_options",
-    category: "Numerical Reasoning",
-    category_question: "Numerical Pattern Reasoning",
-    question: "Which number is missing?",
-    image: "https://media.base44.com/images/public/69b1aedc5a0abb358cd40ec0/62d2d2f08_image.png",
-    options_image: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69b1aedc5a0abb358cd40ec0/1aec79263_image.png",
-    options: ["A", "B", "C", "D", "E", "F"],
-    correct: 2,
-    explanation: "Pattern: Reading left-to-right, top-to-bottom shows numerical sequence with a quadratic progression. Row 3, col 3: 33+66+? follows the pattern where col 3 sequence (9, 34, ?) increases by 25 then 31. Answer: C (65)."
-  },
-  {
-    id: 29,
-    type: "image_options",
-    category: "Spatial Reasoning",
-    category_question: "Visuospatial Insight",
-    question: "Which Shape is missing?",
-    image: "https://media.base44.com/images/public/69b1aedc5a0abb358cd40ec0/9257445cc_image.png",
-    options_image: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69b1aedc5a0abb358cd40ec0/5fd0f2dd2_image.png",
-    options: ["A", "B", "C", "D", "E", "F"],
-    correct: 0,
-    explanation: "The missing section shows horizontal orange stripes with vertical blue dividing lines and a diagonal blue line in the bottom-left corner. Answer: A."
-  },
-  {
-    id: 30,
-    type: "image_options",
-    category: "Pattern Recognition",
-    category_question: "Visuospatial Pattern Reasoning",
-    question: "Which Shape is missing?",
-    image: "https://media.base44.com/images/public/69b1aedc5a0abb358cd40ec0/abe98620c_image.png",
-    options_image: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69b1aedc5a0abb358cd40ec0/ddaf7d447_image.png",
-    options: ["A", "B", "C", "D", "E", "F"],
-    correct: 3,
-    explanation: "The pattern shows decreasing circles and squares across rows and columns. Row 3, col 3 has only orange squares at the bottom with no circles. Answer: D."
-  }
 ];
 
 export default questions;
 
 // Category definitions with total question counts
 export const CATEGORY_TOTALS = {
-  "Numerical Pattern Reasoning": 7,
-  "Visuospatial Insight": 11,
-  "Visuospatial Pattern Reasoning": 12,
+  "Numerical Pattern Reasoning": 5,
+  "Visuospatial Insight": 8,
+  "Visuospatial Pattern Reasoning": 9,
 };
 
 /**
@@ -441,7 +345,7 @@ export function calculateDetailedIQ(answers, mu = 0.5, sigma = 0.15) {
   });
 
   // Raw score (0–1)
-  const rawScore = totalCorrect / 30;
+  const rawScore = totalCorrect / 22;
 
   // Z-score
   const zScore = (rawScore - mu) / sigma;
