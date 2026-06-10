@@ -150,7 +150,7 @@ export default function Email() {
           {t("emailModalTitle2")}
         </h2>
 
-        <p className="text-gray-500 text-sm mb-4">{t("emailModalSubtitle")}</p>
+        {t("emailModalSubtitle") && <p className="text-gray-500 text-sm mb-4">{t("emailModalSubtitle")}</p>}
 
         <form onSubmit={handleSubmit} className="flex flex-col items-center gap-4">
           <div className="relative w-full">

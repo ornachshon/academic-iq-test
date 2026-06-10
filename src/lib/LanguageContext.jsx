@@ -107,9 +107,9 @@ const translations = {
     whyP2: "You can take the test online anytime from any mobile device or desktop computer and immediately receive a detailed score report that tells you how your performance compares to thousands of adults from all over the world.",
 
     // Email Modal
-    emailModalTitle1: "Where to send your IQ score",
-    emailModalTitle2: "and performance report?",
-    emailModalSubtitle: "Please enter your email:",
+    emailModalTitle1: "Good news — your IQ results are ready!",
+    emailModalTitle2: "What email address should we send them to?",
+    emailModalSubtitle: "",
     processing: "Processing...",
     privacyNote: "We value your privacy. Your email will never be shared with anyone.",
 
