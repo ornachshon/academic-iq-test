@@ -299,6 +299,10 @@ export default function Checkout() {
                 &times;
               </button>
             </div>
+            {/* No subscription notice */}
+            <div className="px-4 py-2 bg-gray-50 border-b border-gray-100 text-center text-xs text-gray-500">
+              🔒 No subscription. One-time payment only.
+            </div>
             {/* Stripe Embedded Checkout */}
             <div className="overflow-y-auto flex-1">
               {stripeLoading && (
