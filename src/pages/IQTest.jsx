@@ -21,6 +21,8 @@ export default function IQTest() {
   const [answers, setAnswers] = useState({});
   const [startTime] = useState(Date.now());
   const [showIntro, setShowIntro] = useState(false);
+  const [showHalfway, setShowHalfway] = useState(false);
+  const halfwayShownRef = useRef(false);
 
   useSEO({ title: 'IQ Test – 30 Questions', description: 'Answer 30 scientifically designed questions covering pattern recognition, numerical reasoning, and spatial intelligence. Get your IQ score in minutes.' });
 
@@ -47,7 +49,12 @@ export default function IQTest() {
     }
     setTimeout(() => {
       if (currentQ < questions.length - 1) {
-        setCurrentQ((q) => q + 1);
+        const nextQ = currentQ + 1;
+        setCurrentQ(nextQ);
+        if (nextQ === 11 && !halfwayShownRef.current) {
+          halfwayShownRef.current = true;
+          setShowHalfway(true);
+        }
       }
     }, 400);
   };
@@ -166,6 +173,37 @@ export default function IQTest() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 pb-12">
+      {/* Halfway popup */}
+      <AnimatePresence>
+        {showHalfway && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black/50"
+            onClick={() => setShowHalfway(false)}
+          >
+            <motion.div
+              initial={{ scale: 0.85, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.85, opacity: 0 }}
+              transition={{ type: "spring", stiffness: 300, damping: 25 }}
+              onClick={(e) => e.stopPropagation()}
+              className="bg-white rounded-3xl shadow-2xl p-10 max-w-sm w-full mx-4 text-center"
+            >
+              <div className="text-5xl mb-4">🎉</div>
+              <h2 className="text-2xl font-bold text-[#0C3547] mb-2">Good Job!</h2>
+              <p className="text-gray-500 mb-6">You're halfway there — keep it up!</p>
+              <button
+                onClick={() => setShowHalfway(false)}
+                className="bg-[#F5921B] hover:bg-[#e0830f] text-white font-bold py-3 px-8 rounded-xl text-lg transition-colors"
+              >
+                Continue
+              </button>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
       {/* Top Bar */}
       <div className="bg-[#0C3547] px-4 py-2 shadow-lg">
         <div className="max-w-6xl mx-auto flex items-center justify-between">
