@@ -290,7 +290,7 @@ export default function Checkout() {
         <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center bg-black/60 sm:p-4">
           <div className="bg-white sm:rounded-lg shadow-2xl w-full sm:max-w-lg flex flex-col h-full sm:h-auto sm:max-h-[90vh]">
             {/* Modal Header */}
-            <div className="flex items-center justify-between px-5 py-4 border-b border-gray-200 shrink-0">
+            <div className="flex items-center justify-between px-4 py-2 border-b border-gray-200 shrink-0">
               <h2 className="text-base font-bold text-[#0C3547]">Secure Payment</h2>
               <button
                 onClick={() => setShowPaymentModal(false)}
@@ -302,7 +302,7 @@ export default function Checkout() {
             {/* Stripe Embedded Checkout */}
             <div className="overflow-y-auto flex-1">
               {stripeLoading && (
-                <div className="flex items-center justify-center h-64 text-gray-500 text-sm">
+                <div className="flex items-center justify-center h-40 text-gray-500 text-sm">
                   Loading payment form...
                 </div>
               )}
@@ -312,12 +312,14 @@ export default function Checkout() {
                 </div>
               )}
               {stripeClientSecret && stripePublishableKey && (
-                <EmbeddedCheckoutProvider
-                  stripe={getStripePromise(stripePublishableKey)}
-                  options={{ clientSecret: stripeClientSecret }}
-                >
-                  <EmbeddedCheckout />
-                </EmbeddedCheckoutProvider>
+                <div className="[transform:scale(0.88)] [transform-origin:top_center] sm:transform-none -mb-[12%] sm:mb-0">
+                  <EmbeddedCheckoutProvider
+                    stripe={getStripePromise(stripePublishableKey)}
+                    options={{ clientSecret: stripeClientSecret }}
+                  >
+                    <EmbeddedCheckout />
+                  </EmbeddedCheckoutProvider>
+                </div>
               )}
             </div>
           </div>
