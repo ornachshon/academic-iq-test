@@ -53,6 +53,7 @@ Deno.serve(async (req) => {
         method: "POST",
         headers: { "Content-Type": "application/json", "api-key": BREVO_API_KEY },
         body: JSON.stringify({
+          sender: { name: "Academic IQ Test", email: "support@academiciqtest.com" },
           to: [{ email }],
           subject: "Your Academic IQ Test – Payment Receipt",
           htmlContent: `
