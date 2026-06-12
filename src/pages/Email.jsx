@@ -168,7 +168,7 @@ export default function Email() {
           <button
             type={isValidEmail ? "submit" : "button"}
             disabled={isSubmitting}
-            className={`w-full font-bold py-3 rounded-md transition-colors text-base ${isValidEmail ? "bg-[#F5921B] hover:bg-[#e0830f] text-white" : "bg-[#f5c07b] text-white cursor-pointer"}`}>
+            className={`w-full font-bold py-3 rounded-md transition-colors text-base bg-[#fdd5a1] ${isValidEmail ? "bg-[#F5921B] hover:bg-[#e0830f] text-white" : "text-white cursor-pointer"}`}>
 
             {isSubmitting ? t("processing") : t("getMyResults")}
           </button>
