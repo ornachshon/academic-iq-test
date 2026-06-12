@@ -13,6 +13,7 @@ export default function Email() {
   const location = useLocation();
   const [email, setEmail] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [showValidation, setShowValidation] = useState(false);
 
   const isValidEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim());
 
@@ -160,14 +161,18 @@ export default function Email() {
               type="email"
               required
               value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              className="w-full border border-gray-300 rounded-md pl-9 pr-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#F5921B]"
+              onChange={(e) => { setEmail(e.target.value); setShowValidation(false); }}
+              className={`w-full border rounded-md pl-9 pr-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#F5921B] ${showValidation ? "border-red-400" : "border-gray-300"}`}
               placeholder="" />
+            {showValidation && (
+              <p className="text-red-500 text-xs mt-1 text-left">Please enter your email.</p>
+            )}
           </div>
 
           <button
             type={isValidEmail ? "submit" : "button"}
             disabled={isSubmitting}
+            onClick={!isValidEmail ? () => setShowValidation(true) : undefined}
             className={`w-full font-bold py-3 rounded-md transition-colors text-base bg-[#fdd5a1] ${isValidEmail ? "bg-[#F5921B] hover:bg-[#e0830f] text-white" : "text-white cursor-pointer"}`}>
 
             {isSubmitting ? t("processing") : t("getMyResults")}
