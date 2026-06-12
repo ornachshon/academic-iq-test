@@ -108,7 +108,7 @@ const translations = {
 
     // Email Modal
     emailModalTitle1: "Impressive! Your IQ results show above average",
-    emailModalTitle2: "What email should we send your IQ results to?",
+    emailModalTitle2: "Where should we send your IQ results?",
     emailModalSubtitle: "",
     processing: "Processing...",
     privacyNote: "We value your privacy. Your email will never be shared with anyone.",
