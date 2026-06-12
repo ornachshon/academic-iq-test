@@ -144,7 +144,7 @@ export default function Email() {
         className="relative bg-white rounded-2xl shadow-2xl w-full max-w-md mx-4 p-8 text-center">
 
         <h2 className="text-[#0C3547] mb-2 text-2xl font-bold leading-tight">
-          {t("emailModalTitle1")}
+          Impressive!<br />Your IQ results show above average
         </h2>
         <p className="text-gray-500 mb-4 text-sm font-medium mt-4">
           {t("emailModalTitle2")}
