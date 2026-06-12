@@ -107,8 +107,8 @@ const translations = {
     whyP2: "You can take the test online anytime from any mobile device or desktop computer and immediately receive a detailed score report that tells you how your performance compares to thousands of adults from all over the world.",
 
     // Email Modal
-    emailModalTitle1: "Good news — your IQ results are ready!",
-    emailModalTitle2: "What email address should we send them to?",
+    emailModalTitle1: "Impressive! Your IQ results show above average",
+    emailModalTitle2: "What email should we send your IQ results to?",
     emailModalSubtitle: "",
     processing: "Processing...",
     privacyNote: "We value your privacy. Your email will never be shared with anyone.",
@@ -225,8 +225,8 @@ const translations = {
     whyP2: "スマートフォンやパソコンからいつでもオンラインでテストを受けることができ、世界中の何千人もの大人と比較した詳細なスコアレポートをすぐに受け取ることができます。",
 
     // Email Modal
-    emailModalTitle1: "IQスコアと",
-    emailModalTitle2: "パフォーマンスレポートの送り先は？",
+    emailModalTitle1: "素晴らしい！あなたのIQ結果は平均以上です",
+    emailModalTitle2: "IQ結果をどこのメールアドレスに送信しますか？",
     emailModalSubtitle: "メールアドレスを入力してください：",
     processing: "処理中...",
     privacyNote: "プライバシーを大切にしています。メールアドレスが第三者に共有されることはありません。",
