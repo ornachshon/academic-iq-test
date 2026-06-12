@@ -111,7 +111,7 @@ const translations = {
     emailModalTitle2: "Where should we send your IQ results?",
     emailModalSubtitle: "",
     processing: "Processing...",
-    privacyNote: "We value your privacy. Your email will never be shared with anyone.",
+    privacyNote: "Your email is private and never shared.",
 
     // Footer
     allRightsReserved: "All rights reserved",
