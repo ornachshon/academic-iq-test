@@ -143,12 +143,12 @@ export default function Email() {
         transition={{ duration: 0.3, ease: "easeOut" }}
         className="relative bg-white rounded-2xl shadow-2xl w-full max-w-md mx-4 p-8 text-center">
 
-        <h2 className="text-[#0C3547] mb-1 text-xl font-bold">
+        <h2 className="text-[#0C3547] mb-2 text-2xl font-bold leading-tight">
           {t("emailModalTitle1")}
         </h2>
-        <h2 className="text-[#0C3547] mb-4 text-xl font-bold">
+        <p className="text-gray-500 mb-4 text-sm font-medium">
           {t("emailModalTitle2")}
-        </h2>
+        </p>
 
         {t("emailModalSubtitle") && <p className="text-gray-500 text-sm mb-4">{t("emailModalSubtitle")}</p>}
 
