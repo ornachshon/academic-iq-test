@@ -178,9 +178,14 @@ export default function Checkout() {
               <div className="text-center leading-tight">
                 <p className="text-xs font-bold text-[#0C3547] uppercase tracking-widest">{t("yourIQScore")}</p>
               </div>
-              <div className="w-12 h-12 rounded-full border-2 border-gray-300 bg-gray-100 flex items-center justify-center">
-                <HelpCircle className="w-6 h-6 text-gray-400" />
-              </div>
+              <button
+                onClick={handlePayment}
+                disabled={isRedirecting || priceLoading}
+                className="w-12 h-12 rounded-full border-2 border-[#F5921B] bg-[#FFF4E8] flex items-center justify-center hover:bg-[#ffe8cc] transition-colors cursor-pointer disabled:opacity-70"
+                title="See your IQ score"
+              >
+                <HelpCircle className="w-6 h-6 text-[#F5921B]" />
+              </button>
             </div>
           </div>
 
@@ -242,7 +247,7 @@ export default function Checkout() {
           <button
             onClick={handlePayment}
             disabled={isRedirecting || priceLoading}
-            className="bg-[#F5921B] text-white py-3 text-xl font-bold rounded-md w-full hover:bg-[#e0830f] transition-colors disabled:opacity-70 disabled:cursor-not-allowed">
+            className="bg-[#F5921B] text-white py-4 text-2xl font-black rounded-lg w-full hover:bg-[#e0830f] active:scale-95 transition-all shadow-lg shadow-orange-200 disabled:opacity-70 disabled:cursor-not-allowed tracking-wide">
             {isRedirecting ? t("redirectingToPayment") : t("getMyIQResults")}
           </button>
         </div>
