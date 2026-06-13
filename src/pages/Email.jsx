@@ -145,8 +145,8 @@ export default function Email() {
         className="relative bg-white rounded-2xl shadow-2xl w-full max-w-md mx-4 p-8 text-center">
 
         <h2 className="text-[#0C3547] mb-2 font-bold leading-tight">
-          <span className="text-2xl block">Great news!</span>
-          <span className="text-xl block whitespace-nowrap">Your IQ results are ready.</span>
+          <span className="text-2xl block">{t("emailModalHeadline")}</span>
+          <span className="text-xl block whitespace-nowrap">{t("emailModalSubheadline")}</span>
         </h2>
         <p className="text-gray-500 mb-4 text-sm font-medium mt-4">
           {t("emailModalTitle2")}
@@ -167,7 +167,7 @@ export default function Email() {
               className={`w-full border rounded-md pl-9 pr-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#F5921B] ${showValidation ? "border-red-400" : "border-gray-300"}`}
               placeholder="" />
             {showValidation && (
-              <p className="text-red-500 text-xs mt-1 text-left">Please enter your email.</p>
+              <p className="text-red-500 text-xs mt-1 text-left">{t("emailRequired")}</p>
             )}
           </div>
 

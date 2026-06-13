@@ -108,10 +108,13 @@ const translations = {
 
     // Email Modal
     emailModalTitle1: "Impressive! Your IQ results show above average",
+    emailModalHeadline: "Great news!",
+    emailModalSubheadline: "Your IQ results are ready.",
     emailModalTitle2: "Where should we send your IQ results?",
     emailModalSubtitle: "",
     processing: "Processing...",
     privacyNote: "Your email is private and never shared.",
+    emailRequired: "Please enter your email.",
 
     // Footer
     allRightsReserved: "All rights reserved",
@@ -226,10 +229,13 @@ const translations = {
 
     // Email Modal
     emailModalTitle1: "素晴らしい！あなたのIQ結果は平均以上です",
+    emailModalHeadline: "素晴らしい！",
+    emailModalSubheadline: "IQ結果の準備ができました。",
     emailModalTitle2: "IQ結果をどこのメールアドレスに送信しますか？",
-    emailModalSubtitle: "メールアドレスを入力してください：",
+    emailModalSubtitle: "",
     processing: "処理中...",
-    privacyNote: "プライバシーを大切にしています。メールアドレスが第三者に共有されることはありません。",
+    privacyNote: "メールアドレスは非公開で、第三者に共有されることはありません。",
+    emailRequired: "メールアドレスを入力してください。",
 
     // Footer
     allRightsReserved: "全著作権所有",
