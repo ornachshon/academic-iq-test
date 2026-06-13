@@ -175,7 +175,7 @@ export default function Email() {
             type={isValidEmail ? "submit" : "button"}
             disabled={isSubmitting}
             onClick={!isValidEmail ? () => setShowValidation(true) : undefined}
-            className={`w-full font-bold py-3 rounded-md transition-colors text-base bg-[#fdd5a1] ${isValidEmail ? "bg-[#F5921B] hover:bg-[#e0830f] text-white" : "text-white cursor-pointer"}`}>
+            className={`w-full font-bold py-3 rounded-md transition-colors text-base text-white cursor-pointer ${isValidEmail ? "bg-[#F5921B] hover:bg-[#e0830f]" : "bg-[#fdd5a1]"}`}>
 
             {isSubmitting ? t("processing") : t("getMyResults")}
           </button>
