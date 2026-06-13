@@ -70,6 +70,24 @@ export default function Checkout() {
     const timer = setInterval(() => setTimeLeft(t => t - 1), 1000);
     return () => clearInterval(timer);
   }, [timeLeft]);
+
+  const closeModal = () => {
+    setShowPaymentModal(false);
+    setStripeClientSecret(null);
+    setStripePublishableKey(null);
+    setStripeError(null);
+    setStripeLoading(false);
+  };
+
+  // Push a fake history entry when modal opens so browser back closes it
+  useEffect(() => {
+    if (showPaymentModal) {
+      window.history.pushState({ modal: true }, '');
+      const onPop = () => closeModal();
+      window.addEventListener('popstate', onPop);
+      return () => window.removeEventListener('popstate', onPop);
+    }
+  }, [showPaymentModal]);
   const formatCountdown = (secs) => {
     const m = Math.floor(secs / 60).toString().padStart(2, '0');
     const s = (secs % 60).toString().padStart(2, '0');
@@ -292,16 +310,20 @@ export default function Checkout() {
 
       {/* Payment iFrame Modal */}
       {showPaymentModal && (
-        <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center bg-black/60 sm:p-4">
+        <div
+          className="fixed inset-0 z-50 flex items-end sm:items-center justify-center bg-black/60 sm:p-4"
+          onClick={(e) => { if (e.target === e.currentTarget) closeModal(); }}
+        >
           <div className="bg-white sm:rounded-lg shadow-2xl w-full sm:max-w-lg flex flex-col h-full sm:h-auto sm:max-h-[90vh]">
             {/* Modal Header */}
-            <div className="flex items-center justify-between px-4 py-2 border-b border-gray-200 shrink-0">
+            <div className="flex items-center justify-between px-4 py-3 border-b border-gray-200 shrink-0">
               <h2 className="text-base font-bold text-[#0C3547]">{t("securePayment")}</h2>
               <button
-                onClick={() => setShowPaymentModal(false)}
-                className="text-gray-400 hover:text-gray-600 text-2xl leading-none"
+                onClick={closeModal}
+                className="w-10 h-10 flex items-center justify-center rounded-full bg-gray-100 hover:bg-gray-200 text-gray-600 hover:text-gray-900 transition-colors text-xl font-bold leading-none"
+                aria-label="Close"
               >
-                &times;
+                ✕
               </button>
             </div>
             {/* No subscription notice */}
