@@ -116,6 +116,40 @@ const translations = {
     privacyNote: "Your email is private and never shared.",
     emailRequired: "Please enter your email.",
 
+    // Results page
+    yourIQTestResults: "Your IQ Test Results",
+    hereIsHowYouPerformed: "Here's how you performed",
+    resultNotFound: "Result not found",
+    goHome: "Go Home",
+    performanceSummary: "Performance Summary",
+    correctAnswers: "Correct Answers",
+    timeTakenLabel: "Time Taken",
+    percentile: "Percentile",
+    iqScoreLabel: "IQ Score",
+    topPercentile: (p) => `Top ${p}%`,
+    iqDistribution: "IQ Distribution",
+    scoreVsGlobal: "Your score compared to the global population",
+    cognitiveBreakdown: "Cognitive Breakdown",
+    retakeTest: "Retake Test",
+    shareResults: "Share Results",
+    myIQTestResults: "My IQ Test Results",
+    iScoredText: (score) => `I scored ${score} on the IQ Test! Take the test yourself.`,
+
+    // Checkout modal
+    securePayment: "Secure Payment",
+    noSubscription: "🔒 No subscription. One-time payment only.",
+    loadingPaymentForm: "Loading payment form...",
+
+    // Thankyou page
+    yourIQScoreIs: "Your IQ Score is:",
+    wePreparedEverything: "We've prepared everything for you",
+    personalizedCertificate: "Personalized IQ Certificate",
+    certificateReady: "A personalized certificate is ready for you to download with just one click.",
+    downloadCertificate: "Download Certificate",
+    detailedAnalysisReport: "Detailed Analysis Report",
+    fullStatisticalBreakdown: "A full statistical breakdown of your results with cognitive domain insights.",
+    viewReport: "View Report",
+
     // Footer
     allRightsReserved: "All rights reserved",
     privacyPolicyLink: "Privacy Policy",
@@ -236,6 +270,40 @@ const translations = {
     processing: "処理中...",
     privacyNote: "メールアドレスは非公開で、第三者に共有されることはありません。",
     emailRequired: "メールアドレスを入力してください。",
+
+    // Results page
+    yourIQTestResults: "IQテスト結果",
+    hereIsHowYouPerformed: "あなたの成績はこちらです",
+    resultNotFound: "結果が見つかりません",
+    goHome: "ホームへ",
+    performanceSummary: "パフォーマンスサマリー",
+    correctAnswers: "正解数",
+    timeTakenLabel: "所要時間",
+    percentile: "パーセンタイル",
+    iqScoreLabel: "IQスコア",
+    topPercentile: (p) => `上位 ${p}%`,
+    iqDistribution: "IQ分布",
+    scoreVsGlobal: "世界の人口と比較したあなたのスコア",
+    cognitiveBreakdown: "認知能力の内訳",
+    retakeTest: "再挑戦する",
+    shareResults: "結果をシェア",
+    myIQTestResults: "私のIQテスト結果",
+    iScoredText: (score) => `IQテストで${score}点を獲得しました！あなたも挑戦してみてください。`,
+
+    // Checkout modal
+    securePayment: "安全なお支払い",
+    noSubscription: "🔒 サブスクリプションなし。一回限りのお支払いのみ。",
+    loadingPaymentForm: "お支払いフォームを読み込み中...",
+
+    // Thankyou page
+    yourIQScoreIs: "あなたのIQスコア：",
+    wePreparedEverything: "すべてご用意しました",
+    personalizedCertificate: "パーソナライズされたIQ証明書",
+    certificateReady: "ワンクリックでダウンロードできる証明書が準備できました。",
+    downloadCertificate: "証明書をダウンロード",
+    detailedAnalysisReport: "詳細分析レポート",
+    fullStatisticalBreakdown: "認知領域の洞察を含む結果の完全な統計的内訳です。",
+    viewReport: "レポートを見る",
 
     // Footer
     allRightsReserved: "全著作権所有",

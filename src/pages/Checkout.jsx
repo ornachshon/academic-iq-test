@@ -291,7 +291,7 @@ export default function Checkout() {
           <div className="bg-white sm:rounded-lg shadow-2xl w-full sm:max-w-lg flex flex-col h-full sm:h-auto sm:max-h-[90vh]">
             {/* Modal Header */}
             <div className="flex items-center justify-between px-4 py-2 border-b border-gray-200 shrink-0">
-              <h2 className="text-base font-bold text-[#0C3547]">Secure Payment</h2>
+              <h2 className="text-base font-bold text-[#0C3547]">{t("securePayment")}</h2>
               <button
                 onClick={() => setShowPaymentModal(false)}
                 className="text-gray-400 hover:text-gray-600 text-2xl leading-none"
@@ -301,13 +301,13 @@ export default function Checkout() {
             </div>
             {/* No subscription notice */}
             <div className="px-4 py-2 bg-gray-50 border-b border-gray-100 text-center text-xs text-gray-500">
-              🔒 No subscription. One-time payment only.
+              {t("noSubscription")}
             </div>
             {/* Stripe Embedded Checkout */}
             <div className="overflow-y-auto flex-1">
               {stripeLoading && (
                 <div className="flex items-center justify-center h-40 text-gray-500 text-sm">
-                  Loading payment form...
+                  {t("loadingPaymentForm")}
                 </div>
               )}
               {stripeError && (

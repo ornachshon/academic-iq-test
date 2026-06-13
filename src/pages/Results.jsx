@@ -8,9 +8,11 @@ import { Brain, Clock, Target, Award, RotateCcw, Share2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import ScoreGauge from "@/components/results/ScoreGauge";
 import BellCurve from "@/components/results/BellCurve";
+import { useLanguage } from "@/lib/LanguageContext";
 
 export default function Results() {
   useSEO({ title: 'Your IQ Test Results', description: 'View your IQ score, percentile ranking, cognitive breakdown, and performance summary from your Academic IQ Test.' });
+  const { t } = useLanguage();
   const [result, setResult] = useState(null);
   const [loading, setLoading] = useState(true);
 
@@ -42,9 +44,9 @@ export default function Results() {
     return (
       <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 flex items-center justify-center p-4">
         <div className="text-center">
-          <p className="text-gray-500 text-lg mb-4">Result not found</p>
+          <p className="text-gray-500 text-lg mb-4">{t("resultNotFound")}</p>
           <Link to={createPageUrl("Home")}>
-            <Button>Go Home</Button>
+            <Button>{t("goHome")}</Button>
           </Link>
         </div>
       </div>
@@ -65,9 +67,9 @@ export default function Results() {
             animate={{ opacity: 1, y: 0 }}
             className="text-3xl md:text-4xl font-bold"
           >
-            Your IQ Test Results
+            {t("yourIQTestResults")}
           </motion.h1>
-          <p className="text-gray-300 mt-2">Here's how you performed</p>
+          <p className="text-gray-300 mt-2">{t("hereIsHowYouPerformed")}</p>
         </div>
       </div>
 
@@ -83,13 +85,13 @@ export default function Results() {
             <ScoreGauge score={result.score} />
             
             <div className="flex-1 w-full">
-              <h2 className="text-2xl font-bold text-[#0C3547] mb-6">Performance Summary</h2>
+              <h2 className="text-2xl font-bold text-[#0C3547] mb-6">{t("performanceSummary")}</h2>
               <div className="grid grid-cols-2 gap-4">
                 {[
-                  { icon: Target, label: "Correct Answers", value: `${result.correct_answers}/30` },
-                  { icon: Clock, label: "Time Taken", value: `${minutes}m ${secs}s` },
-                  { icon: Award, label: "Percentile", value: `Top ${percentile}%` },
-                  { icon: Brain, label: "IQ Score", value: result.score },
+                  { icon: Target, label: t("correctAnswers"), value: `${result.correct_answers}/30` },
+                  { icon: Clock, label: t("timeTakenLabel"), value: `${minutes}m ${secs}s` },
+                  { icon: Award, label: t("percentile"), value: t("topPercentile", percentile) },
+                  { icon: Brain, label: t("iqScoreLabel"), value: result.score },
                 ].map((stat) => (
                   <div key={stat.label} className="bg-gray-50 rounded-xl p-4">
                     <div className="flex items-center gap-2 mb-1">
@@ -111,8 +113,8 @@ export default function Results() {
           transition={{ delay: 0.4 }}
           className="bg-white rounded-3xl shadow-xl p-8 mt-6"
         >
-          <h3 className="text-xl font-bold text-[#0C3547] mb-2">IQ Distribution</h3>
-          <p className="text-gray-500 text-sm mb-6">Your score compared to the global population</p>
+          <h3 className="text-xl font-bold text-[#0C3547] mb-2">{t("iqDistribution")}</h3>
+          <p className="text-gray-500 text-sm mb-6">{t("scoreVsGlobal")}</p>
           <BellCurve score={result.score} />
         </motion.div>
 
@@ -123,7 +125,7 @@ export default function Results() {
           transition={{ delay: 0.6 }}
           className="bg-white rounded-3xl shadow-xl p-8 mt-6"
         >
-          <h3 className="text-xl font-bold text-[#0C3547] mb-6">Cognitive Breakdown</h3>
+          <h3 className="text-xl font-bold text-[#0C3547] mb-6">{t("cognitiveBreakdown")}</h3>
           <div className="space-y-5">
             {getCategoryScores(result.answers).map((cat) => (
               <div key={cat.name}>
@@ -158,15 +160,15 @@ export default function Results() {
               className="gap-2 border-[#0C3547] text-[#0C3547] hover:bg-[#0C3547]/5 px-8 py-3"
             >
               <RotateCcw className="w-4 h-4" />
-              Retake Test
+              {t("retakeTest")}
             </Button>
           </Link>
           <Button
             onClick={() => {
               if (navigator.share) {
                 navigator.share({
-                  title: "My IQ Test Results",
-                  text: `I scored ${result.score} on the IQ Test! Take the test yourself.`,
+                  title: t("myIQTestResults"),
+                  text: t("iScoredText", result.score),
                   url: window.location.href,
                 });
               }
@@ -174,7 +176,7 @@ export default function Results() {
             className="gap-2 bg-[#F5921B] hover:bg-[#e0830f] text-white px-8 py-3"
           >
             <Share2 className="w-4 h-4" />
-            Share Results
+            {t("shareResults")}
           </Button>
         </motion.div>
       </div>

@@ -4,9 +4,11 @@ import { useLocation, Link } from "react-router-dom";
 import { Download, FileText } from "lucide-react";
 import { base44 } from "@/api/base44Client";
 import { trackFunnel } from "@/lib/trackFunnel";
+import { useLanguage } from "@/lib/LanguageContext";
 
 export default function Thankyou() {
   useSEO({ title: 'Thank You – Your IQ Results Are Ready', description: 'Download your personalized IQ certificate and view your detailed cognitive analysis report.' });
+  const { t } = useLanguage();
   const location = useLocation();
   const { name, serialNumber, date } = location.state || {};
   // Score may come from router state or localStorage (after Stripe redirect)
@@ -47,19 +49,19 @@ export default function Thankyou() {
         {/* Score section */}
         <div className="text-center mb-10">
           <h1 className="text-3xl font-bold text-[#0C3547] mb-3">
-            Your <span className="text-[#F5921B]">IQ Score</span> is:
+            {t("yourIQScoreIs")}
           </h1>
           <p className="text-6xl font-black text-[#F5921B]">{score ?? "XXX"}</p>
-          <p className="text-gray-500 mt-5 text-base">We've prepared everything for you</p>
+          <p className="text-gray-500 mt-5 text-base">{t("wePreparedEverything")}</p>
         </div>
 
         {/* Cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full max-w-2xl">
           {/* Certificate card */}
           <div className="bg-gray-50 border border-gray-200 rounded-xl p-6 flex flex-col items-center text-center shadow-sm">
-            <h2 className="text-lg font-bold text-[#0C3547] mb-2">Personalized IQ Certificate</h2>
+            <h2 className="text-lg font-bold text-[#0C3547] mb-2">{t("personalizedCertificate")}</h2>
             <p className="text-gray-500 text-sm mb-6 leading-relaxed">
-              A personalized certificate is ready for you<br />to download with just one click.
+              {t("certificateReady")}
             </p>
             <Link
               to="/Certificate"
@@ -67,22 +69,22 @@ export default function Thankyou() {
               className="w-full bg-[#F5921B] hover:bg-[#e0830f] text-white font-bold py-3 rounded-lg text-sm transition-colors flex items-center justify-center gap-2"
             >
               <Download className="w-4 h-4" />
-              Download Certificate
+              {t("downloadCertificate")}
             </Link>
           </div>
 
           {/* Report card */}
           <div className="bg-gray-50 border border-gray-200 rounded-xl p-6 flex flex-col items-center text-center shadow-sm">
-            <h2 className="text-lg font-bold text-[#0C3547] mb-2">Detailed Analysis Report</h2>
+            <h2 className="text-lg font-bold text-[#0C3547] mb-2">{t("detailedAnalysisReport")}</h2>
             <p className="text-gray-500 text-sm mb-6 leading-relaxed">
-              A full statistical breakdown of your results<br />with cognitive domain insights.
+              {t("fullStatisticalBreakdown")}
             </p>
             <Link
               to="/Results"
               className="w-full bg-[#0C3547] hover:bg-[#0a2d3d] text-white font-bold py-3 rounded-lg text-sm transition-colors flex items-center justify-center gap-2"
             >
               <FileText className="w-4 h-4" />
-              View Report
+              {t("viewReport")}
             </Link>
           </div>
         </div>
