@@ -243,7 +243,7 @@ export default function Checkout() {
             <div className="flex flex-col items-end">
               <span className="flex items-center gap-2">
                 {!priceLoading && pricing.original_price && (
-                  <span className="line-through text-gray-400 font-normal text-sm">{formatPrice(pricing.original_price)}</span>
+                  <span className="line-through text-gray-400 font-normal text-sm">{formatPrice(pricing.currency_code === "JPY" ? 3750 : pricing.original_price)}</span>
                 )}
                 {priceLoading ? "..." : formatPrice(pricing.price)}
               </span>
