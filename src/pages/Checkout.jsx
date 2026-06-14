@@ -196,14 +196,15 @@ export default function Checkout() {
               <div className="text-center leading-tight">
                 <p className="text-xs font-bold text-[#0C3547] uppercase tracking-widest">{t("yourIQScore")}</p>
               </div>
-              <button
-                onClick={handlePayment}
-                disabled={isRedirecting || priceLoading}
-                className="w-12 h-12 rounded-full border-2 border-[#F5921B] bg-[#FFF4E8] flex items-center justify-center hover:bg-[#ffe8cc] transition-colors cursor-pointer disabled:opacity-70"
-                title="See your IQ score"
-              >
-                <HelpCircle className="w-6 h-6 text-[#F5921B]" />
-              </button>
+              <div className="relative group">
+                <div className="w-12 h-12 rounded-full border-2 border-[#F5921B] bg-[#FFF4E8] flex items-center justify-center cursor-default">
+                  <HelpCircle className="w-6 h-6 text-[#F5921B]" />
+                </div>
+                <div className="absolute right-0 bottom-14 w-56 bg-gray-800 text-white text-xs rounded-lg px-3 py-2 shadow-lg opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-10 text-center leading-relaxed">
+                  To get your IQ score press the <span className="font-bold text-[#F5921B]">Get My IQ Results</span> button below
+                  <div className="absolute right-4 top-full w-0 h-0 border-l-4 border-r-4 border-t-4 border-l-transparent border-r-transparent border-t-gray-800" />
+                </div>
+              </div>
             </div>
           </div>
 
