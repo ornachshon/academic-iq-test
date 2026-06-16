@@ -196,13 +196,13 @@ export default function IQTest() {
               className="bg-white rounded-3xl shadow-2xl p-10 max-w-sm w-full mx-4 text-center"
             >
               <div className="text-5xl mb-4">🎉</div>
-              <h2 className="text-2xl font-bold text-[#0C3547] mb-2">Good Job!</h2>
-              <p className="text-gray-500 mb-6">You're halfway there — keep it up!</p>
+              <h2 className="text-2xl font-bold text-[#0C3547] mb-2">{t("halfwayTitle")}</h2>
+              <p className="text-gray-500 mb-6">{t("halfwayDesc")}</p>
               <button
                 onClick={() => setShowHalfway(false)}
                 className="bg-[#F5921B] hover:bg-[#e0830f] text-white font-bold py-3 px-8 rounded-xl text-lg transition-colors"
               >
-                Continue
+                {t("halfwayContinue")}
               </button>
             </motion.div>
           </motion.div>
@@ -242,8 +242,8 @@ export default function IQTest() {
                   </div>
                 </div>
               </div>
-              <h2 className="text-2xl font-bold text-[#0C3547] mb-2">Calculating Results</h2>
-              <p className="text-gray-400 text-sm">Analyzing your answers...</p>
+              <h2 className="text-2xl font-bold text-[#0C3547] mb-2">{t("calculatingResults")}</h2>
+              <p className="text-gray-400 text-sm">{t("analyzingAnswers")}</p>
               <div className="flex justify-center gap-1.5 mt-5">
                 {[0, 1, 2].map((i) => (
                   <motion.div

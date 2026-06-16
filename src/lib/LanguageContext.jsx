@@ -135,6 +135,13 @@ const translations = {
     myIQTestResults: "My IQ Test Results",
     iScoredText: (score) => `I scored ${score} on the IQ Test! Take the test yourself.`,
 
+    // Calculating popup
+    calculatingResults: "Calculating Results",
+    analyzingAnswers: "Analyzing your answers...",
+    halfwayTitle: "Good Job!",
+    halfwayDesc: "You're halfway there — keep it up!",
+    halfwayContinue: "Continue",
+
     // Checkout modal
     securePayment: "Secure Payment",
     noSubscription: "🔒 No subscription. One-time payment only.",
@@ -289,6 +296,13 @@ const translations = {
     shareResults: "結果をシェア",
     myIQTestResults: "私のIQテスト結果",
     iScoredText: (score) => `IQテストで${score}点を獲得しました！あなたも挑戦してみてください。`,
+
+    // Calculating popup
+    calculatingResults: "結果を計算中",
+    analyzingAnswers: "あなたの回答を分析しています...",
+    halfwayTitle: "よくできました！",
+    halfwayDesc: "半分まで来ました — この調子で続けてください！",
+    halfwayContinue: "続ける",
 
     // Checkout modal
     securePayment: "安全なお支払い",
