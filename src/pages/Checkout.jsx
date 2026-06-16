@@ -236,14 +236,12 @@ export default function Checkout() {
             <span>{t("oneTimeFeeOnly")}</span>
             <div className="flex flex-col items-end">
               <span className="flex items-center gap-2">
-                {!priceLoading && pricing.original_price && pricing.currency_code !== "JPY" && (
-                  <span className="line-through text-gray-400 font-normal text-sm">{formatPrice(pricing.original_price)}</span>
+                {!priceLoading && pricing.original_price && (
+                  <span className="line-through text-gray-400 font-normal text-sm">{formatPrice(pricing.currency_code === "JPY" ? 1990 : pricing.original_price)}</span>
                 )}
                 {priceLoading ? "..." : formatPrice(pricing.price)}
               </span>
-              {pricing.currency_code !== "JPY" && (
-                <span className="text-[#F5921B] text-xs font-bold">{t("youSave80")}</span>
-              )}
+              <span className="text-[#F5921B] text-xs font-bold">{t("youSave80")}</span>
             </div>
           </div>
 
