@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useCallback } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Star, HelpCircle } from 'lucide-react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import Footer from '@/components/home/Footer';
@@ -6,17 +6,9 @@ import { trackFunnel } from '@/lib/trackFunnel';
 import { useGeoPrice } from '@/hooks/useGeoPrice';
 import { useLanguage } from '@/lib/LanguageContext';
 import { base44 } from '@/api/base44Client';
-import { loadStripe } from '@stripe/stripe-js';
-import { EmbeddedCheckoutProvider, EmbeddedCheckout } from '@stripe/react-stripe-js';
 
-const stripePromiseCache = {};
-const getStripePromise = (publishableKey) => {
-  if (!publishableKey) return null;
-  if (!stripePromiseCache[publishableKey]) {
-    stripePromiseCache[publishableKey] = loadStripe(publishableKey);
-  }
-  return stripePromiseCache[publishableKey];
-};
+
+
 
 const reviewsEn = [
 { name: "Mei Lin Zhang", rating: 5, text: "Great test with a clear layout and easy-to-use controls. The questions leaned more toward critical thinking rather than simple logic, which I liked. The only small confusion was how to view the results, though it becomes clear as you continue. Overall, enjoyable and engaging!" },
@@ -51,11 +43,7 @@ export default function Checkout() {
   const reviews = lang === "ja" ? reviewsJa : reviewsEn;
   const [agreed, setAgreed] = useState(false);
   const [isRedirecting, setIsRedirecting] = useState(false);
-  const [showPaymentModal, setShowPaymentModal] = useState(false);
-  const [stripeClientSecret, setStripeClientSecret] = useState(null);
-  const [stripePublishableKey, setStripePublishableKey] = useState(null);
-  const [stripeLoading, setStripeLoading] = useState(false);
-  const [stripeError, setStripeError] = useState(null);
+
   const navigate = useNavigate();
   const location = useLocation();
   const score = location.state?.score;
@@ -71,23 +59,7 @@ export default function Checkout() {
     return () => clearInterval(timer);
   }, [timeLeft]);
 
-  const closeModal = () => {
-    setShowPaymentModal(false);
-    setStripeClientSecret(null);
-    setStripePublishableKey(null);
-    setStripeError(null);
-    setStripeLoading(false);
-  };
 
-  // Push a fake history entry when modal opens so browser back closes it
-  useEffect(() => {
-    if (showPaymentModal) {
-      window.history.pushState({ modal: true }, '');
-      const onPop = () => closeModal();
-      window.addEventListener('popstate', onPop);
-      return () => window.removeEventListener('popstate', onPop);
-    }
-  }, [showPaymentModal]);
   const formatCountdown = (secs) => {
     const m = Math.floor(secs / 60).toString().padStart(2, '0');
     const s = (secs % 60).toString().padStart(2, '0');
@@ -96,37 +68,7 @@ export default function Checkout() {
 
   const handlePayment = async () => {
     trackFunnel("payment_initiated");
-    setStripeClientSecret(null);
-    setStripePublishableKey(null);
-    setStripeError(null);
-    setStripeLoading(true);
-    setShowPaymentModal(true);
-    try {
-      const res = await base44.functions.invoke("createPaymentIntent", {
-        email,
-        score,
-        priceAmount: pricing.price,
-        priceCurrency: pricing.currency_code,
-        resultId,
-        locale: lang || "auto",
-      });
-      if (res.data?.clientSecret && res.data?.publishableKey) {
-        setStripePublishableKey(res.data.publishableKey);
-        setStripeClientSecret(res.data.clientSecret);
-      } else {
-        setStripeError("Failed to initialize payment. Please try again.");
-      }
-    } catch (err) {
-      console.error("Payment init error:", err);
-      setStripeError("Failed to initialize payment. Please try again.");
-    } finally {
-      setStripeLoading(false);
-    }
-  };
-
-  const handleOldPayment = async () => {
     setIsRedirecting(true);
-    console.log("lang value:", lang);
     try {
       const res = await base44.functions.invoke("createStripeCheckout", {
         email,
@@ -147,6 +89,8 @@ export default function Checkout() {
       setIsRedirecting(false);
     }
   };
+
+
 
   const formatTime = (secs) => {
     const m = Math.floor(secs / 60).toString().padStart(2, '0');
@@ -305,54 +249,7 @@ export default function Checkout() {
 
       <Footer />
 
-      {/* Payment iFrame Modal */}
-      {showPaymentModal && (
-        <div
-          className="fixed inset-0 z-50 flex items-end sm:items-center justify-center bg-black/60 sm:p-4"
-          onClick={(e) => { if (e.target === e.currentTarget) closeModal(); }}
-        >
-          <div className="bg-white sm:rounded-lg shadow-2xl w-full sm:max-w-lg flex flex-col h-full sm:h-auto sm:max-h-[90vh]">
-            {/* Modal Header */}
-            <div className="flex items-center justify-between px-4 py-3 border-b border-gray-200 shrink-0">
-              <h2 className="text-base font-bold text-[#0C3547]">{t("securePayment")}</h2>
-              <button
-                onClick={closeModal}
-                className="w-10 h-10 flex items-center justify-center rounded-full bg-gray-100 hover:bg-gray-200 text-gray-600 hover:text-gray-900 transition-colors text-xl font-bold leading-none"
-                aria-label="Close"
-              >
-                ✕
-              </button>
-            </div>
-            {/* No subscription notice */}
-            <div className="px-4 py-2 bg-gray-50 border-b border-gray-100 text-center text-xs text-gray-500">
-              {t("noSubscription")}
-            </div>
-            {/* Stripe Embedded Checkout */}
-            <div className="overflow-y-auto flex-1">
-              {stripeLoading && (
-                <div className="flex items-center justify-center h-40 text-gray-500 text-sm">
-                  {t("loadingPaymentForm")}
-                </div>
-              )}
-              {stripeError && (
-                <div className="flex items-center justify-center h-64 text-red-500 text-sm px-6 text-center">
-                  {stripeError}
-                </div>
-              )}
-              {stripeClientSecret && stripePublishableKey && (
-                <div className="[transform:scale(0.88)] [transform-origin:top_center] sm:transform-none -mb-[12%] sm:mb-0">
-                  <EmbeddedCheckoutProvider
-                    stripe={getStripePromise(stripePublishableKey)}
-                    options={{ clientSecret: stripeClientSecret }}
-                  >
-                    <EmbeddedCheckout />
-                  </EmbeddedCheckoutProvider>
-                </div>
-              )}
-            </div>
-          </div>
-        </div>
-      )}
+
     </div>
   );
 }
