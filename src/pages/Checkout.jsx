@@ -157,12 +157,6 @@ export default function Checkout() {
   return (
     <div className="min-h-screen bg-gray-100 text-sm text-gray-800">
 
-      {/* Discount countdown banner */}
-      <div className="sticky top-0 z-50 bg-[#F5921B] text-white py-3 px-4 text-base font-semibold flex items-center justify-center gap-2">
-        <img src="https://media.base44.com/images/public/69b1aedc5a0abb358cd40ec0/cbd00333d_image.png" alt="gift" className="w-7 h-7 object-contain" />
-        {t("discountBanner")} <span className="font-mono font-bold">{formatCountdown(timeLeft)}</span>
-      </div>
-
       {/* Top banner */}
       <div className="bg-[#0C3547] text-white text-center py-4 px-4">
         <p className="text-base">{t("youCompleted")} <strong>{formatTime(timeTaken)} {t("minutes")}</strong></p>
