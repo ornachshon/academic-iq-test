@@ -104,7 +104,6 @@ export default function Checkout() {
       {/* Top banner */}
       <div className="bg-[#0C3547] text-white text-center py-4 px-4">
         <p className="text-base">{t("youCompleted")} <strong>{formatTime(timeTaken)} {t("minutes")}</strong></p>
-        <p className="text-base">{t("highlyCompetent")} <strong>{t("visuospatial")}</strong></p>
       </div>
 
       {/* Subtitle */}
