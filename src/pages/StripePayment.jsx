@@ -250,7 +250,7 @@ export default function StripePayment() {
       </div>
 
       {/* Payment card */}
-      <div className="w-full max-w-sm bg-white shadow-2xl" style={{ marginTop: "-60px" }}>
+      <div className="w-full max-w-sm bg-white shadow-2xl" style={{ marginTop: "-120px" }}>
         {/* Security notice */}
         <div className="flex items-start gap-3 px-5 pt-5 pb-4 border-b border-gray-100">
           <Lock className="w-5 h-5 text-gray-500 mt-0.5 shrink-0" />
