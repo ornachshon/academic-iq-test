@@ -248,7 +248,7 @@ export default function StripePayment() {
 
       {/* Modal overlay — centered */}
       <div className="absolute inset-0 flex flex-col items-center justify-center px-4 z-50" style={{ paddingTop: "80px" }}>
-        <div className="w-full max-w-sm bg-white rounded-2xl shadow-2xl overflow-hidden">
+        <div className="w-full max-w-md bg-white rounded-2xl shadow-2xl overflow-hidden">
           {/* Security notice */}
           <div className="flex items-start gap-3 px-5 pt-5 pb-4 border-b border-gray-100">
             <Lock className="w-5 h-5 text-gray-500 mt-0.5 shrink-0" />
