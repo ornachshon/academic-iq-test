@@ -141,33 +141,34 @@ function CheckoutForm({ email, score, timeTaken, resultId, pricing, onBack }) {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-5">
+    <form onSubmit={handleSubmit} className="space-y-4">
+      {/* Google Pay / Apple Pay */}
       {paymentRequest && (
         <PaymentRequestButtonElement
-          options={{ paymentRequest }}
+          options={{ paymentRequest, style: { paymentRequestButton: { height: "52px" } } }}
           className="w-full"
         />
       )}
 
-      <div>
-        <label className="block text-sm font-semibold text-gray-700 mb-1.5">Card Number</label>
-        <div className="border border-gray-300 rounded-lg px-4 py-3 bg-white focus-within:ring-2 focus-within:ring-[#F5921B] focus-within:border-[#F5921B] transition">
-          <CardNumberElement options={{ style: ELEMENT_STYLE }} />
-        </div>
+      {/* Divider */}
+      <div className="flex items-center gap-3">
+        <div className="flex-1 border-t border-gray-200" />
+        <span className="text-sm text-gray-500">Or Pay with Card</span>
+        <div className="flex-1 border-t border-gray-200" />
       </div>
 
-      <div className="grid grid-cols-2 gap-4">
-        <div>
-          <label className="block text-sm font-semibold text-gray-700 mb-1.5">Expiry Date</label>
-          <div className="border border-gray-300 rounded-lg px-4 py-3 bg-white focus-within:ring-2 focus-within:ring-[#F5921B] focus-within:border-[#F5921B] transition">
-            <CardExpiryElement options={{ style: ELEMENT_STYLE }} />
-          </div>
+      {/* Card Number */}
+      <div className="border border-gray-300 rounded-xl px-4 py-4 bg-white focus-within:ring-2 focus-within:ring-[#F5921B] focus-within:border-[#F5921B] transition">
+        <CardNumberElement options={{ style: ELEMENT_STYLE, placeholder: "CARD NUMBER" }} />
+      </div>
+
+      {/* Expiry + CVC */}
+      <div className="grid grid-cols-2 gap-3">
+        <div className="border border-gray-300 rounded-xl px-4 py-4 bg-white focus-within:ring-2 focus-within:ring-[#F5921B] focus-within:border-[#F5921B] transition">
+          <CardExpiryElement options={{ style: ELEMENT_STYLE, placeholder: "MM/YY" }} />
         </div>
-        <div>
-          <label className="block text-sm font-semibold text-gray-700 mb-1.5">CVC</label>
-          <div className="border border-gray-300 rounded-lg px-4 py-3 bg-white focus-within:ring-2 focus-within:ring-[#F5921B] focus-within:border-[#F5921B] transition">
-            <CardCvcElement options={{ style: ELEMENT_STYLE }} />
-          </div>
+        <div className="border border-gray-300 rounded-xl px-4 py-4 bg-white focus-within:ring-2 focus-within:ring-[#F5921B] focus-within:border-[#F5921B] transition">
+          <CardCvcElement options={{ style: ELEMENT_STYLE, placeholder: "CVV" }} />
         </div>
       </div>
 
@@ -177,22 +178,14 @@ function CheckoutForm({ email, score, timeTaken, resultId, pricing, onBack }) {
         </div>
       )}
 
-      <div className="flex gap-3 pt-2">
-        <button
-          type="button"
-          onClick={onBack}
-          className="px-6 py-3 border border-gray-300 rounded-lg text-gray-700 font-semibold hover:bg-gray-50 transition"
-        >
-          Back
-        </button>
-        <button
-          type="submit"
-          disabled={!stripe || loading}
-          className="flex-1 bg-[#F5921B] text-white py-3 rounded-lg font-bold text-lg hover:bg-[#e0830f] transition disabled:opacity-70"
-        >
-          {loading ? "Processing..." : `Pay ${pricing?.currency_symbol || "$"}${pricing?.price || "..."}`}
-        </button>
-      </div>
+      {/* Submit button */}
+      <button
+        type="submit"
+        disabled={!stripe || loading}
+        className="w-full bg-[#F5921B] text-white py-4 rounded-full font-black text-lg tracking-widest uppercase hover:bg-[#e0830f] transition disabled:opacity-70 mt-2"
+      >
+        {loading ? "Processing..." : "Get My IQ Result"}
+      </button>
     </form>
   );
 }
@@ -255,40 +248,19 @@ export default function StripePayment() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-100 flex flex-col" style={{ fontFamily: "'Segoe UI', Arial, sans-serif" }}>
-      {/* Header */}
-      <header className="bg-white border-b border-gray-200">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center h-16">
-            <Link to="/Home">
-              <img
-                src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69b1aedc5a0abb358cd40ec0/6feaa6fe0_aiq_academic_iq_test_logo.svg"
-                alt="Academic IQ Test"
-                className="h-10 w-10 object-contain"
-              />
-            </Link>
-          </div>
+    <div className="min-h-screen bg-gray-100 flex flex-col items-center justify-center px-4 py-8" style={{ fontFamily: "'Segoe UI', Arial, sans-serif" }}>
+      <div className="w-full max-w-md bg-white rounded-2xl shadow-lg overflow-hidden">
+        {/* Top: security notice */}
+        <div className="flex items-start gap-3 px-6 pt-6 pb-4 border-b border-gray-100">
+          <Lock className="w-5 h-5 text-gray-500 mt-0.5 shrink-0" />
+          <p className="text-sm text-gray-600 text-center flex-1">
+            All transactions are secure and encrypted. Credit Card information is never stored.
+          </p>
+          <button onClick={() => navigate(-1)} className="text-gray-400 hover:text-gray-600 text-xl font-light leading-none shrink-0">✕</button>
         </div>
-      </header>
 
-      {/* Content */}
-      <div className="flex-1 max-w-lg w-full mx-auto px-4 py-8">
-        <div className="bg-white rounded-xl shadow-md p-6">
-          <h1 className="text-xl font-bold text-gray-800 mb-1">{t("orderDetails")}</h1>
-          <p className="text-gray-500 text-sm mb-6">IQ Evaluation & Certificate • One-time fee</p>
-
-          <div className="flex items-center justify-between bg-gray-50 rounded-lg px-4 py-3 mb-6">
-            <span className="font-semibold text-gray-700">{t("oneTimeFeeOnly")}</span>
-            <span className="text-lg font-bold text-[#0C3547]">
-              {pricing?.currency_symbol || "$"}{pricing?.price || "..."}
-            </span>
-          </div>
-
-          <div className="flex items-center gap-2 text-sm text-gray-500 mb-6">
-            <Lock className="w-4 h-4" />
-            <span>{t("securePayment")}</span>
-          </div>
-
+        {/* Payment form */}
+        <div className="px-6 py-5">
           {stripePromise && (
             <Elements stripe={stripePromise}>
               <CheckoutForm
