@@ -5,7 +5,7 @@ import { Elements, CardNumberElement, CardExpiryElement, CardCvcElement, Payment
 import { base44 } from "@/api/base44Client";
 import { useLanguage } from "@/lib/LanguageContext";
 import { CheckCircle, Lock } from "lucide-react";
-import Checkout from "./Checkout";
+import ThankyouBackground from "@/components/payment/ThankyouBackground";
 
 const ELEMENT_STYLE = {
   base: {
@@ -233,7 +233,7 @@ export default function StripePayment() {
     <div className="relative min-h-screen overflow-hidden" style={{ fontFamily: "'Segoe UI', Arial, sans-serif" }}>
       {/* Background: Checkout page, blurred & darkened */}
       <div className="pointer-events-none select-none" style={{ filter: "blur(2px) brightness(0.45)" }}>
-        <Checkout />
+        <ThankyouBackground />
       </div>
 
       {/* Modal overlay */}
