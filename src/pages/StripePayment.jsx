@@ -243,14 +243,14 @@ export default function StripePayment() {
           </div>
         </header>
         {/* Score */}
-        <div className="flex flex-col items-center py-10 px-4">
-          <h1 className="text-3xl font-bold text-[#0C3547] mb-4">{t("yourIQScoreIs")}</h1>
+        <div className="flex flex-col items-center pt-8 pb-2 px-4">
+          <h1 className="text-3xl font-bold text-[#0C3547] mb-3">{t("yourIQScoreIs")}</h1>
           <p className="text-6xl font-black text-[#F5921B] select-none" style={{ filter: "blur(6px)" }}>135</p>
         </div>
       </div>
 
       {/* Payment card */}
-      <div className="w-full max-w-sm bg-white shadow-2xl">
+      <div className="w-full max-w-sm bg-white shadow-2xl" style={{ marginTop: "-60px" }}>
         {/* Security notice */}
         <div className="flex items-start gap-3 px-5 pt-5 pb-4 border-b border-gray-100">
           <Lock className="w-5 h-5 text-gray-500 mt-0.5 shrink-0" />
