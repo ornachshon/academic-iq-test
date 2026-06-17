@@ -230,19 +230,41 @@ export default function StripePayment() {
 
   return (
     <div className="fixed inset-0 overflow-hidden" style={{ fontFamily: "'Segoe UI', Arial, sans-serif" }}>
-      {/* Background: blurred & darkened Thankyou page top */}
+      {/* Background: blurred & darkened Thankyou page */}
       <div className="absolute inset-0 pointer-events-none select-none bg-white" style={{ filter: "blur(2px) brightness(0.45)" }}>
-        <header className="border-b border-gray-200 px-6">
-          <div className="flex items-center h-16">
-            <img
-              src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69b1aedc5a0abb358cd40ec0/6feaa6fe0_aiq_academic_iq_test_logo.svg"
-              alt="Academic IQ Test"
-              className="h-10 w-10 object-contain"
-            />
+        {/* Header */}
+        <header className="bg-white border-b border-gray-200">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="flex items-center h-16">
+              <img
+                src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69b1aedc5a0abb358cd40ec0/6feaa6fe0_aiq_academic_iq_test_logo.svg"
+                alt="Academic IQ Test"
+                className="h-10 w-10 object-contain"
+              />
+            </div>
           </div>
         </header>
-        <div className="flex flex-col items-center pt-12 px-4">
-          <h1 className="text-4xl font-bold text-[#0C3547]">{t("yourIQScoreIs")}</h1>
+        {/* Main content */}
+        <div className="flex flex-col items-center justify-center px-4 py-16">
+          <div className="text-center mb-10">
+            <h1 className="text-3xl font-bold text-[#0C3547] mb-3">{t("yourIQScoreIs")}</h1>
+            {/* Score invisible */}
+            <p className="text-6xl font-black" style={{ color: "transparent" }}>XXX</p>
+            <p className="text-gray-500 mt-5 text-base">{t("wePreparedEverything")}</p>
+          </div>
+          {/* Cards */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full max-w-2xl">
+            <div className="bg-gray-50 border border-gray-200 rounded-xl p-6 flex flex-col items-center text-center shadow-sm">
+              <h2 className="text-lg font-bold text-[#0C3547] mb-2">{t("personalizedCertificate")}</h2>
+              <p className="text-gray-500 text-sm mb-6 leading-relaxed">{t("certificateReady")}</p>
+              <div className="w-full bg-[#F5921B] text-white font-bold py-3 rounded-lg text-sm flex items-center justify-center gap-2">{t("downloadCertificate")}</div>
+            </div>
+            <div className="bg-gray-50 border border-gray-200 rounded-xl p-6 flex flex-col items-center text-center shadow-sm">
+              <h2 className="text-lg font-bold text-[#0C3547] mb-2">{t("detailedAnalysisReport")}</h2>
+              <p className="text-gray-500 text-sm mb-6 leading-relaxed">{t("fullStatisticalBreakdown")}</p>
+              <div className="w-full bg-[#0C3547] text-white font-bold py-3 rounded-lg text-sm flex items-center justify-center gap-2">{t("viewReport")}</div>
+            </div>
+          </div>
         </div>
       </div>
 
