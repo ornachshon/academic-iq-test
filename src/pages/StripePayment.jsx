@@ -23,7 +23,6 @@ function CheckoutForm({ email, score, timeTaken, resultId, pricing, onBack }) {
   const { t } = useLanguage();
   const [loading, setLoading] = useState(false);
   const [paypalLoading, setPaypalLoading] = useState(false);
-  const [paypayLoading, setPaypayLoading] = useState(false);
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(false);
   const [paymentRequest, setPaymentRequest] = useState(null);
@@ -196,24 +195,7 @@ function CheckoutForm({ email, score, timeTaken, resultId, pricing, onBack }) {
         )}
       </button>
 
-      {/* PayPay button (JPY only) */}
-      {pricing?.currency_code === "JPY" && (
-        <button
-          type="button"
-          disabled={paypayLoading}
-          onClick={async () => {
-            setPaypayLoading(true);
-            setError(null);
-            const clientSecret = await createIntent();
-            if (!clientSecret) { setError("Payment initialization failed."); setPaypayLoading(false); return; }
-            const { error: paypayError } = await stripe.confirmPayPayPayment(clientSecret, { return_url: buildReturnUrl() });
-            if (paypayError) { setError(paypayError.message); setPaypayLoading(false); }
-          }}
-          className="w-full bg-[#FF0033] text-white py-3 rounded-lg font-bold text-base hover:bg-[#e0002d] transition disabled:opacity-70 flex items-center justify-center gap-2"
-        >
-          {paypayLoading ? "Loading..." : "PayPay"}
-        </button>
-      )}
+
 
       <div className="flex items-center gap-3">
         <div className="flex-1 border-t border-gray-200" />
