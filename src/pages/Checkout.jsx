@@ -4,9 +4,6 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import Footer from '@/components/home/Footer';
 import { useGeoPrice } from '@/hooks/useGeoPrice';
 import { useLanguage } from '@/lib/LanguageContext';
-import { base44 } from '@/api/base44Client';
-
-
 
 
 const reviewsEn = [
@@ -51,7 +48,6 @@ export default function Checkout() {
   const { pricing, loading: priceLoading, formatPrice } = useGeoPrice();
 
   const [timeLeft, setTimeLeft] = useState(10 * 60);
-  const [checkingOut, setCheckingOut] = useState(false);
   useEffect(() => {
     if (timeLeft <= 0) return;
     const timer = setInterval(() => setTimeLeft(t => t - 1), 1000);
@@ -65,21 +61,10 @@ export default function Checkout() {
     return `${m}:${s}`;
   };
 
-  const handlePayment = async () => {
-    if (checkingOut) return;
-    setCheckingOut(true);
-    const res = await base44.functions.invoke("createStripeCheckout", {
-      email,
-      score,
-      priceAmount: pricing.price,
-      priceCurrency: pricing.currency_code,
-      resultId,
-      locale: lang,
+  const handlePayment = () => {
+    navigate("/StripePayment", {
+      state: { score, email, timeTaken, resultId, pricing, locale: lang }
     });
-    setCheckingOut(false);
-    if (res.data?.url) {
-      window.location.href = res.data.url;
-    }
   };
 
 
@@ -196,9 +181,9 @@ export default function Checkout() {
           {/* CTA Button */}
           <button
             onClick={handlePayment}
-            disabled={priceLoading || checkingOut}
+            disabled={priceLoading}
             className="bg-[#F5921B] text-white py-4 text-2xl font-black rounded-lg w-full hover:bg-[#e0830f] active:scale-95 transition-all shadow-lg shadow-orange-200 disabled:opacity-70 disabled:cursor-not-allowed tracking-wide">
-            {checkingOut ? (t("redirectingToPayment") || "Redirecting...") : t("getMyIQResults")}
+            {t("getMyIQResults")}
           </button>
         </div>
 

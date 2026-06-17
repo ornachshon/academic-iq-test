@@ -19,6 +19,7 @@ import Results from './pages/Results';
 import Checkout from './pages/Checkout';
 import Email from './pages/Email';
 import Payment from './pages/Payment';
+import StripePayment from './pages/StripePayment';
 import Certificate from './pages/Certificate';
 import Info from './pages/Info';
 import Thankyou from './pages/Thankyou';
@@ -60,6 +61,7 @@ function App() {
           <Route path="/Email" element={<Email />} />
           <Route path="/Checkout" element={<Checkout />} />
           <Route path="/Payment" element={<Payment />} />
+          <Route path="/StripePayment" element={<StripePayment />} />
           <Route path="/Info" element={<Info />} />
           <Route path="/Thankyou" element={<Thankyou />} />
           <Route path="/Certificate" element={<Certificate />} />
