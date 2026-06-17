@@ -23,7 +23,7 @@ Deno.serve(async (req) => {
     const paymentIntent = await stripe.paymentIntents.create({
       amount,
       currency,
-      payment_method_types: ["card"],
+      payment_method_types: ["card", "paypal"],
       metadata: {
         score: String(score || ""),
         email: email || "",

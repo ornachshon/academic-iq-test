@@ -22,9 +22,31 @@ function CheckoutForm({ email, score, timeTaken, resultId, pricing, onBack }) {
   const navigate = useNavigate();
   const { t } = useLanguage();
   const [loading, setLoading] = useState(false);
+  const [paypalLoading, setPaypalLoading] = useState(false);
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(false);
   const [paymentRequest, setPaymentRequest] = useState(null);
+
+  const buildReturnUrl = () => {
+    const origin = window.location.origin;
+    const params = new URLSearchParams();
+    if (score) params.set("score", String(score));
+    if (email) params.set("email", email);
+    if (resultId) params.set("resultId", resultId);
+    params.set("paymentSuccess", "true");
+    return `${origin}/Info?${params.toString()}`;
+  };
+
+  const createIntent = async () => {
+    const res = await base44.functions.invoke("createPaymentIntentCustom", {
+      email,
+      score,
+      priceAmount: pricing.price,
+      priceCurrency: pricing.currency_code,
+      resultId,
+    });
+    return res.data?.clientSecret;
+  };
 
   useEffect(() => {
     if (!stripe || !elements) return;
@@ -149,7 +171,35 @@ function CheckoutForm({ email, score, timeTaken, resultId, pricing, onBack }) {
         />
       )}
 
+      {/* PayPal button */}
+      <button
+        type="button"
+        disabled={paypalLoading}
+        onClick={async () => {
+          setPaypalLoading(true);
+          setError(null);
+          const clientSecret = await createIntent();
+          if (!clientSecret) { setError("Payment initialization failed."); setPaypalLoading(false); return; }
+          const { error: paypalError } = await stripe.confirmPayPalPayment(clientSecret, { return_url: buildReturnUrl() });
+          if (paypalError) { setError(paypalError.message); setPaypalLoading(false); }
+        }}
+        className="w-full bg-[#0070BA] text-white py-3 rounded-lg font-bold text-base hover:bg-[#005fa3] transition disabled:opacity-70 flex items-center justify-center gap-2"
+      >
+        {paypalLoading ? "Loading..." : (
+          <>
+            <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M7.076 21.337H2.47a.641.641 0 0 1-.633-.74L4.944.901C5.026.382 5.474 0 5.998 0h7.46c2.57 0 4.578.543 5.69 1.81 1.01 1.15 1.304 2.42 1.012 4.287-.023.143-.047.288-.077.437-.983 5.05-4.349 6.797-8.647 6.797H8.134c-.524 0-.973.382-1.058.903L7.076 21.337Z"/>
+            </svg>
+            PayPal
+          </>
+        )}
+      </button>
 
+      <div className="flex items-center gap-3">
+        <div className="flex-1 border-t border-gray-200" />
+        <span className="text-xs text-gray-400 font-medium">or pay with card</span>
+        <div className="flex-1 border-t border-gray-200" />
+      </div>
 
       <div>
         <label className="block text-sm font-semibold text-gray-700 mb-1.5">Card Number</label>
