@@ -230,24 +230,19 @@ export default function StripePayment() {
 
   return (
     <div className="fixed inset-0 overflow-hidden" style={{ fontFamily: "'Segoe UI', Arial, sans-serif" }}>
-      {/* Background: blurred & darkened Thankyou page top */}
-      <div className="absolute inset-0 pointer-events-none select-none bg-white" style={{ filter: "blur(2px) brightness(0.45)" }}>
-        <header className="border-b border-gray-200 px-6">
-          <div className="flex items-center h-16">
-            <img
-              src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69b1aedc5a0abb358cd40ec0/6feaa6fe0_aiq_academic_iq_test_logo.svg"
-              alt="Academic IQ Test"
-              className="h-10 w-10 object-contain"
-            />
-          </div>
-        </header>
-        <div className="flex flex-col items-center pt-12 px-4">
-          <h1 className="text-4xl font-bold text-[#0C3547]">{t("yourIQScoreIs")}</h1>
-        </div>
-      </div>
+      {/* Background: attached image, blurred & darkened */}
+      <div
+        className="absolute inset-0 pointer-events-none select-none"
+        style={{
+          backgroundImage: "url('https://media.base44.com/images/public/69b1aedc5a0abb358cd40ec0/3e76fb001_image.png')",
+          backgroundSize: "cover",
+          backgroundPosition: "center top",
+          filter: "blur(2px) brightness(0.45)",
+        }}
+      />
 
-      {/* Modal overlay — centered */}
-      <div className="absolute inset-0 flex items-center justify-center px-4 z-50">
+      {/* Modal overlay — shifted slightly down from center */}
+      <div className="absolute inset-0 flex items-center justify-center px-4 z-50" style={{ paddingTop: "80px" }}>
         <div className="w-full max-w-sm bg-white rounded-2xl shadow-2xl overflow-hidden">
           {/* Security notice */}
           <div className="flex items-start gap-3 px-5 pt-5 pb-4 border-b border-gray-100">
