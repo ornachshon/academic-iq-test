@@ -23,9 +23,31 @@ function CheckoutForm({ email, score, timeTaken, resultId, pricing, onBack }) {
   const { t } = useLanguage();
   const [loading, setLoading] = useState(false);
   const [paypalLoading, setPaypalLoading] = useState(false);
+  const [paypayLoading, setPaypayLoading] = useState(false);
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(false);
   const [paymentRequest, setPaymentRequest] = useState(null);
+
+  const buildReturnUrl = () => {
+    const origin = window.location.origin;
+    const params = new URLSearchParams();
+    if (score) params.set("score", String(score));
+    if (email) params.set("email", email);
+    if (resultId) params.set("resultId", resultId);
+    params.set("paymentSuccess", "true");
+    return `${origin}/Info?${params.toString()}`;
+  };
+
+  const createIntent = async () => {
+    const res = await base44.functions.invoke("createPaymentIntentCustom", {
+      email,
+      score,
+      priceAmount: pricing.price,
+      priceCurrency: pricing.currency_code,
+      resultId,
+    });
+    return res.data?.clientSecret;
+  };
 
   useEffect(() => {
     if (!stripe || !elements) return;
@@ -157,33 +179,10 @@ function CheckoutForm({ email, score, timeTaken, resultId, pricing, onBack }) {
         onClick={async () => {
           setPaypalLoading(true);
           setError(null);
-
-          const res = await base44.functions.invoke("createPaymentIntentCustom", {
-            email,
-            score,
-            priceAmount: pricing.price,
-            priceCurrency: pricing.currency_code,
-            resultId,
-          });
-
-          if (!res.data?.clientSecret) {
-            setError("Payment initialization failed.");
-            setPaypalLoading(false);
-            return;
-          }
-
-          const origin = window.location.origin;
-          const returnUrl = `${origin}/Info?score=${encodeURIComponent(score || "")}&email=${encodeURIComponent(email || "")}&resultId=${encodeURIComponent(resultId || "")}&paymentSuccess=true`;
-
-          const { error: paypalError } = await stripe.confirmPayPalPayment(
-            res.data.clientSecret,
-            { return_url: returnUrl }
-          );
-
-          if (paypalError) {
-            setError(paypalError.message);
-            setPaypalLoading(false);
-          }
+          const clientSecret = await createIntent();
+          if (!clientSecret) { setError("Payment initialization failed."); setPaypalLoading(false); return; }
+          const { error: paypalError } = await stripe.confirmPayPalPayment(clientSecret, { return_url: buildReturnUrl() });
+          if (paypalError) { setError(paypalError.message); setPaypalLoading(false); }
         }}
         className="w-full bg-[#0070BA] text-white py-3 rounded-lg font-bold text-base hover:bg-[#005fa3] transition disabled:opacity-70 flex items-center justify-center gap-2"
       >
@@ -196,6 +195,25 @@ function CheckoutForm({ email, score, timeTaken, resultId, pricing, onBack }) {
           </>
         )}
       </button>
+
+      {/* PayPay button (JPY only) */}
+      {pricing?.currency_code === "JPY" && (
+        <button
+          type="button"
+          disabled={paypayLoading}
+          onClick={async () => {
+            setPaypayLoading(true);
+            setError(null);
+            const clientSecret = await createIntent();
+            if (!clientSecret) { setError("Payment initialization failed."); setPaypayLoading(false); return; }
+            const { error: paypayError } = await stripe.confirmPayPayPayment(clientSecret, { return_url: buildReturnUrl() });
+            if (paypayError) { setError(paypayError.message); setPaypayLoading(false); }
+          }}
+          className="w-full bg-[#FF0033] text-white py-3 rounded-lg font-bold text-base hover:bg-[#e0002d] transition disabled:opacity-70 flex items-center justify-center gap-2"
+        >
+          {paypayLoading ? "Loading..." : "PayPay"}
+        </button>
+      )}
 
       <div className="flex items-center gap-3">
         <div className="flex-1 border-t border-gray-200" />
