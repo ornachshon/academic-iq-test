@@ -2,10 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { Star, HelpCircle } from 'lucide-react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import Footer from '@/components/home/Footer';
-import { trackFunnel } from '@/lib/trackFunnel';
 import { useGeoPrice } from '@/hooks/useGeoPrice';
 import { useLanguage } from '@/lib/LanguageContext';
-import { base44 } from '@/api/base44Client';
 
 
 
@@ -42,7 +40,6 @@ export default function Checkout() {
   const { t, lang } = useLanguage();
   const reviews = lang === "ja" ? reviewsJa : reviewsEn;
   const [agreed, setAgreed] = useState(false);
-  const [isRedirecting, setIsRedirecting] = useState(false);
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -66,28 +63,10 @@ export default function Checkout() {
     return `${m}:${s}`;
   };
 
-  const handlePayment = async () => {
-    trackFunnel("payment_initiated");
-    setIsRedirecting(true);
-    try {
-      const res = await base44.functions.invoke("createStripeCheckout", {
-        email,
-        score,
-        priceAmount: pricing.price,
-        priceCurrency: pricing.currency_code,
-        resultId,
-        locale: lang || "auto"
-      });
-      if (res.data?.url) {
-        window.location.href = res.data.url;
-      } else {
-        console.error("No URL returned from Stripe checkout");
-        setIsRedirecting(false);
-      }
-    } catch (err) {
-      console.error("Stripe checkout error:", err);
-      setIsRedirecting(false);
-    }
+  const handlePayment = () => {
+    navigate("/Payment", {
+      state: { score, email, timeTaken, resultId, pricing, locale: lang }
+    });
   };
 
 
@@ -204,9 +183,9 @@ export default function Checkout() {
           {/* CTA Button */}
           <button
             onClick={handlePayment}
-            disabled={isRedirecting || priceLoading}
+            disabled={priceLoading}
             className="bg-[#F5921B] text-white py-4 text-2xl font-black rounded-lg w-full hover:bg-[#e0830f] active:scale-95 transition-all shadow-lg shadow-orange-200 disabled:opacity-70 disabled:cursor-not-allowed tracking-wide">
-            {isRedirecting ? t("redirectingToPayment") : t("getMyIQResults")}
+            {t("getMyIQResults")}
           </button>
         </div>
 

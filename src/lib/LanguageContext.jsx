@@ -142,6 +142,12 @@ const translations = {
     halfwayDesc: "You're halfway there — keep it up!",
     halfwayContinue: "Continue",
 
+    // Payment page
+    preparingPayment: "Preparing payment...",
+    paymentError: "Payment Error",
+    goBack: "Go Back",
+    loadingPayment: "Loading payment...",
+
     // Checkout modal
     securePayment: "Secure Payment",
     noSubscription: "🔒 No subscription. One-time payment only.",
@@ -303,6 +309,12 @@ const translations = {
     halfwayTitle: "よくできました！",
     halfwayDesc: "半分まで来ました — この調子で続けてください！",
     halfwayContinue: "続ける",
+
+    // Payment page
+    preparingPayment: "お支払いの準備中...",
+    paymentError: "お支払いエラー",
+    goBack: "戻る",
+    loadingPayment: "お支払いを読み込み中...",
 
     // Checkout modal
     securePayment: "安全なお支払い",

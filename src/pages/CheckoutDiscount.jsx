@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom';
 import { base44 } from '@/api/base44Client';
 import { useGeoPrice } from '@/hooks/useGeoPrice';
 import Footer from '@/components/home/Footer';
-import { trackFunnel } from '@/lib/trackFunnel';
 
 export default function CheckoutDiscount() {
   const navigate = useNavigate();
@@ -14,8 +13,6 @@ export default function CheckoutDiscount() {
   const { pricing, loading: priceLoading, formatPrice } = useGeoPrice();
   const [resultData, setResultData] = useState(null);
   const [loadingResult, setLoadingResult] = useState(true);
-  const [isRedirecting, setIsRedirecting] = useState(false);
-
   const discountedPrice = pricing.price * 0.5;
 
   useEffect(() => {
@@ -34,27 +31,17 @@ export default function CheckoutDiscount() {
       .finally(() => setLoadingResult(false));
   }, [email]);
 
-  const handlePayment = async () => {
-    trackFunnel('payment_initiated_discount');
-    setIsRedirecting(true);
-    try {
-      const res = await base44.functions.invoke('createStripeCheckout', {
+  const handlePayment = () => {
+    navigate('/Payment', {
+      state: {
         email,
         score: resultData?.score || null,
-        priceAmount: pricing.price,
-        priceCurrency: pricing.currency_code,
+        timeTaken: 0,
         resultId: resultData?.id || null,
+        pricing,
         couponId: couponId || undefined,
-      });
-      if (res.data?.url) {
-        window.location.href = res.data.url;
-      } else {
-        setIsRedirecting(false);
       }
-    } catch (err) {
-      console.error('Checkout error:', err);
-      setIsRedirecting(false);
-    }
+    });
   };
 
   return (
@@ -114,10 +101,10 @@ export default function CheckoutDiscount() {
           {/* CTA Button */}
           <button
             onClick={handlePayment}
-            disabled={isRedirecting || priceLoading || loadingResult}
+            disabled={priceLoading || loadingResult}
             className="bg-[#F5921B] text-white py-3 text-xl font-bold rounded-md w-full hover:bg-[#e0830f] transition-colors disabled:opacity-70 disabled:cursor-not-allowed"
           >
-            {isRedirecting ? 'Redirecting to payment...' : loadingResult ? 'Loading...' : 'Get My Results Now'}
+            {loadingResult ? 'Loading...' : 'Get My Results Now'}
           </button>
 
           <p className="text-center text-xs text-gray-400">
