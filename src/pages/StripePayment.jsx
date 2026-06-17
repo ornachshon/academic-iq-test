@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useLocation, Link } from "react-router-dom";
 import { loadStripe } from "@stripe/stripe-js";
-import { Elements, CardNumberElement, CardExpiryElement, CardCvcElement, useStripe, useElements } from "@stripe/react-stripe-js";
+import { Elements, CardNumberElement, CardExpiryElement, CardCvcElement, PaymentRequestButtonElement, useStripe, useElements } from "@stripe/react-stripe-js";
 import { base44 } from "@/api/base44Client";
 import { useLanguage } from "@/lib/LanguageContext";
 import { CheckCircle, Lock } from "lucide-react";
@@ -24,6 +24,71 @@ function CheckoutForm({ email, score, timeTaken, resultId, pricing, onBack }) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(false);
+  const [paymentRequest, setPaymentRequest] = useState(null);
+
+  useEffect(() => {
+    if (!stripe || !elements) return;
+
+    const label = pricing?.currency_code === "JPY"
+      ? `IQ Evaluation & Certificate - ¥${pricing.price}`
+      : `IQ Evaluation & Certificate - ${pricing?.currency_symbol || "$"}${pricing?.price || "..."}`;
+
+    const pr = stripe.paymentRequest({
+      country: "US",
+      currency: (pricing?.currency_code || "usd").toLowerCase(),
+      total: {
+        label,
+        amount: pricing?.currency_code === "JPY" ? Math.round(pricing.price) : Math.round(pricing.price * 100),
+      },
+      requestPayerName: false,
+      requestPayerEmail: false,
+    });
+
+    pr.canMakePayment().then((result) => {
+      if (result) setPaymentRequest(pr);
+    });
+  }, [stripe, pricing]);
+
+  useEffect(() => {
+    if (!paymentRequest) return;
+
+    paymentRequest.on("paymentmethod", async (ev) => {
+      const res = await base44.functions.invoke("createPaymentIntentCustom", {
+        email,
+        score,
+        priceAmount: pricing.price,
+        priceCurrency: pricing.currency_code,
+        resultId,
+      });
+
+      if (!res.data?.clientSecret) {
+        ev.complete("fail");
+        setError("Payment initialization failed.");
+        return;
+      }
+
+      const { error: confirmError, paymentIntent } = await stripe.confirmCardPayment(
+        res.data.clientSecret,
+        { payment_method: ev.paymentMethod.id },
+        { handleActions: false }
+      );
+
+      if (confirmError) {
+        ev.complete("fail");
+        setError(confirmError.message);
+      } else {
+        ev.complete("success");
+        if (paymentIntent?.status === "succeeded") {
+          setSuccess(true);
+          setTimeout(() => {
+            navigate("/Info", {
+              state: { score, email, timeTaken, resultId, paymentSuccess: true },
+            });
+          }, 1000);
+        }
+      }
+    });
+  }, [paymentRequest]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -77,6 +142,21 @@ function CheckoutForm({ email, score, timeTaken, resultId, pricing, onBack }) {
 
   return (
     <form onSubmit={handleSubmit} className="space-y-5">
+      {paymentRequest && (
+        <PaymentRequestButtonElement
+          options={{ paymentRequest }}
+          className="w-full"
+        />
+      )}
+
+      {paymentRequest && (
+        <div className="flex items-center gap-3">
+          <div className="flex-1 border-t border-gray-200" />
+          <span className="text-xs text-gray-400 font-medium">or pay with card</span>
+          <div className="flex-1 border-t border-gray-200" />
+        </div>
+      )}
+
       <div>
         <label className="block text-sm font-semibold text-gray-700 mb-1.5">Card Number</label>
         <div className="border border-gray-300 rounded-lg px-4 py-3 bg-white focus-within:ring-2 focus-within:ring-[#F5921B] focus-within:border-[#F5921B] transition">
