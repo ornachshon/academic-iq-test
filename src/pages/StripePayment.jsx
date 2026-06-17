@@ -5,7 +5,6 @@ import { Elements, CardNumberElement, CardExpiryElement, CardCvcElement, Payment
 import { base44 } from "@/api/base44Client";
 import { useLanguage } from "@/lib/LanguageContext";
 import { CheckCircle, Lock } from "lucide-react";
-import ThankyouBackground from "@/components/payment/ThankyouBackground";
 
 const ELEMENT_STYLE = {
   base: {
@@ -229,62 +228,65 @@ export default function StripePayment() {
     }).finally(() => setLoading(false));
   }, []);
 
-  // Lock scroll
-  useEffect(() => {
-    document.body.style.overflow = "hidden";
-    return () => { document.body.style.overflow = ""; };
-  }, []);
-
   return (
-    <div className="fixed inset-0 overflow-hidden" style={{ fontFamily: "'Segoe UI', Arial, sans-serif" }}>
-      {/* Background: blurred & darkened — only the score heading visible */}
-      <div
-        className="absolute inset-0 pointer-events-none select-none flex flex-col items-center justify-start pt-16"
-        style={{ filter: "blur(2px) brightness(0.45)", background: "#fff" }}
-      >
-        <ThankyouBackground />
+    <div className="min-h-screen bg-gray-200 flex flex-col items-center" style={{ fontFamily: "'Segoe UI', Arial, sans-serif" }}>
+      {/* Top background section — exact Thankyou page header + score */}
+      <div className="w-full max-w-sm bg-white" style={{ filter: "brightness(0.55)" }}>
+        {/* Header */}
+        <header className="border-b border-gray-200 px-4">
+          <div className="flex items-center h-16">
+            <img
+              src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69b1aedc5a0abb358cd40ec0/6feaa6fe0_aiq_academic_iq_test_logo.svg"
+              alt="Academic IQ Test"
+              className="h-10 w-10 object-contain"
+            />
+          </div>
+        </header>
+        {/* Score */}
+        <div className="flex flex-col items-center py-10 px-4">
+          <h1 className="text-3xl font-bold text-[#0C3547] mb-4">{t("yourIQScoreIs")}</h1>
+          <p className="text-6xl font-black text-[#F5921B] select-none" style={{ filter: "blur(6px)" }}>135</p>
+        </div>
       </div>
 
-      {/* Modal overlay */}
-      <div className="absolute inset-0 flex items-center justify-center px-4 z-50">
-        <div className="w-full max-w-sm bg-white rounded-2xl shadow-2xl overflow-hidden">
-          {/* Top: security notice */}
-          <div className="flex items-start gap-3 px-5 pt-5 pb-4 border-b border-gray-100">
-            <Lock className="w-5 h-5 text-gray-500 mt-0.5 shrink-0" />
-            <p className="text-sm text-gray-600 text-center flex-1">
-              All transactions are secure and encrypted. Credit Card information is never stored.
-            </p>
-            <button onClick={() => navigate(-1)} className="text-gray-400 hover:text-gray-600 text-xl font-light leading-none shrink-0">✕</button>
-          </div>
+      {/* Payment card */}
+      <div className="w-full max-w-sm bg-white shadow-2xl">
+        {/* Security notice */}
+        <div className="flex items-start gap-3 px-5 pt-5 pb-4 border-b border-gray-100">
+          <Lock className="w-5 h-5 text-gray-500 mt-0.5 shrink-0" />
+          <p className="text-sm text-gray-600 text-center flex-1">
+            All transactions are secure and encrypted. Credit Card information is never stored.
+          </p>
+          <button onClick={() => navigate(-1)} className="text-gray-400 hover:text-gray-600 text-xl font-light leading-none shrink-0">✕</button>
+        </div>
 
-          {/* Payment form or loading/error */}
-          <div className="px-5 py-5">
-            {loading && (
-              <div className="flex justify-center py-8">
-                <div className="w-10 h-10 border-4 border-[#F5921B] border-t-transparent rounded-full animate-spin" />
-              </div>
-            )}
-            {error && (
-              <div className="text-center py-4">
-                <p className="text-gray-600 mb-4">{error}</p>
-                <button onClick={() => navigate(-1)} className="bg-[#0C3547] text-white px-6 py-3 rounded-lg font-bold">
-                  Go Back
-                </button>
-              </div>
-            )}
-            {stripePromise && (
-              <Elements stripe={stripePromise}>
-                <CheckoutForm
-                  email={email}
-                  score={score}
-                  timeTaken={timeTaken}
-                  resultId={resultId}
-                  pricing={pricing}
-                  onBack={() => navigate(-1)}
-                />
-              </Elements>
-            )}
-          </div>
+        {/* Payment form or loading/error */}
+        <div className="px-5 py-5">
+          {loading && (
+            <div className="flex justify-center py-8">
+              <div className="w-10 h-10 border-4 border-[#F5921B] border-t-transparent rounded-full animate-spin" />
+            </div>
+          )}
+          {error && (
+            <div className="text-center py-4">
+              <p className="text-gray-600 mb-4">{error}</p>
+              <button onClick={() => navigate(-1)} className="bg-[#0C3547] text-white px-6 py-3 rounded-lg font-bold">
+                Go Back
+              </button>
+            </div>
+          )}
+          {stripePromise && (
+            <Elements stripe={stripePromise}>
+              <CheckoutForm
+                email={email}
+                score={score}
+                timeTaken={timeTaken}
+                resultId={resultId}
+                pricing={pricing}
+                onBack={() => navigate(-1)}
+              />
+            </Elements>
+          )}
         </div>
       </div>
     </div>
