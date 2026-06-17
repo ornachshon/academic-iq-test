@@ -248,7 +248,6 @@ export default function StripePayment() {
 
       {/* Modal overlay — centered */}
       <div className="absolute inset-0 flex flex-col items-center justify-center px-4 z-50">
-        <h1 className="text-3xl font-bold text-white mb-4 drop-shadow-lg">{t("yourIQScoreIs")}</h1>
         <div className="w-full max-w-sm bg-white rounded-2xl shadow-2xl overflow-hidden">
           {/* Security notice */}
           <div className="flex items-start gap-3 px-5 pt-5 pb-4 border-b border-gray-100">
