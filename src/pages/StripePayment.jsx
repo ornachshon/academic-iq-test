@@ -5,6 +5,7 @@ import { Elements, CardNumberElement, CardExpiryElement, CardCvcElement, Payment
 import { base44 } from "@/api/base44Client";
 import { useLanguage } from "@/lib/LanguageContext";
 import { CheckCircle, Lock } from "lucide-react";
+import Checkout from "./Checkout";
 
 const ELEMENT_STYLE = {
   base: {
@@ -228,51 +229,53 @@ export default function StripePayment() {
     }).finally(() => setLoading(false));
   }, []);
 
-  if (loading) {
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-100">
-        <div className="w-10 h-10 border-4 border-[#F5921B] border-t-transparent rounded-full animate-spin" />
-      </div>
-    );
-  }
-
-  if (error) {
-    return (
-      <div className="min-h-screen flex flex-col items-center justify-center bg-gray-100 px-4">
-        <p className="text-gray-600 mb-4">{error}</p>
-        <button onClick={() => navigate(-1)} className="bg-[#0C3547] text-white px-6 py-3 rounded-lg font-bold">
-          Go Back
-        </button>
-      </div>
-    );
-  }
-
   return (
-    <div className="min-h-screen bg-gray-100 flex flex-col items-center justify-center px-4 py-8" style={{ fontFamily: "'Segoe UI', Arial, sans-serif" }}>
-      <div className="w-full max-w-md bg-white rounded-2xl shadow-lg overflow-hidden">
-        {/* Top: security notice */}
-        <div className="flex items-start gap-3 px-6 pt-6 pb-4 border-b border-gray-100">
-          <Lock className="w-5 h-5 text-gray-500 mt-0.5 shrink-0" />
-          <p className="text-sm text-gray-600 text-center flex-1">
-            All transactions are secure and encrypted. Credit Card information is never stored.
-          </p>
-          <button onClick={() => navigate(-1)} className="text-gray-400 hover:text-gray-600 text-xl font-light leading-none shrink-0">✕</button>
-        </div>
+    <div className="relative min-h-screen overflow-hidden" style={{ fontFamily: "'Segoe UI', Arial, sans-serif" }}>
+      {/* Background: Checkout page, blurred & darkened */}
+      <div className="pointer-events-none select-none" style={{ filter: "blur(2px) brightness(0.45)" }}>
+        <Checkout />
+      </div>
 
-        {/* Payment form */}
-        <div className="px-6 py-5">
-          {stripePromise && (
-            <Elements stripe={stripePromise}>
-              <CheckoutForm
-                email={email}
-                score={score}
-                timeTaken={timeTaken}
-                resultId={resultId}
-                pricing={pricing}
-                onBack={() => navigate(-1)}
-              />
-            </Elements>
-          )}
+      {/* Modal overlay */}
+      <div className="fixed inset-0 flex items-center justify-center px-4 py-8 z-50">
+        <div className="w-full max-w-sm bg-white rounded-2xl shadow-2xl overflow-hidden">
+          {/* Top: security notice */}
+          <div className="flex items-start gap-3 px-5 pt-5 pb-4 border-b border-gray-100">
+            <Lock className="w-5 h-5 text-gray-500 mt-0.5 shrink-0" />
+            <p className="text-sm text-gray-600 text-center flex-1">
+              All transactions are secure and encrypted. Credit Card information is never stored.
+            </p>
+            <button onClick={() => navigate(-1)} className="text-gray-400 hover:text-gray-600 text-xl font-light leading-none shrink-0">✕</button>
+          </div>
+
+          {/* Payment form or loading/error */}
+          <div className="px-5 py-5">
+            {loading && (
+              <div className="flex justify-center py-8">
+                <div className="w-10 h-10 border-4 border-[#F5921B] border-t-transparent rounded-full animate-spin" />
+              </div>
+            )}
+            {error && (
+              <div className="text-center py-4">
+                <p className="text-gray-600 mb-4">{error}</p>
+                <button onClick={() => navigate(-1)} className="bg-[#0C3547] text-white px-6 py-3 rounded-lg font-bold">
+                  Go Back
+                </button>
+              </div>
+            )}
+            {stripePromise && (
+              <Elements stripe={stripePromise}>
+                <CheckoutForm
+                  email={email}
+                  score={score}
+                  timeTaken={timeTaken}
+                  resultId={resultId}
+                  pricing={pricing}
+                  onBack={() => navigate(-1)}
+                />
+              </Elements>
+            )}
+          </div>
         </div>
       </div>
     </div>
