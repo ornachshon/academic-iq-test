@@ -229,15 +229,24 @@ export default function StripePayment() {
     }).finally(() => setLoading(false));
   }, []);
 
+  // Lock scroll
+  useEffect(() => {
+    document.body.style.overflow = "hidden";
+    return () => { document.body.style.overflow = ""; };
+  }, []);
+
   return (
-    <div className="relative min-h-screen overflow-hidden" style={{ fontFamily: "'Segoe UI', Arial, sans-serif" }}>
-      {/* Background: Checkout page, blurred & darkened */}
-      <div className="pointer-events-none select-none" style={{ filter: "blur(2px) brightness(0.45)" }}>
+    <div className="fixed inset-0 overflow-hidden" style={{ fontFamily: "'Segoe UI', Arial, sans-serif" }}>
+      {/* Background: blurred & darkened — only the score heading visible */}
+      <div
+        className="absolute inset-0 pointer-events-none select-none flex flex-col items-center justify-start pt-16"
+        style={{ filter: "blur(2px) brightness(0.45)", background: "#fff" }}
+      >
         <ThankyouBackground />
       </div>
 
       {/* Modal overlay */}
-      <div className="fixed inset-0 flex items-center justify-center px-4 py-8 z-50">
+      <div className="absolute inset-0 flex items-center justify-center px-4 z-50">
         <div className="w-full max-w-sm bg-white rounded-2xl shadow-2xl overflow-hidden">
           {/* Top: security notice */}
           <div className="flex items-start gap-3 px-5 pt-5 pb-4 border-b border-gray-100">
