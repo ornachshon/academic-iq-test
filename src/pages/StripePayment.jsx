@@ -5,6 +5,7 @@ import { Elements, CardNumberElement, CardExpiryElement, CardCvcElement, Payment
 import { base44 } from "@/api/base44Client";
 import { useLanguage } from "@/lib/LanguageContext";
 import { CheckCircle, Lock } from "lucide-react";
+import { trackFunnel } from "@/lib/trackFunnel";
 
 const ELEMENT_STYLE = {
   base: {
@@ -211,6 +212,7 @@ export default function StripePayment() {
       setLoading(false);
       return;
     }
+    trackFunnel("payment_initiated");
     base44.functions.invoke("createPaymentIntentCustom", {
       email,
       score,
