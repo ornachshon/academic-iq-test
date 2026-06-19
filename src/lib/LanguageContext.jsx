@@ -163,6 +163,11 @@ const translations = {
     fullStatisticalBreakdown: "A full statistical breakdown of your results with cognitive domain insights.",
     viewReport: "View Report",
 
+    // StripePayment modal
+    stripeSecureNotice: "All transactions are secure and encrypted. Credit Card information is never stored.",
+    orPayWithCard: "Or Pay with Card",
+    getMyIQResult: "Get My IQ Result",
+
     // Footer
     allRightsReserved: "All rights reserved",
     privacyPolicyLink: "Privacy Policy",
@@ -330,6 +335,11 @@ const translations = {
     detailedAnalysisReport: "詳細分析レポート",
     fullStatisticalBreakdown: "認知領域の洞察を含む結果の完全な統計的内訳です。",
     viewReport: "レポートを見る",
+
+    // StripePayment modal
+    stripeSecureNotice: "すべての取引は安全に暗号化されています。クレジットカード情報は保存されません。",
+    orPayWithCard: "カードで支払う",
+    getMyIQResult: "IQ結果を取得する",
 
     // Footer
     allRightsReserved: "全著作権所有",
