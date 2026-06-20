@@ -192,7 +192,7 @@ function CheckoutForm({ email, score, timeTaken, resultId, pricing, onBack }) {
 }
 
 export default function StripePayment() {
-  const { t } = useLanguage();
+  const { t, lang } = useLanguage();
   const navigate = useNavigate();
   const location = useLocation();
   const score = location.state?.score;
@@ -200,7 +200,7 @@ export default function StripePayment() {
   const timeTaken = location.state?.timeTaken || 0;
   const resultId = location.state?.resultId || "";
   const pricing = location.state?.pricing;
-  const lang = location.state?.locale;
+  const stripeLocale = lang === "ja" ? "ja" : "en";
 
   const [stripePromise, setStripePromise] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -221,7 +221,7 @@ export default function StripePayment() {
       resultId,
     }).then((res) => {
       if (res.data?.publishableKey) {
-        setStripePromise(loadStripe(res.data.publishableKey));
+        setStripePromise(loadStripe(res.data.publishableKey, { locale: stripeLocale }));
       } else {
         setError(t("paymentFailedInit"));
       }
@@ -298,7 +298,7 @@ export default function StripePayment() {
               </div>
             )}
             {stripePromise && (
-              <Elements stripe={stripePromise}>
+              <Elements stripe={stripePromise} options={{ locale: stripeLocale }}>
                 <CheckoutForm
                   email={email}
                   score={score}
