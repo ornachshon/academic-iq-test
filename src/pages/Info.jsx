@@ -7,8 +7,8 @@ export default function Info() {
   const navigate = useNavigate();
   const location = useLocation();
   const urlParams = new URLSearchParams(window.location.search);
-  const score = location.state?.score || urlParams.get("score");
-  const emailFromUrl = location.state?.email || urlParams.get("email") || "";
+  const score = location.state?.score || urlParams.get("score") || localStorage.getItem("iq_score");
+  const emailFromUrl = location.state?.email || urlParams.get("email") || localStorage.getItem("userEmail") || "";
 
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
