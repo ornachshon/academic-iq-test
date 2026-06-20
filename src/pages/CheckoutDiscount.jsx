@@ -32,13 +32,14 @@ export default function CheckoutDiscount() {
   }, [email]);
 
   const handlePayment = () => {
-    navigate('/StripePayment', {
+    navigate('/Payment', {
       state: {
         email,
         score: resultData?.score || null,
         timeTaken: 0,
         resultId: resultData?.id || null,
-        pricing: { ...pricing, price: discountedPrice },
+        pricing,
+        couponId: couponId || undefined,
       }
     });
   };
