@@ -153,6 +153,18 @@ const translations = {
     noSubscription: "🔒 No subscription. One-time payment only.",
     loadingPaymentForm: "Loading payment form...",
 
+    // Stripe payment modal
+    paymentSecurityNotice: "All transactions are secure and encrypted. Credit Card information is never stored.",
+    orPayWithCard: "Or Pay with Card",
+    cardNumberPlaceholder: "CARD NUMBER",
+    getMyIQResult: "Get My IQ Result",
+    paymentSuccessful: "Payment Successful!",
+    redirectingToResults: "Redirecting to your results...",
+    paymentInitFailed: "Payment initialization failed. Please try again.",
+    paymentFailedInit: "Failed to initialize payment.",
+    paymentErrorGeneric: "Something went wrong.",
+    pricingMissing: "Pricing information is missing.",
+
     // Thankyou page
     yourIQScoreIs: "Your IQ Score is:",
     wePreparedEverything: "We've prepared everything for you",
@@ -320,6 +332,18 @@ const translations = {
     securePayment: "安全なお支払い",
     noSubscription: "🔒 サブスクリプションなし。一回限りのお支払いのみ。",
     loadingPaymentForm: "お支払いフォームを読み込み中...",
+
+    // Stripe payment modal
+    paymentSecurityNotice: "すべての取引は安全に暗号化されています。クレジットカード情報は保存されません。",
+    orPayWithCard: "またはカードでお支払い",
+    cardNumberPlaceholder: "カード番号",
+    getMyIQResult: "IQ結果を取得",
+    paymentSuccessful: "お支払いが完了しました！",
+    redirectingToResults: "結果ページへ移動中...",
+    paymentInitFailed: "お支払いの初期化に失敗しました。再度お試しください。",
+    paymentFailedInit: "お支払いの初期化に失敗しました。",
+    paymentErrorGeneric: "エラーが発生しました。",
+    pricingMissing: "価格情報が不足しています。",
 
     // Thankyou page
     yourIQScoreIs: "あなたのIQスコア：",

@@ -64,7 +64,7 @@ function CheckoutForm({ email, score, timeTaken, resultId, pricing, onBack }) {
 
       if (!res.data?.clientSecret) {
         ev.complete("fail");
-        setError("Payment initialization failed.");
+        setError(t("paymentFailedInit"));
         return;
       }
 
@@ -107,7 +107,7 @@ function CheckoutForm({ email, score, timeTaken, resultId, pricing, onBack }) {
     });
 
     if (!res.data?.clientSecret) {
-      setError("Payment initialization failed. Please try again.");
+      setError(t("paymentInitFailed"));
       setLoading(false);
       return;
     }
@@ -135,8 +135,8 @@ function CheckoutForm({ email, score, timeTaken, resultId, pricing, onBack }) {
     return (
       <div className="text-center py-10">
         <CheckCircle className="w-16 h-16 text-green-500 mx-auto mb-4" />
-        <h2 className="text-xl font-bold text-gray-800 mb-2">Payment Successful!</h2>
-        <p className="text-gray-500">Redirecting to your results...</p>
+        <h2 className="text-xl font-bold text-gray-800 mb-2">{t("paymentSuccessful")}</h2>
+        <p className="text-gray-500">{t("redirectingToResults")}</p>
       </div>
     );
   }
@@ -154,13 +154,13 @@ function CheckoutForm({ email, score, timeTaken, resultId, pricing, onBack }) {
       {/* Divider */}
       <div className="flex items-center gap-3">
         <div className="flex-1 border-t border-gray-200" />
-        <span className="text-sm text-gray-500">Or Pay with Card</span>
+        <span className="text-sm text-gray-500">{t("orPayWithCard")}</span>
         <div className="flex-1 border-t border-gray-200" />
       </div>
 
       {/* Card Number */}
       <div className="border border-gray-300 rounded-xl px-4 py-4 bg-white focus-within:ring-2 focus-within:ring-[#F5921B] focus-within:border-[#F5921B] transition">
-        <CardNumberElement options={{ style: ELEMENT_STYLE, placeholder: "CARD NUMBER" }} />
+        <CardNumberElement options={{ style: ELEMENT_STYLE, placeholder: t("cardNumberPlaceholder") }} />
       </div>
 
       {/* Expiry + CVC */}
@@ -185,7 +185,7 @@ function CheckoutForm({ email, score, timeTaken, resultId, pricing, onBack }) {
         disabled={!stripe || loading}
         className="w-full bg-[#F5921B] text-white py-4 rounded-full font-black text-lg tracking-widest uppercase hover:bg-[#e0830f] transition disabled:opacity-70 mt-2"
       >
-        {loading ? "Processing..." : "Get My IQ Result"}
+        {loading ? t("processing") : t("getMyIQResult")}
       </button>
     </form>
   );
@@ -208,7 +208,7 @@ export default function StripePayment() {
 
   useEffect(() => {
     if (!pricing || !pricing.price) {
-      setError("Pricing information is missing.");
+      setError(t("pricingMissing"));
       setLoading(false);
       return;
     }
@@ -223,10 +223,10 @@ export default function StripePayment() {
       if (res.data?.publishableKey) {
         setStripePromise(loadStripe(res.data.publishableKey));
       } else {
-        setError("Failed to initialize payment.");
+        setError(t("paymentFailedInit"));
       }
     }).catch(() => {
-      setError("Something went wrong.");
+      setError(t("paymentErrorGeneric"));
     }).finally(() => setLoading(false));
   }, []);
 
@@ -277,7 +277,7 @@ export default function StripePayment() {
           <div className="flex items-start gap-3 px-5 pt-5 pb-4 border-b border-gray-100">
             <Lock className="w-5 h-5 text-gray-500 mt-0.5 shrink-0" />
             <p className="text-sm text-gray-600 text-center flex-1">
-              All transactions are secure and encrypted. Credit Card information is never stored.
+              {t("paymentSecurityNotice")}
             </p>
             <button onClick={() => navigate(-1)} className="text-gray-400 hover:text-gray-600 text-xl font-light leading-none shrink-0">✕</button>
           </div>
@@ -293,7 +293,7 @@ export default function StripePayment() {
               <div className="text-center py-4">
                 <p className="text-gray-600 mb-4">{error}</p>
                 <button onClick={() => navigate(-1)} className="bg-[#0C3547] text-white px-6 py-3 rounded-lg font-bold">
-                  Go Back
+                  {t("goBack")}
                 </button>
               </div>
             )}
