@@ -213,21 +213,14 @@ export default function StripePayment() {
       return;
     }
     trackFunnel("payment_initiated");
-    base44.functions.invoke("createPaymentIntentCustom", {
-      email,
-      score,
-      priceAmount: pricing.price,
-      priceCurrency: pricing.currency_code,
-      resultId,
-    }).then((res) => {
-      if (res.data?.publishableKey) {
-        setStripePromise(loadStripe(res.data.publishableKey));
-      } else {
-        setError("Failed to initialize payment.");
-      }
-    }).catch(() => {
-      setError("Something went wrong.");
-    }).finally(() => setLoading(false));
+    const publishableKey = import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY;
+    if (publishableKey) {
+      setStripePromise(loadStripe(publishableKey));
+      setLoading(false);
+    } else {
+      setError("Failed to initialize payment.");
+      setLoading(false);
+    }
   }, []);
 
   return (
