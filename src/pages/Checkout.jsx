@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Star, HelpCircle } from 'lucide-react';
+import { Star, HelpCircle, Brain, Check, Gift } from 'lucide-react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import Footer from '@/components/home/Footer';
 import { useGeoPrice } from '@/hooks/useGeoPrice';
@@ -147,6 +147,56 @@ export default function Checkout() {
             </div>
             <img src="https://media.base44.com/images/public/69b1aedc5a0abb358cd40ec0/03c9e0491_AIQreportsnap.png"
             alt="IQ Report" className="w-64 md:w-32 h-auto mt-4 md:mt-0 mx-auto md:mx-0 md:ml-4 flex-shrink-0 rounded" />
+          </div>
+        </div>
+
+        {/* SharpMind Free Trial Banner */}
+        <div className="relative overflow-hidden rounded-xl border-2 border-[#F5921B] bg-gradient-to-br from-[#FFF8F0] to-[#FFF4E8] shadow-lg">
+          {/* Badge */}
+          <div className="absolute top-0 right-0 bg-[#F5921B] text-white text-xs font-black px-4 py-1.5 rounded-bl-xl uppercase tracking-wider">
+            {t("sharpMindBadge")}
+          </div>
+
+          <div className="p-6 flex flex-col md:flex-row gap-5 items-center">
+            {/* Icon */}
+            <div className="w-16 h-16 rounded-full bg-[#F5921B] flex items-center justify-center shrink-0 shadow-md">
+              <Brain className="w-8 h-8 text-white" />
+            </div>
+
+            {/* Content */}
+            <div className="flex-1 text-center md:text-left">
+              <div className="flex items-center gap-3 justify-center md:justify-start mb-1.5">
+                <h3 className="text-xl font-black text-[#0C3547]">{t("sharpMindTitle")}</h3>
+                <span className="bg-green-500 text-white text-sm font-bold px-3 py-0.5 rounded-full whitespace-nowrap">{t("sharpMindFreeTrial")}</span>
+              </div>
+              <p className="text-gray-600 text-sm mb-3 leading-relaxed">{t("sharpMindDesc")}</p>
+              <ul className="space-y-1.5 text-sm text-gray-700">
+                <li className="flex items-center gap-2 justify-center md:justify-start">
+                  <Check className="w-4 h-4 text-green-500 shrink-0" />
+                  {t("sharpMindFeature1")}
+                </li>
+                <li className="flex items-center gap-2 justify-center md:justify-start">
+                  <Check className="w-4 h-4 text-green-500 shrink-0" />
+                  {t("sharpMindFeature2")}
+                </li>
+                <li className="flex items-center gap-2 justify-center md:justify-start">
+                  <Check className="w-4 h-4 text-green-500 shrink-0" />
+                  {t("sharpMindFeature3")}
+                </li>
+              </ul>
+            </div>
+
+            {/* Free trial highlight */}
+            <div className="text-center shrink-0 bg-white rounded-xl px-5 py-4 border border-[#F5921B]/30 shadow-sm">
+              <Gift className="w-7 h-7 text-[#F5921B] mx-auto mb-1" />
+              <p className="text-2xl font-black text-[#F5921B] leading-none mb-1">{t("sharpMindFreeTrial")}</p>
+              <p className="text-xs text-gray-500 font-medium">{t("sharpMindIncluded")}</p>
+            </div>
+          </div>
+
+          {/* No commitment footer */}
+          <div className="bg-[#0C3547] text-white text-center py-2 text-sm font-medium">
+            {t("sharpMindNoCommitment")}
           </div>
         </div>
 

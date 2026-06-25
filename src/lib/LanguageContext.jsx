@@ -181,6 +181,17 @@ const translations = {
     termsLink: "Terms & Conditions",
     contactUs: "Contact Us",
     support: "Support",
+
+    // SharpMind subscription
+    sharpMindBadge: "BONUS",
+    sharpMindTitle: "SharpMind Brain Training",
+    sharpMindFreeTrial: "7 Days FREE",
+    sharpMindIncluded: "Included FREE with your purchase",
+    sharpMindDesc: "A personalized brain training program created to boost cognitive skills through consistent practice.",
+    sharpMindFeature1: "Daily personalized exercises",
+    sharpMindFeature2: "Memory, focus & problem-solving",
+    sharpMindFeature3: "Track your progress over time",
+    sharpMindNoCommitment: "No commitment — cancel anytime",
   },
   ja: {
     // Header / Layout
@@ -361,6 +372,17 @@ const translations = {
     termsLink: "利用規約",
     contactUs: "お問い合わせ",
     support: "サポート",
+
+    // SharpMind subscription
+    sharpMindBadge: "特典",
+    sharpMindTitle: "SharpMind ブレイントレーニング",
+    sharpMindFreeTrial: "7日間無料",
+    sharpMindIncluded: "ご購入に無料で含まれています",
+    sharpMindDesc: "継続的な練習を通じて認知スキルを向上させるために作られた、パーソナライズされたブレイントレーニングプログラム。",
+    sharpMindFeature1: "毎日のパーソナライズされたエクササイズ",
+    sharpMindFeature2: "記憶力、集中力、問題解決能力",
+    sharpMindFeature3: "経過を追跡して進捗を確認",
+    sharpMindNoCommitment: "コミットメントなし — いつでもキャンセル可能",
   },
 };
 
