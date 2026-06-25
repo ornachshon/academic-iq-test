@@ -182,6 +182,9 @@ const translations = {
     contactUs: "Contact Us",
     support: "Support",
 
+    // One-time payment
+    oneTimePayment: "One-time payment — no recurring charges",
+
     // Safe checkout badge
     guaranteed: "Guaranteed",
     safe: "Safe",
@@ -377,6 +380,9 @@ const translations = {
     termsLink: "利用規約",
     contactUs: "お問い合わせ",
     support: "サポート",
+
+    // One-time payment
+    oneTimePayment: "一回限りのお支払い — 繰り返しの請求はありません",
 
     // Safe checkout badge
     guaranteed: "安全な",

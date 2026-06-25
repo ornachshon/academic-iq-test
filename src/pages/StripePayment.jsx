@@ -188,6 +188,12 @@ function CheckoutForm({ email, score, timeTaken, resultId, pricing, onBack }) {
         {loading ? t("processing") : t("getMyIQResult")}
       </button>
 
+      {/* One-time payment notice */}
+      <div className="flex items-center justify-center gap-1.5 text-xs text-gray-500">
+        <ShieldCheck className="w-3.5 h-3.5 text-green-500" />
+        <span>{t("oneTimePayment")}</span>
+      </div>
+
       {/* Guaranteed Safe Checkout badge */}
       <div className="pt-3 border-t border-gray-200">
         <div className="flex items-center justify-center gap-1.5 text-sm font-bold">
