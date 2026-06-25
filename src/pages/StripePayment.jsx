@@ -4,7 +4,7 @@ import { loadStripe } from "@stripe/stripe-js";
 import { Elements, CardNumberElement, CardExpiryElement, CardCvcElement, PaymentRequestButtonElement, useStripe, useElements } from "@stripe/react-stripe-js";
 import { base44 } from "@/api/base44Client";
 import { useLanguage } from "@/lib/LanguageContext";
-import { CheckCircle, Lock } from "lucide-react";
+import { CheckCircle, Lock, ShieldCheck } from "lucide-react";
 import { trackFunnel } from "@/lib/trackFunnel";
 
 const ELEMENT_STYLE = {
@@ -187,6 +187,16 @@ function CheckoutForm({ email, score, timeTaken, resultId, pricing, onBack }) {
       >
         {loading ? t("processing") : t("getMyIQResult")}
       </button>
+
+      {/* Guaranteed Safe Checkout badge */}
+      <div className="pt-3 border-t border-gray-200">
+        <div className="flex items-center justify-center gap-1.5 text-sm font-bold">
+          <span style={{ color: "#000000" }}>{t("guaranteed")}</span>
+          <span style={{ color: "#6B5B95" }}>{t("safe")}</span>
+          <span style={{ color: "#000000" }}>{t("checkout")}</span>
+          <ShieldCheck className="w-4 h-4 text-gray-400" />
+        </div>
+      </div>
     </form>
   );
 }

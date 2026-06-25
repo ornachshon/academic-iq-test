@@ -182,6 +182,11 @@ const translations = {
     contactUs: "Contact Us",
     support: "Support",
 
+    // Safe checkout badge
+    guaranteed: "Guaranteed",
+    safe: "Safe",
+    checkout: "Checkout",
+
     // SharpMind subscription
     sharpMindBadge: "BONUS",
     sharpMindTitle: "SharpMind Brain Training",
@@ -372,6 +377,11 @@ const translations = {
     termsLink: "利用規約",
     contactUs: "お問い合わせ",
     support: "サポート",
+
+    // Safe checkout badge
+    guaranteed: "安全な",
+    safe: "保証付き",
+    checkout: "決済",
 
     // SharpMind subscription
     sharpMindBadge: "特典",
