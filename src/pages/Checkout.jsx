@@ -151,51 +151,51 @@ export default function Checkout() {
         </div>
 
         {/* SharpMind Free Trial Banner */}
-        <div className="relative overflow-hidden rounded-xl border-2 border-[#F5921B] bg-gradient-to-br from-[#FFF8F0] to-[#FFF4E8] shadow-lg">
+        <div className="relative overflow-hidden rounded-lg border-2 border-[#F5921B] bg-gradient-to-br from-[#FFF8F0] to-[#FFF4E8] shadow-md">
           {/* Badge */}
-          <div className="absolute top-0 right-0 bg-[#F5921B] text-white text-xs font-black px-4 py-1.5 rounded-bl-xl uppercase tracking-wider">
+          <div className="absolute top-0 right-0 bg-[#F5921B] text-white text-[10px] font-black px-3 py-1 rounded-bl-lg uppercase tracking-wider">
             {t("sharpMindBadge")}
           </div>
 
-          <div className="p-6 flex flex-col md:flex-row gap-5 items-center">
+          <div className="p-4 flex items-center gap-4">
             {/* Icon */}
-            <div className="w-16 h-16 rounded-full bg-[#F5921B] flex items-center justify-center shrink-0 shadow-md">
-              <Brain className="w-8 h-8 text-white" />
+            <div className="w-11 h-11 rounded-full bg-[#F5921B] flex items-center justify-center shrink-0 shadow-sm">
+              <Brain className="w-5 h-5 text-white" />
             </div>
 
             {/* Content */}
-            <div className="flex-1 text-center md:text-left">
-              <div className="flex items-center gap-3 justify-center md:justify-start mb-1.5">
-                <h3 className="text-xl font-black text-[#0C3547]">{t("sharpMindTitle")}</h3>
-                <span className="bg-green-500 text-white text-sm font-bold px-3 py-0.5 rounded-full whitespace-nowrap">{t("sharpMindFreeTrial")}</span>
+            <div className="flex-1 text-left">
+              <div className="flex items-center gap-2 mb-0.5">
+                <h3 className="text-base font-black text-[#0C3547]">{t("sharpMindTitle")}</h3>
+                <span className="bg-green-500 text-white text-xs font-bold px-2 py-0.5 rounded-full whitespace-nowrap">{t("sharpMindFreeTrial")}</span>
               </div>
-              <p className="text-gray-600 text-sm mb-3 leading-relaxed">{t("sharpMindDesc")}</p>
-              <ul className="space-y-1.5 text-sm text-gray-700">
-                <li className="flex items-center gap-2 justify-center md:justify-start">
-                  <Check className="w-4 h-4 text-green-500 shrink-0" />
+              <p className="text-gray-600 text-xs leading-snug mb-1.5">{t("sharpMindDesc")}</p>
+              <ul className="grid grid-cols-1 sm:grid-cols-3 gap-x-3 gap-y-0.5 text-xs text-gray-700">
+                <li className="flex items-center gap-1.5">
+                  <Check className="w-3 h-3 text-green-500 shrink-0" />
                   {t("sharpMindFeature1")}
                 </li>
-                <li className="flex items-center gap-2 justify-center md:justify-start">
-                  <Check className="w-4 h-4 text-green-500 shrink-0" />
+                <li className="flex items-center gap-1.5">
+                  <Check className="w-3 h-3 text-green-500 shrink-0" />
                   {t("sharpMindFeature2")}
                 </li>
-                <li className="flex items-center gap-2 justify-center md:justify-start">
-                  <Check className="w-4 h-4 text-green-500 shrink-0" />
+                <li className="flex items-center gap-1.5">
+                  <Check className="w-3 h-3 text-green-500 shrink-0" />
                   {t("sharpMindFeature3")}
                 </li>
               </ul>
             </div>
 
             {/* Free trial highlight */}
-            <div className="text-center shrink-0 bg-white rounded-xl px-5 py-4 border border-[#F5921B]/30 shadow-sm">
-              <Gift className="w-7 h-7 text-[#F5921B] mx-auto mb-1" />
-              <p className="text-2xl font-black text-[#F5921B] leading-none mb-1">{t("sharpMindFreeTrial")}</p>
-              <p className="text-xs text-gray-500 font-medium">{t("sharpMindIncluded")}</p>
+            <div className="text-center shrink-0 bg-white rounded-lg px-3 py-2 border border-[#F5921B]/30">
+              <Gift className="w-5 h-5 text-[#F5921B] mx-auto mb-0.5" />
+              <p className="text-lg font-black text-[#F5921B] leading-none mb-0.5">{t("sharpMindFreeTrial")}</p>
+              <p className="text-[10px] text-gray-500 font-medium leading-tight">{t("sharpMindIncluded")}</p>
             </div>
           </div>
 
           {/* No commitment footer */}
-          <div className="bg-[#0C3547] text-white text-center py-2 text-sm font-medium">
+          <div className="bg-[#0C3547] text-white text-center py-1 text-xs font-medium">
             {t("sharpMindNoCommitment")}
           </div>
         </div>
